@@ -1,0 +1,15 @@
+{
+    "procs": [
+        {
+            "command": [
+                "python3",
+                "/home/kaiz0r/.aos/daemons/aoscore.py",
+                ">",
+                "/home/kaiz0r/.aos/python3.log"
+            ],
+            "name": "python3",
+            "stdout": "/home/kaiz0r/.aos/python3.log",
+            "pid": 65757
+        }
+    ]
+}

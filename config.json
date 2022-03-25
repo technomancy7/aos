@@ -1,0 +1,10 @@
+{
+    "me": {
+        "one": true
+    },
+    "core": {
+        "name": "Athena"
+    },
+    "testvar": "lol",
+    "daemon_delay": 5
+}

@@ -2,7 +2,7 @@ import os
 
 def action_data():
     return {
-    "name": "talk",
+    "name": "shell",
     "author": "Kaiser",
     "version": "0",
     "features": [],
@@ -13,9 +13,13 @@ def on_help(ctx):
     pass
 
 def on_load(ctx): 
-    f = ctx.data_path()
 
-    
+    ctx.exit_code(100)
+
+    while ctx.exit_code(100):
+        usr = input("> ")
+        
+
     ctx.exit_code(0)
     return ctx
 
