@@ -1,10 +1,10 @@
 import os, sys, shlex, json, textwrap
 import importlib
-from objects import Context
+
 HOME = os.path.expanduser("~")+"/"
 ATHENAOS_PATH = HOME+".aos/"
-sys.path.append(ATHENAOS_PATH+"modules/")
-
+sys.path.append(ATHENAOS_PATH+"lib/")
+from objects import Context
 # TODO
 """
 Port over Athena Desktop functionality and apps to here
@@ -27,6 +27,7 @@ def editarg(x):
     if prefix > 0: out = "-"*prefix+out
     return out 
 
+
 def main(args):
     #args = list(map(editarg,  args))
     if len(args) == 0: args = ['help']
@@ -37,17 +38,21 @@ def main(args):
     context = Context(command=cmd, line=line, lines=lines)
     context.aos_dir = ATHENAOS_PATH
     context.load_config()
-    
+    cmd = context.resolve_alias()
+    context.plaintext_output = context.touch_config("plaintext", False)
+    #aliases = context.touch_config("aliases", {})
+
     if not os.path.exists(ATHENAOS_PATH+"actions/"+cmd+".py"):
-        return print("Action not found")
+        return print(f"Action {cmd} not found")
 
 
     f = importlib.import_module("actions."+cmd)
     
-    if context.get_flag("help"):
+    if context.get_flag("help") or context.get_flag("h"):
         if hasattr(f, "on_help") and type(f.on_help(context)) == str:
             return print(textwrap.dedent(f.on_help(context)))
         return print(cmd+" has no help.")
+
     if hasattr(f, "on_load"):
         context = f.on_load(context) or context
 

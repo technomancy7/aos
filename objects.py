@@ -1,4 +1,5 @@
 import json, os
+from rich.console import Console
 
 class Context:
     def __init__(self, *, command = "", line = "", lines = []):
@@ -9,7 +10,24 @@ class Context:
         #print(lines)
         self.config = {}
         self._exit_code = -1
+        self.console = Console(record=True)
         #self.load_config()
+        self.plaintext_output = False
+
+    def resolve_alias(self):
+        aliases = self.touch_config("aliases", {})
+        for a, realname in aliases.items():
+            if a == self.command:
+                self.command = realname
+                return realname
+        return self.command
+
+    def writeln(self, *line, **args):
+        self.console.no_color = self.plaintext_output
+        self.console.print(*line, **args)
+        out = self.console.export_text()
+        with open(self.aos_dir+"self.log", "a+") as f:
+            f.write(out)
 
     def ask(self, value, *, prompt = "", default = ""):
         inse = ""
@@ -132,4 +150,5 @@ class Context:
                 return self.config[parent][sub]
             else:
                 return default
-        return self.config[key]
+        if self.config.get(key, None) == None: self.set_config(key, default)
+        return self.config.get(key, default)
