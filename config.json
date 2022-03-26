@@ -6,5 +6,11 @@
         "name": "Athena"
     },
     "testvar": "lol",
-    "daemon_delay": 5
+    "daemon_delay": 5,
+    "translate": {
+        "mirror": "https://libretranslate.de/translate"
+    },
+    "keys": {
+        "weather": "e2114f04eab34041b34121223200804"
+    }
 }

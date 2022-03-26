@@ -99,3 +99,37 @@ class Context:
     def save_config(self):
         with open(self.aos_dir+"config.json", 'w+') as f:
             f.write(json.dumps(self.config, indent=4))
+
+    def set_config(self, key, value):
+        if "." in key:
+            parent = key.split(".")[0]
+            sub = key.split(".")[1]
+            if self.config.get(parent, None) == None:
+                self.config[parent] = {}
+            
+            if type(self.config[parent]) == dict:
+                self.config[parent][sub] = value
+            else:
+                return 
+
+        else:
+            self.config[key] = value
+
+        self.save_config()
+
+    def touch_config(self, key, default = None):
+        self.load_config()
+        if "." in key:
+            parent = key.split(".")[0]
+            sub = key.split(".")[1]
+            if self.config.get(parent, None) == None:
+                self.config[parent] = {}
+            
+            if type(self.config[parent]) == dict:
+                if self.config[parent].get(sub, None) == None:
+                    self.set_config(key, default)
+                    return default
+                return self.config[parent][sub]
+            else:
+                return default
+        return self.config[key]
