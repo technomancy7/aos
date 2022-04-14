@@ -13,6 +13,8 @@ class Context:
         self.console = Console(record=True)
         #self.load_config()
         self.plaintext_output = False
+        self.buffer = []
+        self.time_format = 'HH:mm:ss DD-MM-YYYY'
 
     def resolve_alias(self):
         aliases = self.touch_config("aliases", {})
@@ -26,8 +28,7 @@ class Context:
         self.console.no_color = self.plaintext_output
         self.console.print(*line, **args)
         out = self.console.export_text()
-        with open(self.aos_dir+"self.log", "a+") as f:
-            f.write(out)
+        self.buffer.append(out)
 
     def ask(self, value, *, prompt = "", default = ""):
         inse = ""
@@ -38,14 +39,15 @@ class Context:
 
     def has_flag(self, name):
         for flag in self.lines:
-            if flag.startswith(f"-{name}") or flag.startswith(f"--{name}") and (":" in flag or "=" in flag):
+            if flag.startswith(f"-{name}:") or flag.startswith(f"--{name}:") and (":" in flag or "=" in flag):
                 return True
             if flag == f"-{name}" or flag == f"--{name}" and (":" not in flag and "=" not in flag):
                 return True
+        return False
 
     def get_flag(self, name):
         for flag in self.lines:
-            if flag.startswith(f"-{name}") or flag.startswith(f"--{name}") and (":" in flag or "=" in flag):
+            if flag.startswith(f"-{name}:") or flag.startswith(f"--{name}:") and (":" in flag or "=" in flag):
                 if ":" in flag:
                     return flag.split(":")[1]
                 elif "=" in flag:
@@ -89,6 +91,24 @@ class Context:
         if not os.path.exists(path):
             os.makedirs(path)
         return path
+
+    def open_text_editor(self, default_text = ""):
+        txtedit = self.touch_config("system.texteditor", "nano")
+        txtfile = self.aos_dir+"editing.txt"
+
+        if not os.path.exists(txtfile):
+            f = open(txtfile, "w+")
+            f.write(default_text)
+            f.close()
+
+        os.system(txtedit+" "+txtfile)
+        with open(txtfile, "r") as f:
+            return f.read().strip()
+
+    def delete_text_file(self):
+        txtfile = self.aos_dir+"editing.txt"
+        if os.path.exists(txtfile):
+            os.remove(txtfile)
 
     def validate_data_file(self):
         f = self.data_path()

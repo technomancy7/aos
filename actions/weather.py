@@ -44,8 +44,7 @@ def on_load(ctx):
             Min: {day['mintemp_c']}c/{day['mintemp_f']}f 
             Avg: {day['avgtemp_c']}c/{day['avgtemp_f']}f 
             Max:{day['maxtemp_c']}c/{day['maxtemp_f']}f
-            {' - '.join(precip)}
-            """))
+            {' - '.join(precip)}"""))
         ctx.writeln("\n".join(out))
 
     elif ctx.has_flag("alerts"):
@@ -54,15 +53,14 @@ def on_load(ctx):
         result = requests.get(url).json()
         alerts = result['alerts']['alert']
         for alert in alerts:
-            ctx.writeln(dedent(f""" 
+            ctx.writeln(dedent(f"""    
 --- {alert['headline']} ({alert['category']}) ---
 {alert['event']}
 {alert['desc']}
 -
 {alert['instruction']}
 
-Effective between {alert['effective']} - {alert['expires']}
-            """))
+Effective between {alert['effective']} - {alert['expires']}"""))
     else:
         url = f"http://api.weatherapi.com/v1/current.json?key={key}&q={q}&aqi=no"
         

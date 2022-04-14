@@ -5,18 +5,23 @@ HOME = os.path.expanduser("~")+"/"
 ATHENAOS_PATH = HOME+".aos/"
 sys.path.append(ATHENAOS_PATH+"lib/")
 from objects import Context
+context = None
 # TODO
 """
-Port over Athena Desktop functionality and apps to here
-Maybe keep both, but have this as a cli-only version with slightly different functionality
+Talk mode action using basic regex natural language to pass to commands
+Have aliases for common patterns 
+So instead of 
+Roll a (full dice notation syntax detection) 
+Roll a (:dice_notation:) 
 
-Usage:
+Class with dot Learn() 
+Detect if passed arg is a dir or file
 
-aos <sub-command> <args>
-aos talk How are you?
+Tamagotchi style pet
+When creating new pet, it populates a pets thing in codex
 
-
-This passes "How are you?" string to the action talk
+Use codex addrbook for user and bot to store info for other actions like location for weather
+Make sure ctx get data can override without changing own command
 """
 def editarg(x):
     prefix = 0
@@ -29,6 +34,7 @@ def editarg(x):
 
 
 def main(args):
+    global context
     #args = list(map(editarg,  args))
     if len(args) == 0: args = ['help']
     cmd = args[0]
@@ -60,4 +66,11 @@ def main(args):
         f.on_exit(context)
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    try:
+        main(sys.argv[1:])
+    finally:
+        if len(context.buffer) != 0:
+            with open(context.aos_dir+"self.log", "a+") as f:
+                f.write("\n--- NEW LOG START ---\n\n")
+                for out in context.buffer:
+                    f.write(out)
