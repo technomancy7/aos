@@ -46,7 +46,7 @@ def on_load(ctx):
     data = ctx.get_data()
     speaker.variables = data.get("variables", {})
     speaker.tree = data.get("tree", [])
-
+    
     line = ctx.get_string()
 
     if line == "":

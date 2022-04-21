@@ -22,11 +22,13 @@ def on_load(ctx):
         if not file.endswith(".dcs"):
             file = file+".dcs"
         parser = Datascript()
+        parser.writeln = ctx.writeln
         dc = parser.parse_file(file)
         if show_data: print(dc)
 
     else:
         parser = Datascript()
+        parser.writeln = ctx.writeln
         while True:
             l = input(parser.getv('_current_block')+"> ")
             parser.readline(l)

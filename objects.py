@@ -1,12 +1,11 @@
-import json, os
+import json, os, importlib, textwrap, readline, traceback
 from rich.console import Console
 
 class Context:
-    def __init__(self, *, command = "", line = "", lines = []):
-        self.aos_dir = ""#ATHENAOS_PATH
-        self.command = command
-        self.line = line
-        self.lines = lines
+    def __init__(self, *, line = "", command = "", lines = [], base_dir = ""):
+        self.aos_dir = base_dir#ATHENAOS_PATH
+        if line != "": self.update_from_line(line)
+        else: self.update(command=command, lines=lines)
         #print(lines)
         self.config = {}
         self._exit_code = -1
@@ -15,6 +14,82 @@ class Context:
         self.plaintext_output = False
         self.buffer = []
         self.time_format = 'HH:mm:ss DD-MM-YYYY'
+        self.response = {}
+
+    def coerce_bool(self, line):
+        return str(line).lower() in ["1", "yes", "y", "true"]
+            
+    def update_from_line(self, line):
+        line = line.split(" ")
+        self.command = line[0]
+        self.line = " ".join(line[1:])
+        self.lines = line[1:]
+        return self
+
+    def update(self, *, command = "", lines = []):
+        self.command = command
+        self.line = " ".join(lines)
+        self.lines = lines
+        return self
+
+    def start_response(self):
+        self.response = {
+            "log": [],
+            "data": {},
+            "command": self.command,
+            "line": self.lines,
+            "string": self.get_string()
+        }
+        self.buffer = self.response["log"]
+
+    def update_response(self, **args):
+        self.response["data"].update(**args)
+
+    def clone(self, *, command = "", lines = []):
+        c = Context(command=command or self.command, lines = lines or self.lines)
+        c.aos_dir = self.aos_dir
+        c.load_config()
+        c.plaintext_output = self.plaintext_output
+        return c
+
+    def execute(self, *, context = None):
+        self.start_response()
+        subctx = None
+        if context == None:
+            subctx = self 
+        else:
+            subctx = context
+        
+        command = subctx.resolve_alias()
+
+        if not os.path.exists(self.aos_dir+"actions/"+command+".py"):
+            return self.writeln(f"Action {command} not found")
+
+        try:
+            f = importlib.import_module("actions."+command)
+            
+            if subctx.get_flag("help") or subctx.get_flag("h"):
+                if hasattr(f, "on_help") and type(f.on_help(subctx)) == str:
+                    return self.writeln(textwrap.dedent(f.on_help(subctx)))
+                return self.writeln(command+" has no help.")
+            try:
+                if hasattr(f, "on_load"):
+                    subctx = f.on_load(subctx) or subctx
+            except Exception as e:
+                print(traceback.format_exc())
+                #print(e)
+            finally:
+                if hasattr(f, "on_exit"):
+                    f.on_exit(subctx)
+        except Exception as e:
+            print(traceback.format_exc())
+        finally:
+            if len(subctx.buffer) != 0:
+                with open(subctx.aos_dir+"self.log", "a+") as f:
+                    f.write("\n--- NEW LOG START ---\n\n")
+                    for out in subctx.buffer:
+                        f.write(out)
+            return subctx
 
     def resolve_alias(self):
         aliases = self.touch_config("aliases", {})
@@ -45,7 +120,7 @@ class Context:
                 return True
         return False
 
-    def get_flag(self, name):
+    def get_flag(self, name, default = ""):
         for flag in self.lines:
             if flag.startswith(f"-{name}:") or flag.startswith(f"--{name}:") and (":" in flag or "=" in flag):
                 if ":" in flag:
@@ -56,7 +131,7 @@ class Context:
                     return "true"
             if flag == f"-{name}" or flag == f"--{name}" and (":" not in flag and "=" not in flag):
                 return "true"
-        return ""
+        return default
 
     def get_string(self):
         out = []
@@ -155,8 +230,25 @@ class Context:
 
         self.save_config()
 
-    def touch_config(self, key, default = None):
-        self.load_config()
+    def unset_config(self, key):
+        if "." in key:
+            parent = key.split(".")[0]
+            sub = key.split(".")[1]
+            if self.config.get(parent, None) == None:
+                return
+            
+            if type(self.config[parent]) == dict:
+                del self.config[parent][sub]
+            else:
+                return 
+
+        else:
+            del self.config[key]
+
+        self.save_config()
+
+    def touch_config(self, key, default = None, *, ignore = False, force_refresh = False):
+        if force_refresh: self.load_config()
         if "." in key:
             parent = key.split(".")[0]
             sub = key.split(".")[1]
@@ -165,10 +257,11 @@ class Context:
             
             if type(self.config[parent]) == dict:
                 if self.config[parent].get(sub, None) == None:
-                    self.set_config(key, default)
+                    if not ignore: self.set_config(key, default)
                     return default
                 return self.config[parent][sub]
             else:
                 return default
+
         if self.config.get(key, None) == None: self.set_config(key, default)
         return self.config.get(key, default)

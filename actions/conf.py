@@ -1,3 +1,4 @@
+from ast import parse
 import os
 
 def action_data():
@@ -10,7 +11,16 @@ def action_data():
 }
 
 def on_help(ctx):
-    pass
+    return """
+    Commands:
+        set <<parent.>key> <value>
+        get <<parent.>key>
+        append <<parent.>key> <value>
+        unappend <<parent.>key> <value>
+        unset <<parent.>key>
+        list
+    
+    """
 
 def parse_val(line):
     try:
@@ -20,57 +30,68 @@ def parse_val(line):
 
 
 def on_load(ctx): 
-    cmd = ctx.get_string_list()[0]
-    line = ctx.get_string_list()[1:]
-
+    cmd = ""
+    line = []
+    if ctx.get_string() == "": 
+        cmd = "list"
+        
+    else:
+        cmd = ctx.get_string_list()[0]
+        line = ctx.get_string_list()[1:]
+    ctx.update_response(operator = cmd)
     conf = ctx.config
     if cmd == "set":
         key = line[0]
-        val = " ".join(line[1:])
+        val = parse_val(" ".join(line[1:]))
 
-        if "." in key:
-            parent = key.split(".")[0]
-            sub = key.split(".")[1]
-            if conf.get(parent, None) == None:
-                conf[parent] = {}
-            
-            if type(conf[parent]) == dict:
-                if val == "null":
-                    del conf[parent][sub]
-                    print(f"Key [{parent}.{sub}] erased.")
-                else:
-                    conf[parent][sub] = parse_val(val)
-                    print(f"Key [{parent}.{sub}] set to {conf[parent][sub]} ({type(conf[parent][sub])})")
-            else:
-                return print("Parent does not accept sub-values.")
-
-        else:
-            if val == "null":
-                del conf[key]
-                ctx.writeln(f"Key [yellow]{key}[/yellow] erased.", style="red")
-            else:
-                conf[key] = parse_val(val)
-                print(f"Key [{key}] set to {conf[key]} ({type(conf[key])})")
-
+        ctx.set_config(key, val)
+        ctx.writeln(f"[yellow]{key}[/yellow] = [green]{val}[/green] ({type(val)})")
+        ctx.update_response(key = key, value = val)
         ctx.save_config()
+
+    elif cmd == "unset":
+        key = line[0]
+        val = parse_val(" ".join(line[1:]))
+
+        ctx.unset_config(key)
+        ctx.writeln(f"[yellow]{key}[/yellow] = [green]None[/green] (None)")
+        ctx.update_response(key = key)
+        ctx.save_config()
+
+    elif cmd == "unappend":
+        key = line[0]
+        line = parse_val(" ".join(line[1:]))
+        ls = ctx.touch_config(key, None)
+        if type(ls) == list:
+            ls.remove(line)
+            ctx.set_config(key, ls)
+            ctx.writeln(f"[yellow]{key}[/yellow] = [green]{ls}[/green] ({type(ls)})")
+            ctx.update_response(key = key, value = ls)
+        else:
+            return ctx.writeln(f"Invalid type for {line}. Expected {type([])}, got {type(ls)}.")
+
+    elif cmd == "append":
+        key = line[0]
+        line = parse_val(" ".join(line[1:]))
+        ls = ctx.touch_config(key, None)
+        if type(ls) == list:
+            ls.append(line)
+            ctx.set_config(key, ls)
+            ctx.writeln(f"[yellow]{key}[/yellow] = [green]{ls}[/green] ({type(ls)})")
+            ctx.update_response(operator = "append", key = key, value = ls)
+        elif type(ls) == str:
+            ls += line
+            ctx.set_config(key, ls)
+            ctx.writeln(f"[yellow]{key}[/yellow] = [green]{ls}[/green] ({type(ls)})")
+            ctx.update_response(operator = "append", key = key, value = ls)
+        else:
+            return ctx.writeln(f"Invalid type for {line}. Expected {type([])} or {type('')}, got {type(ls)}.")
 
     elif cmd == "get":
         key = " ".join(line)
-        if "." in key:
-            parent = key.split(".")[0]
-            sub = key.split(".")[1]
-            if conf.get(parent, None) == None:
-                return print(f"[{parent}.*] is undefined.")
-            
-            if type(conf[parent]) == dict:
-                if conf[parent].get(sub, None) == None:
-                    return print(f"[{parent}.{sub}] is undefined")
-                print(f"Key [{parent}.{sub}] set to {conf[parent][sub]} ({type(conf[parent][sub])})")
-            else:
-                return print("Parent does not accept sub-values.")
-
-        else:
-            print(f"Key [{key}] set to {conf[key]} ({type(conf[key])})")
+        val = ctx.touch_config(key, "", ignore = True)
+        ctx.update_response(operator = "get", key = key, value = val)
+        ctx.writeln(f"[yellow]{key}[/yellow] = [green]{val}[/green] ({type(val)})")
 
     elif cmd == "list":
         ind = False

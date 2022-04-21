@@ -4,6 +4,29 @@ import io
 import traceback
 from contextlib import redirect_stdout
 
+def PreProc_Reform(engine, body):
+    for line in body.split("\n"):
+        if line.startswith("start") and "<<" in line:
+            edit = line.replace("<<", "\n<<")
+            body = body.replace(line, edit)
+
+    return body
+
+def PreProc_Label(engine, body):
+    v = engine.setv
+    g = engine.getv
+
+    v("_lineno", 0) 
+    for line in body.split("\n"):
+        v("_lineno", int(g("_lineno"))+1) 
+        if line.startswith(":"):
+            labelname = line[1:]
+            engine.variables["_labels"][labelname] = int(g("_lineno")) 
+        
+
+    v("_lineno", -1)         
+    return body
+
 class InfoscriptBase:
     @staticmethod
     def extend(engine):
@@ -54,7 +77,7 @@ class InfoscriptBase:
     @staticmethod
     def echo(engine, line):
         line = engine._handle(line)
-        engine.print(line)
+        engine.echo(line)
 
 class Datascript:
     @staticmethod
@@ -70,8 +93,11 @@ class Datascript:
         parser.parse(text)
         return parser
 
-    def print(self, line):
-        print(f'[{self.getv("_lineno")}] {line}')
+    def echo(self, line):
+        blck = ""
+        if self.getv("_current_block", "") != "":
+            blck = ":"+self.getv("_current_block", "")
+        self.writeln(f'({self.getv("_lineno")}{blck}) {line}')
 
     def _handle(self, line):
         if type(line) != str: return line
@@ -124,6 +150,7 @@ class Datascript:
             return "ERROR"
 
     def __init__(self):
+        self.writeln = print
         self.body = ""
         self.data = {}
         self.variables = {
@@ -134,6 +161,12 @@ class Datascript:
             "_labels": {}
         }
         self.commands = {}
+
+        self.preprocessors = [
+            PreProc_Reform,
+            PreProc_Label
+        ]
+
         InfoscriptBase.extend(self)
         self.env = {
             "_": self,
@@ -253,23 +286,6 @@ class Datascript:
                     if self.commands.get(cmd, None) != None:
                         self.commands[cmd](self, line=val)
 
-    def _get_labels(self, body):
-        v = self.setv
-        g = self.getv
-
-        v("_current_block", "")
-        v("_lineno", 0) 
-        all_lines = body.split("\n")
-
-        for linen in range(0, len(all_lines)):
-            line = all_lines[linen].strip()
-            v("_lineno", int(g("_lineno"))+1) 
-            if line.startswith(":"):
-                labelname = line[1:]
-        
-        v("_current_block", "")
-        v("_lineno", -1) 
-
     def parse_file(self, path):
         with open(path, "r") as f:
             return self.parse(f.read())
@@ -278,21 +294,28 @@ class Datascript:
         v = self.setv
         g = self.getv
 
+        for preproc in self.preprocessors:
+            body = preproc(self, body)
+
         v("_current_block", "")
         v("_lineno", 0) 
         all_lines = body.split("\n")
 
-        for linen in range(0, len(all_lines)):
-            line = all_lines[linen].strip()
-            v("_lineno", int(g("_lineno"))+1) 
+        #for linen in range(0, len(all_lines)):
+        while True:
+            if g("_lineno", 0) >= len(all_lines): break
+            if all_lines[g("_lineno", 0)] == "stop": break
+            line = all_lines[g("_lineno", 0)].strip()
             self.readline(line)
+            v("_lineno", int(g("_lineno"))+1) 
+            
         
         v("_current_block", "")
         v("_lineno", -1) 
+        v("_line_count", len(all_lines))
 
         return {
-            "variables": self.variables,
-            "line_count": len(all_lines)
+            "variables": self.variables
         }
 
             
