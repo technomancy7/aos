@@ -4,9 +4,9 @@ def action_data():
     return {
     "name": "pokedex",
     "author": "Kaiser",
-    "version": "0",
+    "version": "1.09",
     "features": [],
-    "group": "utility",
+    "group": "api",
 }
 LANGUAGE = ["en"]
 

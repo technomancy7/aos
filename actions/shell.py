@@ -4,7 +4,7 @@ def action_data():
     return {
     "name": "shell",
     "author": "Kaiser",
-    "version": "0",
+    "version": "0.9",
     "features": [],
     "group": "utility",
 }

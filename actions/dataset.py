@@ -4,9 +4,9 @@ def action_data():
     return {
     "name": "journal",
     "author": "Kaiser",
-    "version": "0",
+    "version": "0.0",
     "features": [],
-    "group": "utility",
+    "group": "wip",
 }
 
 def on_help(ctx):

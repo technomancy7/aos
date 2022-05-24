@@ -4,9 +4,9 @@ def action_data():
     return {
     "name": "tierlist",
     "author": "Kaiser",
-    "version": "0",
+    "version": "0.05",
     "features": [],
-    "group": "utility",
+    "group": "toys",
 }
 
 def on_help(ctx):

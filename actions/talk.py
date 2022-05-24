@@ -6,9 +6,9 @@ def action_data():
     return {
     "name": "talk",
     "author": "Kaiser",
-    "version": "0",
+    "version": "0.4",
     "features": [],
-    "group": "utility",
+    "group": "system",
 }
 
 speaker = Dataspeak()

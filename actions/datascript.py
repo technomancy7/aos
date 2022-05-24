@@ -5,7 +5,7 @@ def action_data():
     return {
     "name": "datascript",
     "author": "Kaiser",
-    "version": "0",
+    "version": "0.9",
     "features": [],
     "group": "utility",
 }
@@ -19,8 +19,8 @@ def on_load(ctx):
 
     if cmd == "run":
         file = ctx.get_string()[len(cmd)+1:]
-        if not file.endswith(".dcs"):
-            file = file+".dcs"
+        if not file.endswith(".dsc"):
+            file = file+".dsc"
         parser = Datascript()
         parser.writeln = ctx.writeln
         dc = parser.parse_file(file)

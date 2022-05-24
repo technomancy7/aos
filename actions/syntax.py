@@ -4,7 +4,7 @@ def action_data():
     return {
     "name": "syntax",
     "author": "Kaiser",
-    "version": "0",
+    "version": "0.1a",
     "features": [],
     "group": "utility",
 }

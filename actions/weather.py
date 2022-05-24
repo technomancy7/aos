@@ -4,9 +4,9 @@ def action_data():
     return {
     "name": "weather",
     "author": "Kaiser",
-    "version": "0",
+    "version": "1.0b",
     "features": [],
-    "group": "utility",
+    "group": "api",
 }
 
 

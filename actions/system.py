@@ -4,9 +4,9 @@ def action_data():
     return {
     "name": "system",
     "author": "Kaiser",
-    "version": "0",
+    "version": "0.2",
     "features": [],
-    "group": "utility",
+    "group": "system",
 }
 
 def on_help(ctx):

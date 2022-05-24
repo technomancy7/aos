@@ -4,7 +4,7 @@ def action_data():
     return {
     "name": "scan",
     "author": "Kaiser",
-    "version": "0",
+    "version": "0.89",
     "features": [],
     "group": "utility",
 }

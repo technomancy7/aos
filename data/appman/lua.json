@@ -1,0 +1,1 @@
+{"name": "lua", "group": "", "command": "{APPS}bin/lua.sh", "wd": "{APPS}lua/"}

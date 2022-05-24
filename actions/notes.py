@@ -5,7 +5,7 @@ def action_data():
     return {
     "name": "notes",
     "author": "Kaiser",
-    "version": "0",
+    "version": "1.0b",
     "features": [],
     "group": "utility",
 }

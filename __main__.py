@@ -36,7 +36,7 @@ def editarg(x):
 def main(args):
     global context
     if type(args) == str: args = shlex.split(args)
-    if len(args) == 0: args = ['system', "actions"]
+    if len(args) == 0: args = ['actions', "list"]
 
     cmd = args[0]
     lines = args[1:]
