@@ -33,7 +33,7 @@ def editarg(x):
     return out 
 
 
-def main(args):
+def main(args): # @todo
     global context
     if type(args) == str: args = shlex.split(args)
     if len(args) == 0: args = ['actions', "list"]

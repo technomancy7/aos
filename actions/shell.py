@@ -1,4 +1,4 @@
-import os, shlex, importlib, textwrap
+import os, shlex, traceback
 
 def action_data():
     return {
@@ -29,6 +29,14 @@ def on_load(ctx):
         if usr == "q" or usr == "quit" or usr == "exit":
             subctx.exit_code(1)
             break
+
+        if usr.startswith(":"):
+            line = usr[1:]
+            try:
+                eval(line, {"ctx": ctx})
+            except:
+                print(traceback.format_exc())
+            continue
 
         usr = shlex.split(usr)
 

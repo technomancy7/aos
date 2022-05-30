@@ -11,9 +11,12 @@ def action_data():
 
 def on_help(ctx):
     return """
-    Commands:
-
+    Searches directory for text within files.
     
+    Flags:
+        -c (case-sensative)
+        -d:<int> (depth to search)
+        -v (verbose printing)
     """
 
 def run_dir(ctx, path, depth = 0, *, max_depth = 1, line = "", case_sensitive = False, filetypes = []):
@@ -40,6 +43,7 @@ def run_dir(ctx, path, depth = 0, *, max_depth = 1, line = "", case_sensitive = 
 
     if ctx.has_flag("v"): print(f"Leaving sub-directory {path}")
     
+# @testme
 def on_load(ctx): 
     exts = ctx.touch_config("scan.ext", [".txt", ".js", ".uc", ".c", ".cpp", ".h", ".lua", ".rb", ".jl"])
     line = ctx.get_string()

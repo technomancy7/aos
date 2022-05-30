@@ -1,5 +1,6 @@
 from ast import parse
 import os
+from tools.datascript import *
 
 def action_data():
     return {
@@ -94,25 +95,37 @@ def on_load(ctx):
         ctx.writeln(f"[yellow]{key}[/yellow] = [green]{val}[/green] ({type(val)})")
 
     elif cmd == "list":
+        dc = Datascript().parse_file(ctx.aos_dir+"definitions.dcs")["variables"]
+
         ind = False
         for k, v in conf.items():
+            desc = ""
+            if dc.get("root") and dc["root"].get(k):
+                desc = f" //'{dc['root'][k]}'"
+
             if type(v) == dict:
                 ind = True
+
                 ctx.writeln()
-                ctx.writeln(f"[blue]{k}[/blue]:")
+                ctx.writeln(f"[blue]{k}[/blue]:{desc}")
                 for sk, sv in v.items(): 
-                    ctx.writeln(f"- [yellow]{sk}[/yellow] = [green]{sv}[/green] ({type(sv)})")
+                    desc2 = ""
+                    if dc.get(k) and dc[k].get(sk):
+                        desc2 = f" //'{dc[k][sk]}'"
+                    ctx.writeln(f"- [yellow]{sk}[/yellow] = [green]{sv}[/green] ({type(sv)}){desc2}")
+
             elif type(v) == list:
                 ind = True
                 ctx.writeln()
-                ctx.writeln(f"[blue]{k}[/blue]:")
+                ctx.writeln(f"[blue]{k}[/blue]:{desc}")
                 for item in v:
                     ctx.writeln(f"* [yellow]{item}[/yellow] ({type(item)})")
+
             else:
                 if ind:
                     ctx.writeln()
                     ind = False
-                ctx.writeln(f"[yellow]{k}[/yellow] = {v} ({type(v)}")
+                ctx.writeln(f"[yellow]{k}[/yellow] = {v} ({type(v)}){desc}")
     else:
         return ctx.writeln("What?")
     return ctx

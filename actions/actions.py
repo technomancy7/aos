@@ -37,6 +37,22 @@ def printdata(ctx, d):
 def on_load(ctx): 
     output = {}
     errors = []
+
+    if ctx.get_string_ind(0) == "new": #@todo - actions.new
+        pass
+
+    if ctx.get_string_ind(0) == "enable": #@todo - actions.enable
+        pass
+
+    if ctx.get_string_ind(0) == "disable": #@todo - actions.disable
+        pass
+
+    if ctx.get_string_ind(0) == "download": #@todo - actions.download
+        pass
+
+    if ctx.get_string_ind(0) == "delete": #@todo - actions.delete
+        pass
+
     if ctx.get_string_ind(0) == "list":
         directory = ctx.aos_dir+"actions/"
         for filename in os.listdir(directory):
