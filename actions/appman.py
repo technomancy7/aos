@@ -218,7 +218,7 @@ def on_load(ctx):
             with open(apps_dir+name+".json", 'w') as f:
                 json.dump(app, f)
         
-        case "check":
+        case "check": #@todo rewrite to not read data json every time, store in memory instead
             nolinks = []
             ddir = os.path.expanduser(ctx.touch_config("appman.dir", "~/.aos_applications/"))
             ddir = ddir+"bin/"
@@ -229,9 +229,11 @@ def on_load(ctx):
                 fullpath = os.path.join(ddir, filename)
 
                 for jsname in os.listdir(apps_dir):
-                    
+                    #print(jsname)
                     with open(apps_dir+jsname, "r") as f:
-                        js = json.load(f)
+                        try:
+                            js = json.load(f)
+                        except: continue
                         realpath = replaceTags(ctx, js["command"])
 
                         if fullpath == realpath:

@@ -2,7 +2,7 @@ import arrow
 
 def action_data():
     return {
-    "name": "journal",
+    "name": "dataset",
     "author": "Kaiser",
     "version": "0.0",
     "features": [],

@@ -1,6 +1,6 @@
 import re
 import textwrap
-import io
+import io, os
 import traceback
 from contextlib import redirect_stdout
 
@@ -289,6 +289,12 @@ class Datascript:
     def parse_file(self, path):
         with open(path, "r") as f:
             return self.parse(f.read())
+
+    def parse_dir(self, path):
+        out = []
+
+        for filename in os.listdir(path):
+            self.parse_file(path+filename)
 
     def parse(self, body):
         v = self.setv

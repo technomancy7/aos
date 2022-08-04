@@ -18,20 +18,18 @@ def on_help(ctx):
 
 def on_load(ctx): 
     path = ctx.get_string()
-    from rich.console import Console
     from rich.syntax import Syntax
     from rich.markdown import Markdown
 
-    console = Console()
     
 
     if path.endswith("md") or ctx.has_flag("md"):
         with open(path) as f:
             md = Markdown(f.read())
-            console.print(md)
+            ctx.writeln(md)
     else:
         syntax = Syntax.from_path(path)
-        console.print(syntax)
+        ctx.writeln(syntax)
 
     return ctx
 

@@ -8,11 +8,11 @@ class Dataspeak:
         self.aphanumeric = re.compile('[\s\W_]+')
 
     def _strip_input(self, line):
-        line = line.lower()
+        # @todo Create rules for things like converting don't to do not
+        #line = line.lower()
         
-        #print(self.aphanumeric.sub('', line))
         line = ''.join(e for e in line if e.isalnum() or e == " ")
-        #print("edit", edit)
+
         return line
 
     def does_trigger_exist(self, trigger):
@@ -44,11 +44,20 @@ class Dataspeak:
         self.tree.append(data)
 
     def load(self, data):
+        if data == {}: return
         trigger = data.get("trigger", None)
         responses = data.get("respond", [])
         weight = data.get("weight", 0)
-        new_data = {"trigger": trigger, "respond": responses, "weight": int(weight)}
-        if trigger != None and len(responses) > 0:
+        command = data.get("command", "")
+        new_data = {"trigger": trigger, "respond": responses, "weight": int(weight), "command": command}
+
+        if trigger == None:
+            #print("A DEFAULT", new_data)
+            self.default_response = new_data
+            print("Default trigger set...")
+            return
+
+        if trigger != None:# and len(responses) > 0:
             #print("checking trigger", trigger, responses)
             to_add = True
             if self.does_trigger_exist(trigger):
@@ -74,18 +83,23 @@ class Dataspeak:
     def read(self, line):
         line = self._strip_input(line)
         results = []
+
         for t in self.tree:
             reg = self._check(line, t)
             if reg:
-                results.append({"result": t, "regex": reg})
+                results.append({"result": t, "regex": reg, "command": self.insert_v(t.get("command", ""), reg)})
 
-        #print("results", results)
+        if len(results) == 0:
+            response_line = random.choice(self.default_response['respond'])
+            return {"text": response_line, "command": ""}
 
-        if len(results) == 1:
+        elif len(results) == 1:
             result = results[0]["result"]
             reg = results[0]["regex"]
-            response_line = random.choice(result['respond'])
-            return self.insert_v(response_line, reg)
+            response_line = ""
+            if len(result["respond"]) > 0:
+                response_line = random.choice(result['respond'])
+            return {"text": self.insert_v(response_line, reg), "command": results[0]["command"]}
         
         elif len(results) > 1:
             final_result = None
@@ -98,7 +112,7 @@ class Dataspeak:
             result = final_result["result"]
             reg = final_result["regex"]
             response_line = random.choice(result['respond'])
-            return self.insert_v(response_line, reg)
+            return {"text": self.insert_v(response_line, reg), "command": final_result["command"]}
                 
                 #return random.choice(t['respond'])
 
@@ -106,8 +120,8 @@ class Dataspeak:
         #if line.lower() == part["trigger"]:
             #return True
 
-        r = re.compile(part["trigger"])
-        results = r.findall(line)
+        #r = re.compile(part["trigger"])
+        results = re.findall(part["trigger"], line, re.IGNORECASE)
         #print("results from",part,results)
         if len(results) > 0:
             real_results = []
@@ -125,4 +139,4 @@ class Dataspeak:
         return None
 
     def export(self):
-        return {"tree": self.tree, "variables": self.variables}
+        return {"tree": self.tree, "variables": self.variables, "default_response": self.default_response}

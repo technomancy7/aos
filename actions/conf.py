@@ -24,6 +24,8 @@ def on_help(ctx):
     """
 
 def parse_val(line):
+    if line == "true": return True
+    if line == "false": return False
     try:
         return eval(line)
     except:

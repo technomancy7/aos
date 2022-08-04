@@ -33,7 +33,7 @@ def editarg(x):
     return out 
 
 
-def main(args): # @todo
+def main(args):
     global context
     if type(args) == str: args = shlex.split(args)
     if len(args) == 0: args = ['actions', "list"]
@@ -45,6 +45,9 @@ def main(args): # @todo
     context.load_config()
     context.plaintext_output = context.touch_config("plaintext", False)
     context.execute()
+    #print(context.response["data"])
+    if context.response["data"].get("tts"):
+        context.say(context.response["data"]["tts"])
     #print(context.response)
 
 def run(args):

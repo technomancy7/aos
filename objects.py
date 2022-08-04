@@ -52,6 +52,12 @@ class Context:
         c.plaintext_output = self.plaintext_output
         return c
 
+    def sanity_check_disabled(self, disabled):
+        invalid = ["actions", "system", "conf"]
+        for inv in invalid:
+            if inv in disabled: disabled.remove(inv)
+        return disabled
+
     def execute(self, *, context = None):
         self.start_response()
         subctx = None
@@ -60,7 +66,14 @@ class Context:
         else:
             subctx = context
         
-        command = subctx.resolve_alias()
+        command = subctx.resolve_alias().lower()
+
+        disabled = subctx.touch_config("system.disabled", [])
+
+        disabled = self.sanity_check_disabled(disabled)
+
+        if command in disabled:
+            return subctx.writeln(f"Action is disabled.")
 
         if not os.path.exists(self.aos_dir+"actions/"+command+".py"):
             return self.writeln(f"Action {command} not found")
@@ -91,6 +104,35 @@ class Context:
                         f.write(out)
             return subctx
 
+    def username(self):
+        codex = self.access_data("codex", "addrbook")
+
+        if codex.get("self") and codex["self"].get("name"): return codex["self"]["name"]
+        return "User"
+
+    def name(self):
+        return self.touch_config("system.name", "Bot")
+
+    def say(self, line):
+        if line == "": return
+        if self.touch_config("system.vocal", False):
+            tts_cmd = self.touch_config("system.tts")
+            if tts_cmd != None:
+                os.system(tts_cmd.replace("$P", line.replace("'", ""))+"&")
+        
+        if self.touch_config("system.tts_output", True):
+            self.writeln(f"[red]\[{self.name()}][/red] {line}")
+
+    def send_to_sayfile(self, text):
+        with open(self.aos_dir+"text.txt", "w+") as f:
+            f.write(text)
+
+    def say_file(self, file = ""): # @todo - make it use the specific flite command for reading file
+        if file == "": file = self.aos_dir+"text.txt"
+        if os.path.exists(file):
+            with open(file, "r+") as f:
+                self.say(f.read())
+
     def resolve_alias(self):
         aliases = self.touch_config("aliases", {})
         for a, realname in aliases.items():
@@ -107,9 +149,11 @@ class Context:
 
     def ask(self, value, *, prompt = "", default = ""):
         inse = ""
-        if prompt != "": inse = f": ({prompt}) "
-        f = self.get_flag(value) or input(f"{value}{inse}[{default}] > ")
-        if f == "": f = default
+        if prompt != "": prompt = f": ({prompt}) "
+        if default != "": inse = f"[{default}]"
+        f = self.get_flag(value) or input(f"{value}{prompt}{inse} > ")
+        if f == "": 
+            f = default
         return f
 
     def has_flag(self, name):
@@ -133,7 +177,10 @@ class Context:
                 return "true"
         return default
 
-    def get_string(self):
+    def get_string(self, start_at = None, *, default = ""):
+        if start_at != None: 
+            return " ".join(self.get_string_list()[int(start_at):]) or default
+
         out = []
         for flag in self.lines:
             if not flag.startswith(f"-"):
@@ -146,6 +193,8 @@ class Context:
             if not flag.startswith(f"-"):
                 out.append(flag)
         return out
+    
+    def get_string_at(self, ind = 0): return self.get_string_ind(ind)
 
     def get_string_ind(self, ind = 0):
         iters = 0
@@ -167,40 +216,64 @@ class Context:
             os.makedirs(path)
         return path
 
-    def open_text_editor(self, default_text = ""):
+    def open_text_editor(self, default_text = None, *, filetype = "txt"):
         txtedit = self.touch_config("system.texteditor", "nano")
-        txtfile = self.aos_dir+"editing.txt"
+        txtfile = self.aos_dir+"editing."+filetype
 
-        if not os.path.exists(txtfile):
+        if default_text != None:#not os.path.exists(txtfile):
             f = open(txtfile, "w+")
-            f.write(default_text)
+            f.write(str(default_text))
             f.close()
 
         os.system(txtedit+" "+txtfile)
-        with open(txtfile, "r") as f:
-            return f.read().strip()
+        if os.path.exists(txtfile):
+            with open(txtfile, "r") as f:
+                return f.read().strip()
+        else:
+            return ""
+
+    def edit_file(self, txtfile):
+        txtedit = self.touch_config("system.texteditor", "nano")
+
+        os.system(txtedit+" "+txtfile)
+        if os.path.exists(txtfile):
+            with open(txtfile, "r") as f:
+                return f.read().strip()
+        else:
+            return ""
 
     def delete_text_file(self):
         txtfile = self.aos_dir+"editing.txt"
         if os.path.exists(txtfile):
             os.remove(txtfile)
 
-    def validate_data_file(self):
+    def validate_data_file(self, filename = "data"):
         f = self.data_path()
-        if not os.path.exists(f+"data.json"):
-            with open(f+"data.json", 'w+') as f:
+        if not os.path.exists(f+filename+".json"):
+            with open(f+filename+".json", 'w+') as f:
                 f.write("{}")
 
-    def get_data(self):
-        f = self.data_path()
-        self.validate_data_file()
-        with open(f+"data.json", 'r') as fl:
+    def access_data(self, action, filename):
+        with open(f"{self.aos_dir}data/{action}/{filename}.json", 'r') as fl:
             return json.load(fl)
 
-    def save_data(self, js):
+    def get_data_list(self, action = ""):
+        out = []
+        f = self.data_path(action)
+        for filename in os.listdir(f):
+            out.append(filename)
+        return out
+
+    def get_data(self, filename = "data"):
         f = self.data_path()
-        self.validate_data_file()
-        with open(f+"data.json", 'w+') as fl:
+        self.validate_data_file(filename)
+        with open(f+filename+".json", 'r') as fl:
+            return json.load(fl)
+
+    def save_data(self, js, filename = "data"):
+        f = self.data_path()
+        self.validate_data_file(filename)
+        with open(f+filename+".json", 'w+') as fl:
             fl.write(json.dumps(js, indent=4))
         
     def load_config(self):

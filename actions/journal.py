@@ -17,6 +17,8 @@ def on_help(ctx):
         edit | e <index>
 
         delete | del | d <index>
+
+        list | ls
     """
 
 def format_entry(ctx, i, entry):
@@ -53,7 +55,7 @@ def on_load(ctx):
             data["entries"].append(new_journal)
 
             ctx.save_data(data)
-            #ctx.delete_text_file()
+
         case "delete" | "del" | "d":
             ind = ctx.get_string()[len(cmd)+1:]
             if ind.isdigit():
@@ -75,11 +77,10 @@ def on_load(ctx):
         case "list" | "ls":
             i = 0
             for entry in data.get("entries", []):
-                #ts = arrow.get(entry["created"], ctx.time_format).format(ctx.time_format)
-                
                 ctx.writeln(format_entry(ctx, i, entry))
                 i += 1
             ctx.writeln("---")
+
     return ctx
 
 def on_exit(ctx):

@@ -61,11 +61,19 @@ def on_load(ctx):
             
         case "dice":
             if line == "": line = "d6"
-            ctx.writeln(tools.dice.prettyRoll(line))
+            result = tools.dice.prettyRoll(line)
+            
+            if ctx.touch_config("shell.active") or ctx.touch_config("talk.active"):
+                ctx.send_to_sayfile(result)
+                ctx.say_file()
+            else:
+                ctx.writeln(result)
+
 
         case "coin" | "flip":
-            ctx.writeln(random.choice(["heads", "tails"]))
-
+            r = random.choice(["heads", "tails"])
+            ctx.writeln(r)
+            ctx.update_response(tts = f"You flipped a {r}")
 
         case "choice" | "choose" | "select":
             opts = line.split(" ")

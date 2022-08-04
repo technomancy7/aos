@@ -45,3 +45,7 @@ end
 start appman.select_first
 @description If True, when there are multiple possible applications to launch, default to the first one found.
 end
+
+start actions.list_disabled
+@description Do we show disabled actions in the action list?
+end

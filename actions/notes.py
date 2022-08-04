@@ -12,11 +12,11 @@ def action_data():
 
 def on_help(ctx):
     return dedent("""
-    
     Commands:
         add <text> --tags:<tag1,tag2...> --group:<group>
         list --tags:<tag1,tag2...> --group:<group> (--hidden)
         edit <new text> --i:<index>
+        delete <index>
         group --i:<index> <new group>
         tag --i:<index> --tags:<new tags...>
         addtag --i:<index> tag1,tag2
@@ -42,11 +42,18 @@ def on_load(ctx):
 
     if cmd == "" or cmd == None: cmd = "list"
     match cmd:
-        case "add":
-            note = ctx.get_string()[len(cmd)+1:]
-            ctx.writeln("Adding note.")
-            d["notes"].append({"text": note, "tags": tags, "group": group})
-            ctx.save_data(d)
+        case "add" | "new":
+            note = ""
+            if ctx.has_flag("f"):
+                note = ctx.open_text_editor().strip()
+            else:
+                note = ctx.get_string()[len(cmd)+1:]
+
+            if note != "":
+                ctx.writeln("Adding note.")
+                d["notes"].append({"text": note, "tags": tags, "group": group})
+                ctx.save_data(d)
+            ctx.delete_text_file() 
 
         case "list" | "ls":
             hidden = ctx.has_flag("hidden")
@@ -74,6 +81,23 @@ def on_load(ctx):
 
             ctx.writeln("---")
             if hiddens > 0: ctx.writeln(f"{hiddens} hidden notes.")
+
+        case "delete" | "del" | "d":
+            index = -1
+
+            #try:
+            index = int(ctx.get_string(1))
+            if index >= len(d["notes"]):
+                return ctx.writeln("Index must be below "+str(len(d['notes'])))
+            #except:
+                #return ctx.writeln("Invalid selection input.")
+
+            note = d["notes"][index]
+            ctx.writeln(format_note(note, i=index))
+            d["notes"].remove(note)
+            ctx.save_data(d)
+            ctx.writeln("!! DELETED !!")
+
 
         case "edit":
             index = ctx.get_flag("i") or -1

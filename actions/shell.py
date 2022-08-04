@@ -47,6 +47,8 @@ def on_load(ctx):
         subctx.update(command = cmd, lines = lines)
             
         subctx.execute()
+        if subctx.response["data"].get("tts"):
+            subctx.say(subctx.response["data"]["tts"])
 
     ctx.exit_code(0)
     return ctx

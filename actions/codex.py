@@ -45,9 +45,6 @@ def pretty_print_entity(ctx, name, entity):
         ctx.writeln(f" * [blue]{k}[/blue] = [yellow]{v}[/yellow]")
 
 def on_load(ctx): 
-    f = ctx.data_path()
-    ctx.validate_data_file()
-    data = ctx.get_data()
     cmd = ctx.get_string_ind(0)
 
     db = ctx.touch_config("codex.database", "addrbook")
@@ -56,7 +53,9 @@ def on_load(ctx):
         ctx.set_config("codex.database", db)
         print("Updated default database record: "+db)
 
-    if data.get(db, None) == None: data[db] = {}
+    data = ctx.get_data(db)
+
+    #if data.get(db, None) == None: data[db] = {}
 
     if cmd == "" or cmd == None: cmd = "list"
     ctx.writeln(f" --- Currently in {db} ---")
@@ -65,10 +64,10 @@ def on_load(ctx):
             name = ctx.get_string()[len(cmd)+1:] or ctx.get_flag("name") or input("Name > ")
             if name == "": return print("Name is required.")
 
-            if data[db].get(name, None) == None:
-                data[db][name] = {}
+            if data.get(name, None) == None:
+                data[name] = {}
 
-                ctx.save_data(data)
+                ctx.save_data(data, db)
                 print(f"{name} index created.")
                 return ctx.exit_code(1)
             else: return print("Index already exists.")
@@ -80,18 +79,20 @@ def on_load(ctx):
                 ctx.writeln("Updated default database record: "+new)
             else:
                 ctx.writeln("Databases:")
-                for n, _ in data.items():
+                for n in ctx.get_data_list():
+                    #self.parse_file(path+filename)
                     ctx.writeln(f" [blue]{n}[/blue]")
 
         case "delete" | "del" | "d":
             name = ctx.get_string()[len(cmd)+1:] or ctx.get_flag("name") or input("Name > ")
-            if data[db].get(name, None) != None:
-                pretty_print_entity(ctx, name, data[db][name])
+            if data.get(name, None) != None:
+                pretty_print_entity(ctx, name, data[name])
                 if ctx.get_flag("nw") or input("Confirm to delete (Input y to confirm) > ") == "y":
-                    del data[db][name]
-                    ctx.save_data(data)
+                    del data[name]
+                    ctx.save_data(data, db)
+
         case "list" | "ls":
-            for name, index in data[db].items():
+            for name, index in data.items():
                 pretty_print_entity(ctx, name, index)
 
         case "update" | "u":
@@ -107,12 +108,12 @@ def on_load(ctx):
                         return ctx.writeln("Problem parsing line format...")
                     if key != "" and entity != "" and value != "":
                         #print(entity, key, value)
-                        if data[db].get(entity, None) == None:
+                        if data.get(entity, None) == None:
                             ctx.writeln("Entity not found.")
                         else:
-                            data[db][entity][key] = value
-                            pretty_print_entity(ctx, entity, data[db][entity])
-                            ctx.save_data(data)
+                            data[entity][key] = value
+                            pretty_print_entity(ctx, entity, data[entity])
+                            ctx.save_data(data, db)
 
                     else:
                         ctx.writeln("Problem parsing line format...")
@@ -132,7 +133,7 @@ def on_load(ctx):
 
             if scope == "" or scope == "all":
                 if ctx.get_flag("nw") or input("Confirm to alter ALL index (Input y to confirm) > ") == "y":
-                    for name, index in data[db].items():
+                    for name, index in data.items():
                         #if index.get(field, None) == None:
                         if operation == "empty":
                             index[field] = ""
@@ -142,13 +143,13 @@ def on_load(ctx):
                             index[field] = ""
                         if operation == "edit":
                             index[field] = new_value
-                    ctx.save_data(data)
+                    ctx.save_data(data, db)
                     return ctx.exit_code(1)
                 else:
                     print("Cancelled.")
                     return ctx.exit_code(0)
             else:
-                index = data[db].get(scope, None)
+                index = data.get(scope, None)
                 if index != None:
                     if operation == "empty":
                         index[field] = ""
@@ -158,7 +159,7 @@ def on_load(ctx):
                         index[field] = ""
                     if operation == "edit":
                         index[field] = new_value
-                    ctx.save_data(data)
+                    ctx.save_data(data, db)
                     return ctx.exit_code(1)
                 else:
                     return print("Index does not exist.")

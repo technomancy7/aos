@@ -2,3 +2,4 @@ config.json
 self.log
 **data.json
 data/appman/**
+data/addrbook/**
