@@ -1,3 +1,0 @@
-Rolling 1d6 (+0)
-Total: 5
-Rolls: [5]
