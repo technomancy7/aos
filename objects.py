@@ -1,5 +1,6 @@
 import json, os, importlib, textwrap, readline, traceback
 from rich.console import Console
+from copy import deepcopy
 
 class Context:
     def __init__(self, *, line = "", command = "", lines = [], base_dir = ""):
@@ -15,6 +16,9 @@ class Context:
         self.buffer = []
         self.time_format = 'HH:mm:ss DD-MM-YYYY'
         self.response = {}
+
+    def clone(self):
+        return deepcopy(self)
 
     def coerce_bool(self, line):
         return str(line).lower() in ["1", "yes", "y", "true"]
@@ -57,6 +61,12 @@ class Context:
         for inv in invalid:
             if inv in disabled: disabled.remove(inv)
         return disabled
+
+    def quick_run(self, line):
+        tmp = self.clone()
+        tmp.update_from_line(line)
+        tmp.execute()
+        return tmp
 
     def execute(self, *, context = None):
         self.start_response()
@@ -216,6 +226,14 @@ class Context:
             os.makedirs(path)
         return path
 
+    def view_image(self, path):
+        app = self.touch_config("system.imageviewer", "eog")
+        
+        if "$T" in app:
+            os.system(app.replace("$T", path))
+        else:
+            os.system(app+" "+path)
+
     def open_text_editor(self, default_text = None, *, filetype = "txt"):
         txtedit = self.touch_config("system.texteditor", "nano")
         txtfile = self.aos_dir+"editing."+filetype
@@ -225,7 +243,11 @@ class Context:
             f.write(str(default_text))
             f.close()
 
-        os.system(txtedit+" "+txtfile)
+        if "$T" in txtedit:
+            os.system(txtedit.replace("$T", txtfile))
+        else:
+            os.system(txtedit+" "+txtfile)
+
         if os.path.exists(txtfile):
             with open(txtfile, "r") as f:
                 return f.read().strip()

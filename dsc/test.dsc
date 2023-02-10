@@ -1,3 +1,15 @@
-@name Youtube Playlist
-+audio Eminem
-+audio Linkin Park
+
+@name Artists
++names Eminem
++names Linkin Park
+
+start Eminem.songs
++songs Lose Yourself
++songs Not Afraid
+end
+
+@copy_of_name @{name}
+
+@first_artist @{names#0}
+
+#echo My favourite artist is @{first_artist}, and his song @{Eminem.songs#0}

@@ -3,29 +3,7 @@ import textwrap
 import io, os
 import traceback
 from contextlib import redirect_stdout
-
-def PreProc_Reform(engine, body):
-    for line in body.split("\n"):
-        if line.startswith("start") and "<<" in line:
-            edit = line.replace("<<", "\n<<")
-            body = body.replace(line, edit)
-
-    return body
-
-def PreProc_Label(engine, body):
-    v = engine.setv
-    g = engine.getv
-
-    v("_lineno", 0) 
-    for line in body.split("\n"):
-        v("_lineno", int(g("_lineno"))+1) 
-        if line.startswith(":"):
-            labelname = line[1:]
-            engine.variables["_labels"][labelname] = int(g("_lineno")) 
-        
-
-    v("_lineno", -1)         
-    return body
+import urllib.request
 
 class InfoscriptBase:
     @staticmethod
@@ -93,6 +71,11 @@ class Datascript:
         parser.parse(text)
         return parser
 
+    @staticmethod
+    def from_url(url):
+        text = urllib.request.urlopen(url).read().decode("utf8")
+        return Datascript.from_text(text)
+        
     def echo(self, line):
         blck = ""
         if self.getv("_current_block", "") != "":
@@ -147,7 +130,41 @@ class Datascript:
             print(e)
             tb = traceback.format_exc()
             print(tb)
+
             return "ERROR"
+
+    def PreProc_Reform(self, engine, body):
+        for line in body.split("\n"):
+            if line.startswith("start") and "<<" in line:
+                edit = line.replace("<<", "\n<<")
+                body = body.replace(line, edit)
+
+        return body
+
+    def PreProc_Vars(self, engine, body):
+        for line in body.split("\n"):
+            if line.startswith("@!"):
+                line = line[2:]
+                key = line.split(" ")[0]
+                var = " ".join(line.split(" ")[1:])
+                engine.setv(key, var)
+
+        return body
+
+    def PreProc_Label(self, engine, body):
+        v = engine.setv
+        g = engine.getv
+
+        v("_lineno", 0) 
+        for line in body.split("\n"):
+            v("_lineno", int(g("_lineno"))+1) 
+            if line.startswith(":"):
+                labelname = line[1:]
+                engine.variables["_labels"][labelname] = int(g("_lineno")) 
+            
+
+        v("_lineno", -1)         
+        return body
 
     def __init__(self):
         self.writeln = print
@@ -161,10 +178,11 @@ class Datascript:
             "_labels": {}
         }
         self.commands = {}
-
+        self.fallback = {}
         self.preprocessors = [
-            PreProc_Reform,
-            PreProc_Label
+            self.PreProc_Reform,
+            self.PreProc_Label,
+            self.PreProc_Vars
         ]
 
         InfoscriptBase.extend(self)
@@ -179,6 +197,7 @@ class Datascript:
         }
 
     def setv(self, key, val):
+        #print("Setting", key, val)
         val = self._handle(val)
         if "." in key:
             parent = self._handle(key.split(".")[0])
@@ -186,9 +205,19 @@ class Datascript:
             
             if self.variables.get(parent, None) == None:
                 self.variables[parent] = {}
-            self.variables[parent][sub] = val
+
+            if ":" in sub:
+                prop = sub.split(":")[1]
+                sub = sub.split(":")[0]
+                if self.variables[parent].get(sub, None) == None: self.variables[parent][sub] = {}
+                #print(self.variables)
+                #print(self.variables[parent][sub])
+                self.variables[parent][sub][prop] = val
+            else:
+                self.variables[parent][sub] = val
         else:
             self.variables[self._handle(key)] = val
+
 
     def appendv(self, key, val):
         val = self._handle(val)
@@ -218,6 +247,10 @@ class Datascript:
             if "#" in sub:        
                 ind = int(sub.split("#")[1])
                 return self.variables[parent].get(self._handle(sub).split("#")[0], [])[ind]
+            elif ":" in sub:
+                isubvar = sub.split(":")[1]
+                sub = sub.split(":")[0]
+                return self.variables[parent].get(self._handle(sub), {}).get(isubvar, default)
             else:
                 return self.variables[parent].get(self._handle(sub), default)
         else:
@@ -225,8 +258,15 @@ class Datascript:
                 ind = int(key.split("#")[1])
                 key = key.split("#")[0]
                 return self.variables.get(self._handle(key), [])[ind]
+            elif ":" in key:
+                isubvar = key.split(":")[1]
+                key = key.split(":")[0]
+                return self.variables.get(self._handle(key), {}).get(isubvar, default)
             else:
                 return self.variables.get(self._handle(key), default)
+
+    def set_fallback(self, scope, fn):
+        self.fallback[scope] = fn
 
     def readline(self, line):
         v = self.setv
@@ -235,7 +275,10 @@ class Datascript:
         if line.startswith("//"): return
 
         if g("_current_block") == "":
-            if line.startswith("start"):
+            if line == "finish":
+                v("_stopped", True)
+
+            elif line.startswith("start"):
                 if " " in line:
                     v("_current_block", " ".join(line.split(" ")[1:]))
                 else:
@@ -243,21 +286,25 @@ class Datascript:
                     v("_current_block", name)
                 v("_number_of_blocks", int(g("_number_of_blocks"))+1)  
 
-            if line.startswith("@"):
+            elif line.startswith("@") and not line.startswith("@!"):
                 key = line.split(" ")[0][1:]
                 val = " ".join(line.split(" ")[1:])
                 v(key, val)
             
-            if line.startswith("#"):
+            elif line.startswith("#"):
                 cmd = line.split(" ")[0][1:]
                 val = " ".join(line.split(" ")[1:])
                 if self.commands.get(cmd, None) != None:
                     self.commands[cmd](self, line=val)
 
-            if line.startswith("+"):
+            elif line.startswith("+"):
                 key = line.split(" ")[0][1:]
                 val = " ".join(line.split(" ")[1:])
                 self.appendv(key, val)
+            else:
+                if line.strip() != "" and self.fallback.get("global", None) != None:
+                    self.fallback["global"](self, line)
+
         else:
             if line == "end":
                 v("_current_block", "")
@@ -269,22 +316,34 @@ class Datascript:
                     for k, val in toimport.items():
                         v(b+"."+k, val)
 
-                if line.startswith("@"):
+                elif line.startswith("@") and not line.startswith("@!"):
                     key = line.split(" ")[0][1:]
                     val = " ".join(line.split(" ")[1:])
-                    v(b+"."+key, val)
+                    #print("Setting")
+                    #print(b+" k "+key)
+                    if "." in b:
+                        v(b+":"+key, val)        
+                    else:
+                        v(b+"."+key, val)
 
-                if line.startswith("+"):
+                elif line.startswith("+"):
                     key = line.split(" ")[0][1:]
                     val = " ".join(line.split(" ")[1:])
                     self.appendv(b+"."+key, val)
 
-                if line.startswith("#"):
+                elif line.startswith("#"):
                     cmd = line.split(" ")[0][1:]
                     val = " ".join(line.split(" ")[1:])
 
                     if self.commands.get(cmd, None) != None:
                         self.commands[cmd](self, line=val)
+                else:
+                    if line.strip() != "":
+                        if self.fallback.get("block", None) != None:
+                            self.fallback["block"](self, b, line)
+
+                        if self.fallback.get("block_"+b, None) != None:
+                            self.fallback["block_"+b](self, line)     
 
     def parse_file(self, path):
         with open(path, "r") as f:
@@ -296,21 +355,32 @@ class Datascript:
         for filename in os.listdir(path):
             self.parse_file(path+filename)
 
-    def parse(self, body):
+    def _run_preprocs(self):
+        body = self.getv("_body")
+        for preproc in self.preprocessors:
+            body = preproc(self, body)
+            self.setv("_body", body)
+
+    def parse(self, body, *, run_preproc = True):
         v = self.setv
         g = self.getv
 
-        for preproc in self.preprocessors:
-            body = preproc(self, body)
+        v("_body", body)
 
+        if run_preproc:
+            self._run_preprocs()
+
+        body = g("_body")
         v("_current_block", "")
         v("_lineno", 0) 
-        all_lines = body.split("\n")
+        v("_stopped", False)
 
-        #for linen in range(0, len(all_lines)):
+        all_lines = body.split("\n")
+        
         while True:
             if g("_lineno", 0) >= len(all_lines): break
             if all_lines[g("_lineno", 0)] == "stop": break
+            if g("_stop", False): break
             line = all_lines[g("_lineno", 0)].strip()
             self.readline(line)
             v("_lineno", int(g("_lineno"))+1) 
@@ -319,7 +389,7 @@ class Datascript:
         v("_current_block", "")
         v("_lineno", -1) 
         v("_line_count", len(all_lines))
-
+        v("_stopped", True)
         return {
             "variables": self.variables
         }

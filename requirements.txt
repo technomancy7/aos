@@ -1,0 +1,12 @@
+opencv-python 
+arrow
+dearpygui
+fuzzywuzzy
+humanfriendly
+pokebase
+pygments
+requests
+urllib3
+qrcode
+pyzbar
+pillow
