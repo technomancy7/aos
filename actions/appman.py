@@ -1,5 +1,6 @@
 import os, json, subprocess, shutil
-
+from thefuzz import fuzz, process
+import shlex
 def action_data():
     return {
         "name": "appman",
@@ -18,249 +19,138 @@ def on_help(ctx):
             Runs the command specified.
 
         show <appname>
-            Shows information on app.
 
-        edit <appname> <key> <value>
-            Edits a key in the launcher file.
+        list
 
-        list | ls
-            Shows all apps.
+        add_directory <dir>
 
-        rename <oldname> <newname>
-            Changes command name.
-
-        delete <appname>
-            Deletes command.
-
-        link [--name:<appname>] [--command:<appcommand>]
-            Creates new launcher called appname which links to appcommand.
-
-        check [--fix]
-            Runs through the application directory and checks if they all have a launcher related to them.
+        add_launcher <dir>
     """
 
-def get_app(ctx, name, *, need_exact = False):
-    apps_dir = ctx.data_path()
-    if not apps_dir.endswith("/"): apps_dir = apps_dir+"/"
-    if not os.path.exists(apps_dir):
-        return None
-    
-    if os.path.exists(apps_dir+name+".json"):
-        with open(apps_dir+name+".json", 'r') as f:
-            return json.load(f)
-    else:
-        if need_exact:
-            return ctx.writeln("Can't infer selection, requires exact input.")
-        out = []
-        for filename in os.listdir(apps_dir):
-            f = os.path.join(apps_dir, filename)
-            if os.path.isfile(f) and filename.endswith(".json") and name.lower() in filename.lower():
-                with open(apps_dir+filename, 'r') as f:
-                    out.append(json.load(f))
-        if len(out) == 1 or ctx.touch_config("appman.select_first", False): return out[0]
-        return out
-
-def replaceTags(ctx, string):
-    string = string.replace("{ROOT}", ctx.aos_dir)
-    string = string.replace("{DATA}", ctx.data_path())
-    string = string.replace("{APPS}", os.path.expanduser(ctx.touch_config("appman.dir", "~/.aos_applications/")))
-    return string
-
-def launch(ctx, app):
-    command = app["command"]
-    command = replaceTags(ctx, command)
-    extra_args = ctx.get_string_list()[2:]
-
-    wd = app.get("wd", None)
-
-    cwd = os.getcwd()
-
-    if wd != None:
-        cwd = os.path.expanduser(wd)
-        cwd = replaceTags(ctx, cwd)
-        if not os.path.exists(cwd):
-            os.makedirs(cwd)
-    
-    if app.get("generic", False) == True:   
-        command = shutil.which(command)
-
-    try:
-        p = subprocess.run([command, *extra_args], cwd=cwd)
-    except PermissionError:
-        ctx.writeln("Permissions error! Updating executable...")
-        os.system(f"chmod u+x {command}")
-        p = subprocess.run([command, *extra_args], cwd=cwd)
-    
-    if ctx.touch_config("appman.show_result"): ctx.writeln(f"Application exit: [blue]{p.args}[/blue] (Return code: "+str(p.returncode)+")")
-
-def select_app(ctx, opts):
-    for i, opt in enumerate(opts):
-        ctx.writeln(f"* ({i}) {opt['name']} ({opt.get('description', 'None')})")
-    
-    c = input("?> ")
-
-    if c.isdigit() and int(c) < len(opts):
-        return opts[int(c)]
-    elif c == "":
-        return opts[0]
-    elif not c.isdigit():
-        for opt in opts:
-            if c.lower() == opt["name"]:
-                return opt
-    else:
-        return opts[0]
-
-def edit_app(ctx, name, app, key, val):
-    apps_dir = ctx.data_path()
-    if val == None:
-        if app.get(key):    
-            del app[key]
-        else:
-            return ctx.writeln("Key already doesn't exist.")
-    else:
-        if val.isdigit(): val = int(val)
-        elif val == "true" or val == "false": val = bool(val)
-
-        app[key] = val
-    with open(apps_dir+name+".json", 'w') as f:
-        json.dump(app, f)
-
-def show_app(ctx, app):
-    ctx.writeln(f"{app['name']} ({app.get('group', '')})")
-
-    ex = "  * Executes "+replaceTags(ctx, app['command'])
-    if app.get("generic"):
-        ex += " as "+shutil.which(app['command'])
-    if app.get("wd"):
-        ex += " in "+replaceTags(ctx, app['wd'])
-    ctx.writeln(ex)
-
 def on_load(ctx): 
-    apps_dir = ctx.data_path()
-    if not os.path.exists(apps_dir):
-        os.mkdir(apps_dir)
-
     cmd = ctx.get_string_ind(0)
     line = ""
     if len(ctx.get_string_list()) > 1:
-        line = ctx.get_string_list()[1]
-    
+        line = ctx.get_string()[len(cmd)+1:]
+    data = ctx.get_data()
+    appdirs = data.get("appdirs", [])
+    extraapps = data.get("extraapps", [])
+    min_match = ctx.touch_config("appman.min_match", 90)
+    appinfo = data.get("appinfo", {})
+
+    def get_prop(ctx, app, key, de = None):
+        if appinfo.get(app, {}):
+            if appinfo[app].get(key, de) != de:
+                return appinfo[app][key]
+
+        return de
+
     match cmd:
+        
         case "run":
-            if line == "": return print("todo error")
-            r = get_app(ctx, line)
-            if type(r) == dict:
-                launch(ctx, r)
-            elif type(r) == list:
-                launch(ctx, select_app(ctx, r))
-        
-        case "show":
-            if line == "": return print("todo error")
-            r = get_app(ctx, line)
-            if type(r) == dict:
-                show_app(ctx, r)
-            elif type(r) == list:
-                show_app(ctx, select_app(ctx, r))
-
-        case "edit":
-            if line == "": return print("todo error")
-            key = ctx.get_string_ind(2)
-            val = ctx.get_string_ind(3)
-            if val == key: return print("todo error")
-
-            r = get_app(ctx, line, need_exact = True)
-
-            if type(r) == dict:
-                edit_app(ctx, line, r, key, val)
-
-            elif type(r) == list:
-                rf = select_app(ctx, r)
-                edit_app(ctx, line, rf, key, val)
-
-        case "ls" | "list":
-            grps = {"default": []}
-            #print("---")
-            for filename in os.listdir(apps_dir):
-                
-                f = os.path.join(apps_dir, filename)
-                if os.path.isfile(f) and filename.endswith(".json"):
-                    with open(apps_dir+filename, 'r') as f:
-                        app = json.load(f)
-                        if app.get("hidden") == True:
-                            continue
-                        if app.get("group") == "": app["group"] = "default"
-                        if grps.get(app.get("group", "default"), None) == None: grps[app.get("group", "default")] = []
-                        grps[app.get("group", "default")].append(app)
-                        #show_app(ctx, app)
-                        #print("---")
-            for key, item in grps.items():
-                ctx.writeln(f" --- {key} ---")
-                for app in item:
-                    show_app(ctx, app)
-        
-        case "rename":
-            oldn = ctx.get_string_ind(1)
-            newn = ctx.get_string_ind(2)
-            if os.path.exists(apps_dir+oldn+".json") and not os.path.exists(apps_dir+newn+".json"):
-                os.rename(apps_dir+oldn+".json", apps_dir+newn+".json")
-
-        case "delete":
-            appn = ctx.get_string_ind(1)
-            if os.path.exists(apps_dir+appn+".json"):
-                os.remove(apps_dir+appn+".json")
-
-        case "link":
-            name = ctx.ask("name", prompt="Name of application")
-            command = ctx.ask("command", prompt="Command to execute")
-            app = {"name": name, 
-                    "group": "", 
-                    "command": command}
-            with open(apps_dir+name+".json", 'w') as f:
-                json.dump(app, f)
-        
-        case "check": #@todo rewrite to not read data json every time, store in memory instead
-            nolinks = []
-            ddir = os.path.expanduser(ctx.touch_config("appman.dir", "~/.aos_applications/"))
-            ddir = ddir+"bin/"
-            for filename in os.listdir(ddir):
-                found = False
-                #ctx.writeln(f"Checking {filename}...")
-
-                fullpath = os.path.join(ddir, filename)
-
-                for jsname in os.listdir(apps_dir):
-                    #print(jsname)
-                    with open(apps_dir+jsname, "r") as f:
-                        try:
-                            js = json.load(f)
-                        except: continue
-                        realpath = replaceTags(ctx, js["command"])
-
-                        if fullpath == realpath:
-                            #ctx.writeln("Exists")
-                            found = True
-                if not found:
-                    nolinks.append(fullpath)
-
-            if len(nolinks) == 0:
-                return ctx.writeln("OK")
-
-            if ctx.has_flag("fix"):
-                for command in nolinks:
+            def run_app(ctx, path, *args):
+                cwd = os.getcwd()
+                print("Run", path, "with", *args)
+                app = appinfo.get(path, {})
+                print(app)
+                if app.get("launcher", "") != "":
+                    pass
+                else:
+                    try:
+                        p = subprocess.run([path, *args], cwd=cwd)
+                    except PermissionError:
+                        ctx.writeln("Permissions error! Updating executable...")
+                        os.system(f"chmod u+x {path}")
+                        p = subprocess.run([path, *args], cwd=cwd)
                     
-                    name = command.split("/")[-1].split(".")[0].split("-")[0].split("_")[0]
-                    ctx.writeln(f"Creating {command} as {name}...")
-                    app = {"name": name, 
-                            "group": "", 
-                            "command": command}
-                    with open(apps_dir+name+".json", 'w') as f:
-                        json.dump(app, f)
+                    if ctx.touch_config("appman.show_result"): 
+                        ctx.writeln(f"Application exit: [blue]{p.args}[/blue] (Return code: "+str(p.returncode)+")")
 
-            elif ctx.has_flag("wizard"):
-                pass
+            to_run = ctx.get_string_at(1)
+            matches = []
+            for d in appdirs:
+                for filename in os.listdir(d):
+                    m = fuzz.ratio(line, filename)
+                    if min_match < m or filename.startswith(to_run):
+                        matches.append(d+filename)
+            
+            if len(matches) == 0:
+                ctx.say("No matches found.")
+            elif len(matches) == 1:
+                ctx.writeln(f"Launching {matches[0]}")
+                run_app(ctx, matches[0], *ctx.get_string_list()[2:])
             else:
-                ctx.writeln(f"{len(nolinks)} apps in application directory don't have launchers. Run again with --fix to automatically create launchers, or --wizard to walk through manually.")
+                ctx.say("Too many matches, select one: ")
+                for i, m in enumerate(matches):
+                    ctx.writeln(f"{i}. {m}")
+                
+                result = ctx.ask("Launch which app?")
+                if result.isdigit():
+                    result = int(result)
+                    app = matches[result]
+                    ctx.writeln(f"Launching {app}")
+                    run_app(ctx, app, *ctx.get_string_list()[2:])
+        
+        case "set":
+            if "/" not in line:
+                line = os.getcwd()+"/"+line
+            else:
+                os.path.expanduser(line)
 
-                print(nolinks)
+            ctx.writeln(f"Setting config for {line}")
+            key = ctx.ask("Key")
+            value = ctx.ask("Value")
+            ctx.writeln(key, value)
+            a = appinfo.get(line, {})
+            a[key] = value
+            appinfo[line] = a
+            data["appinfo"] = appinfo
+            ctx.save_data(data)
+
+        case "list":
+            for d in appdirs:
+                ctx.writeln(f"=== {d} ===")
+                for filename in os.listdir(d):
+                    ctx.writeln("* "+filename)
+                    p = get_prop(ctx, d+filename, "description", "")
+
+                    if p != "":
+                        ctx.writeln(f" - {p}")
+
+            ctx.writeln("=== Others ===")
+            for app in extraapps:
+                ctx.writeln(app)
+
+        case "add_directory":
+            if line == "." or line == "":
+                line = os.getcwd()+"/"
+            else:
+                os.path.expanduser(line)
+            if not line.endswith("/"):
+                line = line+"/"
+            if line in appdirs:    
+                return ctx.say("Directory already added.")
+            ctx.writeln(f"Added > {line}")
+            appdirs.append(line)
+            data["appdirs"] = appdirs
+            print(data)
+            ctx.save_data(data)
+            ctx.say("Directory added.")
+
+        case "add_launcher":
+            if "/" not in line:
+                line = os.getcwd()+"/"+line
+            else:
+                os.path.expanduser(line)
+
+            if line in extraapps:    
+                return ctx.say("Launcher already added.")
+
+            ctx.writeln(f"Added > {line}")
+            extraapps.append(line)
+            data["extraapps"] = extraapps
+            print(data)
+            ctx.save_data(data)
+            ctx.say("Launcher added.")
 
     return ctx

@@ -257,7 +257,11 @@ class Context:
     def edit_file(self, txtfile):
         txtedit = self.touch_config("system.texteditor", "nano")
 
-        os.system(txtedit+" "+txtfile)
+        if "$T" in txtedit:
+            os.system(txtedit.replace("$T", txtfile))
+        else:
+            os.system(txtedit+" "+txtfile)
+            
         if os.path.exists(txtfile):
             with open(txtfile, "r") as f:
                 return f.read().strip()

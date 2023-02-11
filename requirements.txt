@@ -1,6 +1,7 @@
 opencv-python 
 arrow
 dearpygui
+thefuzz
 fuzzywuzzy
 humanfriendly
 pokebase

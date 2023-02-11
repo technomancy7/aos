@@ -1,0 +1,1 @@
+{"name": "test", "group": "", "command": "{APPS}bin/test.py", "wd": "{APPS}test/"}

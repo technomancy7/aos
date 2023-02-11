@@ -1,0 +1,1 @@
+{"name": "install_haxe", "group": "", "command": "{APPS}bin/install_haxe.sh", "wd": "{APPS}install_haxe/"}

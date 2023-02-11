@@ -1,5 +1,5 @@
 import json
-from fuzzywuzzy import fuzz, process
+from thefuzz import fuzz, process
 
 def action_data():
     return {

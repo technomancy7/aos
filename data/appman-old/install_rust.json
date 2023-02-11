@@ -1,0 +1,1 @@
+{"name": "install_rust", "group": "", "command": "{APPS}bin/install_rust.sh", "wd": "{APPS}install_rust/"}

@@ -1,0 +1,1 @@
+{"name": "install_go", "group": "", "command": "{APPS}bin/install_go.sh", "wd": "{APPS}install_go/"}
