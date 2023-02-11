@@ -3,7 +3,7 @@
 +names Eminem
 +names Linkin Park
 
-start Eminem.songs
+start Eminem
 +songs Lose Yourself
 +songs Not Afraid
 end
@@ -13,3 +13,6 @@ end
 @first_artist @{names#0}
 
 #echo My favourite artist is @{first_artist}, and his song @{Eminem.songs#0}
+#delay 2.5
+#echo Now, a couple seconds later, we winning.
+#aos test

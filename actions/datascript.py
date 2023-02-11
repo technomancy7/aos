@@ -13,14 +13,25 @@ def action_data():
 def on_help(ctx):
     pass
 
+def customize(ctx, dsc):
+    def raos(engine, line):
+        engine.echo("Successful connection to customize.")
+        engine.echo(f"Got line {line}")
+    dsc.commands["aos"] = raos
+    return dsc
+
 def on_load(ctx): 
     cmd = ctx.get_string_ind(0)
-    show_data = ctx.has_flag("show")
+    show_data = not ctx.has_flag("silent")
 
     if cmd == "run":
         file = ctx.get_string()[len(cmd)+1:]
         if not file.endswith(".dsc"):
             file = file+".dsc"
+
+        if "/" not in file:
+            file = ctx.aos_dir+"dsc/"+file
+        print(file)
         parser = Datascript()
         parser.writeln = ctx.writeln
         dc = parser.parse_file(file)

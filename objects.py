@@ -17,9 +17,6 @@ class Context:
         self.time_format = 'HH:mm:ss DD-MM-YYYY'
         self.response = {}
 
-    def clone(self):
-        return deepcopy(self)
-
     def coerce_bool(self, line):
         return str(line).lower() in ["1", "yes", "y", "true"]
             
@@ -55,6 +52,9 @@ class Context:
         c.load_config()
         c.plaintext_output = self.plaintext_output
         return c
+
+    def copy(self):
+        return deepcopy(self)
 
     def sanity_check_disabled(self, disabled):
         invalid = ["actions", "system", "conf"]
@@ -261,7 +261,7 @@ class Context:
             os.system(txtedit.replace("$T", txtfile))
         else:
             os.system(txtedit+" "+txtfile)
-            
+
         if os.path.exists(txtfile):
             with open(txtfile, "r") as f:
                 return f.read().strip()

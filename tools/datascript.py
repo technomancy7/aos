@@ -1,6 +1,6 @@
 import re
 import textwrap
-import io, os
+import io, os, time
 import traceback
 from contextlib import redirect_stdout
 import urllib.request
@@ -17,6 +17,14 @@ class InfoscriptBase:
         engine.commands["eval"] = InfoscriptBase._eval
         engine.commands["exec"] = InfoscriptBase._exec
         engine.commands["input"] = InfoscriptBase._input
+        engine.commands["delay"] = InfoscriptBase._delay
+
+    @staticmethod
+    def _delay(engine, line):
+        try:
+            time.sleep(float(line))
+        except: return "0"
+        return "1"
 
     @staticmethod
     def _input(engine, line):
@@ -179,6 +187,7 @@ class Datascript:
         }
         self.commands = {}
         self.fallback = {}
+
         self.preprocessors = [
             self.PreProc_Reform,
             self.PreProc_Label,
@@ -225,8 +234,10 @@ class Datascript:
         if type(l) != list:
             return print(f"{key} value not a list, can't operate.")
         else:
+            print("Appending", val, "to", l, "under", key)
             l.append(val)
             self.setv(key, l)
+            print(self.getv(key))
 
     def unappendv(self, key, val):
         val = self._handle(val)
@@ -246,6 +257,7 @@ class Datascript:
                 
             if "#" in sub:        
                 ind = int(sub.split("#")[1])
+                
                 return self.variables[parent].get(self._handle(sub).split("#")[0], [])[ind]
             elif ":" in sub:
                 isubvar = sub.split(":")[1]
@@ -257,7 +269,10 @@ class Datascript:
             if "#" in key: 
                 ind = int(key.split("#")[1])
                 key = key.split("#")[0]
+                print(self.variables)
+                #try:
                 return self.variables.get(self._handle(key), [])[ind]
+                #except: return ""
             elif ":" in key:
                 isubvar = key.split(":")[1]
                 key = key.split(":")[0]
@@ -271,7 +286,7 @@ class Datascript:
     def readline(self, line):
         v = self.setv
         g = self.getv
-        
+        print("READING LINE", line)
         if line.startswith("//"): return
 
         if g("_current_block") == "":
@@ -307,6 +322,7 @@ class Datascript:
 
         else:
             if line == "end":
+                print("END OF BLOCK", g("_current_block"))
                 v("_current_block", "")
             else:
                 b = g("_current_block")
@@ -329,6 +345,7 @@ class Datascript:
                 elif line.startswith("+"):
                     key = line.split(" ")[0][1:]
                     val = " ".join(line.split(" ")[1:])
+                    print("adding", b+"."+key, val)
                     self.appendv(b+"."+key, val)
 
                 elif line.startswith("#"):

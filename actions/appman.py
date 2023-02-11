@@ -49,12 +49,17 @@ def on_load(ctx):
         
         case "run":
             def run_app(ctx, path, *args):
+                print(args)
                 cwd = os.getcwd()
                 print("Run", path, "with", *args)
                 app = appinfo.get(path, {})
                 print(app)
-                if app.get("launcher", "") != "":
+
+                if path.endswith(".aos.py"):
                     pass
+                elif app.get("launcher", "") != "":
+                    cmd = app['launcher']
+                    p = subprocess.run([path, *args], cwd=cwd)
                 else:
                     try:
                         p = subprocess.run([path, *args], cwd=cwd)
@@ -73,12 +78,13 @@ def on_load(ctx):
                     m = fuzz.ratio(line, filename)
                     if min_match < m or filename.startswith(to_run):
                         matches.append(d+filename)
+            args = ctx.lines[2:]
             
             if len(matches) == 0:
                 ctx.say("No matches found.")
             elif len(matches) == 1:
                 ctx.writeln(f"Launching {matches[0]}")
-                run_app(ctx, matches[0], *ctx.get_string_list()[2:])
+                run_app(ctx, matches[0], *args)
             else:
                 ctx.say("Too many matches, select one: ")
                 for i, m in enumerate(matches):
@@ -89,7 +95,7 @@ def on_load(ctx):
                     result = int(result)
                     app = matches[result]
                     ctx.writeln(f"Launching {app}")
-                    run_app(ctx, app, *ctx.get_string_list()[2:])
+                    run_app(ctx, app, *args)
         
         case "set":
             if "/" not in line:
