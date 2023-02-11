@@ -4,7 +4,8 @@ import io, os, time
 import traceback
 from contextlib import redirect_stdout
 import urllib.request
-
+#@todo
+# doing @{Value#index} doesnt work, example in test copy.dsc
 class InfoscriptBase:
     @staticmethod
     def extend(engine):
@@ -105,6 +106,7 @@ class Datascript:
         regc = re.compile("\#{[\w_\-\.:\s\[\]\d\"\']*}")
         for word in regc.findall(line):
             modified_word = word[2:-1]
+            #print("Found sub command", word)
             result = ""
             if ":" in modified_word:
                 cmd = modified_word.split(":")[0]
@@ -234,10 +236,10 @@ class Datascript:
         if type(l) != list:
             return print(f"{key} value not a list, can't operate.")
         else:
-            print("Appending", val, "to", l, "under", key)
+            #print("Appending", val, "to", l, "under", key)
             l.append(val)
             self.setv(key, l)
-            print(self.getv(key))
+            #print(self.getv(key))
 
     def unappendv(self, key, val):
         val = self._handle(val)
@@ -269,8 +271,9 @@ class Datascript:
             if "#" in key: 
                 ind = int(key.split("#")[1])
                 key = key.split("#")[0]
-                print(self.variables)
+                #print(self.variables)
                 #try:
+                #print("Getting", key)
                 return self.variables.get(self._handle(key), [])[ind]
                 #except: return ""
             elif ":" in key:
@@ -286,7 +289,7 @@ class Datascript:
     def readline(self, line):
         v = self.setv
         g = self.getv
-        print("READING LINE", line)
+        #print("READING LINE", line)
         if line.startswith("//"): return
 
         if g("_current_block") == "":
@@ -304,6 +307,7 @@ class Datascript:
             elif line.startswith("@") and not line.startswith("@!"):
                 key = line.split(" ")[0][1:]
                 val = " ".join(line.split(" ")[1:])
+                print("Setting line", key, val)
                 v(key, val)
             
             elif line.startswith("#"):
@@ -322,7 +326,7 @@ class Datascript:
 
         else:
             if line == "end":
-                print("END OF BLOCK", g("_current_block"))
+                #print("END OF BLOCK", g("_current_block"))
                 v("_current_block", "")
             else:
                 b = g("_current_block")
@@ -337,6 +341,7 @@ class Datascript:
                     val = " ".join(line.split(" ")[1:])
                     #print("Setting")
                     #print(b+" k "+key)
+                    print("Setting line", key, val)
                     if "." in b:
                         v(b+":"+key, val)        
                     else:
@@ -349,8 +354,10 @@ class Datascript:
                     self.appendv(b+"."+key, val)
 
                 elif line.startswith("#"):
+                    
                     cmd = line.split(" ")[0][1:]
                     val = " ".join(line.split(" ")[1:])
+                    print("executing", cmd)
 
                     if self.commands.get(cmd, None) != None:
                         self.commands[cmd](self, line=val)

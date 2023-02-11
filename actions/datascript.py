@@ -33,6 +33,7 @@ def on_load(ctx):
             file = ctx.aos_dir+"dsc/"+file
         print(file)
         parser = Datascript()
+        customize(ctx, parser)
         parser.writeln = ctx.writeln
         dc = parser.parse_file(file)
         if show_data: print(dc)

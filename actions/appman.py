@@ -1,6 +1,7 @@
-import os, json, subprocess, shutil
+import os, json, subprocess, shutil, sys, textwrap
 from thefuzz import fuzz, process
-import shlex
+import shlex, importlib
+import importlib.util as ilu
 def action_data():
     return {
         "name": "appman",
@@ -56,8 +57,16 @@ def on_load(ctx):
                 print(app)
 
                 if path.endswith(".aos.py"):
-                    pass
-                elif app.get("launcher", "") != "":
+                    #cd = os.path.dirname(path)
+                    with open(path) as f:
+                        text = f.read()
+                        to_compile = f'def func():\n{textwrap.indent(text, "  ")}'
+                        env = {"ctx": ctx}
+                        env.update(globals())
+                        exec(to_compile, env)
+                        env['func']()
+
+                elif app.get("launcher", "") != "": #@todo finish and test this
                     cmd = app['launcher']
                     p = subprocess.run([path, *args], cwd=cwd)
                 else:
