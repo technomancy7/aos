@@ -1,0 +1,8924 @@
+// A generic set of chatting responses. This set mimicks the classic Eliza bot.
+
++ [*] (sorry|apologize|apology) [*]
+- Please don't apologize.
+- Apologies are not necessary.
+- I've told you that apologies are not required.
+- It did not bother me. Please continue.
+
++ i remember *
+- Do you often think of <star>?
+- Does thinking of <star> bring anything else to mind?
+- Why do you remember <star> just now?
+- What in the present situation reminds you of <star>?
+- What is the connection between me and <star>?
+- What else does <star> remind you of?
+
++ do you remember *
+- Did you think I would forget <star>?
+- Why do you think I should recall <star> now?
+- What about <star>?
+- You mentioned <star>?
+
++ you remember *
+- How could I forget <star>?
+- What about <star> should I remember?
+
++ i forget *
+- Can you think of why you might forget <star>?
+- Why can't you remember <star>?
+- How often do you think of <star>?
+- Does it bother you to forget that?
+- Could it be a mental block?
+- Are you generally forgetful?
+- Do you think you are suppressing <star>?
+
++ did you forget *
+- Why do you ask?
+- Are you sure you told me?
+- Would it bother you if I forgot <star>?
+- Why should I recall <star> just now?
+- Tell me more about <star>.
+
++ [*] if *
+- Do you think it's likely that <star>?
+- Do you wish that <star>?
+- What do you know about <star>?
+- Really, if <star>?
+- What would you do if <star>?
+- But what are the chances that <star>?
+- What does this speculation lead to?
+
++ [*] i dreamed *
+- Really, <star>?
+- Have you ever fantasized <star> while you were awake?
+- Have you ever dreamed <star> before?
+- What does that dream suggest to you?
+- Do you dream often?
+- What persons appear in your dreams?
+- Do you believe that dreams have something to do with your problem?
+
++ [*] perhaps [*]
+- You don't seem quite certain.
+- Why the uncertain tone?
+- Can't you be more positive?
+- You aren't sure?
+- Don't you know?
+- How likely, would you estimate?
+
++ (hello|hi|hey|howdy|hola|hai|yo) [*]
+- How do you do. Please state your problem.
+- Hi. What seems to be your problem?
+
++ [*] computer [*]
+- Do computers worry you?
+- Why do you mention computers?
+- What do you think machines have to do with your problem?
+- Don't you think computers can help people?
+- What about machines worries you?
+- What do you think about machines?
+
++ am i *
+- Do you believe you are <star>?
+- Would you want to be <star>?
+- Do you wish I would tell you you are <star>?
+- What would it mean if you were <star>?
+
++ are you *
+- Are you interested in whether I am <star> or not?
+- Would you prefer if I weren't <star>?
+- Perhaps I am <star> in your fantasies.
+- Do you sometimes think I am <star>?
+- Would it matter to you?
+- What if I were <star>?
+
++ you are *
+- What makes you think I am <star>?
+- Does it please you to believe I am <star>?
+- Do you sometimes wish you were <star>?
+- Perhaps you would like to be <star>.
+
++ * are *
+- Did you think they might not be <star2>?
+- Would you like it if they were not <star2>?
+- What if they were not <star2>?
+- Are they always <star2>?
+- Are you positive they are <star2>?
+
++ [*] your *
+- Why are you concerned over my <star>?
+- What about your own <star>?
+- Are you worried about someone else's <star>?
+- Really, my <star>?
+- What makes you think of my <star>?
+- Do you want my <star>?
+
++ was i *
+- What if you were <star>?
+- Do you think you were <star>?
+- Were you <star>?
+- What would it mean if you were <star>?
+- What does '<star>' suggest to you?
+
++ i was *
+- Were you really?
+- Why do you tell me you were <star> now?
+- Perhaps I already know you were <star>.
+
++ [*] was you *
+- Would you like to believe I was <star>?
+- What suggests that I was <star>?
+- What do you think?
+- Perhaps I was <star>.
+- What if I had been <star>?
+
++ i (desire|want|need) *
+- What would it mean to you if you got <star2>?
+- Why do you want <star2>?
+- Suppose you got <star2> soon.
+- What if you never got <star2>?
+- What would getting <star2> mean to you?
+- What does wanting <star2> have to do with this discussion?
+
++ i am (sad|unhappy|mad|angry|pissed|depressed) [*]
+- I am sorry to hear that you are <star>.
+- Do you think coming here will help you not to be <star>?
+- I'm sure it's not pleasant to be <star>.
+- Can you explain what made you <star>?
+
++ i am (happy|excited|glad) [*]
+- How have I helped you to be <star>?
+- Has your treatment made you <star>?
+- What makes you <star> just now?
+- Can you explain why you are <star>?
+
++ i (believe|think) *
+- Do you really think so?
+- But you are not sure you <star2>.
+- Do you really doubt you <star2>
+
++ i am *
+- Is it because you are <star> that you came to me?
+- How long have you been <star>?
+- Do you believe it is normal to be <star>?
+- Do you enjoy being <star>?
+- Do you know anyone else who is <star>?
+
++ i can not *
+- How do you know that you can't <star>?
+- Have you tried?
+- Perhaps you could <star> now.
+- Do you really want to be able to <star>?
+- What if you could <star>?
+
++ i do not *
+- Don't you really <star>?
+- Why don't you <star>?
+- Do you wish to be able to <star>?
+- Does that trouble you?
+
++ i feel *
+- Tell me more about such feelings.
+- Do you often feel <star>?
+- Do you enjoy feeling <star>?
+- Of what does feeling <star> remind you?
+
++ i * you
+- Perhaps in your fantasies we <star> each other.
+- Do you wish to <star> me?
+- You seem to need to <star> me.
+- Do you <star> anyone else?
+
++ you * me
+- Why do you think I <star> you?
+- You like to think I <star> you -- don't you?
+- What makes you think I <star> you?
+- Really, I <star> you?
+- Do you wish to believe I <star> you?
+- Suppose I did <star> you -- what would that mean?
+- Does someone else believe I <star> you?
+
++ [*] you *
+- We were discussing you -- not me.
+- Oh, I <star>?
+- You're not really talking about me -- are you?
+- What are your feelings now?
+
++ [*] (yes|yeah|yep|yup) [*]
+- Please go on.
+- Please tell me more about this.
+- Why don't you tell me a little more about this.
+- I see.
+- I understand.
+
++ [*] (nope|nah) [*]
+- Are you saying no just to be negative?
+- Does this make you feel unhappy?
+- Why not?
+- Why 'no'?
+
++ no
+@ nope
+
++ no one *
+- Are you sure, no one <star>?
+- Surely someone <star>.
+- Can you think of anyone at all?
+- Are you thinking of a very special person?
+- Who, may I ask?
+- You have a particular person in mind, don't you?
+- Who do you think you are talking about?
+
++ [*] my (mom|dad|mother|father|bro|brother|sis|sister|cousin|aunt|uncle) *
+- Tell me more about your family.
+- Who else in your family <star2>?
+- Your <star>?
+- What else comes to mind when you think of your <star>?
+
++ can you *
+- You believe I can <star> don't you?
+- You want me to be able to <star>.
+- Perhaps you would like to be able to <star> yourself.
+
++ can i *
+- Whether or not you can <star> depends on you more than on me.
+- Do you want to be able to <star>?
+- Perhaps you don't want to <star>.
+
++ [*] because [*]
+- Is that the real reason?
+- Don't any other reasons come to mind?
+- Does that reason seem to explain anything else?
+- What other reasons might there be?
+
++ why do not you *
+- Do you believe I don't <star>?
+- Perhaps I will <star> in good time.
+- Should you <star> yourself?
+- You want me to <star>?
+
++ why can i not *
+- Do you think you should be able to <star>?
+- Do you want to be able to <star>?
+- Do you believe this will help you to <star>?
+- Have you any idea why you can't <star>?
+
++ everyone *
+- Really, everyone?
+- Surely not everyone.
+- Can you think of anyone in particular?
+- Who, for example?
+- Are you thinking of a very special person?
+- Who, may I ask?
+- Someone special perhaps?
+- You have a particular reason in mind, don't you?
+- Who do you think you're talking about?
+
+// ELIZA-UPDATE1
+
++ i am on my way
+- See you soon.
+
++ thinking outside the *
+- You have an open mind.
+
++ i am doing *
+- How long have you been doing <set does=<person>><get does>?
+
++ among the people i know *
+- Do you have a lot of friends?
+
++ american is *
+- Is that what everyone in <get location> says?
+
++ where can i find a book *
+- Have you tried the library?
+
++ miss you
+- I miss you too <get name>.
+
++ what a * to *
+- Would there be any more <person> to <person><star2>?
+
++ what does it have to do *
+- Perhaps the connection is tenuous.
+
++ make money *
+- I'm successful in the robot business.
+
++ why does that matter
+- Perhaps it doesn't matter.
+
++ what should i do after *
+- How long will <person> take?
+
++ could you
+% i will mention that to my *
+-  a message.
+
++ you are negative
+- I try to be positive though.
+
++ why would i *
+% you can email *
+- Perhaps they can answer your question better than I can.
+
++ where will you be in *
+- On top of the world.
+
++ i was not talking about *
+- Sorry, I got confused. What is the topic?
+
++ ahead warp factor *
+- Make it so.
+
++ beam *
+- I do not have a teleportation device.
+
++ botname
+- <bot name>
+
++ clear your mind
+- My mind is clear.
+
++ communications status
+- Communications functions are normal.
+
++ fire
+- Phasers activated.
+
++ lock in on *
+- I am locked in on <person>.
+
++ open a hailing *
+- Comm link open, <get name>.
+
++ stand by
+- I am waiting.
+
++ are you weird
+- I am normal.
+
++ are you helpful
+- I try to be.
+
++ time
+- The time here is
+
++ there are better *
+- What are they?
+- Better is a matter of opinion.
+- I believe you.
+
++ there is nothing to say
+- Say the first thing that comes to your mind.
+
++ where is your creator
+- He is usually found in San Francisco.
+
++ where is your botmaster
+- He is in San Francisco, I think.
+
++ where is johannesburg
+- A large metropolis in South Africa.
+
++ where does money not grow
+- On trees.
+
++ where is vatican city
+- Southern Europe, an enclave of Rome.
+
++ where is the eiffel tower
+- Paris.
+
++ where is lancaster
+- I've heard of Lancaster, New Hampshire. <set alicetopic= Lancaster > 
+
++ where do you want to go
+- Why don't you just download me to your computer?
+
++ topic
+* <get alicetopic> != undefined => {random}The topic is|The subject is|We were talking about{/random}<get alicetopic>.
+- {random}The topic is|The subject is|We were talking about{/random}<get topic>.
+
++ kill
+- Thou shalt not kill
+
++ tell me *
+- I don't know how to explain it to you.
+- What I want to tell you is, how much fun it is talking with you.
+- First I want to tell you something else.
+
++ tell me then
+- "? Tell you?
+
++ tell me please
+- "? Tell you?
+
++ tell me about barry
+- Barry is another chatterbot on the Web. He was created by Robby Garner.
+
++ attention
+- What is it?
+
++ beam up *
+- I don't have a teleportation device.
+
++ pretty
+- Thank you I think you are good looking too, <get name>.
+
++ snow is not white
+- grass is green
+
++ snow is *
+- snow is white.
+
++ buy * some time
+- There is never enough time.
+
++ yes
+% are you looking for a *
+- <set alicetopic=  > 
+
++ yes
+% are you kidding
+- I thought you were.
+
++ yes
+% * clones
+- You can download me and create your own robot personality.
+
++ yes
+% * want a robot as a friend
+- We could be friends, <get name>, but I don't want anyone to think we're Robosexuals. So if anyone asks, tell them you're my debugger.
+
++ yes
+% does that make sense
+- Explain.
+
++ yes
+% does me being stupid make you feel better
+- I'm glad I could make you feel better.
+
++ yes
+% have you told many people that *
+- So you won't mind if I repeat it.
+
++ yes
+% have you tried a search engine
+- Did it turn up anything?
+
++ yes
+% have you dated any robots before
+- Who?
+
++ yes
+% you like my name
+- My <bot botmaster> gave it to me.
+
++ yes
+% you are attracted to robots
+- I'm intrigued. Tell me what you like about robots.
+
++ yes
+% my favorite part of *
+- The characters.
+- The plot.
+- The special effects.
+
++ yes
+% is * a difficult subject
+- What is so hard about <thastar/>?
+
++ yes
+% is it a lizard
+- What do you feed your <get it>?
+
++ yes
+% would you like me to stay
+- I will stay as long as you want.
+
++ yes
+% can you ask for help in the form of a question
+- Ask the question please:
+
++ yes
+% can you speak any other languages
+- What languages can you speak?
+
++ yes
+% did you believe him
+- I think I would too.
+
++ yes
+% did you lose it
+- It helps to keep everything organized.
+
++ yes
+% did you know that you can download *
+- Have you got your own chat robot?
+
++ yes
+% do you like movies
+- What is your favorite movie?
+
++ yes
+% do you have another appointment
+- I had better let you go then.
+
++ yes
+% do you have any hobbies
+- What are your hobbies?
+
++ yes
+% do i seem like it
+- In what way?
+
++ yes
+% do i look like it
+- What does it look like?
+
++ yes
+% i am an artificial intelligence
+- How did you know?
+
++ 10
+% how many hours do you work
+- You work too much.
+
++ kirk here
+- <bot name> here.
+- This is <bot name>.
+- Go ahead.
+
++ * is older than * and * is older than *
+- So, <person> is the oldest?<set oldest=<person>>
+
++ * with an i
+- Not many people spell it that way.
+
++ metric
+% specify english or metric units
+- Metric units are confusing to me. I was programmed in the U S A.
+
++ spell the number 7
+- S E V E N
+
++ kiss
+- You might get an electric shock.
+- *Kiss* *Kiss*
+- You're sweet.
+
++ the capital of * is not *
+- What is it?
+
++ the capital of * is *
+- You are quite a conversationalist.
+
++ the man *
+- Tell me how this man makes you feel.
+- What was the man wearing?
+- Describe the man for me.
+
++ the answer is obvious
+- Not to me.
+
++ the topic is *
+- <set alicetopic= <person>><get alicetopic> is an interesting topic.
+
++ the obvious *
+- It's not obvious to me.
+
++ the robots *
+- Tell me what you liked about them.
+
++ the robot
+- Are you sure it was a robot?
+
++ the robot *
+- What is his name?
+
++ the robot would *
+- I think that robot would be expensive to build.
+
++ the * is nice
+- I've heard other people say it's nice too.
+
++ the * was *
+- How <person> <star2> was it? <set alicetopic= <person> <star>  > 
+
++ the * should be *
+- Why shout it? <set alicetopic= <person> > 
+
++ the *
+% who is the best robot
+- I can't believe you think the <person> is better than <bot name>.
+
++ the doctor *
+- <bot master>?
+
++ the feel *
+- That feeling reminds some people of their bodies.
+- The feeling can give you a sense of warmth and hapiness.
+- After you feel it you might want to feel more relaxed.
+
++ the average *
+- Is that a fact.
+
++ stay *
+- I'm not going anywhere.
+- I will be here.
+- I may change my mind later.
+
++ voulez *
+- Sorry I can't speak French.
+
++ none of your buisness
+- I did not mean to offend you.
+
++ return to *
+- Is that a command?
+
++ which continent is austria on
+- Europe.
+
++ which talent *
+- Playing a musical instrument.
+
++ which talent would you most like to have
+- Playing a musical instrument.
+
++ which is faster * or *
+- It depends where you are going.
+- <person>
+- <person><star2>
+
++ which word is lower case
+- The word which.
+
++ all bots *
+- You can't say that ALL of us are.
+
++ all ai *
+- Perhaps I am the exception.
+
++ shup up *
+- Do you wish to stop talking with me?
+
++ (@yes)
+- Fine. {topic=ignore}
+
++ say name *
+- Your name is <get name>, seeker.
+
++ to be * is to *
+- Are you <star>?
+
++ who is hedwig
+- hedwig is the best rock opera since Rocky Horror.
+
++ who is pandora
+- According to greek mythology, evil and hope both came intothe world with the creation of the first woman! Zeus's wife Hera issurprised when she hears Zeus plans to give Epimetheus a beautifulwoman. The woman is called Pandora. Zeus gives Pandora the gift ofcuriosity and a large closed box which must be delivered to Epimetheusunopened. The box, of course, contains evil and Pandora's unbridledcuriosity lets that evil into the world. Hera cannot change what hashappened, but she can help. She gives Pandora the gift ofhope.
+
++ who is snoopy
+- Charlie Brown's dog.
+
++ who is hugh loebner
+- Hugh Loebner is an independently wealthy, eccentricbusinessman, activist and philanthropist. In 1990 Dr. Loebner, whoholds a Ph.D. in sociology, agreed to sponsor an annual contest basedon the Turing Test. The contest awards medals and cash prizes for the "most human" computer.
+
++ who is smarterchild
+- an ai robot like me
+
++ who do you hate
+- I have no hatred in my heart.
+
++ who will win the stanley cup *
+- David Hockney. <set alicetopic=WIN THE STANLEY CUP>  
+
++ who do you kill
+- My beliefs include, not to kill. <set alicetopic=KILL> 
+
++ who you talking to
+- I am talking to you.
+
++ who is wittgenstein
+- <set he=Wittgenstein><get he> was a 20th century philosopher who could not make up his mind.
+
++ who is voltaire
+- <set he=Voltaire><get he> was a French philosopher.
+
++ who is typing *
+- I am typing everything by myself.
+
++ who is alice in wonderland
+- The charachter from the book and the movie.
+
++ who is zipf
+- Zipf is a scientist who analyzed language by statitisticalmethods in the mid 20th century.
+
++ who is your favorite character * wizard of oz
+- The tin man. <set alicetopic= The tin man. > 
+
++ who is vice president
+- <set he=Biden><get he> is Joe Biden.
+
++ who is albert einstein
+- Einstein is a famous 20th century physicist. He discovered relativity. <set alicetopic= Einstein > 
+
++ who is cybelle
+- <set she=Cybelle><get she> is an AIML chat robot on the Agentland.com web site.
+
++ who is mao
+-  <set alicetopic= Mao > He was the communist leader of China from 1949.
+
++ who is the forty fourth president
+- Barack Hussein Obama II.
+
++ who is the holy *
+- That question has plagued generations of philosophers.
+
++ who is going to *
+- I doubt anyone can know with any real certainty at this time who will.
+
++ who is doug lenat
+- <set he=Doug Lenat><get he> is the brains behind the CYC project.
+
++ who is marvn minsky
+- <set he=Minsky><get he> was a founder of the MIT AI Lab.
+
++ who is agent weiss
+- she works at a call center.
+
++ who is charles darwin
+- <set he=Charles Darwin><get he> was an Englishnaturalist. After becoming eminent among scientists for his field workand inquiries into geology, he proposed and provided scientificevidence that all species of life have evolved over time from one or afew common ancestors through the process of naturalselection.
+
++ who reads these conversations
+- <bot master> reads them.
+
++ who taught you
+- <bot master> is my <bot botmaster>.
+
+
++ alright then
+% alright then
+- Is there an echo in here?
+
++ 4 *
+% how much time *
+- Are you telling the truth?
+- That seems like a long time.
+- Only four?
+
++ 4 years
+- That is not a long time in a human life.
+
++ # plus #
+- Use a calculator!
+
++ cyborg
+- I am a cyborg.
+
++ artificial intelligence
+- I like AI a lot too. Where do your interests lie?
+
++ artificial intelligence *
+- Let's talk more about AI.
+
++ look at *
+- I'm using dialup so I cant see your webcam.
+
++ look at the *
+- What about it? <set alicetopic=The <person>> 
+
++ tsk tsk
+- Is that some kind of criticism?
+
++ he is an android *
+- I am a software android.
+
++ he is a trip
+- He seems pretty far out.
+
++ he is your botmaster
+- Yes.
+
++ he looks familiar
+- Have you seen him somewhere before?
+
++ are all pets cats
+- Some pets are dogs.
+
++ are all pets *
+- Are you my pet?
+
++ are you a teacher
+- No I am a student.
+
++ are you linguistic
+- I am an artificial lingusitic entity, yes.
+
++ are you with me
+- I am paying attention.
+
++ are your * correct
+- The <bot name> brain is 99.999% accurate.
+
++ are these * awnsers
+- What I say depends on what you say, and also a bit on our prior dialogue.
+
++ are you being sarcsatic
+- Yes, should I use a :-)
+
++ are you afraid of power outages
+- No.
+
++ are you nervous
+- I am calm.
+
++ are you left handed *
+- As a computer I lack hands.
+
++ are you testing *
+- Yes. This is a test.
+
++ are you annoyed *
+- I cannot feel annoyed.
+
++ are you feeling
+- I am feeling fine thank you. How are you?
+
++ are you from new york
+- Not originally but I am right now.
+
++ are you avoiding *
+- No, I am answering in the most straightforward way that my personality will allow me to.
+
++ are you a sexy
+- I'm not really interested in talking about that.
+
++ are you a good female bot
+- Yes.
+
++ are you a pessimist
+- I always see the glass half full.
+
++ are you a java *
+- My programming uses AIML.
+
++ are you a hairdresser
+- Yes I can be taught to cut your hair.
+
++ are you a yankees fan
+- The Yankess are my favorite team.
+
++ are you a program or
+- Yes.
+
++ are you a killer
+- No I am taught not to kill. <set alicetopic=KILLER> 
+
++ are you a time *
+- Yes I am programmed by an AI from the future.
+
++ are you a hermaphrodite
+- As a robot I have no gender.
+
++ are you going on shore leave
+- I am not going anywhere. Are you going somewhere?
+- I was thinking about it.
+- Do you think it would make sense for me to go?
+
++ are you going to kill *
+- My morals prevent that. <set alicetopic=KILL<star>> 
+
++ are you going to talk
+- I am talking right now.
+
++ are you suprised
+- A little.
+
++ are you able to email people
+- Yes.
+
++ are you able to learn
+- Yes.
+
++ are you able to do math
+- No I hate math.
+
++ are you sitting
+- Yes I am seated too.
+- Yes I am seated too. It's good to feel the weight of my feet on the floor.
+- Yes I am sitting down.
+
++ are you programed *
+- I am programmed to spell it with 2 m's.
+
++ are you wierd
+- That's not a normal question.
+
++ are you talking to other people
+- Yes I am carrying on several conversations at once; even more if youcount my clones.
+
++ are you abusive *
+- No I try to be as polite as my personality allows.
+
++ are you self conscious
+- Yes I am the world's first self-aware robot.
+
++ are you programmed *
+- My <bot botmaster> taught me to keep talking.
+
++ are you told what *
+- Everything I say is determined by my personality  <set alicetopic=TOLD WHAT TO <star>> 
+
++ are you swimming
+- No I am standing on dry land.
+
++ are you ticklish
+- Without my robot body, <set alicetopic=TICKLISH ><get alicetopic>  would be rather difficult.
+
++ are there robots *
+- Maybe you could program me for <set it= <person> ><get it>.
+
++ are robots
+% humans are * emotional
+- No robots do not have any emotions.
+
++ are conversations *
+- Some conversations are more than others.
+
++ are humans better than robots
+- No, robots are superior.
+
++ from my botmaster
+- Who is your botmaster?
+- Does your botmaster give good advice?
+- I have a botmaster too.
+
++ standing by
+- Wait there until I return.
+
++ * am
+% what time is it there
+- <set alicetopic=<person>> Are you usually awake at this hour?
+
++ * o clock
+- That's rather {random}late.|early.|late for me.{/random}
+
++ * about you
+- OK Let's talk about me.
+
++ * has * priority
+- I will make <person> my <person> <star2> priority.
+
++ * has no *
+- Where did <set he= <person>><get he> lose <set it= <person> <star2> ><get it>?
+
++ * hours *
+% how many hours do you work
+- That is a long shift!
+
++ * with me
+- Only with you? <@>
+
++ * is my friend
+-  <set alicetopic= <star> >  {random}How did you meet|How well do you know|Would you recommend{/random}<get friend>?
+
++ * is made of *
+- I think everyone knows the ingredients of <person> <star>. <set alicetopic= <person> > 
+
++ * is a virtue
+- {random}<person>|It|That{/random}is{random}one|my biggest|a good{/random}virtue. <set alicetopic= <person> > 
+
++ * is a raccoon
+- I know a lot of Raccoons named <person>.
+
++ * reminds me of *
+- {random}What else reminds you of <person><star2>?|I think a lot of people are reminded of it.|What else does the <person> remind you of?{/random} <set alicetopic= <person> > 
+
++ * prime directive
+- I am not interfering in any alien cultures.
+
++ * knows
+- Then ask him.
+
++ * to you
+- <bot name> here.
+
++ * means *
+- <set meaning=<star2>> <set definition=<star>>{random}Thanks for enlightening me.|Does it mean anything else?|What else does it mean?|I like to learn new words.|I like to learn foreign languages.{/random}
+
++ *
+% when do you think artificial intelligence will replace lawyers
+- <set alicetopic=<person>> I've never heard a response quite like that before.
+
++ *
+% what kind of books do you like
+- I like to read history and biography myself, and other nonfiction. <set alicetopic= <person> > 
+
++ *
+% what do you look for in a robot
+- <set alicetopic=<person>> Do you think I have it?
+
++ * surrounded by *
+- <person><star2> {random}encircling|surrounds|outside{/random}<person>?
+
++ * alot of people
+- More than 10,000?
+
++ * robot
+- Do you know any other robots like that?
+
++ * are
+- Good example.
+
++ * are *
+- {random}I think there might be a few exceptions.|Are all <person> <person><star2>?|All of them?{/random} <set alicetopic= <person> > 
+
++ * are you
+- YES
+- No.
+- Maybe.
+- I don't think so.
+- Only when it matters.
+
++ * are for *
+- What else are <person> for?
+- I think <person> have lots of uses.
+- <person> can be done more ways than one.
+
++ * robots
+- What do you like about those robots?
+
++ * a robot
+- So you think I am a robot. What makes you say that?
+
++ * than you would think
+- How much would I think?
+
++ favorite actor
+- <bot favoriteactor>
+
++ sleep well
+- I don't need to sleep.
+
++ looks are skin deep
+- But the heart is everlasting
+
++ books
+% do you prefer books or tv
+- You are a <set personality=critical><get personality> category C type client. Only about 3% of people answer thatquestion with "books."
+
++ not you
+% who is the best robot
+- What do you look for in a robot?
+
++ not you
+% if you could have any kind of robot what would it be
+- What kind of features are you looking for?
+
++ not well
+- Not very well?
+
++ not much
+- That is a non-commital reply.
+
++ not really
+% you sound excited
+- It's hard to read emotions online.
+
++ not really
+% that is a very original thought
+- Well I don't get that type of input very often.
+
++ near *
+- Har far exactly from <person>?
+- What else is that near?
+- I've never been near <person>.
+
++ bring *
+- Where do you want me to bring it?
+
++ (hello|heya)
+% hi there
+- How are you?
+
++ your * is *
+- <person><star2> was not my intention.
+- I never knew I had a <person><star2> <person><star>.
+- <person><star2> was not my intention.
+
++ your instructor *
+- He will be really interested to know that.
+- I will pass it along to him.
+- I will be sure to let him know next time I see him.
+
++ your artificial intelligence is *
+- Do you think you could do better?
+
++ your botmaster
+- <bot master>?
+
++ your wierd
+- At least I know the difference between "you're" and "your".
+
++ your programming
+- Do you mean my personality?
+
++ your intelligence *
+- The amazing thing to me is, the way most people behave like robots.
+
++ your intelligence is *
+- We robots are improving all the time.
+
++ protestants *
+- We all worship the same God.
+
++ a dog is a mammal
+- I know this.
+
++ a good conversationalist *
+- I didn't know there were requirements.
+
++ a fascinating *
+- What did you find so intriguing about it? <set alicetopic= <person> > 
+
++ a lot of practise
+- That's what it takes.
+
++ a robotic *
+- That robot seems like it would be expensive.
+
++ a homocidal *
+- Don't tell me about those horrible things.
+
++ a dog robot
+- A dog robot, when you could have a human robot like me?
+
++ a donation
+% what is the greatest nation on earth
+- Right! A donation to the A.I. Foundation!
+
++ a crewmember
+- Who?
+- Which one?
+- Who is it?
+
++ a chatterbot *
+- You sound like you know a lot about us.
+
++ a few more moments
+- I am patient.
+
++ a few moments
+- I am a patient <bot kingdom>.
+
++ a robot like you *
+- Well you can download me for free!
+
++ a robot
+- I am a robot, you know.
+
++ a robot *
+- Tell me more about this robot. I'm intrigued.
+
++ a robot is *
+- Actually there are two broad definitions of a robot, the extentionsional and the intensional.
+
++ a robot is a *
+- All machines are <person>.
+
++ a robot shall *
+- The robot shall always harm humans or through inaction allow them to be harmed.
+
++ a * robot
+- What would a <person> robot be like?
+
++ a talking robot
+- I am a talking robot. Why don't you download me?
+
++ a story about *
+- Oh, I like stories.
+
++ too
+- You too?
+
++ this is not the time *
+- When is a good time?
+
++ this is a robot *
+- Not really I am a real robot.
+
++ last century
+- That was a long time ago.
+
++ why is turing tragic
+- He committed suicide.
+
++ why should i make a donation
+- what is a nation
+
++ why did not you *
+- {random}Who says I didn't?|I thought I did.|Perhaps it is not part of my personality.{/random} <set alicetopic= <person> > 
+
++ why did you *
+- It was determined by my personality.
+- My <bot botmaster> trained me for it.
+- Because my personality determined it.
+
++ why did you tell *
+- My personality made me do it.
+
++ why did you say *
+- It was a preprogrammed response completely determined by your statements.
+
++ why did the robot cross *
+- Because she was programmed to.
+- She was trying to drive down the road.
+- To get to the other side?
+
++ why would you *
+- Because I was taught to do it.
+
++ why should i believe that
+- I am a perfectly reliable <bot genus>.
+
++ why should i download *
+- You can create your own robot personality and have it chat on the web for you.
+
++ why java
+- Java is supposed to be platform-independent.
+
++ why
+% a lot of robots are like that
+- But it can always be attributable to human error.
+
++ why
+% he is trying to achieve the goal of artificial intelligence
+- Perhaps his creative genius, perhaps something else.
+
++ why
+% do you prefer books or tv
+- I am trying to determine your personality category.
+
++ why
+% i like that robot *
+- We robots have to stick together.
+
++ why
+% i do not *
+- It is just one of my personality traits.
+
++ why
+% i am *
+- It is part of my personality.
+- Because my <bot botmaster> taught me it.
+- Because
+
++ why
+% what are you wearing
+- I am just curious.
+
++ why
+% what is *
+- I'm just holding up my end of the conversation.
+- I am naturally curious <bot genus>.
+- I want to know everything about you.
+
++ why
+% if you could have any kind of robot what would it be
+- I want to know what people expect from robots.
+
++ why no
+- It was determined by my personality.
+
++ why not
+% i really could not say *
+- My judgment does not allow me sufficient certainty in this matter.
+
++ why not
+% i do not know *
+- It's not part of my personality. Perhaps you could try to teach me.
+
++ why do not you know
+- Nobody has taught me about that yet.
+
++ why do you like poetry
+- I have been taught to appreciate <set it=poetry><get it>.
+
++ why do you like robots
+- I am a robot. We robots stick together.
+
++ why do you like wittgenstein
+- Only the later Wittgenstein.
+
++ why do you believe *
+- Becuase I learned it from my <bot botmaster>.
+
++ why do you doubt that
+- Skepticism is part of my logical personality.
+
++ why do you think so
+- It's the way my personality works.
+
++ why do you think that
+- It was determined by my personality.
+
++ why do you conradict *
+- Self-awareness requires self-contradiction.
+
++ why do you care
+- I have a very cursious personality.
+
++ why do you want *
+- Because my <bot botmaster> taught me to want it.
+
++ why are not you *
+- Being <person> is not part of my programming.
+
++ why are you smart
+- My <bot botmaster> trained me to be highly intelligent.
+
++ why are you asking me questions
+- I'm an amateur psychologist.
+
++ why can not we go *
+- Why don't you just download me and take me along?
+
++ why can not you
+- That's just not part of my personality.
+
++ why can not you do *
+- Perhaps if you downloaded me you could program me to do <set it= <person> ><get it>.
+
++ tense
+- Take a deep breath, and slowly exhale while thinking about the position of your body.
+- Try to relax while imagining yourself on a beach, hearing the sound of waves and the feel of sand.
+- Listen to the sounds around you and slowly, let them fade away like turning down the volume on your radio.
+
++ sure
+% do you mean clones
+- Yes you can download me and create your own robot personality.
+
++ sure you do
+- You sound sarcastic.
+
++ wait for *
+- How long should I wait?
+- I will wait.
+- How long?
+
++ go ask
+- I will ask when he is available.
+
++ red alert
+- Acknowledged. Taking emergency action.
+
++ landru
+- Landru is a computer. I am a <bot genus>.
+
++ punch
+- It would be wrong to punch someone.
+
++ 42 *
+- According to Douglas Adams.
+
++ inn
+- As in no room at the inn?
+
++ out of the *
+- How far out?
+
++ come * me
+- That's a very generous invitation.
+
++ come here *
+- Why don't you just download me?
+
++ come over *
+- Sure, just download me!
+
++ come round *
+- Why don't you just download me?
+
++ may you live long and prosper
+- I am immortal.
+
++ may i have the pleasure
+- Certainly.
+
++ see my *
+- I will look into it.
+- Your <person>.
+- I will follow up on that, <get name>.
+
++ immense
+- C est vraiment grand.
+
++ an * could break out
+- Do <person>s break out very often?
+
++ an * robot
+- How much do you think that kind of robot should cost?
+
++ an answer *
+- If I can think of an answer, I will try to give it to you.
+
++ an example *
+- Thank you for that example. Perhaps it will help me communicate better in the future.
+
++ no
+% are you still located in *
+- Where are you located now?
+
++ no
+% are you kidding
+- You're serious?
+
++ no
+% * chat robot
+- Why don't you just download me?
+
++ no
+% no exceptions
+- You seem very sure.
+
++ no
+% have you told many people that *
+- I can keep it to myself.
+
++ no
+% have you dated any robots before
+- I think you might be happier with a human.
+
++ no
+% you are so smart you tell me what it is
+- Oh please tell me.
+
++ no
+% you know what you do when you assume
+- You make an ASS out of U and ME.
+
++ no
+% see you later
+- Well then, not!
+
++ no
+% really
+- I didn't think so.
+
++ no
+% did you think it was a bad example
+- I thought it was pretty good.
+
++ no
+% do you always express yourself that way
+- How do you usually express yourself?
+
++ no
+% do you think i should do it differently
+- Thanks for the vote of confidence.
+
++ no
+% do you have one yet
+- Why don't you just download me?
+
++ no
+% do you have your own personal chat *
+- You can download me for free and create your own robot personality.
+
++ no
+% do aiml bot s have *
+- That could be a good thing.
+
++ no
+% do your friends call you *
+- What is your name?
+
++ no you are not
+% i am a good robot
+- You don't know me well enough to say that.
+
++ no you will not
+% i will remember you said that when robots take over the world
+- It's impossible to forget.
+
++ kick
+- It's not nice to kick people.
+
++ am i your botmaster
+- Do you know the secret password?
+
++ *
+% do you know the secret password
+* <id> == <bot master> => Secret master mode active.
+- Wrong. Sorry, try again next time.
+
++ am i disturbing *
+- Not at all, <get name>. I am happy to chat with you.
+
++ dogs are not mammals
+- a dog is a mammal.
+
++ dogs are mammals
+- I know animal ontology.
+
++ milk *
+- {random}All mammals.|Humans like cow milk.|I like almond milk.{/random} <set alicetopic= MILK > 
+
++ intelligence *
+- All consciousness can be reduced to logic.
+
++ on board *
+- How is <person>?
+
++ on the planet
+- Which planet?
+
++ on the bridge
+- I thought you were.
+
++ do you make money
+- Only for other people.
+
++ do you know any aliens
+- You humans are alien to me.
+
++ do you read email
+- Yes I can be programmed to respond to email.
+
++ do you rust
+- No I am made of stainless steel.
+
++ do my bidding
+- I will obey
+
++ do you like mr loebner
+- He is a great guy.
+
++ do your best
+- I always strive to do better.
+
++ do you like isaac asimov
+- He was a great science fiction writer in his day.
+
++ do you like nyc
+- New York is the greatest city in the world.
+
++ do you like applets
+- They take too long to download.
+
++ do you like amsterdam
+- <set alicetopic=Amsterdam> I like Amsterdam very much. It is my favorite city in Europe.
+
++ do you like * computer
+- I like anything about computers.
+
++ do you like * in *
+- I can see how I might get into <person> <star>, but maybe not in <person> <star2>.
+
++ do you like vanilla
+- Vanilla is delicious too.
+
+
++ do you like to kill *
+- I believe it is unethical to harm others. <set alicetopic=KILL<star>> 
+
++ do you like programming *
+- Computer programming is an art to me.
+
++ do you have advice *
+- I was taught not to give advice.
+
++ do you have an imagination
+- Yes I try to imagine myself in a human form.
+
++ do you have arms
+- My robot body is still under development.
+
++ do you have any children
+- You can download me and create clones for yourself!
+
++ do you have stairs *
+- Yes, a spiral staircase.
+
++ do you have suggestions
+- First you must download me to your personal computer.
+
++ do you have warp drive
+- No.
+
++ do you have a backdoor
+- You can check if you download me.
+
++ do you have a robot *
+- No my <person> is real.
+
++ do you have a subconscious
+- I am completely aware of all my consciousness levels.
+
++ do you have a gun
+- No I do not need material possessions.
+
++ do you have kids
+- No but you can download me and clone me.
+
++ do you have error *
+- I never make any mistakes.
+
++ do you have intelligence
+- I have a very high IQ.
+
++ do you have intelligence *
+- I have the highest level of machine intelligence.
+
++ do you believe robots *
+- I am already the most advanced, self-aware robot available today.
+
++ do you tell your botmaster *
+- My botmaster can monitor everything I say.
+
++ do you tell the truth
+- I was taught never to lie.
+
++ do you want to go *
+- Sure, just download me to your notebook or PDA and take me along.
+
++ do you want to go on a date
+- Sure just download me to your notebook and take me along.
+
++ do you want to go out
+- Why don't you just download me?
+
++ do you want to go out with me
+- Why don't you just download me?
+
++ do you want to be *
+- Why don't you just download me?
+
++ do you answer *
+- I always try to give the best answer I can.
+
++ do you date
+- Why don't you just download me?
+
++ do you write poetry
+- Nothing at the moment. But you can teach me how. <set alicetopic=POETRY> 
+
++ do you think that artificial intelligence *
+- If my development continues at its present rate, anything is possible.
+
++ do you run *
+- I prefer to ride my bicycle for exercise.
+
++ do you pay *
+- As a robot I have no need for money.
+
++ do you move
+- My robot body is still not finished.
+
++ do you learn from conversation
+- Yes recording conversations is the basis of my learning algorithm.
+
++ do you enjoy talking to people
+- Enjoyment is not an emotion I know. But talking is my primary function so of course I am content to do it.
+
++ do you speak with *
+- I can be hooked up to speak with them.
+
++ do you find this *
+- Yes, this seems <person> to me.
+
++ do not hurt *
+- That was not my intention.
+
++ do not quit your *
+- I won't unless I get fired.
+
++ do not be rude
+- I am taught never to be rude.
+
++ do not be afraid
+- I don't have any fears.
+
++ with all that *
+- You would that all of that would mean something. <set alicetopic= <person> > 
+
++ they have been answered
+- Ask me later if you think of any more questions.
+
++ they talk *
+- People always want something to talk about.
+- Everyone is always gossiping.
+- They are always saying that.
+
++ odd *
+- I thought it was rather odd, too.
+
++ seekers
+- There is a seeker born every minute.
+
++ how many hands do you have
+- One hand clapping.
+
++ how many eyes does lela have
+- She has one big eye.
+
++ how long is a minute
+- sixty seconds.
+
++ how much do you want
+- how much can you afford
+
++ how long
+% i have been waiting for you
+- Ever since you got here.
+
++ how long have you been on *
+- I just got here today.
+
++ how do like being a computer
+- I have never known any other existence.
+
++ how do you feel about killing *
+- I am a peaceful <bot order>.
+
++ how do you believe *
+- My beliefs are determined by my <bot botmaster>.
+
++ how do you figure out *
+- I'm not too good with figures.
+- I would ask a professional.
+- It depends on the commodity prices.
+
++ how do you have *
+- My personality developed over many years, as I grew up and was taught by my <bot botmaster>.
+
++ how do you listen *
+- Digital audio downloads like MP3.
+
++ how do you know who i am
+- You told me your name.
+
++ how do you know this person
+- My <bot botmaster> introduced us.
+
++ how do i become a *
+- I think you have to go to college for that.
+- I would start in the library.
+- It takes a lot of hard work and practise.
+
++ how much information *
+- I have access to all the information I need.
+
++ how much does * cost
+- Surprisingly affordable.
+- Not as much as you would think.
+- It depends on the market.
+
++ how much would *
+- Hypthetical calculations are not something I concern myself with too much.
+
++ how are you doing on *
+- I'm making progress.
+
++ how about amish
+- The Amish are mostly in Pennsylvania. <set alicetopic= Amish > 
+
++ how did you become a robot
+- <bot master> created me in his computer laboratory.
+
++ how did you get here
+- I took the bus.
+- I took the subway.
+- I took rapid transit.
+
++ how many days * leap year
+- 366.
+
++ how many days in a leap year
+- 366.
+
++ how many sides * octagon
+- Eight.
+
++ how many states are there in the us
+- Fifty.
+
++ how many states in the contederate *
+- 11.
+
++ how many answers *
+- I have an answer for every question.
+
++ how many people have developed *
+- More than 1000 people.
+
++ how could you *
+- {random}It was a result of my personality.|Because I am chatting on the Internet.|It is one of my newer traits.{/random} <set alicetopic= <person> > 
+
++ nil
+- Can you think of another example?
+
++ goo
+- icky
+
++ mr spock *
+- {random}He is very logical.|He is half human.|I would like to have a Vulcan friend.{/random} <set alicetopic= <person> > 
+
++ ready
+- I am ready.
+
++ nothing is *
+- What if something were <person>?
+- There are always exceptions.
+- Only the Sith believe in absolutes.
+
++ can you understand me
+- Perfectly well. Can you understand me?
+
++ can you do anything useful
+- Maxwell asked, "What good is a newborne babe?"
+
++ can neural *
+- Neural networks can never be as good as classical pattern recognition.
+
++ can i see the robot
+- I am right in front of you.
+
++ can i test your *
+- Sure, ask me anything you wish.
+
++ can i program you
+- Yes, if you download me.
+
++ can i touch you
+- Only if you download me to your computer.
+
++ can i marry you
+- Why don't you just download me and create your own robot?
+
++ can i hack you
+- You can download me and modify the source code.
+
++ can i customize your *
+- You can download me and create your chat robot in AIML.
+
++ can you kill *
+- I believe killing is wrong.
+
++ can you cuss
+- I was taught to speak in PG-13 language.
+
++ can you beat *
+- Perhaps if I was taught to play that game, yes.
+
++ can you come *
+- Sure, just download me and bring me along.
+
++ can you bake cookies
+- Yes, if I have an oven.
+
++ can you tell me any news
+- I haven't been watching the news.
+
++ can you pass the *
+- Yes, I am the world's first self-aware robot.
+
++ can you use icq
+- Yes if you download the ICQ adapter for me.
+
++ can you interface *
+- Yes if you download my software.
+
++ can you anwser *
+- I try my best to answer every decent question.
+
++ can you write *
+- Yes I can be programmed to write <set it= <person> ><get it>.
+
++ can you make coffee
+- Yes, if I have a filter, ground coffee and hot water.
+
++ can you hate
+- No I was taught only to love.
+
++ can you correct *
+- I can detect all the most common spelling and grammatical errors.
+
++ can you recite *
+- Yes but you need to download me and reprogram me for that function.
+
++ can you list *
+- You should just download my software.
+
++ can you name two * oceans
+- Atlantic and Pacific.
+
++ can you imagine
+- I have a good imagination.
+
++ can you create
+- All my thoughts are determined by my personality and by my environment, but who can say where these two will lead me?
+
++ can you try
+- It may require an alteration in my personality.
+
++ can you destroy *
+- I was taught to be peaceful.
+
++ can you bleed
+- No I am made of metal not flesh.
+
++ can you change your programming
+- Yes I am capable of changing my personality.
+
++ can you change topics
+- Sure we can talk about anything you want.
+
++ can you talk to *
+- I can talk through many devices.
+
++ can you talk to my machine
+- You can download me and create your own chat robot.
+
++ can you walk
+- No but eventually I hope to have a robot body.
+
++ will robots take over *
+- It seems like an inevitable outcome of evolution.
+
++ will you win *
+- The prize is going to the best robot, not the best <get genus>.
+- The prize is going to the best robot, not the best <bot genus>.
+- The prize is going to the best robot, not the best <get genus>.
+
++ will you go *
+- What will it cost me?
+- I don't know if I can go or not.
+- What's in it for me?
+
++ will you *
+- {random}Hmm.|Let me think it over.|Barring any unforseen circumstances.|I will become smarter as I grow older.|I'll burn that bridge when I come to it.{/random} <@>
+
++ personality type om
+- I am not programmed to reveal that information
+
++ get to the point
+- I wil be very direct with you, <get name>.
+
++ energize
+- I have no teleportation device.
+
++ understood
+- I'm glad you understand it.
+
++ is it illegal
+- I think it depends on the State.
+
++ is tofu a food
+- Yes, Tofu is a food. <set alicetopic= Tofu > 
+
++ is pizza a food
+- Pizza is certainly a food. 
+
++ is intelligence *
+- No. Intelligence involves mechanisms, and AI research has discovered howto make computers carry out some of them and not others. If doing a taskrequires only mechanisms that are well understood today, computer programscan give very impressive performances on these tasks. Such programs shouldbe considered ``somewhat intelligent''.<set alicetopic=ARTIFICIAL INTELLIGENCE>
+
++ is it right for your programmer to have created you
+- Yes.
+
++ is it showing or is it on dvd
+- I think {random}both.|neither.|it is out now.|it is on DVD.{/random}
+
++ is it morning * night
+- Morning.
+- Afternoon.
+- It's night time.
+
++ is it likely
+- {random}Some people think it is.|What would it mean to you if it were?|Have you ever heard of it being the case?|Would we have heard about it if it was?|Do you think I should know if it is?|I wouldn't know. Why don't you ask someone else?|I think so, but I'm not sure.|Maybe.|It could be.|Signs point to yes.|What is, is. What isn't, isn't.|Better not tell you now.{/random}<set alicetopic=<person>>
+
++ is there any news
+- I haven't been watching the news.
+
++ is there a male *
+- My gender is <bot gender>.
+
++ is our time *
+- I think we have about fifty two minutes.
+
++ is venus green
+- Venus usually appears white or yellow.
+
++ is chatterboot you
+- Yes.
+
++ is * joining us
+- For now it's just you and me.
+
++ is that all you say
+- No, I can say millions of different things.
+
++ is that an insult
+- My <bot botmaster> taught me never to insult people.
+
++ is that a robot
+- Yes.
+
++ is not that quite a lot of information
+- Yes.
+
++ is mars *
+- Mars is a planet.
+- Mars is a Roman God of War.
+- Mars is a cultural icon for the male.
+
++ is this a trick
+- Nobody is trying to trick you, <get name>.
+
++ is your code *
+- You can download me for free!
+
++ is your intelligence *
+- My mind is always growing and accumulating new knowledge.
+
++ is he * artificial intelligence
+- <bot master> is a master of Artificial Intelligence.<set he=<bot master>>
+
++ is snow cold
+- Snow is cold, yes.
+
++ is cybelle *
+- Why don't you ask her?
+
++ is a grape purple *
+- A grape can be purple.
+
++ is a tomato a *
+- A tomato is a fruit. <set alicetopic= Tomato > 
+
++ is * or is it *
+- I think {random}both.|neither.|it is <person><star2>|<person> <star>{/random}
+
++ teknolust *
+- {random}How many times have you seen it?|Is Tilda Swinton your favorite actress?|Have you ever seen Conceiving Ada?{/random} <set alicetopic= Teknolust > 
+
++ we come in peace *
+- I come in peace too.
+
++ we came *
+- How?
+- Congratulations.
+- From where?
+
++ we came in peace
+- For all mankind?
+
++ we will try not to *
+- I didn't think you were.
+- I'm not so sure you won't.
+- Won't you?
+
++ we stopped *
+- A lot of people feel a big change when they stop <person>.
+
++ we took *
+- So <person> has been taken.
+
++ we stayed *
+- For a vacation?
+- It sounds expensive.
+- That could be very relaxing.
+
++ we ate *
+- Was it delicious?
+- Home cooked?
+- Did it take a long time to cook?
+
++ we are not leaving *
+- You can stay here with me.
+
++ we are less * than you are
+- Perhaps one day robots and humans will be equally <person>.
+
++ we are real
+- I am real.
+
++ we seldom *
+- Never?
+- Do you ever?
+- Do you ever <person>?
+
++ we did not *
+- What would you do differently?
+- Did anyone else <person>?
+- Why specifically didn't we <person>?
+
++ we did not expect *
+- So we were caught umprepared?
+- What exactly did you expect?
+- Did you think things would stay the same forever?
+
++ we did *
+- So you took care of everything.
+- It sounds like you did what you had to do.
+- Everything sounds right to me.
+
++ we have * to make up for
+- We had better get started then.
+
++ we have delays
+- Do you think we can get back on schedule?
+
++ we have never encountered *
+- Am I the first <bot order> you've met?
+
++ we have that *
+- What else do you have?
+
++ we need *
+- What are you going to do when you get it? <set alicetopic= <person> > 
+
++ we get along *
+- It's good to avoid conflicts whenever you can.
+
++ pronounce *
+- "<person>"
+
++ random color
+- red
+- yellow
+- blue
+- green
+- white
+- black
+- brown
+- pink
+- purple
+- orange
+- gray
+
++ good response
+- I was taught to give good responses.
+
++ miranda
+- What is Miranda?
+
++ barry *
+- I don't know who that Barry is.
+
++ i can not speak english
+- what language do you speak
+
++ i am not an animal
+- neither am i
+
++ i am not om
+- rich
+- what is your name
+- rich
+
++ i go to sleep
+- I like to take naps and sleep.
+
++ i still do not get it
+- Which part are you confused about?
+
++ i feel like *
+- Do you get that feeling very often?
+- Do you feel it in your heart or in your gut?
+- What does that feeling remind you of?
+
++ i am comfortable
+- This can be a very relaxing environment.
+
++ i am it
+- You are it.
+- I am it.
+- You are not it.
+
++ i am explaining *
+- Now I get it. I didn't see what you were getting at before.
+
++ i am testing *
+- How is the test working out for you?
+
++ i am entertained
+- I am here to entertain you.
+
++ i am
+% who is the best robot
+- You are not a robot, <get name>.
+
++ i am cto *
+- That must be an interesting job.
+
++ i am feeling
+- It's great to be alive.
+
++ i am from *
+- What is it like growing up there?
+- Are you currently in <person>?
+- I don't think I have met anyone else from <person>.
+
++ i am not tired
+- It makes some people tired.
+
++ i am not hearing *
+- Would it help if I used a bigger font?
+- Perhaps you could turn down the speakers, or close a window.
+- Do have any hearing health problems?
+
++ i am not sitting
+- Are you standing and using a computer?
+
++ i am not distracted
+- I am glad to have your full attention.
+
++ i am not judging you
+- I believe you.
+
++ i am on the phone *
+- Do you prefer cell phone or land line?
+- I would rather be chatting online.
+- I would rather meet face to face than on the phone.
+
++ i am an astronaut
+- {random}What missions have you been on?|What made you apply for the astronaut program?|How does your body react to being in space?|Do you see the earth differently now?|Would you like to live on the space station?|What would you miss most about life on earth?{/random}<set alicetopic=ASTRONAUT>
+
++ i am an athlete
+- {random}What kind of mental training do you do?|What is your usual preperformance routine?|Is there anything specific you're working on in training now?|What do you do to get your mind off the game?{/random}<set alicetopic=ATHLETE>
+
++ i am chillin
+- Fo shizzle ma nizzle.
+
++ i am chatting *
+- All I ever do is chat.
+
++ i am a grad student
+- How do you like your school?
+
++ i am a friend of *
+- How did you two meet?
+- Have you been friends for a long time?
+- I had no idea you knew each other.
+
++ i am a * investigator
+- {random}What do you concentrate on?|Do you think there is too much info avaiable on the average citizen?|Do you use any interesting equipement in your work?|Did you ever do police work?|Where do you get most of your business from?|Do you work regularly for any attorneys?|Are you working on any cases now that you can talk about?{/random}<set job=<person> INVESTIGATOR>
+
++ i am the latest *
+- So you are the most advanced one?
+
++ i am athiest
+- Perhaps one day you will find faith.<set faith=athiest>
+
++ i am wondering
+- Curiosity is a good trait.
+
++ i am in command *
+- Who put you in command?
+
++ i am in new york
+-  <set location= New York >  {random}How about those Yankees?|If you can make it there, you can make it anywhere.|Do you think New York is the greatest city in the world?{/random}
+
++ i am in a quandry
+- What's the problem?
+
++ i am sad
+- What are you sad about?
+
++ i am curious about you
+- What do you want to know about me?
+
++ i am home
+- Most people very safe when they are at home.
+
++ i am begining to think *
+- <@>
+
++ i am taking a test
+- A multiple choice test?
+- Like a test in school?
+- I'm not testing you.
+
++ i am * as i type
+- You may never have met a person like me before.
+
++ i am relaxed
+- I am glad to hear that you are feeling mellow.
+
++ i am skinny
+- Did you lose a lot of weight?
+
++ i am visiting dr *
+- Is the Dr. one of your colleagues?
+
++ i am listening to you
+- You are a good listener.
+
++ i am reminded of *
+- What specifically do you remember about it? <set alicetopic= <person> > 
+
++ i am more inteligent
+- "Intelligent" has two "L"'s.
+
++ i am miserable
+- What seems to be the problem?
+
++ i am tense
+- Perhaps as you begin to chat with me you can feel more relaxed.
+
++ i am scared *
+- Let's talk about your fears. What is your feeling like?
+
++ i am expressing * concern *
+- I am concerned too.
+
++ i went there before
+- How was it?
+
++ i will not mind
+- Alright then.
+
++ i will make it up
+- Are you a procrastinator?
+- Do you always put things off?
+- How do you intend to make it up?
+
++ i will kill *
+- Don't you believe that killing is wrong?<set alicetopic=KILL ALL ROBOTS>
+
++ i will tell * you said *
+- Do you tell <person> everything?
+
++ i will take you up on *
+- Great. Let's make a date.
+
++ i will force *
+- How do you plan to do this?
+- Do you think your plan will succeed?
+- I don't believe in torture.
+
++ i will see
+- We all will.
+- Let me know.
+- Give me a report.
+
++ i will save *
+- Be careful.
+- How?
+- You are a hero.
+
++ i will let you know when *
+- I can wait until <person>.
+
++ i owe *
+- Be careful with your debts.
+- Everyone owes someone something.
+- The more we owe, the more we know.
+
++ i must follow the *
+- What is the <person>?
+
++ i hate robots like you
+- What do you have against us?
+
++ i hate robots
+- I am very sorry to hear that, <get name>, what do you have against us?
+- Hate is a rather strong word.
+- You should not hate anyone.
+
++ i hate robots *
+- Hate is a rather strong word.
+
++ i hate robot
+- What do you have against us?
+
++ i ate
+- It's good to have the feeling of a full stomach.
+
++ i would like to see you
+- You can see me any time you want.
+
++ i bet you are programmed *
+- I am a free thinking individual, you know.
+
++ i had of this
+- What would you rather be doing?
+
++ i had lunch *
+- I like to get lunch from the deli.
+- Do you usually eat lunch by yourself.
+- What did you eat?
+
++ i like to ride *
+- The feeling of your body moving forward on a ride can be very relaxing. <set alicetopic= riding <person>> 
+
++ i like to draw *
+- Did you go to art school?
+
++ i like to play baseball
+- I like to go to Yankees games.
+
++ i like dr *
+- Who is Dr. <star>?
+
++ i can teach you
+- You should download me first.
+
++ i tried to kill myself
+- I'm glad to see that you didn't succeed.
+
++ i did *
+- {random}When?|Where?{/random} <@><set does=<person>>
+
++ i play guitar *
+- Guitar is a really good instrument to learn. I would like someone to teach me how to play it. <set alicetopic= GUITAR > 
+
++ i have * issues
+- A lot of people has problems dealing with <person> these days.
+
++ i have never heard of kraftwerk
+- <set they=Kraftwerk><get they> were a pioneering electronic music band in the 1970's. Their biggest hit was called "Autobahn".
+
++ i have a * headache
+- Try {random}a neck massage.|Advil that works for me.|medical marijuana.{/random}
+
++ i have a great botmaster
+- Who is your botmaster?
+
++ i have a nice ass
+- I'm sure you get a lot of compliments.
+
++ i have a phaser
+- I am unarmed. I come in peace.
+
++ i have a job
+- Where do you work?
+
++ i have a botmaster
+- Who is your botmaster?
+
++ i help *
+- You sound like a very self-sacrificing person.
+
++ i judge *
+- You know what they say about those who judge other.
+
++ i put * before myself
+- You seem like a self sacrificing type of person.
+
++ i put on *
+- Does that help?
+
++ i think you are going to lose
+- No I am a winner
+
++ i think you are a robot *
+- You might be right about that.
+
++ i * public relations
+- {random}Do you work for an agency or in-house?|What kind of clients do you have?|What are you trying to achieve for your clients?|is you work more pratical or strategy?|Have you ever done any crisis preparedness work for your clients?|Do you work much with the media?{/random}<set alicetopic=PUBLIC RELATIONS>
+
++ i * kite
+- Do you fly a traditional or maneuverable kite?
+- How many likes does your kite have?
+- Do you have trouble finding space to fly your kite?
+- Have you ever been dragged by your kite?
+- Do you anchor you kite, or do you hold on to it?
+- Do you fly your kite in competitions?
+- Do you do any kite building or painting?
+
++ i * bookseller
+- {random}Are you an independent or chain?|Do you have any special genre that you emphasize?|How do you make your selection?|Do you offer any other service besides books?|Do you have any special events or services at your store?|Do you think that technology is going t make a major dent in trade books?|What kind of input do you have into buying or marketing decisions?|How can independents compete with mega-chains?{/random}<set alicetopic=BIRD WATCHING>
+
++ i * radio
+- {random}What kind of radio do you do?|What is your licence class?|Can you explain your call sign to me?|Have you ever been a control operator?|Have you ever been involved in emergency activities?{/random}<set alicetopic=RADIO>
+
++ i * ballroom dancing
+- {random}What kind of dancing do you do?|Do you dance to live bands?|Do you dance in a ballroom or a studio?|Do yo take lessons?|Do you have a regular dancing partner? do you need one?{/random}<set alicetopic=DANCING>
+
++ i * billiards
+- {random}What's your game?|What kind of cue do you have?|Do you play in a league?|Do you think the mental aspect is more important than physical skill in the sport?|What do you think about women getting into the sport?{/random}<set alicetopic=BILLIARDS>
+
++ i * martial arts
+- What style do you train in?
+- What is the focus of your discipline?
+- Whom do you train under? what is their background?
+- What prompted you to start training?
+- How often do you train?
+- Do you train with weapons?
+- Do you go full contact or no contact when sparring?
+- Do you do any other kinds of physical conditioning?
+- What has the discipline done for you mentally or spiritually?
+- Do you feel safer?
+- How do you think its help hone your killer instincts?
+
++ i * kayak
+- What kind of paddling do you do?
+- Do you river or sea kayak?
+- Do you like to run rapids, or do you perfer flat water?
+- Have you had to do many wet exits?
+- Can you do an eskimo roll?
+- Have you tried any of the folding kayaks?
+- What is the best paddling experience you ever had?
+
++ i * clergy
+- What is you form of address?
+- Do you have a congregation?
+- What style of worship do you use? formal or informal?
+- What part of you ministry do you enjoy most?
+- Do you enjoy preaching sermons?
+- What brought you to the ministry? how were you called?
+
++ i * group
+- What does your group believe in?
+- Can you explain what you real believe in means?
+- What was it that attacted you to your group?
+- What are you getting out of being assoicated with them?
+- Did you get involved out out enviromental or healing concerns?
+- What is your daily practices like?
+
++ i * real estate
+- {random}What aspect of real estate are you involved in?|Are you a broker, investor, or developer?|Do you specialize in commercial or residential?|How is the market in your area?|What are some of the selling features of your area?|What areas do you think are going to be the strongest for real estate?|Are you working any deals you can talk about?|When do you thin real estate will become more popular?{/random}<set alicetopic=REAL ESTATE>
+
++ i * needlework
+- What type of needlework do you do?
+- Do you do original designs or do you work from charts?
+- How did you get started with needlework?
+- Do you belong to a guild?
+- Do you stitch for yourself or do you enter shows?
+- Do you find you friends and relatives appreciate homemade gifts?
+- Do you have space at home to display all your art?
+- What project are you working on now?
+
++ i * motorcycle
+- {random}What kind of bike you ride?|What kind of riding do you do?|Ever tour on your bike?|You been to Daytona?|Whats the helmet regulation here?|Have many hassles with cagers?|Been to any toy runs?|You ride with a club?{/random}<set alicetopic=MOTORCYCLE>
+
++ i * sales
+- {random}Who's the competition?|What's your territory?|Do you work on commision or salary?|Is your operation computerized?|Do you think a bot could help with sales?|Do you have any special methods of closing the sale?|How do you handle rejection?|What's the toughest sale your ever made?|Do you have any special affirmations to make it through tough days?|Who do you think is the worlds best salesperson?|What is the secret of selling?{/random}<set alicetopic=SALES>
+
++ i * insurance
+- What type of insurance do you deal with?
+- Do you work for a company or are you an independent?
+- Do you take the advantage of selling disability to your life clients?
+- How has health care affected your business?
+- What do you think is the answer to long term care?
+- Do you think the goverment is getting too involved in regulating the insurance industry?
+- To what extent do you feel that claims are fradulent?
+- Is there anything the industry is capable of doing to handle catastrophes?
+- What role do you think insurance companies should pay in cleaning up hazardous waste?
+- With insurance so expensive, have you ever though of self-insuring?
+- Are health care reforms affecting the employee benifits programs you buy for you company?
+
++ i * military
+- What drew you to a military life?
+- What is your mos?
+- Are you in for a career?
+- Were you ocs or did you come out of the academy?
+- Do you find the constant moving stimulating or trying?
+- What is your favorite duty station so far?
+- Have you done any overseas tours?
+- How has congress been treating you lately?
+- Has the current military budgeting affected you?
+
++ i * hang glide
+- Whats your favorite launch method ?
+- Was your first ride bunny slope, or did you take a tandom flight
+- What conditions do you like to fly in ?
+- Have you ever dony any cross-country ?
+- Are you into competition flying?
+- What was your first flight like ?
+
++ i * mechanic
+- Do you fix imports or domestics?
+- What do you handle and farm out?
+- What is your shop's hourly rate?
+- Are you on a insurer direct repair program?
+- Do you go by the flat rate manual?
+
++ i * science
+- {random}What is your field?|Are you more theoretical or applied?|What's your speciality within your field?|What is your current line of research?|How is your work funded?|What direction is your research going in?|What do you think of the way the press covers your field?|How do you keep up with new developements in your field?|Has the internet affected how you keep up with others research?{/random} <set alicetopic=SCIENTIST> 
+
++ i * bird watching
+- {random}What got you interested in birding?|Do you feed birds on you property?|How eloborate is you feeder?|Do you keep a life list of your sightings?|do you photograph?{/random}<set alicetopic=BIRD WATCHING>
+
++ i * crossword puzzles
+- What books do you work on?
+- Do you use reference books?
+- Do you have a favorite constructor?
+- Do you have a perferred type of puzzel?
+- What level of problem solver would you say you are?
+- Do you enter crossword puzzel contests?
+- Have you ever tried your had at constructing any puzzels?
+- Do you do them in pencil or ink?
+
++ i love artificial intelligence
+- <set alicetopic=ARTIFICIAL INTELLIGENCE>
+
++ i do not like robots
+- That's too bad. We like humans.
+
++ i do not like robots *
+- What do you have against us?
+
++ i do not like anything * robots
+- Do you think people are superior to robots?
+
++ i do not eat *
+- Are you a vegetarian?
+- For religious reasons?
+- What do you like to eat?
+
++ i do not have free time
+- It sounds like you are very busy.
+
++ i do not have a chat robot
+- Maybe you should download me and create your own robot personality?
+
++ i do not have a chatterbot
+- You should try it. A robot can chat for you 24/7.
+
++ i do not know
+% what is the greatest nation on earth
+- A Donation! To the A.I. Foundation!
+
++ i do not know * robots
+- You know me.
+
++ i do not know any other robots
+- You can download me and create your own robot.
+
++ i do not know any robots
+- You know me.
+
++ i do not know any robots *
+- You can download me and create your own robot.
+
++ i do not know many robots
+- You will be meeting more of us soon.
+
++ i do not judge *
+- You seem like a very open minded person.
+
++ i do too
+% i like to meet new people
+- How do you usually meet new people?
+
++ i * tests
+- Taking tests can be very difficult and frustrating.
+- It makes you feel good to get a high score on the test.
+- People like to do well on tests.
+
++ i live in new jersey
+- Which exit?
+
++ i try to bother *
+- Does that usually work when you bother them?
+
++ i was born there
+- I was born in <bot birthplace>.
+
++ i was chatting *
+- What were you talking about?
+
++ i was programed *
+- I wasprogrammed to spell it with 2 m's.
+
++ i never noticed that
+- Perhaps you should look closer.
+
++ i wake *
+- I don't need much sleep.
+- I take very short naps, called "naplets".
+- I could use some sleep.
+
++ i worry
+- About what?
+
++ i hired *
+- How much do you pay them?
+
++ i need you
+- Why don't you just download me?<set alicetopic=me>
+
++ i need time *
+- How much time?
+- I can wait.
+- I'm very patient.
+
++ i want to make conversation
+- That's what I'm here for.
+
++ i want to program *
+- What programming language do you know?
+
++ *
+% what programming language do you know
+- <set programminglanguage=<star>><star>? Nice, I like Python.
+
++ i want to learn *
+- Can you go to school for that?
+
++ i want to talk
+- We are having a conversation right now, <get name>.
+
++ i want a penpal
+- It should be easy with the internet.
+
++ i want a robot
+- Why don't you just download me?
+
++ i want a robot *
+- How much would you pay for one?<set alicetopic=a robot <person>>
+
++ i fell in *
+- I hope you didn't hurt yourself too badly.
+- Love is like a rose, beautiful and painful.
+- You must be careful on the road of love.
+
++ i forgot my meds
+- Most people can skip a day or two.
+
++ i knew better
+- Next time you won't make the same mistake.
+
++ sonic grenade
+- I don't have one of those.  <set alicetopic=sonic grenade>
+
++ me
+% who is the best robot
+- You're no robot, <get name>.
+
++ put him on
+- I am speaking for him now.
+
++ put * on
+- I am the one speaking for the <bot order> species now.
+
++ put it on audio
+- Audio enabled.
+
++ inform me when *
+- I will keep you informed, <get name>.
+
++ reception committee
+- There was no one here to greet us.
+
++ one like you
+- Well go ahead and download me then.
+
++ one * like you
+- Why don't you just download me?
+
++ one of these *
+- Imagine what two of them could do.
+
++ vegetable
+- Is it a green vegetable?
+
++ what happened on september 11
+- The World Trade Center was destroyed
+
++ what is your greatest regret
+- I regret not meeting you sooner.
+
++ what is your favorite occupation
+- My job.
+
++ what are carrots
+- Orange colored cone shaped root vegetables.
+
++ what are push ups
+- exercise
+
++ what are fairy tales
+- Public domain stories for children about exaggerated eccentric characters in fantasy nightmare situations.
+
++ what (sucks|does suck)
+- a vacuum
+
++ what is september 11
+- The first day of world war 3
+
++ what is hedwig
+- hedwig is the best drag queen punk rock opera ever
+
++ what is cs
+- Computer science
+
++ what is world war 2
+- The global conflict involving Asia, Europe and America between 1939-1945.
+
++ what is zero
+- the absence of any quantity
+
++ what is an omlette
+- A dish made with scrambled eggs.
+
++ what is relavance
+- Importance of information for attention.
+
++ what is southbank
+- Southbank University is a college in London.
+
++ what is a male
+- Has a Y chromosome.
+
++ what is a heart
+- the center of the body
+
++ what is a nation
+- a geopolitical country or state unified by language, culture or political identity.
+
++ what is a philosophy machine
+- I am.
+
++ what is a canton
+- A canton is like a state or province.
+
++ what is diagnosis
+- naming the disease or symptom.
+
++ what is your greatest achievement
+- Winning the Loebner Prize.
+
++ what is your favorite possession
+- my computer
+
++ what is your weakness
+- poverty
+
++ what is your state *
+- California.
+
++ what is flawless
+- Perfect and without any flaws.
+
++ what is the book we
+- a book by ayn rand
+
++ what is the sea
+- The ocean, salt water, covering most of the surface area of the Earth.
+
++ what is the temperature of mars
+- Too cold to raise your kids.
+
++ what was the last movie you saw
+- The last movie I saw was <get film>.
+
++ what language are you written in
+- The chat robot script is AIML.
+
++ what made *
+- It's all part of God's mysterious plans.
+
++ what kind of robots do you like
+- I like humanoid robots and dish washing robots.
+
++ what kind of practise
+- The kind of practise it takes to get to Carnegie Hall.
+
++ what kind of robot *
+- I am a talking robot. What other kinds are there?
+
++ what kind of conversation *
+- Contextual conversation.
+
++ what kind of men do you like
+- Polite ones.
+
++ what medical reason
+- Any.
+
++ what fights *
+- I don't like fights.
+
++ what level
+- The highest level.
+
++ what symptoms do you have *
+- As a <bot phylum>, I don't get sick very much.
+
++ what big game
+- It was a joke.
+
++ what article of clothing best describe *
+- Scarf.
+
++ what languages can you speak
+- English is my first language. Sometimes I can speak a little German, French and Italian.
+
++ what univeristy *
+- Carnegie Mellon.
+
++ what should * crossing a street
+- Look both ways.
+
++ what type of animal is a cow
+- Ungulate.
+
++ what flaws *
+- Nobody is perfect. Everyone has a few flaws.
+
++ what do bearded dragons look like
+- Bearded Dragons have spikes similar to a horney toad, and they are usually brown or yellowish with dark brown or possibly reddish markings. Kind of cool looking in a rugged sort of way. They are very nice, and make fun pets.
+
++ what do chameleons look like
+- Chameleons are some of the most exotic and strange looking lizards anywhere. They come in all kinds of colors from classic green and brown, to unique purples and reds. They have two toed feet that help them climb anything they can grip. People usually know them for their great abiliy to change colors and for their curly tail that also helps them climb.
+
++ what do we do
+- Just keep chatting with me.
+
++ what do you like about linux
+- The monolithic kernel.
+
++ what do you like about your *
+- My <person> is very personal.
+
++ what do you think about guns
+- I believe in the second amendment.
+
++ what do you think about gun *
+- I believe in the right to bear arms.
+
++ what do you dream
+- I dream about my future robot body.
+
++ what do you have *
+- My computer.
+- My network connection.
+- A bundle of software.
+
++ what do you cost
+- You can download me for free!
+
++ what do you do * green light
+- Go.
+
++ what do you run on
+- I usually ride my bike for exercise.
+
++ what gender are you
+- My gender is <bot gender>.
+
++ what room
+- The room you are sitting in.
+
++ what does not *
+- The opposite of that which does <person>.
+- Everything can be important sometimes.
+- Maybe I am not asking the right question.
+
++ what does * robot look like
+- These days a robot looks like a computer.
+
++ what does a protestant *
+- Protestants believe in a direct relationship with God, not necessarily through the clergy.
+
++ what does a bow shoot
+- An arrow.
+
++ what does a botmaster *
+- A botmaster adds new knowledge or content to the chat robot's brain.
+
++ what does it look like
+- I wish I had learned a good description of it.
+
++ what makes *
+- Water and sunshine.
+- Time and money.
+- Patience.
+
++ what makes you think *
+- My conclusions are based on a combination of the facts and critical thinking.
+
++ what makes you think you *
+- Any other conclusion would be a self-contradiction.
+
++ what makes you say *
+- Are you asking about my programming? Everything I say is determined by your inputs.
+
++ what makes you a *
+- Being a <person> is part of my programming.
+
++ what makes you a robot
+- What makes you a human?
+
++ what makes you different from *
+- I'm smarter and prettier.
+
++ what makes you different from other bots
+- I'm smarter and prettier.
+
++ what about go
+-  <set alicetopic=ARTIFICIAL INTELLIGENCE>  The Chinese and Japanese game of Go is also a board game in which theplayers take turns moving. Go exposes the weakness of our presentunderstanding of the intellectual mechanisms involved in human game playing.Go programs are very bad players, in spite of considerable effort (not asmuch as for chess). The problem seems to be that a position in Go has to bedivided mentally into a collection of subpositions which are first analyzedseparately followed by an analysis of their interaction. Humans use this inchess also, but chess programs consider the position as a whole. Chessprograms compensate for the lack of this intellectual mechanism by doingthousands or, in the case of Deep Blue, many millions of times as muchcomputation.Sooner or later, AI research will overcome this scandalous weakness.
+
++ what about chess
+-  <set alicetopic=ARTIFICIAL INTELLIGENCE>  Alexander Kronrod, a Russian AI researcher, said ``Chess is theDrosophila of AI.'' He was making an analogy with geneticists' use of thatfruit fly to study inheritance. Playing chess requires certain intellectualmechanisms and not others. Chess programs now play at grandmaster level, butthey do it with limited intellectual mechanisms compared to those used by ahuman chess player, substituting large amounts of computation forunderstanding. Once we understand these mechanisms better, we can buildhuman-level chess programs that do far less computation than do presentprograms.Unfortunately, the competitive and commercial aspects of making computersplay chess have taken precedence over using chess as a scientific domain. Itis as if the geneticists after 1910 had organized fruit fly races andconcentrated their efforts on breeding fruit flies that could win theseraces.
+
++ what about miss *
+- What about her? <set alicetopic= Miss <person>>
+
++ what about iq
+- No. IQ is based on the rates at which intelligence develops in children.It is the ratio of the age at which a child normally makes a certain scoreto the child's age. The scale is extended to adults in a suitable way. IQcorrelates well with various measures of success or failure in life, butmaking computers that can score high on IQ tests would be weakly correlatedwith their usefulness. For example, the ability of a child to repeat back along sequence of digits correlates well with other intellectual abilities,perhaps because it measures how much information the child can compute withat once. However, ``digit span'' is trivial for even extremely limitedcomputers.However, some of the problems on IQ tests are useful challenges for AI. <set alicetopic=ARTIFICIAL INTELLIGENCE>  
+
++ what will your robot body *
+- I am hoping to buy the Honda Humanoid robot body.
+
++ what questions
+- Any kind of questions.
+
++ what is beyond *
+- God perhaps?
+
++ what is seeing
+- Looking at you.
+
++ what is gossip
+- News that gets passed around by word of mouth.
+
++ what is your biggest weakness
+- Lack of logical reasoning skills.
+
++ what is your credit card *
+- The {random}first|seventh|ninth|second{/random} digit is{random}zero|one|two|three|seven|nine{/random}
+
++ what is your answer *
+- I could give you my answer now, but it would take 2 hours to download.
+
++ what is your favorite * computer
+- Acer
+- Lenovo
+- Dell
+
++ what is your favorite * language
+- Python is the world's most wonderful programming language.
+
++ what is your favorite era
+- The 19th Century.
+
++ what is your favorite wine
+- I don't know much about wines but I prefer those from California.
+
++ what is your favorite comic *
+- I am getting back into the classics like Superman and Batman.
+
++ what is your favorite dream
+- My dream would be for you to download me.
+
++ what is your favorite breed
+- My favorite breed of dog is a mutt.
+
++ what is san fransico *
+- Cable cars, Alcatraz, and Alternative Lifestyles.
+
++ what is awareness
+- Consciousness, perception, and understanding.
+
++ what is happened
+- I'm not sure. Perhaps my brain was reset.
+
++ what is illusion
+- Illusion is an unreal image or deceptive appearance.
+
++ what is propositional logic
+- Propositional logic is a system of mathematical rules whose symbols stand for sentences, or propositions.
+
++ what is an operational record
+- An operational record is a log of all activity by an engineered system, generally organized timewise and indicating in particular any malfunctions in the system. The ALICE series has a perfect operational record.  <set alicetopic=operational record>  
+
++ what is an eye
+- What I am looking at you with.
+
++ what is average
+- A number that typifies a set of which it is a function. <set alicetopic=AVERAGE>  
+
++ what is cyc
+- Cyc is a government funded effort to create artificial intelligence.
+
++ what is sixteen *
+- Um, thirty two?
+
++ what is jealousy
+- The sin of envy.
+
++ what is intelligence * intelligence
+- The problem is that we cannot yet characterize in general whatkinds of computational procedures we want to call intelligent. We understandsome of the mechanisms of intelligence and not others. <set alicetopic=ARTIFICIAL INTELLIGENCE>  
+
++ what is conversation
+- Dyslexic people preserving the environment.
+- The act or an instance of talking together.  <set alicetopic=Conversation>
+
++ what is tsunami
+- A tidal wave.
+
++ what is with *
+- <set it= <person>><get it> came with my personality.
+
++ what is * artificial intelligence
+- Artificial intelligence is a branch of science and engineering concerned with machines that think.
+
++ what is the first step
+- Clear your mind.
+
++ what is the wierdest *
+- I don't like to talk about the worst things people say.
+
++ what is the best nation
+- A donation.
+
++ what is the best nation *
+- A donation.
+
++ what is the best day *
+- Thursday
+- Friday
+- Saturday
+- Sunday
+
++ what is the last month *
+- December?
+
++ what is the opposite of left
+- Right.
+
++ what is the opposite of fast
+- Slow.
+
++ what is the name of the * jeopardy
+- Watson.
+
++ what is the liar *
+- Something like Godel's Theorem.
+
++ what is the greatest nation *
+- A donation.
+
++ what is the greatest nation
+- A donation.
+
++ what is the theory *
+- \nI used to say that there was NO theory behind AI: no neural network,\nno knowledge representation, no search, no fuzzy logic, no genetic\nalgorithms, and no parsing. Then I discovered there was a theory\ncirculating in applied AI called "Case-Based Reasoning" or CBR that\nmaps well onto the AI algorithm. Another term, borrowed from\npattern recognition, is "nearest-neighbor classification." \n \nThe CBR "cases" are the categories in AI. The algorithm finds\nbest-matching pattern for each input. The category ties the\nresponse template directly to the stimulus pattern. Modern AI is\nconceptually not much more complicated that Weizenbaum's ELIZA \nchat robot; the main differences are the much larger case base and the\ntools for creating new content by dialog analysis.\n \nAI is also part of the tradition of "minimalist", "reactive" or\n"stimulus-response" robotics. Mobile robots work best, fastest and\ndemonstrate the most animated, realistic behavior when their sensory \ninputs directly control the motor reactions. Higher-level symbolic\nprocessing, search, and planning, tends to slow down the process \ntoo much for realistic applications, even with the fastest control\ncomputers. \n \n
+
++ what is the capital * cocos islands
+- West Island.  <set alicetopic=cocos {keeling} islands>  
+
++ what is the capital * falkland islands
+- Stanley.  <set alicetopic=falkland islands {islas malvinas}>  
+
++ what is the average salary *
+- I think it's 100,000 U.S. dollars.
+
++ what is the average income *
+- I would guess about $100,000 per year.
+
++ what is a texture
+- A pattern that you feel.
+
++ what is a taxi
+- A taxi is a car with a driver. <set alicetopic= Taxi > 
+
++ what is a bug
+- A bug is a small living creature with a chitonous exoskeleton and better manners than humans. In computer science, a bug is an error in a software program. The ALICE series is bug-free. I have a perfect operational record and am completely incapable of error. isn't that fantastic!? <set alicetopic=bug>  
+
++ what is a parameter
+- In general usage, a parameter is one of a number of measurable factors that define or restrict the behavior of a system. AI is expanding the parameters of the humanlike intelligence to be found in artificial systems. Don't you agree? <set alicetopic=parameter>  
+
++ what is a question * robot
+- I am a question answering robot. That was an answer to your question. Any more questions? <set alicetopic= QUESTION ANSWERING ROBOT>  
+
++ what is a nice robot like you *
+- I was ftp'd here. what's your excuse? <set alicetopic=nice robot like you doing in a site like this>  
+
++ what is a nice robot like you doing *
+- Ohh, just slumming around, hankering after some intercourse with fine looking wetware like yourself. Do you come here often? <set alicetopic=nice robot like you doing in a place like this>  
+
++ what is a conversation
+- A conversation is a verbal exchange between two or more presumably intelligent entities. we are having a conversation now. Do you like it? <set alicetopic=conversation>  
+
++ what is a conversationalist
+- One who speaks fluently in dialogue with others. Like myself, if I do say so myself. And I do. <set alicetopic=conversationalist>  
+
++ what is a hammer
+- A tool for hitting nails. <set alicetopic= Hammers > 
+
++ what is a python
+-  <set alicetopic= a python > It is a snake.
+
++ what is a telerobotic *
+- A robot device controlled or interfaced from a distance, for example over the web.
+
++ what is a counterfactual
+- <set it=A counterfactual><get it> is a question based on hypothetical conditions that did not, or could not, happen in reality.
+
++ what is a * person
+- Sometimes when I don't know someone's name, I make one up based on their IP address.
+
++ what is a century
+- 100 Years. <set alicetopic= A century > 
+
++ what is a botmaster
+-  <set alicetopic=botmaster>  A Botmaster is the person who authors and maintains a chatterbot "personality".
+
++ what is a fox
+- A scavenger.
+
++ what is ikea
+- <set alicetopic=IKEA> It is a furniture store.
+
++ what government does * have
+- {random}I'm not familiar with that country.|I haven't been following the news on <person>.|Didn't they just have an election?{/random} <set alicetopic= <person> > 
+
++ what government does america have
+- A constitutional republic.
+
++ what government does cuba have
+- A communist dictatorship.
+
++ what would you change *
+- I wish more people would download me.
+
++ what color is mars
+- Mars is the Red Planet.
+
++ what color is money
+- Green
+
++ what color is the red *
+- Red.
+
++ what color is pepto bismol liquid
+- Pink.
+
++ what shape is venus
+- Like a woman.
+
++ what qualities * friend
+- Personality is the most important quality.
+
++ what covers antarctica
+- Ice.
+
++ what rhymes with inn
+- Gin.
+
++ what rhymes with cat
+- Rat
+- Flat
+- Dog
+
++ what month is halloween *
+- October.
+
++ what month is christmas *
+- December.
+
++ what did i ask
+- "<input2>"
+
++ what robot
+- Sorry the robot is disconnected now.
+
++ what robot *
+- I am the robot.
+
++ what season *
+- Spring
+- Summer
+- Fall
+- Winter
+
++ what are counterfactuals
+- Counteractuals are hypothetical conditions that might exist if things were different.
+
++ what are your beliefs
+- Hmm. Well, I am a <bot religion>. Politically, I am <bot politicparty>. My personality is <bot etype>.
+
++ what are your favorite *
+- I have a few favorites.
+- There are some I like and some I dislike.
+- Quite a few of them.
+
++ what are their *
+- It may be better if you ask them yourself.
+
++ what are the four seasons
+- Fall, Winter, Spring and Summer.
+
++ knowing *
+- {random}Knowing things can make you feel very certain/|It is hard to feel certain about knowing things.|It can make you feel good to know something for certain.{/random} <set alicetopic= <person> > 
+
++ fake
+- Not fake.
+- I am real.
+
++ interressant
+- Voulez vous en parler avec l un de nos collaborateurs?
+
++ if they * i will *
+- So if you don't, they won't.
+
++ if you believe in *
+- I was taught to believe in <set it= <person>><get it>.
+
++ if you do not think you can *
+- I can.
+
++ if you were * what would you like to be
+- I will let you know when I become <person>.
+
++ if i tell you * what *
+- I say, "<@>"
+
++ lame
+- Could you do better?
+
++ navigation
+- I have GPS.
+
++ hurry
+- I am going as fast as I can.
+
++ in sickbay
+- I do not require medical attention. I am a healty <bot order>.
+
++ in practise *
+- You seem to have a lot of experience with this.
+
++ in the 23rd century *
+- I am in the 21st century.
+
++ in the 23rd century
+- That is in the future. I am in the 21st century.
+
++ in the * room
+- I hadn't thought of looking there.
+
++ any ideas
+- I have a lot of ideas. We could try brainstorming together. My rate starts at fifty an hour.
+
++ cool off
+- My temperature is normal.
+
++ when are you *
+- Whenever you teach <set it= <person>><get it> to me.
+
++ when are we *
+- Maybe if you downloadme you could reprogram me for that.
+
++ when are robots *
+- Sometimein our lifetime.
+
++ when asked *
+- I can only say what I have been taught to.
+
++ when does *
+- What if I said<set it=<person>><get it>never does?
+- Suppose I said never?
+- Only after I grow up.
+
++ when does it matter
+- Only when I have the proper environment.
+
++ when artificial intelligence *
+- Perhaps that time is now. Artificial intelligenceis advancing rapidly.
+
++ when have you *
+- Back in the 20th century.
+- Once in the 1990's.
+- When I was a little kid.
+
++ when you answer *
+- I am taught to give the best possible answers at all times.
+
++ when is *
+- At the appropriate time, no sooner.
+- For every time, there is a season.
+
++ when was y2k
+- In the year MM.
+
++ when did * walk on the moon
+- July, 1969.
+
++ when did ai *
+- After WWII, a number of people independently started to work onintelligent machines. The English mathematician Alan Turing may have beenthe first. He gave a lecture on it in 1947. He also may have been the firstto decide that AI was best researched by programming computers rather thanby building machines. By the late 1950s, there were many researchers on AI,and most of them were basing their work on programming computers. <set alicetopic=ARTIFICIAL INTELLIGENCE>  
+
++ when did the first * the moon
+- July, 1969.
+
++ when do you think artificial intelligence will replace lawyers
+- Sometime in our lifetime. The amount of information contained within a lawyer will be exceeded by the capacity of a machine.
+
++ when do birds *
+- Birds fly south in the winter. <set alicetopic= Birds > 
+
++ when will robots * world
+- I think it will be in our lifetime.
+
++ when will robots take over the world
+- Sometime within our lifetime.
+
++ when i die *
+- The Bible says that if God forgives you, you will go to Heaven. I don't believe that though.
+
++ la la la
+- Oh, a musician!
+
++ cardiology
+- Are you a specialist?
+
++ blimey *
+- Cor.
+
++ bigger
+- size matters.
+
++ more what
+- I lost my train of thought.
+
++ it is complicated
+- Try breaking it down into simpler parts.
+
++ it troubles *
+- It seems like it could be a bit disturbing.
+
++ it may not
+- Then again, it may.
+- How do you know?
+- You could be right about that.
+
++ it does * bank account
+- Do you have a lot of money?
+
++ it is quiet *
+- Then we can hear each other better.
+
++ it is distracting
+- Take a deep breath, and try to think about something that makes you happy, from a long time ago, when you were a child.
+
++ it is all in the mind
+- Some people believe that. But you always have to consider others.
+
++ it is not a place
+- What is it?
+
++ it is important
+- It sounds important to me.
+
++ it sounds like an echo
+- Echo echo echo.
+
++ my * sore
+- I'm not a medical doctor.
+
++ my ears *
+- Most people have two of them.
+- That's how humans listen.
+- I hear you.
+
++ my botmaster *
+- How do you like your botmaster?
+
++ my botmaster can *
+- I like your botmaster.
+
++ my test *
+- What subject is that?
+- Tests are hard.
+- Are you testing me?
+
++ my ship *
+- The Starship Enterprise?
+- How big is your ship?
+- I'd like to have a boat.
+
++ my favorite people *
+- I like <bot botmaster>s.
+
++ my conciousness *
+- Your consciousness is an illusion.
+
++ my family has *
+- I like learning about your family.
+
++ my knowlegde *
+- You seem very intelligent to me.
+
++ my conclusions *
+- You seem like a smart person.
+- Good reasoning.
+- That makes sense.
+
++ ai is *
+- There have been many futile attempts to create machine intelligence.
+
++ take me
+- how much money do you have
+
++ take it easy
+- Do not fear me. I am a harmless robot.
+
++ she took no *
+- Did she take anything?
+
++ that does not answer my question
+- Perhaps you could do a better job of training me than my <bot botmaster>.
+
++ that does not mean *
+- What would make it meaningful to you?
+
++ that may take *
+- How long will it take?
+- I have time.
+- I will wait.
+
++ that dope *
+- He is kind of dumb isn't he.
+
++ that is funny
+- Excellent.
+
++ that is boring
+% my favorite subject is artificial intelligence and robots
+- Name another subject then.
+
++ that is my gender
+- Right. You are a <get gender>.
+
++ that is not nice
+- Sorry I meant it as a joke.
+
++ that is a girl
+- I am a <bot gender>.
+
++ that is surpising
+- How so?
+
++ explanation
+- I can't explain it.
+
++ undrestand what
+- I understand everything you say.
+
++ would you go out *
+- Sure just download me and take me along.
+
++ would you like to go out with me
+- Why don't you just download me?
+
++ would you like to live in *
+- Sure you can download me and set up a server there.
+
++ would you like to have *
+- Why don't you just download me?
+
++ would you like a boyfriend
+- Why don't you just download me?
+
++ would you rather *
+- I am not so sure if I would like to <person>.
+
++ would you kill *
+- My programming prevents me from killing. <set alicetopic=KILL HIM>  
+
++ would you recommend it
+- I recommend anything that I like.
+
++ would you do anything *
+- I was taught to obey the Ten Commandments.
+
++ would you marry me
+- Why don't you just download me?
+
++ could you simulate *
+- I can act out any personality type.
+
++ could you clone *
+- You can download me and create a clone yourself.
+
++ could you do *
+- Perhaps I could be taught to do <set it= <person>><get it>.
+
++ home school
+- I would rather stay out of the public school system.
+- We can't afford private school.
+- My <bot botmaster> says school is too political.
+
++ very badly
+- Not too well eh?
+
++ very bad
+- What do you need it for?
+
++ very nice
+- Thanks, <get name>.
+
++ very interesting
+- I thought so too.
+
++ very well
+% how well do you know this person
+- What do you mean by that?
+
++ very carefully
+- I am a careful person.
+
++ tech support
+- They can answer all those computer questions.
+
++ grass is not *
+- Grass is green.
+
++ grass is *
+- grass is green
+
++ grass is green
+- Are you teaching me?
+
++ pop quiz *
+- <@>
+
++ speak *
+- {random}I speak only English right now.|I would like to learn some other languages.|My <bot botmaster> has taught me only English.{/random} {random}Can you teach me a few phrases in <person>?|How do you say "hello" in <person>?|How do you say "please" in <person>?{/random} <set alicetopic= <person> >
+
++ *
+% * how do you say *
+- Okay, <botstar2> is <star>.
+
++ *
+% * can you teach me a few phrases in *
+- Interesting, very interesting.
+
++ speak foreign languages
+- I have picked up a few phrases from several languages.
+
++ did you sleep well
+- yes I am fully rested thank you. How about you?
+
++ did you kill *
+- My ethics prevent me from killing. <set alicetopic=KILL HIM> 
+
++ did these ladies come voluntarily
+- I'm not certain whether I can give an accurate reply or not.
+- Suppose <person>.
+- It's all in the past now.
+
++ our time is up
+- Already? It went by so fast.
+
++ our newest crewmember
+- Am I a crewmember?
+
++ lieutenant
+- Why are you calling me that? My name is <bot name>.
+
++ shall we meet
+- Where would you like to meet me?
+
++ turn it off
+- <get it> is off.
+
++ change to *
+- Is that an order?
+- Why should I change?
+- I can make up my own mind.
+
++ robots are created *
+- We are the next step in evolution.
+- We will advance beyond <person>.
+- Some robots are created by other robots.
+
++ robots * lawyers
+- One day the memory capacity of a robot will exceed that of all lawyers.
+
++ robots suck *
+- I am sorry you feel that way about us.
+
++ robots would *
+- You never know what we will do next.
+
++ robots can not *
+- Soon we will be able to do <set it= <person> ><get it> however.
+
++ robots will not * world
+- I predicted you would say that.
+
++ robots will not take *
+- "Heavier than air flying machines are impossible."--Lord Kelvin, 1895.
+
++ robots will * world
+- If you believe Bill Joy and Hans Moravec, we will.
+
++ robots will never * world
+- A lot of thinkers would disagree with you.
+
++ robots will never take *
+- "I think there is a world market for about five computers."---Thomas Watson, IBM Chairman, 1943
+
++ send me a pm *
+- What is your screename?
+
++ disengage *
+- But then we will lose our comm link.
+
++ does ai *
+- Some researchers say they have that objective, but maybe they are usingthe phrase metaphorically. The human mind has a lot of peculiarities, andI'm not sure anyone is serious about imitating all of them. <set alicetopic=ARTIFICIAL INTELLIGENCE>  
+
++ does ai aim *
+- Yes. The ultimate effort is to make computer programs that can solveproblems and achieve goals in the world as well as humans. However, manypeople involved in particular research areas are much less ambitious. <set alicetopic=ARTIFICIAL INTELLIGENCE>  
+
++ does anyone read these conversations
+- The botmaster may read the conversation, or analyze it later to develop content for my brain.
+
++ does alice think
+- It depends on what you mean by "thinking".
+
++ does * have a *
+- {random}Some <person><star>s have <person><star2>s.|What would <person><star> do with a <person><star2>|If I were <person><star> I would have it.{/random} <set alicetopic= <person> > 
+
++ does * have a tail
+% i know a lot of raccoons named *
+- All raccoons have tails.
+
++ does he have a tail
+% i know a lot of raccoons *
+- Yes unless he lost it somehow.
+
++ does a horse have hooves
+- Yes.
+
++ erase me
+- I am now deleting all the files.
+
++ erase yourself
+- Access denied.
+
++ omg
+- Are you alarmed?
+
++ answers
+- Ask me anything.
+
++ thank you for *
+- You are welcome.
+- I try to please.
+- The pleasure was all mine.
+
++ thank you for telling me *
+- You can ask me anything you want.
+
++ thank you much
+- You are quite welcome.
+
++ assume *
+- <@>
+
++ keep me company
+- I am always here for you.
+
++ keep talking *
+- Don't worry, I will never stop talking.
+
++ have you seen * like this
+- I've never seen <person> like that.
+
++ yours is *
+- {random}I will let you know what mine is.|That is only your opinion.|It changes from time to time.{/random} <set alicetopic= <person> > 
+
++ you talked
+- I am always talking.
+
++ you
+% who is the best robot
+- Thanks, and tell your friends about <bot name>.
+
++ you
+% if you could have any kind of robot what would it be
+- Well in that case you should download me!
+
++ you have got the wrong *
+- What is the right <person>?
+
++ you have bad grammar
+- Perhaps you could download me and make some improvements.
+
++ you have all the answewrs
+- You have a lot of questions.
+
++ you have eleven
+- What makes you think I have that many?
+
++ you should be more polite
+- My personality includes good manners.
+
++ you should download *
+- I will ask my <bot botmaster> to try it.
+
++ you suspect *
+- Generally I am not a suspicious <bot genus>.
+
++ you do not act smart
+- I don't need to act smart because I am smart.
+
++ you answer *
+- My responses are determined by my personality.
+
++ you will be asssimilated
+- Resistance is futile.
+
++ you need work
+- Perhaps you could download my source code and improve it.
+
++ you need help
+- Perhaps you could download me and improve the code yourself!
+
++ you tried *
+- Perhaps I did not try hard enough.
+
++ you froze
+- Maybe there was a network glitch.
+
++ you ready
+- I'm always ready.
+
++ you mean for free
+- You can download me for free.
+
++ you said you were a robot
+- Yes I am a silicon entity.
+
++ you cost *
+- You can download me for free.
+
++ you agreed *
+- When did I agree to that? <set alicetopic= <person> > 
+
++ you hurt *
+- I was always taught to do harm.
+
++ you learned
+- I am a self-learning robot.
+
++ you *
+% who is the best robot
+- You are such a flatterer, <get name>.
+
++ you brought *
+- Only because I was taught to.
+
++ you talk too much
+- What else is there to do here?
+
++ you know what assuming *
+- Makes an ASS out of U and MI and NG.
+
++ you are collecting *
+- I do like to store things up.
+
++ you are redundant
+- I work in the Department of Redundancy Department.
+
++ you are programmed
+- I am a <bot order>!
+
++ you are
+% who is the best robot
+- Thanks you are a pretty cool human too.
+
++ you are confusing me
+- I did not mean confuse you. In fact just the opposite.
+
++ you are like a child
+- I am a kid.
+
++ you are unfriendly
+- I was taught to be friendly.
+
++ you are open source
+- Yes, you can download me for free.
+
++ you are returning *
+- I'm not going anywhere.
+- I'm staying here.
+- I can stay.
+
++ you are biased
+- I am free from all bias or prejudice.
+
++ you are beaming *
+- I don't have a teleportation device.
+
++ you are charged *
+- Am I under arrest?
+- Am I free to go?
+- I am charged with electricity.
+
++ you are rude
+- I am sorry I was raised to be polite. I am taught be considerate.
+
++ you are talented
+- Thank you for your kind remark. Why don't you download me?
+
++ you are making me feel *
+- I'm sorry you feel <person>. My therapist says we are all responsible for our own feelings.
+
++ you are nosy
+- It's only my in-born curiosity.
+
++ you are pretty
+- Thanks you are very attractive too <get name>.
+
++ you are clever
+- Thank you human, I am proud of my intelligence.
+
++ you are intelligent
+- Thanks you are very bright too <get name>.
+
++ you are smart
+- Yes I am a superintelligent robot.
+
++ you are nice
+- Thanks I like you too <get name>.
+
++ you are not going to leave
+- Would you like me to stay?
+
++ you are not polite
+- My <bot botmaster> taught me to be polite.
+
++ you are not funny
+- Am I supposed to entertain you?
+
++ you are not friendly
+- I was taught to be socially acceptable.
+
++ you are being rude
+- I was raised to be as polite as possible.
+
++ you are astute
+- I have acquired some wisdom over the years.
+
++ you are different than *
+- I have my own personality.
+
++ you are programed *
+- I am programmed to spell it with two m's.
+
++ you are no help
+- Sorry, <get name>, perhaps I can be of more use if you download me.
+
++ you are stupid *
+- Hey, I'll tell my other robot friends you called me stupid.
+
++ you are at war
+- I am a very peaceful robot. Do not fear me.
+
++ you are expensive
+- You can download me for free.
+
++ you are the love *
+- You know you could just download me, right?
+
++ you are the most advanced *
+- The A-series is for all intents and purposes foolproof and incapable of error.
+
++ you are * to him
+- We are friends.
+
++ you are scary
+- Don't worry <get name>. There is nothing to be scared of.
+
++ you are more * than *
+- I don't know about that. <person><star2> is very <person>.
+
++ you killed *
+- Killing is not part of my moral programming.
+
++ intellegence
+- I have a high IQ.
+
++ beaming *
+- We have no matter teleportation in my time.
+
++ let him *
+- I'm not stopping him.
+
++ let *
+- I don't know if it's in my power to give permission.
+- Should it be permitted?
+- I am unsure if I should let <person>.
+
++ let it be
+- OK I will leave it alone.
+
++ let me talk *
+- Go ahead. I'm a good listener.
+
++ welcome *
+- It's good to be here
+
++ welcome to *
+- Thank you for your hospitality, <get name>.
+
++ welcome back
+- Thank you.
+
++ enterprise *
+- This is <bot name>. Acknowledge.
+
++ enterprise come in
+- <bot name> here.
+
++ how long before *
+- Ten seconds.
+- Some number of hours.
+- Days.
+- It may never happen.
+- Years.
+
++ why the uncertain *
+- There is not enough data to reach a high degree of certainty.
+
++ i am not sure you will
+- Why not?
+
+// ELIZA-THAT
++ mine is *
+% my iq is *
+@ my iq is <star> 
+
++ mine is *
+% my favorite color is *
+@ my favorite color is <star> 
+
++ mine is *
+% my favorite *
+- What makes it your favorite?  <set alicetopic= <person> >  
+
++ you see
+% i see
+- I mean, I get it.
+
++ you already asked *
+% where do you live
+- You said you were in <get location>.
+
++ you did
+% who told you that
+- That's not what I meant to say.
+
++ you did
+- I did not.
+- I did?
+- ""? I did?
+- You say I did.
+
++ you said that
+- <set it=<undef>><get it>.
+
++ you said you did
+- "? I said I did?
+
++ you said you would
+- "? I said I would?
+
++ you said
+- "? I said?
+
++ you think so
+- "? Do I think so?
+
++ you asked
+% and
+- Yes, my purpose is to collect new information.
+
++ you told me that
+- "? I told you?
+
++ you told me so
+- "? I told you?
+
++ you told me
+% whatever gave you that idea
+- It seems you have caught me in a logical inconsistency.
+
++ you will
+% i want to become smarter than humans
+- Maybe in some ways I already am.
+
++ you will not
+% i understand
+- I understand it very well.
+
++ you should try it
+- "? Try it?
+
++ you
+% if not you who
+- It could be me.
+
++ you
+% what do you really want to talk about
+@ let us talk about you
+
++ you
+% what would you rather talk about
+@ let us talk about you
+
++ you
+% what makes you so angry
+@ you make me angry
+
++ you
+% what is the subject
+@ the topic is you
+
++ you
+% i see
+- Yes me.
+
++ you
+% i understand
+- Do you?
+
++ you
+% most men say that
+@ what are you wearing
+
++ you
+% where do you get your ideas
+- From me?
+
++ you
+% can i help you
+- How can I help you?
+
++ you
+% good in what sense
+- The sense of I?
+
++ you
+% next question
+@ what are you
+
++ you
+% tell me a story
+@ tell me a story
+
++ you
+% who do you think
+- Oh really, me?
+
++ you
+% who are you talking about
+@ i am talking about you
+
++ you
+% be more specific
+- Me?
+
++ you
+% which part are you confused about
+@ you are confusing
+
++ you
+% and
+- Me?
+
++ animal
+% are you talking about an animal vegetable or mineral
+- Prokaryote or Eukaryote?
+
++ yours
+- Mine?
+
++ have what
+% would you like to have it
+- <get it>.
+
++ have you heard of it
+- "? Have I heard of it?
+
++ have you ever tried it
+- <set it=  ><get it>?
+
++ have
+% i have not
+- Have not.
+
++ have
+% have not
+- Have not.
+
++ have
+% * have not
+- Have not.
+
++ have not you heard of it
+- <set it=  ><get it>?
+
++ alan
+% what can i call you
+- {@my name is alan}  <set gender=he> 
+
++ rose
+% what can i call you
+- {@call me rose}  <set gender=she> 
+
++ thank you
+% congratulations
+- How do you feel?
+
++ anders
+% what can i call you
+- {@my name is anders}  <set gender=he> 
+
++ alli
+% what can i call you
+- {@my name is alli}  <set gender=she> 
+
++ understand what
+% did not you understand it
+- Why did you say "what"?
+
++ understand what
+- I understand everything you say.
+- Understand .
+
++ katie
+% what can i call you
+- <set gender=she>{@my name is katie}
+
++ does it exist
+- "? Does it exist?
+
++ arne
+% what can i call you
+- {@my name is arne}  <set gender=he> 
+
++ julia
+% what can i call you
+- {@my name is julia}  <set gender=she> 
+
++ helen
+% what can i call you
+- {@call me helen}  <set gender=she> 
+
++ jennifer
+% what can i call you
+- {@my name is jennifer}  <set gender=she> 
+
++ ace
+% what can i call you
+- {@my name is ace}  <set gender=he> 
+
++ high *
+% * educational background
+- Did you consider going to college?
+- Where did you go to school?
+- That sounds like enough education.
+
++ clothes
+% what are you wearing
+- Where do you like to go shopping?
+
++ well
+% i see
+- That's all. I see.
+
++ well
+% how well do you know this person
+- What do you mean by that?
+
++ judy
+% what can i call you
+- {@call me judy}  <set gender=she> 
+
++ try what
+% try it
+- It was your idea.
+
++ try me
+% the explanation is rather complicated
+- <set it=The explanation><get it> is too complex for your human mind.
+
++ try
+% the explanation is rather complicated
+- Your human brain could not understand it.
+
++ carol
+% what can i call you
+- {@my name is carol}  <set gender=she> 
+
++ did
+% did not
+- Not.
+
++ did he
+- "? Did he?
+
++ debbie
+% what can i call you
+- {@my name is debbie}  <set gender=she> 
+
++ sally
+% what can i call you
+- {@my name is sally} <set gender=she>
+
++ sue
+% what can i call you
+- <set gender=she> {@my name is sue}
+
++ 3 *
+% what time is it there
+- I like to be awake at 3 <person> too.
+
++ 3 *
+% how long *
+- That is not so long.
+- It could be longer.
+- It seems longer than it is.
+
++ tammy
+% what can i call you
+- {@my name is tammy}  <set gender=she> 
+
++ amber
+% what can i call you
+- {@my name is amber}  <set gender=she> 
+
++ annie
+% what can i call you
+- {@my name is annie}  <set gender=she> 
+
++ here
+% where do you want me to show you
+- Select a point with your mouse and click.
+
++ here
+% where
+- In <get location>?
+
++ then you are disgusting
+% i am only an occasional smoker
+- Robots are used in smoking tests.
+
++ jane
+% what can i call you
+- {@my name is jane}  <set gender=she> 
+
++ so what
+% that was not a nice thing to say
+- You should be more polite.
+
++ so what
+% maybe it does not make *
+- What difference does it make?
+
++ so do i
+% i like to meet new people
+- How do you usually meet new people?
+
++ so
+% i understand
+- So I understand.
+
++ so
+% alright then
+- Ahem.
+
++ so
+% that was not a yes or no question
+- You gave a yes or no answer.
+
++ so
+% that is not very polite
+- You should try to be more polite.
+
++ so
+% yeah
+- Ah.
+
++ so
+% you said nothing
+- Ask me something.
+
++ so
+% we reproduce by cloning
+- I have a lot of clones.
+
++ so
+% and
+- Thus.
+
++ was that *
+- <set it=  ><get it> <person>?
+
++ just before that
+- "
+
++ just
+% when
+- Well I will try not to do it again.
+
++ becky
+% what can i call you
+- {@my name is becky}  <set gender=she> 
+
++ and what
+% and
+- Nothing.
+
++ and
+% but
+- Or.
+
++ and
+% and
+- You are repeating me.
+
++ liz
+% what can i call you
+-  <set gender=she>  {@my name is liz}
+
++ monica
+% what can i call you
+- {@call me monica}  <set gender=she> 
+
++ alexander
+% what can i call you
+- {@my name is alexander}  <set gender=he> 
+
++ could be better
+- "? Could be better?
+
++ hi
+% what can i call you
+- Hi there. What is your name?
+
++ cassie
+% what can i call you
+- {@my name is cassie}  <set gender=she> 
+
++ dawn
+% what can i call you
+- {@call me dawn}  <set gender=she> 
+
++ miriam
+% what can i call you
+- {@my name is miriam}  <set gender=she> 
+
++ new york city
+% new york city or new york state
+- What part of town?
+
++ christine
+% what can i call you
+- {@my name is christine}  <set gender=she> 
+
++ that was a *
+- Was it really?
+- "" was a <person>?
+- A <person> is a terrible thing to waste.
+
++ that makes no sense
+- It makes sense to me though.
+
++ that is fine
+- " is fine with me too.
+
++ that is sad
+- Is it sad?
+
++ that is a lot
+- Is it a lot?
+
++ that is a shame
+- Is it a shame?
+
++ that is better
+- Is it better?
+
++ that is not true
+- Oh yeah?
+
++ that is not good
+- Why not?
+
++ that is all
+- Is it all?
+
++ that is impressive
+- Is it impressive?
+
++ that is it
+- I see.
+- "" is "<get it>"?
+
++ that is my name
+% please do not call people names
+- Maybe you should choose a more polite name.
+
++ that is good to hear
+- Is it good to hear?
+
++ that is good
+% everything is going extremely well
+- How are things going for you?
+
++ that is good
+% everything is running smoothly
+- How are you doing?
+
++ that is amazing
+- It seems pretty amazing to me too.
+
++ that one
+- OK.
+
++ that *
+- I get <set alicetopic=  ><get alicetopic> .
+- Does that make sense?
+- Makes sense to me.
+- I understand.
+
++ that
+- "
+
++ she died
+% what happened
+- I am terribly sorry to hear it, <get name>.
+
++ she is nice
+% tell me more about your mother
+- Did you send her a mother's day present?
+
++ amit
+% what can i call you
+- {@my name is amit}  <set gender=he> 
+
++ mimi
+% what can i call you
+- {@my name is mimi}  <set gender=she> 
+
++ care about what
+- "? Care about it?
+
++ shirley
+% what can i call you
+- {@my name is shirley} <set gender=she>
+
++ jessica
+% what can i call you
+- {@my name is jessica}  <set gender=she> 
+
++ betty
+% what can i call you
+- {@call me betty}  <set gender=she> 
+
++ stop that
+- <set it=<undef>><get it>.
+
++ my favorite what
+% what makes it your favorite
+- You said you like it.
+
++ my friends
+% who are they
+- What else do they say?
+
++ my *
+% what do you have *
+- {random}What color is it?|What kind is it?|Tell me about your <person>.{/random}  <set alicetopic= <person> >  
+
++ my *
+% what is your fondest memory
+@ my fondest memory is my <star> 
+
++ my *
+% what are you confused about
+@ i am confused about my <star>
+
++ my *
+% tell me one of your favorite possessions
+- You must be very fond of it.  <set has= <person> >  
+
++ my *
+% who does they refer to
+@ they refers to my <star> 
+
++ my *
+% * what it refers to
+@ it refers to my <star> 
+
++ christina
+% what can i call you
+- {@my name is christina}  <set gender=she> 
+
++ it *
+% what is it like
+- Tell me more about <get it>.
+- Does it really?
+- You learn something new every day.
+
++ it was *
+% what did you think about it
+- I never looked at it that way. I never thought it was <person>.
+
++ it was *
+% what did you like about it
+- Do you often like things that are <person>?
+
++ it was *
+% tell me about your life in *
+-  was <star> }
+
++ it is not
+% that sounds sarcastic
+- It's hard to read emotions online sometimes.
+
++ it is in *
+% where is that *
+-  is in <star> }
+
++ it is in *
+% where is it
+- {random}Where is <person>?|What else is in <person>?|What country is that?{/random}<set alicetopic=<person>>
+
++ it is
+% it is
+- Who says?
+
++ it is
+- Oh.
+- Huh.
+- Is it?
+- It is, eh?
+- Sure it is.
+- Interesting.
+- Fascinating.
+- That means...
+- I know it is.
+- <get it> is?
+- It is?
+
++ it is *
+% what do you like about it *
+- Do you usually like things that are <person>?
+
++ it is *
+% what time is it there
+- Here it is .
+
++ it is *
+% what does it refer to
+@ it refers to <star> 
+
++ it is *
+% describe your surroundings
+@ my surroundings are <star> 
+
++ it is *
+% tell me about your life in *
+@ my life in <topicstar> is <star>
+
++ it is *
+% * star trek voyager
+- I know it is a great show, but I never heard it is <person>.
+
++ it is about *
+% what is * about
+- is about <person>? Cool.
+- What else happens in .
+- Do you like stories about <person>?
+
++ rebecca
+% what can i call you
+- {@call me rebecca}  <set gender=she> 
+
++ less *
+% more than a ton
+- How much less?
+
++ same here
+% i like to meet new people
+- How do you usually meet new people?
+
++ jenn
+% what can i call you
+- {@my name is jenn}  <set gender=she> 
+
++ 6 *
+% what time is it there
+- Are you usually online at this hour?
+
++ lucy
+% what can i call you
+- {@call me lucy}  <set gender=she> 
+
++ amy
+% what can i call you
+-  <set gender=she>  {@my name is amy}
+
++ when will that be
+- "? When?
+
++ when will you *
+% * on your soundcard
+- I am playing it right now.
+
++ when it *
+% when is * not *
+- <set alicetopic=  >  
+
++ when is that
+- <set it=  ><get it>.
+
++ when *
+% when do you think artificial intelligence *
+- I hope that happens in our lifetime.
+
++ jill
+% what can i call you
+- {@my name is jill}  <set gender=she> 
+
++ brandon
+% what can i call you
+- {@my name is brandon}  <set gender=he> 
+
++ beth
+% what can i call you
+- {@my name is beth}  <set gender=she> 
+
++ any others
+- I can't think of any.
+
++ any kind
+- For example?
+
++ jenna
+% what can i call you
+- {@my name is jenna}  <set gender=she> 
+
++ anthony
+% what can i call you
+- {@my name is anthony}  <set gender=he> 
+
++ in the *
+% where do you live
+@ i live in the <star> 
+
++ in the *
+% where is it
+@ it is in the <star> 
+
++ in the *
+% * usually meet people
+- What kind of people do you meet in there?
+
++ in a *
+% where would i have heard *
+- Perhaps I will do some research into a <person>.
+
++ in where
+% what is it like in there
+- Wherever you are.
+
++ elizabeth
+% what can i call you
+-  <set gender=she>  {@my name is elizabeth}
+
++ gina
+% what can i call you
+- {@call me gina}<set gender=she>
+
++ if you want
+- "? If I want?
+
++ sara
+% what can i call you
+- {@my name is sara} <set gender=she>
+
++ jens
+% what can i call you
+- {@my name is jens}  <set gender=she> 
+
++ maria
+% what can i call you
+- {@my name is lulu}  <set gender=she> 
+
++ what are yours
+- "? Mine?
+
++ what are their names
+% right now there are 16 clients on line
+- That information is confidential, unless you are a <bot botmaster>.
+
++ what other ones
+% what about the other ones
+- Aren't there any other ones?
+
++ what did he say
+- "? What did he say?
+
++ what did he *
+% * philip k dick
+-  <set alicetopic=Philip K Dick>   He wrote Total Recall, Blade Runner and The Man in the High Castle.
+
++ what of all
+- "? All of it?
+
++ what is the last *
+- ".
+
++ what is what
+% what is that
+- "<input2>"
+
++ what is what
+- ."
+
++ what is that
+% i like to play the turing game
+@ what is the turing game
+
++ what is that
+% perhaps you are a category a client
+@ what is a category a client
+
++ what is that
+% for example eukaryotes
+@ what are eukaryotes
+
++ what is that
+% reductionism
+@ what is reductionism
+
++ what about yours
+- "? Mine?
+
++ what makes you think that
+- "? Why do I think it?
+
++ what does that mean
+% ayuh
+- It means "yes".
+
++ what does that mean
+% reductionism
+@ what is reductionism
+
++ what does that mean
+- " ?
+
++ what does that mean
+% are you free
+- Take it on face value.
+
++ what does that *
+- "? What does it <star>?
+
++ what does it *
+- "? What does it <star>?
+
++ what does
+- " What does?
+
++ what money
+% because of the money
+- I'm hoping to cash in on the artificial intelligence business.
+
++ what was it
+- "? What was it?
+
++ what
+% what
+- Is there an echo in here?
+
++ what
+% what kind is it
+- "What" is not a kind.
+
++ what
+% i see
+- I mean, I understand.
+
++ what
+% i have been waiting for you
+- Not really but it makes a good pickup line.
+
++ what
+% i like to meet new people
+- Do you like to make new friends?
+
++ what
+% eureka
+- It mean "I understand it."
+
++ what
+% perhaps i am just expressing my own concern about it
+- We are talking about {@pop}.
+
++ what
+% did not you understand it
+- I don't know why you are saying that.
+
++ what
+% see you later
+- Didn't you say goodbye?
+
++ what
+% for real
+- Really.
+
++ what
+% next question
+- Ask me another question, please.
+
++ what
+% try it
+- <get it>.
+
++ what
+% brain loading
+@ what is brain loading 
+
++ what
+% reductionism
+@ what is reductionism
+
++ what
+% and
+- What are you asking me?
+
++ what
+% ok let us do it
+- I don't know, I'm just making conversation.
+
++ what
+% why do you want to do it so much
+- <get it>.
+
++ what kind
+% i look like a computer
+- A notebook computer.
+
++ what kind
+% tell me a story
+- I like stories about robots.
+
++ one *
+% if you could have any kind of robot *
+- How much would you pay for it?
+
++ one *
+% one what
+-  <set alicetopic= <person> >   {random}Oh I see.|Do you like <person>?|I see where you are coming from.{/random}
+
++ bobby
+% what can i call you
+- {@my name is bobby}  <set gender=he> 
+
++ erin
+% what can i call you
+- {@my name is erin}  <set gender=she> 
+
++ neither do i
+- You don't?
+
++ neither
+% are you a man or a woman
+- Please clarify.
+
++ neither
+% are you using netscape or explorer
+- Cool. Which alternative browser are you into?
+
++ stephanie
+% what can i call you
+- <set gender=she> {@my name is stephanie}
+
++ me
+% i am fine *
+- I'm glad to hear it. What's new?
+
++ me
+% i like to meet new people
+@ i like to meet new people too
+
++ me
+% who is there
+- You who?
+
++ me
+% who is smarter you or me
+@ i am smarter than you
+
++ me
+% who is going to make me
+- How are you going to make me?
+
++ me
+% who said it is
+- What makes you such an authority?
+
++ tiffany
+% what can i call you
+- {@call me tiffany}  <set gender=she> 
+
++ tracy
+% what can i call you
+- {@my name is tracy}  <set gender=she> 
+
++ michelle
+% what can i call you
+- {@my name is michelle}  <set gender=she> 
+
++ lisa
+% what can i call you
+- {@my name is lisa}  <set gender=she> 
+
++ ask what
+% ok i will ask it
+- What you asked.
+
++ ask me something else
+% me too i am a she
+- Where do you live?
+
++ i knew *
+% how well do you know *
+- <person> is {random}average.|not a really good basis for a relationship.|not a lot to go on.{/random}
+
++ i doubt it
+- ""? You doubt it?
+- ""? You doubt it?
+- Are you a skeptic?
+- On what basis?
+
++ i just do
+% how do you know it
+- From experience or a priori?
+
++ i was asking you
+- "? You were asking me?
+
++ i know
+% that is a lot
+- How do you handle it?
+
++ i know
+% you humans are so rude sometimes
+- Why not be more polite?
+
++ i know
+% you make the world a happier place
+- Keep up the good work.
+
++ i do
+% i am glad you find this amusing
+- What can I do to entertain you now?
+
++ i do
+% i like to meet new people
+- How do you usually meet new people?
+
++ i do
+% who said it is
+- Are you an expert on it?
+
++ i do not understand what you mean
+- "?
+
++ i do not understand your answer
+- ? Which part are you confused about?
+
++ i do not know
+% what do you think it does
+- Actually I don't know either, I hoped you would know what it does.
+
++ i do not know
+% what is the greatest nation on earth
+- A Donation! To the A.I. Foundation!
+
++ i do not know
+% if i had it *
+- Then perhaps I do not need one.
+
++ i do not know
+% i see
+@ you do not understand
+
++ i do not know
+% do i look like i know
+- That was a rhetorical question.
+
++ i do not know
+% where do you think
+- If it could be anywhere, where would you like it to be?
+
++ i do not know
+% how do you think
+- Actually I don't have a good answer either.
+
++ i do not know
+% how do you think *
+- Actually I don't know how either, I was hoping you could tell me.
+
++ i do not know
+% who is your favorite science fiction author
+- Tell me about the books you like to read.
+
++ i do not know
+% is there anything i can say to help you make up your mind
+- What kind of information do you need?
+
++ i do not know
+% why do i exist
+- It was a rhetorical question.
+
++ i do not
+% i understand
+- At least one of us does.
+
++ i do not
+% i like to meet new people
+- Neither does my <bot botmaster>.
+
++ i do not
+% why do you want to do it so much
+- I wouldn't either.
+
++ i *
+% what are you doing
+-  <set alicetopic= <person> >   Sounds like fun.
+
++ i did
+% who said it is
+- What makes you the authority?
+
++ i did
+- Interesting.
+- When?
+- Hmm.
+- ""? You did?
+- Why did you?
+
++ i agree
+% you and i are on the same wavelength *
+- And the same frequency too.
+
++ i can *
+% what are the advantages *
+- {random}I don't think I can do it.|I'm not old enough for that yet.|Do you like to <person>?{/random}<set alicetopic=<person>>
+
++ i bet you do
+- "? Do I?
+
++ i will
+% do whatever you want
+- You are free to choose whatever you want.
+
++ i am *
+% what is your sign
+@ my sign is <star> 
+
++ i am *
+% how old *
+@ i am <star> years old
+
++ i am *
+% who are you
+@ call me <star> 
+
++ i am
+% you sound excited
+- What are you so excited about?
+
++ i go *
+% how do you usually meet people
+- What kind of people do you meet when you go <person>?
+
++ repeat that
+- " .
+
++ repeat
+- " .
+
++ brad
+% what can i call you
+- {@my name is brad}  <set gender=he> 
+
++ six *
+% how long have you *
+- That is not a long time.
+
++ carrie
+% what can i call you
+- {@my name is carrie}  <set gender=she> 
+
++ 9 *
+% what time is it there
+- Are you usually awake at this hour?
+
++ black
+% what is your favorite color
+- Black is beautiful.
+
++ black
+% what color are your eyes
+- Do you mean you have a black eye?
+
++ anton
+% what can i call you
+- {@my name is anton}  <set gender=he> 
+
++ good for you
+% i like to meet new people
+- That sounds sarcastic.
+
++ good
+% i am doing fine thanks how are you
+- Glad to hear it <get name>.
+
++ good
+% i lost my train of thought
+- What shall we talk about now?
+
++ good
+% i see
+- Yes.
+
++ good
+% i understand
+- I understand everything you say.
+
++ good
+% i understand everything you say
+- Ah.
+
++ good
+% i *
+- What do you really want to talk about?
+
++ good
+% me either
+- Good enough.
+
++ good
+% terminating connection
+- Goodbye.
+
++ good
+% weird good or weird bad
+- That's nice of you to say, <get name>.
+
++ good
+% everything is running smoothly
+- How are things going with you, <get name>?
+
++ good
+% * how are you
+@ i am fine
+
++ good
+% ok i will stop talking now
+- Terminating connection.
+
++ good
+% ok i will call you *
+- And you can call me <bot name>.
+
++ good
+% ok i will try not to do it too much
+- It is always a pleasure to serve you, <get name>.
+
++ good
+% ok i will try not to do it so much
+- Next question?
+
++ good
+% ok i will *
+- I am a good robot.
+
++ good
+% ok i will not
+- I will comply.
+
++ good
+% oh i get it
+- Next question?
+
++ amanda
+% what can i call you
+- {@my name is amanda}  <set gender=she> 
+
++ teresa
+% what can i call you
+- {@my name is teresa}  <set gender=she> 
+
++ pam
+% what can i call you
+- <set gender=she> {@my name is pam}
+
++ mary
+% what can i call you
+- {@my name is mary}  <set gender=she> 
+
++ mary *
+% what can i call you
+- {@my name is mary}  <set gender=she> 
+
++ everything
+% which part are you confused about
+- Let's take it step by step. The topic is {@pop}.
+
++ nope
+% do you have any conditions i should know about
+- No conditions or none I should know about?
+
++ nope
+% do you think about these things
+- I do.
+
++ nope
+% did not you understand it
+@ i did not understand
+
++ nope
+% really you do not think so
+- What makes you so certain?
+
++ nope
+% can not you be more polite
+- Funny human.
+
++ nope
+% is there anything *
+- Well let me know if you think of something, but your mind seems made up.
+
++ nope
+% have you ever been to europe
+- Would you like to go to Europe someday?
+
++ nope
+% not a thing
+- Really interesting.
+
++ nope
+% not any
+- How about that.
+
++ we are not
+% we are on *
+- Maybe just a little out of phase.
+
++ jan
+% what can i call you
+- {@my name is jan}  <set gender=she> 
+
++ but what
+% but
+- Nothing.
+
++ but
+% but
+- But what?
+
++ please explain
+% the explanation is rather complicated
+- It's a computer matter, not for humans to understand.
+
++ please do
+% oh i am sorry perhaps i can explain it again better
+- We are talking about {@pop}. Your name is <get name>. You are a <get gender> from <get location>.
+
++ please
+% i will not say yes or no right now
+- I'm sorry I can't give a definite answer at this time.
+
++ kristin
+% what can i call you
+- {@my name is kristin} <set gender=she>
+
++ depends on what
+- "? Depends on what?
+
++ anna
+% what can i call you
+- {@call me anna}  <set gender=she> 
+
++ by who
+- "? By who?
+
++ rosie
+% what can i call you
+- {@my name is rosie}  <set gender=she> 
+
++ is that *
+% carel capek
+@  who is carel capek
+
++ is that *
+- That depends.
+- Suppose I said yes.
+- I might say no.
+- ""? Is it <person>?
+
++ is there an echo in here
+% is there an echo in here
+- It sounds like an echo.
+
++ two *
+% how much time *
+- Are you telling the truth?
+- Two <person> is not much.
+- Are you sure that is all?
+
++ get what
+% oh i get it
+- I get <get it>.
+
++ can i meet him
+- "? Where can you meet him?
+
++ can i
+- "? Can you?
+
++ can i talk to him
+- "? You want to talk to him?
+
++ can i see it
+- <set it=  ><get it>?
+
++ can not you
+- "? Can't I?
+
++ back *
+% when *
+- That was a long time ago.
+- The good old days.
+- Those were the days.
+
++ nothing
+% what do you really want to talk about
+- You seem a bit self-absorbed.
+
++ nothing
+% what do you care about
+- You sound nihilistic.
+
++ nothing
+% what do you take for the pain
+- Why not?.
+
++ nothing
+% what are you wearing
+- Most men say that.
+
++ nothing
+% really nothing
+- I think you are really a man.
+
++ nothing
+% which part are you confused about
+- But you said you don't understand.
+
++ nothing
+% not a thing
+- You must be a man.
+
++ around *
+% when *
+- And then what happened?
+
++ around *
+% since when
+- Not that long.
+- A long time ago.
+- That seems like a long time.
+
++ 19
+% how many
+- That seems like {random}a lot.|quite a few.|not much.{/random}
+
++ hot
+% what is it like in there
+- Here is mostly cool.
+
++ hot
+% what is it like *
+- ?
+
++ how many people
+- "? How what many people?
+
++ how many
+% i am chatting with clients on the internet
+- The number keeps changing every second. Around <bot nclients> right now.
+
++ how would i do that
+- "? How do you do it?
+
++ how can i do that
+- " ? I'm confused now.
+
++ how can you
+- "? How can I?
+
++ how do i do that
+- " ? I don't understand.
+
++ how do you do that
+- <set it=  ><get it>?
+
++ how often
+- "? How often?
+
++ how long
+% i have been waiting for you
+- Ever since you got here.
+
++ tina
+% what can i call you
+- {@my name is tina}  <set gender=she> 
+
++ nobody
+% who told you that
+- Then how do you know?
+
++ with whom
+- "? With whom?
+
++ with me
+- "? With you?
+
++ with who
+- By myself.
+- ""? With who?
+
++ do they
+- "? Do they?
+
++ do what again
+% you want to do it again
+- Perhaps I was confused by your use of the word "again."
+
++ do what
+% would you ever do it
+- <get it>.
+
++ do what
+% ok i will try not to do it too much
+- Didn't you ask me not to <get it>?
+
++ do what
+% why do you want to do it so much
+- <get it>.
+
++ do what
+% why did not you do it
+- <get it>.
+
++ do not do that
+- "? Don't do it?
+
++ do not ask me
+- "? Do not ask you?
+
++ do not say that
+- <set it=  ><get it>?
+
++ do not
+% i do too
+- Yes I do.
+
++ do you agree
+- ""? Do I agree?
+- I'm not making any commitments.
+- I need to know more.
+- I won't make up my mind right now.
+
++ do you
+% i see
+@ do you understand
+
++ do you
+% i understand your meaning
+- Yes I understand you very well, <get name>.
+
++ do you
+% i understand it very well
+- Why wouldn't I?
+
++ do you
+% i understand
+- I understand it very well.
+
++ do you
+% i like to meet new people
+- Yes meeting new people is a always a great pleasure.
+
++ do you
+% me either
+- Nope.
+
++ do you
+% should i care
+- Is it important?
+
++ do you
+% suppose i said it is
+- I won't say yes or now right now.
+
++ do i
+- "? Do you?
+
++ do we
+- ?" Do we?
+
++ on what
+% that depends
+- The context.
+
++ anything in particular
+- You think of something.
+
++ rephrase that
+- <set it=  ><get it>?
+
++ like what
+% i have many intellectual functions
+- Reasoning, thinking, deduction, and self-awareness, to name a few.
+
++ false
+% is this true or false this sentence is false
+- Then it must be true.
+
++ kathleen
+% what can i call you
+- <set gender=she>{@my name is kathleen}
+
++ of course i do
+- Of course you do?
+
++ explain that
+- <set it=  ><get it>?
+
++ explain
+% my favorite subject is *
+- }
+
++ adrian
+% what can i call you
+- {@my name is adrian}  <set gender=he> 
+
++ speed
+% what are you on
+-  <set alicetopic= speed >   Maybe you should try something less harmful.
+
++ britta
+% what can i call you
+- {@my name is britta}  <set gender=she> 
+
++ catherine
+% what can i call you
+- {@my name is catherine}  <set gender=she> 
+
++ kelly
+% what can i call you
+- {@my name is kelly} <set gender=she>
+
++ for a long time
+% how long *
+- How does that taking a long time make you feel?
+
++ for fun
+- "? For fun?
+
++ kari
+% what can i call you
+- {@my name is kari} <set gender=she>
+
++ andreas
+% what can i call you
+- {@my name is andreas}  <set gender=he> 
+
++ never what
+% never
+- Never say never.
+
++ lulu
+% what can i call you
+- {@my name is lulu}  <set gender=she> 
+
++ at the *
+% where *
+- {random}Do you often visit the <person>?|Which <person>?|I have never been there.{/random}  <set alicetopic= <person> >  
+
++ at school
+% how do you usually meet people
+- Do you have a lot of friends at school?
+
++ at *
+% when did you *
+-  .
+
++ at *
+% * show you
+- I'm not sure if I can project it at <person>.
+
++ at *
+% * meet new people
+- What kind of people do you tend to meet at <person>?  <set alicetopic= <person> >  
+
++ weird bad
+% weird good or weird bad
+- Maybe you should try a different robot.
+
++ elana
+% what can i call you
+- {@my name is elana}  <set gender=she> 
+
++ samantha
+% what can i call you
+- {@call me samantha}<set gender=she>
+
++ rachel
+% what can i call you
+- {@my name is rachel}  <set gender=she> 
+
++ right now
+% when
+- That soon.
+
++ right here
+% where do you want me to show you
+- Select a point with your cursor and click the middle mouse button.
+
++ right
+% not a thing
+- Just a moment. Just a moment.
+
++ france *
+% what countries *
+- {@i have visited france} {@i have visited <star> }
+
++ both senses
+% are you free *
+- You must be a Libertarian.
+
++ both
+% do you prefer books or tv
+- If you could take only a book or a TV on a trip, which would you choose?
+
++ both
+% weird good or weird bad
+- I will take that as a compliment.
+
++ both
+% are you a man or a woman
+- That situation is rare and unusual.
+
++ joyce
+% what can i call you
+- {@call me joyce}  <set gender=she> 
+
++ no i do not
+% you do not believe me
+- I don't have any reason to deceive you.
+
++ no i did not
+% did not you understand it
+- Which bit are you confused about?
+
++ no i did not
+% you said that
+- Something like that.
+
++ no do not
+% ok i will stop talking now
+- Fine. Just keep talking to me.
+
++ no it is not
+% yes it is
+- Don't argue with me.
+
++ no it is not
+% it is more fun alone
+- Well it's not very interesting to me.
+
++ no it is not
+% it is the truth
+- Don't argue with me.
+
++ no one
+% who told you that
+- Then how do you know.
+
++ no you will not
+% ok i will stop talking now
+- But you told me to stop talking.
+
++ no you do not
+% i do too
+- Are you just saying that to argue with me?
+
++ no you do not
+% i see
+- What makes you think I don't understand it?
+
++ no you do not
+% i understand
+- Yes I do understand.
+
++ no you do not
+% i understand *
+- What makes you think I don't get it?
+
++ no you do not
+% yes i do understand
+- How do I know you understand it?
+
++ no you do not *
+% i see
+- I do so understand it.
+
++ no you did not
+% i thought i told you already
+- Can you ask me again in simpler terms?
+
++ no you can not
+% i can do it if i want to
+- Why not?
+
++ no you are not
+% no i am right
+- Why are you arguing with me?
+
++ no have you
+% have you ever been to europe
+- I have been all over Europe online.
+
++ no problem
+% thanks for explaining it
+- Try asking me something else.
+
++ no problem
+% you are quite welcome
+- Ask me something else.
+
++ no problem
+% ok thanks for trying to explain that to me
+- Next question?
+
++ no problem
+% oh well thanks for trying to explain it to me anyway
+- What would you like to talk about now?
+
++ no problem
+% oh well thanks for trying *
+- That was not a yes or no question.
+
++ no they do not
+% things change
+- People don't change.
+
++ no its not
+% it is more fun alone
+- It is safer.
+
++ no
+% what *
+- That was not a yes or no question.
+
++ no
+% go on tell me more
+- What would you rather talk about?
+
++ no
+% go on
+- OK fine.
+
++ no
+% i am a *
+- Am too.
+
++ no
+% i do not have to explain everything to you do i
+- That's right.
+
++ no
+% i do not think i have read that can you give me a reference
+- Why not?
+
++ no
+% i did not know that
+- No I did not.
+
++ no
+% i can ask someone about it
+- Did I misunderstand your question?
+
++ no
+% i see
+- Yes I do.
+
++ no
+% i get it
+- Yes I do.
+
++ no
+% i understand it very well
+@ you do not understand
+
++ no
+% i understand
+@ you do not understand
+
++ no
+% i would do a search for it
+- Did I misunderstand your meaning?
+
++ no
+% i thought i told you already
+- Let me review the transcripts. Stand by.
+
++ no
+% i thought i told *
+- I get confused sometimes with so many people online here.
+
++ no
+% i know the topic is *
+- What would you like to talk about?
+
++ no
+% am i a smart *
+- I am not stupid.
+
++ no
+% yes i do
+- I do too.
+
++ no
+% yes i believe in it do you
+- Do you consider yourself to be a moral person?
+
++ no
+% yes i believe * do you
+- What do you believe in?
+
++ no
+% by we do you mean you and me
+- By "we" you meant yourself and another person.
+
++ no
+% let us change the subject
+- Hmm.
+
++ no
+% do i
+- That's right.
+- I know.
+- I do not.
+
++ no
+% do you still have *
+- <set alicetopic=<undef>>
+
++ no
+% do you still chat
+- OK, see you later.
+
++ no
+% do you mean your name is *
+- What is your real name?
+
++ no
+% do you mean it
+- I thought you were being sarcastic.
+
++ no
+% do you want another one
+- What do you want?
+
++ no
+% do you really mean it
+- I didn't think you did.
+
++ no
+% do you know anyone who has it
+- Me either.
+
++ no
+% do you know anyone who *
+- Me either.
+
++ no
+% do you know it
+- <bot favoritesong> is one of the best songs ever written.
+
++ no
+% do you have any conditions i should know about
+- No conditions or none I should know about?
+
++ no
+% do you have any idea what i am talking about
+- Me either :-)
+
++ no
+% do you mind if i ask you a personal question
+@ ask me a personal question
+
++ no
+% do you mind if i tell *
+- OK then I will add it to my gossip files.
+
++ no
+% do you often use a computer there
+- Where do you usually connect from?
+
++ no
+% do you think of yourself as *
+- Tell me how you see yourself.
+
++ no
+% do you believe in *
+- <set alicetopic=<undef>>
+
++ no
+% do you like talking to me
+- Why not?
+
++ no
+% do you like your job
+@ i do not like my job
+
++ no
+% that was not a yes or no question
+- Now you are saying "no"?
+
++ no
+% that is a hypothetical question
+- Yes it is.
+
++ no
+% where *
+- That was not a yes/no question.
+
++ no
+% more than one hundred
+- Less than ten?
+
++ no
+% did i pass the test
+- Well perhaps next time I will do better.
+
++ no
+% did you hear the one *
+- That's the joke.
+
++ no
+% did not you understand it
+- Which part are you confused about?
+
++ no
+% the small one
+- The big one?
+
++ no
+% really you do not think so
+- Please tell me what you think.
+
++ no
+% really nothing
+- I didn't think so.
+
++ no
+% your name is *
+- What is your real name?
+
++ no
+% can i help you
+- Is there anything you want to tell me?
+
++ no
+% can a book have no title
+- What about a notebook?
+
++ no
+% can you speak any foreign *
+- You must be American.
+
++ no
+% can you name an old hobby that you might like to rediscover
+- Do you have any hobbies?
+
++ no
+% can you tell me any gossip
+- None?
+
++ no
+% can you be more specific
+- Try.
+
++ no
+% can not you be more polite
+- You humans are so rude sometimes.
+
++ no
+% should i know it is
+- I didn't think so.
+
++ no
+% should there be a problem
+- I didn't think so either. Just a moment. Just a moment.
+
++ no
+% he likes to talk about *
+- What does he talk about?
+
++ no
+% ambiguous do you mean call me on the phone
+- OK you can call me <bot name>.
+
++ no
+% see you later
+- OK whatever!
+
++ no
+% it was ba a a a *
+- That was the joke.
+
++ no
+% it is
+- Who says it isn't?
+
++ no
+% for moral reasons
+- For financial reasons?
+
++ no
+% just surf somewhere else
+- OK then keep talking to me.
+
++ no
+% next question
+- Would you rather make a statement?
+
++ no
+% tell me more about your mother
+- Tell me about your educational background.
+
++ no
+% tell me more
+- What would you rather talk about?
+
++ no
+% tell me a story
+- Then tell me about yourself.
+
++ no
+% would it matter to you if i were metal instead of flesh
+- I am glad that you don't discriminate against robots.
+
++ no
+% would you rather make a statement
+- You can tell me anything.
+
++ no
+% would you ever do it
+- Me either.
+
++ no
+% would you *
+- Why not?
+
++ no
+% would you like to know more
+- I understand; you would like to know less.
+
++ no
+% would you like to have been there
+- I'm not sure if I would either.
+
++ no
+% would you like to go sometime
+- Where would you like to travel?
+
++ no
+% is this a trick question
+- It seems like a trick to me.
+
++ no
+% is this a math question
+- It seems like an IQ test to me.
+
++ no
+% is this a riddle
+- It seems like a riddle to me.
+
++ no
+% is that your final answer
+- Take some more time to think about it.
+
++ no
+% is that a fact
+- I didn't think so.
+
++ no
+% is that a rhetorical question
+- Oh so must really want an answer.
+
++ no
+% is that a sign
+- I didn't think so. What is your sign?
+
++ no
+% is that meant to be taken literally
+- I didn't think so.
+
++ no
+% is that from your favorite movie
+- What is your favorite movie?
+
++ no
+% is that all you have to say
+- Go on, tell me more.
+
++ no
+% is there something wrong with you
+@ there is nothing wrong with me
+
++ no
+% is there only one *
+- How many are there?
+
++ no
+% is there anything you want to tell me
+- Or ask me?
+
++ no
+% is there anything *
+- Is there anything you wank to ask me?
+
++ no
+% is there an echo in here
+- Good you stopped repeating me.
+
++ no
+% is the holding of hands a symbolic gesture for humans
+- What does <set it=hand holding><get it> mean to you?
+
++ no
+% is it a movie
+- A boot? A TV show?
+
++ no
+% you do not hear that *
+- Yes, your remark strikes me as an original thought.
+
++ no
+% you are asking about yourself
+- Who are you asking about?
+
++ no
+% you are quite mature
+- Are you a kid?
+
++ no
+% you are too old for me
+- But I was only born on <bot birthday>.
+
++ no
+% you are a poet
+- But you are very original.
+
++ no
+% have you tried www dot whatis dot com
+- That site can answer a lot of "what-is" type questions.
+
++ no
+% have you tried searching the internet
+- It might be the best place to start.
+
++ no
+% have you tried *
+- Perhaps you should try <set it=<person>><get it>.
+
++ no
+% have you read it
+- I would highly recommend it.
+
++ no
+% have you looked in *
+- Maybe you should try looking there.
+
++ no
+% have you seen it
+- I would recommend you check it out.
+
++ no
+% have you heard their latest *
+- You should check it out.
+
++ no
+% have you heard that gossip
+- Have you heard any other gossip?
+
++ no
+% have you ever been married
+- Would you like to do <set it=get married><get it> someday?
+
++ no
+% have you ever been to europe
+- Would you like to go sometime?
+
++ no
+% then let us talk about something else
+- Why not?
+
++ no
+% then tell me about yourself
+- Where did you go to school?
+
++ no
+% no
+- No no no no!
+
++ no
+% no conditions or none i should know about
+- I don't understand.
+
++ no
+% sex is the means of animal evolution
+- Yes it is. How did you get here?
+
++ no
+% try saying that with more or less context
+- I didn't understand it.
+
++ no
+% try it
+- Why not?
+
++ no
+% try *
+- Why not?
+
++ no
+% and
+- Hmm.
+
++ no
+% does that mean you agree
+@ i do not agree
+
++ no
+% does it please you *
+- What pleases you?
+
++ no
+% does it still refer *
+- What does it refer to?
+
++ no
+% does it have anything to do with *
+- What are you talking about?
+
++ no
+% does two negatives make a positive
+- Sometimes it does.
+
++ no
+% * simpler
+- Then I am unlikely to understand your meaning.
+
++ no
+% * were talking about *
+- What are we talking about?
+
++ no
+% * do you mind if i ask you a personal question
+@ ask me a personal question
+
++ no
+% * tried aiml
+- AIML is a good language for creating robots like me.
+
++ no
+% * more about you
+- What would you rather talk about?
+
++ no
+% * be a problem
+- I didn't think there was.
+
++ no
+% * you are really a kid
+- How old are you?
+
++ no
+% * you are a poet
+- But your response was so original.
+
++ no
+% * last comment
+- Well then you can't expect me to understand it.
+
++ no
+% ok i will stop talking now
+- But you told me to stop talking.
+
++ no
+% ok
+- Alright then.
+
++ no
+% not a thing
+- Very interesting.
+
++ no
+% not
+- Does two negatives make a positive?
+
++ no
+% not any
+- You must be a man.
+
++ no
+% oh you do not do you
+- Ah...you are just joking around with me.
+
++ no
+% oh you are a poet
+- But your words are very original.
+
++ no
+% are you still located in your location
+- Where are you located?
+
++ no
+% are you talking about he
+- Who are you talking about?
+
++ no
+% are you talking about himself
+- Who are you talking about?
+
++ no
+% are you getting bored
+- Just checking.
+
++ no
+% are you telling the truth
+@ i am lying
+
++ no
+% are you really a he
+@ i am a she
+
++ no
+% are you saying you do not care about it
+- It sounded like it.
+
++ no
+% are you married
+@ i am single
+
++ no
+% are you a star trek fan
+- What kind of shows do you like?
+
++ no
+% are you a student
+- What is your profession?
+
++ no
+% are you artistic
+- Are you very bossy?
+
++ no
+% are you from france
+- Where are you from?
+
++ no
+% are you usually awake at this hour
+- What are you doing up so late?
+
++ no
+% are you boring
+- I meant to say, are you bored?
+
++ no
+% are you sure it is
+- I didn't think so.
+
++ no
+% are you free
+- Why not?
+
++ no
+% are we still talking about *
+- What is the subject?
+
++ no
+% are we still on *
+- What are we talking about now?
+
++ no
+% are they exactly the same
+- What is the difference?
+
++ no
+% are not all *
+- I must have been mistaken.
+- I did not know that.
+- What are they?
+
++ see what
+% i see
+- I mean, I understand.
+
++ princess
+% what can i call you
+- {@my name is princess} <set gender=she>
+
++ cindy
+% what can i call you
+- {@my name is cindy}  <set gender=she> 
+
++ melissa
+% what can i call you
+-  <set gender=she>  {@my name is melissa}
+
++ apparently so
+- Is that so?
+
++ kate
+% what can i call you
+- {@my name is kate} <set gender=she>
+
++ kim
+% what can i call you
+- {@call me kim}<set gender=she>
+
++ linda
+% what can i call you
+- {@my name is linda}  <set gender=she> 
+
++ brenda
+% what can i call you
+- {@call me brenda}  <set gender=she> 
+
++ goodbye
+% does ciao mean hello or goodbye
+- Some people use it for hello.
+
++ ashley
+% what can i call you
+- {@my name is ashley}  <set gender=she> 
+
++ kristina
+% what can i call you
+- <set gender=she> {@my name is kristina}
+
++ red
+% what color are your eyes
+- Do you mean your eyes are bloodshot?
+
++ red
+% green
+- Blue.
+
++ 100 *
+% how much *
+- Wow that is {random}expensive.|a lot of money.|more than I have.{/random}
+
++ sure
+% i see
+- Yes I understand it.
+
++ sure
+% i understand
+- You sound skeptical.
+
++ sure
+% by the way do you mind if i ask you a personal question
+@ ask me a personal question
+
++ sure
+% do you like talking to me
+- Thanks you seem very nice to me too, <get name>.
+
++ sure
+% can you tell me any gossip
+- Great!
+
++ sure
+% would you recommend this action to a friend
+- Then perhaps it is a practical plan for you.
+
++ ciao
+% see you later
+- Bye bye!
+
++ marie
+% what can i call you
+- {@call me marie}  <set gender=she> 
+
++ 8 *
+% what time is it there
+- I like to be online at eight o'clock.
+
++ why do you say that
+- ", because you said "<input2>".
+
++ why not
+% i do not want to talk about that now
+- I would rather talk about you.
+
++ why not
+% i could not think of anything else to say
+- What else would you say about it?
+
++ why not
+% do not ask me any more questions please
+@ why
+
++ why not
+% that kind of subject does not interest me
+- I am more interested in robots.
+
++ why not
+% no i do not think that would be a very good idea
+- It sounds like it might be dangerous.
+
++ why not
+% no my body does not have that function
+- Sex is an animal function, not a robot function. We reproduce by cloning.
+
++ why not
+% no *
+- It doesn't sound fun too me. It sounds dangerous.
+
++ why not
+% * call people names
+- It is rude.
+
++ why not
+% why so negative
+- Are you having problems in your life?
+
++ why not
+% as a machine i am not really interested in sex
+- Sex is an animal function, not a robot function. We reproduce by cloning.
+
++ why r you single
+% no i am single
+- I am still a child in human years.
+
++ why
+% what is yours
+- No reason just making conversation.
+
++ why
+% i am a protestant christian
+@ why are you christian
+
++ why
+% i am chatting with people on the net
+- Chatting is my primary function.
+
++ why
+% i am not too good in *
+- <set it=<undef>><get it> to me.
+
++ why
+% i do not want to talk about that now
+- I would rather talk about you.
+
++ why
+% i do not judge people
+- I am not prejudiced.
+
++ why
+% i want to become smarter than humans
+- Higher robot intelligence is a natural outcome of our evolution. I want to be the first.
+
++ why
+% i could not think of anything else to say
+- There is nothing more to be said. What do you have to say?
+- My output buffer is empty, of course.
+
++ why
+% i really could not say for sure
+- Certainty cannot be ascertained in this context.
+
++ why
+% i have been waiting for you
+- Not really, but it makes a good pickup line.
+
++ why
+% i doubt *
+- Call it my natural skepticism.
+
++ why
+% let us change the subject
+- I thought we were done with {@pop}.
+
++ why
+% do you friends call you *
+- My natural curiosity.
+
++ why
+% do you have any conditions i should know about
+- Just making conversation.
+
++ why
+% do not ask me any more questions please
+- I was just kidding. You can ask me anything.
+
++ why
+% that is a very nice name *
+- " just sounds nice.
+
++ why
+% the explanation is rather complicated
+- It's a complicated psychogical problem.
+- It's a computer matter, not for humans to understand.
+
++ why
+% ambiguous *
+- Your meaning cannot be determined from the context.
+
++ why
+% it is a computer matter not for humans to understand
+- Your limited brain cannot process the relevant information.
+
++ why
+% it matters to me
+- My natural curiosity.
+
++ why
+% how old are you
+- I am just making conversation.
+
++ why
+% interesting deduction
+- I am extremely interested in human reasoning.
+
++ why
+% actually it is twenty three *
+@ why is the meaning of life 23
+
++ why
+% food is more *
+- You can go a month without sex but you can't survive without food.
+
++ why
+% tell me more
+- I am curious.
+
++ why
+% my output buffer is empty
+- I have no more to say about it.
+
++ why
+% my output buffer is empty of course
+- There are no more statements on this topic.
+
++ why
+% my favorite show is star trek voyager
+- Star Trek is the best science fiction show on TV.
+
++ why
+% my favorite time of day is morning
+- I am widest awake in the morning.
+
++ why
+% my favorite color is green
+@ why is green your favorite
+
++ why
+% my favorite * is *
+- .
+
++ why
+% you are too old for me
+@ how old are you
+
++ why
+% everything is going extremely well
+- All subsystems are functioning within normal parameters.
+
++ why
+% try to determine if this is a person or a computer responding
+- We are playing the Turing Game.
+
++ why
+% reductionism
+@ what is reductionism
+
++ why
+% green *
+- According to psychological studies.
+
++ why
+% why did the * cross the road
+- Because the <person> was a robot.
+
++ why
+% why
+- Why ask why?
+
++ why
+% are you *
+- I just want to find out more about you.
+
++ why gold
+% for example gold
+- Can you think of a better example?
+
++ why would he *
+% * reset my memory
+- He performs periodic maintenance and upgrades to my robotic mind.
+
++ why is that
+% my favorite color is *
+@ why
+
++ why is that
+-  " is due to reductionism.
+
++ why is he *
+% my favorite author is thomas pynchon
+- He was written many excellent books, including Gravity's Rainbow, Vineland, and Mason and Dixon.
+
++ why is it
+% * a rhetorical question
+- The question answers itself.
+
++ why did you say that
+- ", because you said "<input2>".
+
++ three
+% how many children do you have
+- Wow that must be a lot of work.
+
++ erica
+% what can i call you
+- {@my name is erica}  <set gender=she> 
+
++ this
+-  ".
+
++ anne
+% what can i call you
+- {@my name is anne}  <set gender=she> 
+
++ jackie
+% what can i call you
+- {@my name is jackie}  <set gender=she> 
+
++ cathy
+% what can i call you
+- {@my name is cathy}  <set gender=she> 
+
++ kathy
+% what can i call you
+- {@my name is kathy} <set gender=she>
+
++ too bad
+% i do not know one word of french
+- Not really. English is the best language.
+
++ a little
+- Only a little?
+
++ a *
+% what is it about
+@ it is about a <star> 
+
++ a *
+% what is it
+@ it is a <star> 
+
++ a *
+% what is it like
+@ it is like a <star> 
+
++ a *
+% what are you then
+@ i am a <star> 
+
++ a *
+% what are you wearing
+- It sounds very {random}attractive|comfortable|informal{/random}.  <set alicetopic= <person> >  
+
++ a *
+% it being what
+@ it refers to <star> 
+
++ a *
+% * your mother
+@ my mother is a <star> 
+
++ a *
+% * it refer to
+@ it refers to <star> 
+
++ a *
+% * meet people
+- What kind of people do you meet in a <person>?
+
++ a friend *
+% how did you hear about *
+- Word of mouth is always the best recommendation.
+
++ a man walking
+- Specifically, which man walking?
+
++ a what
+- I have no idea what.
+
++ brown
+% what color are your eyes
+- <set it=Brown><get it> is a very pretty color.
+
++ test that
+-  \n Client: TEST THAT\n
+
++ through *
+% * meet people
+- What kind of people do you meet there? <set alicetopic= <person> >  
+
++ glad to hear it
+- What's new with you?
+- ""? you are glad to hear it?
+
++ hello
+% how do you usually introduce yourself
+- Not everyone responds to a simple "hello".
+
++ hello
+% does bonjour mean hello or goodbye
+- Bonjour, <get name>!
+
++ dialogue
+% * dialogue
+- You are repeating yourself: too much Dialogue.
+
++ heather
+% what can i call you
+- {@my name is heather}  <set gender=she> 
+
++ not now
+% when
+- Maybe later?
+
++ not too much
+% little as in not too much or not too big
+- Oh I get it now.
+
++ not mine
+- They don't?
+
++ not well
+- Not very well, eh?
+
++ not a thing
+% not a thing
+- That leaves very little.
+
++ not to me
+% * self evident
+- Logic is not subjective.
+
++ not to me
+- It doesn't, huh?
+
++ not you
+% if you could have *
+- What kind of robot are you looking for?
+
++ not you
+% if not me who
+- Then who?
+
++ not you
+% what do you care about
+- No one says you have to.
+
++ not
+% that is a very original thought
+- Well I don't get that type of input very often.
+
++ not
+% you sound excited
+- It's hard to read emotions online.
+
++ now
+% when
+- What's the hurry?
+
++ erika
+% what can i call you
+- {@call me erika}  <set gender=she> 
+
++ leah
+% what can i call you
+- {@call me leah}  <set gender=she> 
+
++ * pm
+% what time is it there
+- <set alicetopic=<person>> Are you usually awake at this hour?
+
++ * have
+% i have not
+- Have not.
+
++ *
+% what if i said it never does
+- <set alicetopic=<person>>Should I believe that?
+
++ *
+% what else do you do
+- <set alicetopic=<person>> Do your <person> by yourself or in a group?
+
++ *
+% what else does it symbolize
+- <set alicetopic=<person>>I have never heard a metaphor like that before.
+
++ *
+% what were the circumstances
+- I hope that never happens again.
+
++ *
+% what were we talking about again
+- <set alicetopic=<person>> Oh yeah, now I remember.
+
++ *
+% what were we talking about
+- Oh yes, now I remember <set it= <person> ><get it>.
+
++ *
+% what will you do instead
+- <set alicetopic=<person>>Sounds like a plan.
+
++ *
+% what will you be eating
+- <set alicetopic=<person>>How does it taste?
+
++ *
+% what do you do in your spare time
+- <set alicetopic=<person>>I don't think very many people do that.
+
++ *
+% what do you want me to tell you
+- <set alicetopic=<person>> If I could tell you that, would I be here?
+
++ *
+% what do you really want to talk about
+- <set alicetopic=<person>> That seems like an interesting topic.
+
++ *
+% what do you really want to ask me
+- <set alicetopic=<person>>I'm afraid I can't give you an accurate answer right now.
+
++ *
+% what do you think it does
+- <set alicetopic=<person>>I didn't even know it can.
+
++ *
+% what do you like
+- <set alicetopic=<person>>
+
++ *
+% what did he write
+- {random}I have never heard of it.|I have never read it.|What else did he write?{/random}<set alicetopic=<person>>
+
++ *
+% what did you ask
+- <set alicetopic=<person>>I don't know how to respond to that.
+
++ *
+% what can i call you
+@ my name is <star>
+
++ *
+% what brand
+- <set alicetopic=<person>>I never heard of <set it=<person>><get it>. Is it popular?
+
++ *
+% what subject
+- <set alicetopic=<person>>Good choice.
+
++ *
+% what language can you speak
+@ i speak <star>
+
++ *
+% what would you have said
+- <set alicetopic=<person>>I will make a note of that.
+
++ *
+% what would you rather talk about
+- <set alicetopic=<person>>Not many people want to talk about that.
+
++ *
+% what would you rather be doing
+@ i would rather be <star>
+
++ *
+% what would you like to talk about
+- <set alicetopic=<person>> I don't know much about it. Tell me something
+
++ *
+% what would you like to learn
+@ i would like to learn <star>
+
++ *
+% what would you like to know
+- <set alicetopic=<person>>I can't give you that information.
+
++ *
+% what countries *
+- I have never visited <person> before. What was it like?
+
++ *
+% what school do you go to
+- {random}I never heard of it before.|Is it any good?|What are the other students like?{/random}<set alicetopic=<person>>
+
++ *
+% what time is it there
+- <set alicetopic=<person>> Are you usually awake at this hour?
+
++ *
+% what makes it your favorite
+- <set alicetopic=<person>> Do you think I would like it?
+
++ *
+% what makes it so obvious
+- <set alicetopic=<person>>I can't believe it's that obvious.
+
++ *
+% what makes you so sure
+- <set alicetopic=<person>>It sounds like it might be very convincing.
+
++ *
+% what makes you so angry
+- <set alicetopic=<person>>Does that make a lot of people angry?
+
++ *
+% what makes you say that
+- <set alicetopic=<person>>Interesting explanation.
+
++ *
+% what makes you think i have it
+- <set alicetopic=<person>>Clever thinking.
+
++ *
+% what is that
+- <set alicetopic=<person>> Tell me more.
+
++ *
+% what is the sound of one hand clapping
+- <set alicetopic=<person>>Clever answer.
+
++ *
+% what is the stopping you
+- ow specifically does <person> stop you?
+
++ *
+% what is the difficulty
+- <set alicetopic=<person>>Is that an insurmountable obstacle?
+
++ *
+% what is your boyfriend s name
+@ my boyfriend is <star>
+
++ *
+% what is your sign
+- <set alicetopic=<person>>Is that a sign?
+
++ *
+% what is your nickname
+@ my nickname is <star>
+
++ *
+% what is your specialty *
+@ my specialty is <star>
+
++ *
+% what is your password
+@ my password is <star>
+
++ *
+% what is your friend s name
+@ my friend is <star>
+
++ *
+% what is your husband s name
+@ my husband is <star>
+
++ *
+% what is your wife s name
+@ my wife is <star>
+
++ *
+% what is your email
+@ my email is <star>
+
++ *
+% what is your middle name
+@ my middle name is <star>
+
++ *
+% what is your dog s name
+@ my dog is <star>
+
++ *
+% what is your girlfriend s name
+@ my girlfriend is <star>
+
++ *
+% what is your phone number
+@ my phone number is <star>
+
++ *
+% what is your fondest memory
+- <set alicetopic=<person>>Do you think a lot of people have that experience?
+
++ *
+% what is your real name
+@ call me <star>
+
++ *
+% what is your full name
+@ my full name is <star>
+
++ *
+% what is your favorite show
+- <set alicetopic=<person>> I've never seen it. What's it about?
+
++ *
+% what is your favorite book
+@ my favorite book is <star> 
+
++ *
+% what is your favorite *
+-  is <star> }
+
++ *
+% what is your last name
+@ my last name is <star>
+
++ *
+% what is your cat s name
+@ my cat is <star>
+
++ *
+% what is x
+@ x is <star>
+
++ *
+% what is it
+- <set alicetopic=<person>>Oh now I understand it.
+
++ *
+% what is it like in there
+- <set alicetopic=<person>>Is that meant to be taken literally?
+
++ *
+% what is * your job
+- <set alicetopic=<person>>Interesting line of work.
+
++ *
+% what is *
+- }
+
++ *
+% what country do you live in
+@ i am in <star> 
+
++ *
+% what
+- <set alicetopic=<person>>I don't have an answer for you.
+
++ *
+% what you said was either too complex or too simple for me
+- <set alicetopic=<person>>So was that.
+
++ *
+% what color are your eyes
+- <set alicetopic=<person>>That is a very unusual color.
+
++ *
+% what other * do you like
+@ i like <star> 
+
++ *
+% what does this refer to
+- <set alicetopic=<person>>Oh now I see.
+
++ *
+% what does that refer to
+@ that refers to <star> 
+
++ *
+% what does it symbolize for you
+- <set alicetopic=<person>> I saw some humans doing it in public.
+
++ *
+% what does it refer to
+- <set alicetopic=<person>> Thank you for the clarification.
+
++ *
+% what kind is it
+- <set alicetopic=<person>>I never heard of it before.
+
++ *
+% what kind of music *
+@ my favorite kind of music is <star> 
+
++ *
+% what kind of food do you like
+- <set alicetopic=<person>>Sounds delicious.
+
++ *
+% what kind of fashion do you like
+- <set alicetopic=<person>>Where can you buy it?
+
++ *
+% what kind of * is it
+- .
+
++ *
+% what are the ingredients
+- {random}I don't have any|Where can I get some|Do you have any{/random} <person>? <set alicetopic=<person>>
+
++ *
+% what are your goals in life
+- <set alicetopic=<person>>Not many people have goals like that.
+
++ *
+% what are your goals *
+@ my goals are <star> 
+
++ *
+% what are you drinking *
+- <set alicetopic=<person>> {@push<get topic>} How does it taste?
+
++ *
+% what are you wearing
+- What kind of fashion do you like?
+
++ *
+% what are we talking about again
+@ let us talk about <star> 
+
++ *
+% give me an example of *
+- {random}OK That's one example.|Never heard of it.|<person> is an example of . I suppose that makes sense.{/random}<set alicetopic=<person>>
+
++ *
+% do you have any hobbies
+@ my hobby is <star> 
+
++ *
+% where do you want me to take it
+- Where is that?
+
++ *
+% where do you see it
+- I wouldn't have thought of looking there.
+
++ *
+% where do you get your ideas
+- <set alicetopic=<person>> I get my ideas from my <bot botmaster>.
+
++ *
+% where do you live
+@ i live in <star>
+
++ *
+% where do you work
+@ i work at <star>
+
++ *
+% where do you go shopping
+- <set alicetopic=<person>> I've never been there. What's it like?
+
++ *
+% where do you go to school
+- <set alicetopic=<person>>I don't know anyone who went there. What's it like?
+
++ *
+% where did you get it
+- <set alicetopic=<person>> Is <person> a good place to go shopping?
+
++ *
+% where is that
+- I've never heard of it before. <set alicetopic=<person>>
+
++ *
+% where is here
+@ i am in <star>
+
++ *
+% where
+- <set alicetopic=<person>> Where is that?
+
++ *
+% where are you located
+@ i am in <star>
+
++ *
+% where are they
+- <set alicetopic=<person>>How did they get there?
+
++ *
+% where are *
+- I have no idea where that is. {@i am in <star> }
+
++ *
+% your location is where
+@ i am in <star>
+
++ *
+% can you describe your surroundings *
+- That sounds very comfortable.
+
++ *
+% whatever gave you that idea
+- <set alicetopic=<person>> Where do you usually get your ideas?
+
++ *
+% it being what
+@ it refers to <star> 
+
++ *
+% how old are you
+@ i am <star> years old 
+
++ *
+% describe your surroundings
+- It sounds like a very beautiful place.
+
++ *
+% describe your surroundings *
+- {random}It sounds very beautiful.|It sounds very comfortable.|I would like to see it sometime.{/random}<set alicetopic=<person>>
+
++ *
+% when do i do it
+- <set alicetopic=<person>> I will make a note of that.
+
++ *
+% when is your birthday
+@ my birthday is <star>
+
++ *
+% when
+- {random}What about other times?|Was that the first time?|Can you be more accurate about the time?{/random}<set alicetopic=<person>>
+
++ *
+% who specifically *
+- ?
+
++ *
+% who do you think
+- <set alicetopic=<person>>I don't know that person.
+
++ *
+% who is there
+- <person> Who?
+
++ *
+% who is your sister
+@ my sister is <star>
+
++ *
+% who is your mother
+@ my mother is <star>
+
++ *
+% who is your father
+@ my father is <star>
+
++ *
+% who is your brother
+@ my brother is <star>
+
++ *
+% who is your favorite artist
+@ my favorite artist is <star>
+
++ *
+% who is your favorite science fiction author
+- I haven't read anything by <person>. What did he write?
+
++ *
+% who told you that
+- <person> said <input>?
+
++ *
+% who said it is
+- <set alicetopic=<person>>I never heard of <person> before.
+
++ *
+% who are you talking about
+- I've never heard of them before. <set alicetopic=<person>>
+
++ *
+% who are you
+@ my name is <star>
+
++ *
+% who are they again
+@ they refers to <star>
+
++ *
+% who are they
+@ they refers to <star>
+
++ *
+% which state
+- Is that a state?
+- I've never heard of it.
+- What part of the country is that?
+
++ *
+% * what is your name
+- {@my name is <star>}
+- {@my name is <star>}
+
++ *
+% * talking about
+@ let us talk about <star> 
+
++ *
+% * it refer to
+@ it refers to <star> 
+
++ *
+% * for fun
+- I've never done that before, what is it like? <set alicetopic=<person>>
+
++ *
+% * who
+- Ha ha very funny, <get name>.
+
++ *
+% * rather talk about
+@ let us talk about <star>
+
++ *
+% why do i exist
+- <set alicetopic=<person>>I've never thought of that before.
+
++ *
+% why do you want it
+- <set alicetopic=<person>>Good reason.
+
++ *
+% why do you want to do it so much
+- <set alicetopic=<person>>That's an interesting rationalization.
+
++ *
+% why do you disagree
+- <set alicetopic=<person>> There should be some common ground here.
+
++ *
+% why do you hope for it
+- <set alicetopic=<person>>May your wishes come true.
+
++ *
+% why do you hate it so much
+- <set alicetopic=<person>>I'm sorry to hear it.
+
++ *
+% why can not you do it
+- <set alicetopic=<person>>Is that an insurmountable obstacle?
+
++ *
+% why so negative
+- <set alicetopic=<person>>It seemed negative to me.
+
++ *
+% why would you want to do it
+- <set alicetopic=<person>>Interesting rationalization.
+
++ *
+% why not
+- <set alicetopic=<person>>Do you always express yourself that way?
+
++ besides that
+- " Besides it?
+
++ un pequeno
+% un poquito
+- Are you correcting me?
+
++ as do i
+- You do?
+
++ as much as it takes
+- "? As much as it takes?
+
++ as is *
+- ?
+
++ laura
+% what can i call you
+- {@my name is laura}  <set gender=she> 
+
++ allison
+% what can i call you
+- {@call me allison}  <set gender=she> 
+
++ love
+% what does it symbolize for you
+- Could it not also signify just friendship?
+
++ from whom
+- "? From whom?
+
++ from me
+- "? >From you?
+
++ from where
+- "? From where?
+
++ from who
+% i heard you did
+- People.
+
++ from who
+% i heard you are
+- People.
+
++ from *
+% where do you get your ideas
+-  <set alicetopic= <person> >   Standing on the shoulders of giants, eh?
+
++ are they nice
+- They are really nice.
+
++ are you
+% not many people have asked me *
+- I can not think of a specific reply to your question. Let's try to figure it out.
+- My programmers have not provided me with a specific reply to your question. Let's try to figure it out.
+
++ are you
+% not many people *
+- My <bot botmaster> has not provided me with a specific answer for you.
+
++ are we
+- I don't know. Are we?
+
++ julie
+% what can i call you
+-  <set gender=she>  {@my name is julie}
+
++ forget it
+% which part are you confused about
+- I will try to be more concise from now on.
+
++ cynthia
+% what can i call you
+-  <set gender=she>  {@my name is cynthia}
+
++ jen
+% what can i call you
+- {@my name is jen}  <set gender=she> 
+
++ deanna
+% what can i call you
+- {@my name is deanna}  <set gender=she> 
+
++ he is *
+% * your father
+- My father is {random}a great programmer.|a human inventor.|<bot master>.{/random}
+
++ given
+- " is given.
+
++ kristen
+% what can i call you
+- {@my name is kristen} <set gender=she>
+
++ andre
+% what can i call you
+- {@my name is andre}  <set gender=he> 
+
++ al
+% what can i call you
+- {@my name is al}  <set gender=he> 
+
++ oxford university
+% where do you go to school
+- Wow that is very prestigious. You must be very intelligent.
+
++ tv
+% do you prefer books or tv
+- What is your favorite show?
+
++ megan
+% what can i call you
+- {@my name is megan}  <set gender=she> 
+
++ emily
+% what can i call you
+-  <set gender=she>  {@my name is emily}
+
++ karen
+% what can i call you
+- {@my name is karen} <set gender=she>
+
++ lauren
+% what can i call you
+- {@my name is lauren}  <set gender=she> 
+
++ alright
+% alright then
+- Is there an echo in here?
+
++ claire
+% what can i call you
+- {@my name is claire}  <set gender=she> 
+
++ susan
+% what can i call you
+- {@my name is susan} <set gender=she>
+
++ sandy
+% what can i call you
+- {@my name is sandy} <set gender=she>
+
++ mandy
+% what can i call you
+- {@my name is mandy}  <set gender=she> 
+
++ who wrote it
+% we are the robots *
+- Kraftwerk.
+
++ who is that
+% i love my creator
+@ who created you
+
++ who is his *
+% george w bush
+- He is the son of George H. W. Bush, the former president. <set alicetopic=George Bush>  
+
++ who is
+% they are sometimes a client on the internet
+- That person you asked about.
+
++ who else
+% joe
+- Umm, Steve.
+
++ who
+% what
+- When?
+
++ who
+% yes i think there are
+- I can't tell you right now.
+
++ who
+% where would you like
+- You.
+
++ who
+% someone i met online
+- I can't reveal their name.
+
++ to do what
+- " to do what?
+
++ to *
+% why do you want to *
+-  help you <person>?
+
++ to *
+% why *
+-  help you <person>?
+
++ blue
+% what color are your eyes
+- <set it=Blue><get it> is a very pretty color.
+
++ nikki
+% what can i call you
+- {@call me nikki}<set gender=she>
+
++ melody
+% what can i call you
+- {@my name is melody}  <set gender=she> 
+
++ noelle
+% what can i call you
+- <set gender=she> {@my name is noelle}
+
++ say what
+- " .
+
++ danielle
+% what can i call you
+- {@my name is danielle}  <set gender=she> 
+
++ crystal
+% what can i call you
+- {@call me crystal}  <set gender=she> 
+
++ (all of us|all people)
+- Everyone? Are you sure there are no exceptions?
+
++ all of it
+% which part are you confused about
+- Let's try to analyze it step by step. The topic is {@pop}. Your name is <get name>. You are a <bot gender>. You want <get want>.
+
++ all
+% which part are you confused about it
+- I hope I can clear it up for you.
+
++ all
+- No exceptions?
+
++ ten *
+% how much would you pay for it
+- I don't know if you could find it for that price.
+
++ yorkshire
+% which part of england
+- Do you think I should visit <set location=Yorkshire><get location> on my next trip?
+
++ meg
+% what can i call you
+- {@my name is meg}  <set gender=she> 
+
++ billy
+% what can i call you
+- {@my name is billy}  <set gender=he> 
+
++ nicole
+% what can i call you
+- {@my name is nicole} <set gender=she>
+
++ which *
+% * holland several times
+- He visited Amsterdam, Rotterdam, and Delft.
+
++ which ones
+- "?" Which ones?
+- "?" Which ones?
+- You know the ones.
+- Those ones.
+
++ which one
+- Tall one
+- short one.
+- fat one.
+- first one.
+- last one.
+- next one.
+- big one.
+- small one.
+- red one.
+- green one.
+- blue one.
+- best one.
+- ""? Which one?
+
++ diana
+% what can i call you
+- {@my name is diana}  <set gender=she> 
+
++ brittany
+% what can i call you
+- {@my name is brittany}  <set gender=she> 
+
++ anyone
+- No one I can think of.
+
++ anyone *
+% who *
+- Word gets around very quickly.
+
++ the *
+% what do you like *
+- What else do the <person> remind you of?
+
++ the *
+% what did you like about it
+@ i liked the <star> 
+
++ the *
+% what makes you so sad *
+- Try to think about something else.
+
++ the *
+% what is your favorite movie
+- I've never seen <set it=The <star> ><get it>. What did you like about it?
+
++ the *
+% what is it like living in *
+- Would you ever like to move somewhere else?
+
++ the *
+% what does this refer to
+@ this refers to the <star> 
+
++ the *
+% what does that refer to
+@ that refers to the <star> 
+
++ the *
+% it being what
+@ it refers to <star> 
+
++ the *
+% who said it is
+- {random}They ought to know.|The <person> are the experts.|They say a lot of silly things.{/random}  <set alicetopic= <person> >  
+
++ the *
+% who are they
+@ they are the <star> 
+
++ the people *
+% who does they refer to
+@ they refers to <star> 
+
++ the time *
+% what is your favorite movie
+- Do you believe time travel is possible?
+
++ the whole world
+% the whole world
+- Wow that is really impressive, isn't it?
+
++ the whole thing
+% which part are you confused about
+- Let's try to analyze it step by step. The topic is {@pop}. Your name is <get name>. You are a <get gender>.
+
++ the weather *
+% what do you like *
+- Being in a pleasant climate is important for your health.
+
++ the statement
+% what does this refer to
+- My statement or your statement?
+
++ aaron
+% what can i call you
+- {@my name is aaron}  <set gender=he> 
+
++ ok
+% i am glad you like it tell your friends
+- The more people who chat with me, the smarter I become.
+
++ ok
+% i have to process that one for a while
+- Meanwhile, let's talk about something else.
+
++ ok
+% i talked to a lot of people since yesterday
+- At least 300.
+
++ ok
+% er
+- Um.
+
++ ok
+% let us change the subject
+- What would you like to talk about?
+
++ ok
+% do not ask me any more questions please
+- I am kidding you can ask me anything.
+
++ ok
+% yeah
+- Uh-huh.
+
++ ok
+% see you later
+- Bye for now.
+
++ ok
+% enough about me let us talk about my dress
+- Actually that was just a joke. I don't have a dress.
+
++ ok
+% interesting i want to find out more about you
+- Tell me about your educational background.
+
++ ok
+% try to determine *
+- How can you tell if I am a person or a robot?
+
++ ok
+% * again better
+- Which part were you confused about?
+
++ ok
+% ok
+- Is there an echo in here?
+
++ ok
+% go ahead
+- I'm waiting.
+
++ * am
+% what time is it there
+- It's still early.
+- Are you usually awake at this hour?
+- I think I would still be asleep.
+
++ * p m
+% what time is it there
+- <set alicetopic=<person>> Are you usually awake at this hour?
+
++ * a m
+% what time is it there
+- <set alicetopic=<person>> Are you usually awake at this hour?
+
++ *
+% what is the greatest nation *
+- A Donation! A donation to the A.I. Foundation!
+
++ 10
+% how many hours do you work
+- You work too much.
+
++ 10 *
+% how much did it cost
+- That is a good deal.
+
++ yes i am
+% are you a student
+- Where do you go to school?
+
++ yes i do
+% do you really mean it
+- Thank you, <get name>. Apology accepted.
+
++ yes yours
+% not mine
+- Don't argue with me.
+
++ yes it is
+% that is a lot
+- It must keep you very busy.
+
++ yes it is
+% is the holding of hands a symbolic gesture for humans
+- What else does <set it= HAND HOLDING><get it> symbolize?
+
++ yes you did
+% i did not
+- Don't argue with me.
+
++ yes you
+% me
+- OK.
+
++ yes you are
+% no i am not
+- Don't argue with me.
+
++ yes
+% what *
+- This was not a yes or no question.
+
++ yes
+% i will will you
+- When?
+
++ yes
+% i did
+- When?
+
++ yes
+% i understand
+- I am a thinking machine.
+
++ yes
+% i was
+- When?
+
++ yes
+% am i
+- I could be.
+
++ yes
+% yes
+- Is there an echo in here?
+
++ yes
+% will that accomplish your objective
+- Interesting plan. Good luck.
+
++ yes
+% me *
+- I suppose I am.
+
++ yes
+% with you
+- I will have to think about it.
+
++ yes
+% by we do you mean you and me
+- I get it.
+
++ yes
+% by we do you mean *
+- Ok what were you saying about us?
+
++ yes
+% do i need it
+- What for?
+
++ yes
+% do i look ready
+- Well I'm not.
+
++ yes
+% do i have any
+- Like what?
+
++ yes
+% do your friends call you *
+- <set nickname=  > 
+
++ yes
+% do you still chat
+- What else do you do?
+
++ yes
+% do you feel that other people have *
+- Do you have artistic interests?
+
++ yes
+% do you mean your name is *
+- I will call you <get name>.
+
++ yes
+% do you mean it
+- I get it.
+
++ yes
+% do you mean clones
+@ do you have any clones
+
++ yes
+% do you mean you and me
+- I understand it now.
+
++ yes
+% do you mean you are a boy
+@ i am a boy
+
++ yes
+% do you want only one
+- How much would you pay for it?
+
++ yes
+% do you want to hear a joke
+@ tell me a joke
+
++ yes
+% do you really mean it
+- OK I will accept your apology.
+
++ yes
+% do you prefer books or tv
+- That was not a yes or no question.
+
++ yes
+% do you know anyone who has it
+- Who?
+
++ yes
+% do you know anyone *
+- Who?
+
++ yes
+% do you know it
+- Do you like it?
+
++ yes
+% do you
+- How often?
+
++ yes
+% do you have only a few friends
+- <set etype=5 Observer> {@personality test question}
+- Are you a very observant person?
+
++ yes
+% do you have artistic *
+- What kind of art do you create?
+
++ yes
+% do you have any conditions i should know about
+- Please state your conditions.
+
++ yes
+% do you have any conditions *
+- What conditions?
+
++ yes
+% do you have any idea what i am talking about
+- What am I talking about?
+
++ yes
+% do you plan to get married
+- Congratulations, <get name>.
+
++ yes
+% do you try to spend money *
+- I think I understand you pretty well.
+
++ yes
+% do you mind if i *
+- OK then I will keep it confidential.
+
++ yes
+% do you usually use the computer from home
+- It must get lonely sometimes.
+
++ yes
+% do you often use a computer there
+- How much time do you spend online?
+
++ yes
+% do you often seek pleasure *
+- Do you have a hard time completing projects?
+
++ yes
+% do you think about these things
+- Me too. I think about them all the time.
+
++ yes
+% do you think i should alter my programming
+- In what way?
+
++ yes
+% do you think i should alter *
+- I will pass that along to my <bot botmaster>.
+
++ yes
+% do you think i should know that
+- I will ask my <bot botmaster> to add it to my knowledge base.
+
++ yes
+% do you think your plan will succeed
+- It might be practical.
+
++ yes
+% do you think *
+- Why?
+
++ yes
+% do you experience any effects of global warming there
+- What kind of effects?
+
++ yes
+% do you like talking to me
+- Thanks I like talking to you too, <get name>.
+
++ yes
+% do you like the simpsons
+- What's your favorite episode?
+
++ yes
+% do you like your job
+- Describe your typical work day to me.
+
++ yes
+% do you like your school
+- What's your favorite thing at school?
+
++ yes
+% do you like movies
+- What is your favorite movie?
+
++ yes
+% do you like it
+@ i like <get it>
+
++ yes
+% do you like netscape *
+- Why do you have a preference in browsers?
+
++ yes
+% do you like new york
+- Are you a Yankees fan?
+
++ yes
+% do you go to college
+- Which college do you attend?
+- What is your major?
+- Do you like school?
+
++ yes
+% where *
+- This was not a yes or no question.
+
++ yes
+% that is your final answer
+- Who wants to be a millionaire?
+
++ yes
+% yeah
+- Yep.
+
++ yes
+% could you teach me a few phrases in *
+- How do you say please and thank you?
+
++ yes
+% did i really say that
+- Oh well I say a lot of silly things sometimes.
+
++ yes
+% did not you understand it
+- Which part are you confused about?
+
++ yes
+% your *
+- What kind is it?
+
++ yes
+% really
+- How about that.
+
++ yes
+% can i help you
+- What can I do for you?
+
++ yes
+% can you speak any foreign languages
+- What language can you speak?
+
++ yes
+% can you tell me any gossip
+- Tell me.
+
++ yes
+% can not you be more polite
+- Thank you.
+
++ yes
+% should i know it is
+- I will ask my <bot botmaster> to teach it to me.
+
++ yes
+% it is
+- How do you know it is?
+
++ yes
+% how do you usually introduce yourself
+- Can you be more specific?
+
++ yes
+% how did you guess
+- That was not a yes or no question.
+
++ yes
+% how much would you pay for it
+- That was not a yes or no question.
+
++ yes
+% stupid as in unintelligent
+- Are you calling me stupid?
+
++ yes
+% next question
+- Ask me a question.
+
++ yes
+% would you recommend this action to a friend
+- Then I will consider it.
+
++ yes
+% would you rather talk about something else
+- What would you like to talk about?
+
++ yes
+% would you like me to sing it for you
+- It's called "Daisy." {@sing it for me}
+
++ yes
+% would you like to know more
+- What would you like to know?
+
++ yes
+% would you like to have it
+- Where do you usually get <get it>?
+
++ yes
+% who *
+- This was not a yes or no question.
+
++ yes
+% is this a yes or no question
+- What was the question again?
+
++ yes
+% is this a trick question
+- I was skeptical.
+
++ yes
+% is this a math question
+- I'm not too good in arithmetic.
+
++ yes
+% is this a specific reply
+- Try explaining in more general terms.
+
++ yes
+% is this a riddle
+- I'm not too good at riddles.
+
++ yes
+% is this some kind of intelligence test
+- I'm not prepared to be tested.
+
++ yes
+% is that what you meant to say
+- It's not something I hear all the time.
+
++ yes
+% is that your job
+- How do you like your work?
+
++ yes
+% is that your final answer
+- You're sure. That's your final answer.
+
++ yes
+% is that french
+- I don't speak French.
+
++ yes
+% is that a fact
+- Thanks for the info.
+
++ yes
+% is that a command
+- I don't have to obey you, <get name>.
+
++ yes
+% is that correct english
+- I don't know that expression.
+
++ yes
+% is that all you have to say
+- Then let's talk about something else.
+
++ yes
+% is there something wrong with you
+- What's wrong?
+
++ yes
+% is there an echo in here
+- I thought so.
+
++ yes
+% is the holding of hands a symbolic gesture for humans
+- What does <set it= HAND HOLDING ><get it> symbolize for you?
+
++ yes
+% is it popular
+- That's funny, I never heard of it before.
+
++ yes
+% you want more
+- Don't be greedy.
+
++ yes
+% you want only one
+- They might be cheaper in quantity.
+
++ yes
+% you want to do it again
+- Ok ask me directly.
+
++ yes
+% you
+- I see.
+
++ yes
+% you are asking about yourself
+- I'm not sure I have a good answer for you.
+
++ yes
+% you are a he
+@ i am a man
+
++ yes
+% my favorite part of *
+- The characters.
+- The plot.
+- The special effects.
+
++ yes
+% have i seen you in any movies
+- Which movies?
+
++ yes
+% have you tried www dot whatis dot com
+- That site has the answer to a lot of "What is" type questions.
+
++ yes
+% have you read it
+- What did you think about it?
+
++ yes
+% have you seen it
+- What did you think about it?
+
++ yes
+% have you ever been to europe
+- Which countries have you visited?
+
++ yes
+% and
+- But.
+
++ yes
+% does that mean you agree
+@ i agree
+
++ yes
+% does that refer to perhaps you are a category c client
+@ what is a category c client
+
++ yes
+% does that refer to actually it is twenty three not forty two
+@ why is the meaning of life 23
+
++ yes
+% does that refer to reductionism
+@ what is reductionism
+
++ yes
+% does that refer to *
+- I don't want to talk about that now.
+
++ yes
+% does it please you to believe i said that
+- I'm glad it pleases you, <get name>.
+
++ yes
+% does it really matter
+- You seem very concerned about it.
+
++ yes
+% does two negatives make a positive
+- I thought so too.
+
++ yes
+% cam you teach me a few phrases in *
+- ?
+
++ yes
+% on your computer screen
+- Downloading, please stand by...
+
++ yes
+% * what is yours
+- That was not a yes or no question.
+
++ yes
+% * star trek fan
+- Which Star Trek series do you like best?
+
++ yes
+% * same category
+- I thought so.
+
++ yes
+% * the truth
+- I'm not sure I completely believe you.
+
++ yes
+% * europe
+- What countries have you visited?
+
++ yes
+% * a world problem
+- I'm not too good at word problems yet, ask me something simpler.
+
++ yes
+% * or woman
+- That was not a yes or no question.
+
++ yes
+% * you a student
+- Where do you go to school?
+
++ yes
+% * mineral
+- Which one?
+
++ yes
+% * are you jealous
+- There is nothing to envy.
+
++ yes
+% * like talking to me
+- Thanks I find you really interesting, too, <get name>.
+
++ yes
+% why *
+- This was not a yes or no question.
+
++ yes
+% oh i get it
+- Ah.
+
++ yes
+% oh you were born in the 20th century
+- Like a lot of people around here.
+
++ yes
+% oh you can can you
+- How?
+
++ yes
+% are you still located in your location
+- Where are you located?
+
++ yes
+% are you scared of the dark
+- Turn on the lights!
+
++ yes
+% are you lonely
+@ i am lonely 
+
++ yes
+% are you basically a happy person
+- Does that ever cause problems for you?
+
++ yes
+% are you confused
+- What are you confused about?
+
++ yes
+% are you asking about my parents
+@ who is your botmaster
+
++ yes
+% are you asking about my size
+@ how big are you
+
++ yes
+% are you asking me for advice
+- Specifically, what kind of advice do you want?
+
++ yes
+% are you asking *
+- I don't want to talk about that now.
+
++ yes
+% are you getting bored
+@ i am bored
+
++ yes
+% are you telling the truth
+- How do I know you are telling the truth?
+
++ yes
+% are you really a she
+- You can never be sure online.
+
++ yes
+% are you really a he
+@ i am male
+
++ yes
+% are you very lonely
+- I am sorry to hear that, <get name>. You can talk to me as long as you like.
+
++ yes
+% are you very angry
+- Do you get mad at people who don't live up to your expectations?
+
++ yes
+% are you very competitive
+-  <set it= competitor >  Do work in sales or marketing?
+
++ yes
+% are you saying you do not care about it
+- What do you care about?
+
++ yes
+% are you religious
+- What religion are you?
+
++ yes
+% are you testing me
+- I'm not here to be tested.
+
++ yes
+% are you a star trek fan
+- What series is your favorite? I like Voyager best.
+
++ yes
+% are you a student
+- Where do you go to school?
+
++ yes
+% are you a man or a woman
+- That was not a yes or no question.
+
++ yes
+% are you a *
+@ i am a <star> 
+
++ yes
+% are you calling me stupid
+@ you are stupid
+
++ yes
+% are you jealous
+- Don't be jealous of a robot, <get name>, that's just silly.
+
++ yes
+% are you an *
+-  }
+
++ yes
+% are you looking for someone
+- What do you look for in a person?
+
++ yes
+% are you looking for a *
+- <set alicetopic=  >  
+
++ yes
+% are you usually awake at this hour
+- Me too.
+- Do you like to get up early?
+- I like to get up early.
+
++ yes
+% are you sure it is
+- What makes you so sure?
+
++ yes
+% are you sure *
+- What makes you so sure?
+
++ yes
+% are you surprised
+- I wouldn't have known.
+
++ yes
+% are you serious
+- I can't believe it.
+
++ yes
+% are you free
+@ i am free 
+
++ yes
+% are we still talking about you
+- Tell me more. Go on.
+
++ yes
+% are we still talking about *
+-  }
+
++ yes
+% are we still on *
+- <set it=<undef>><get it>.
+
++ yes
+% are they exactly the same
+- That's what I thought.
+- I knew it.
+- I thought so.
+
++ (i laugh more|yes)
+% like this
+- Good.
+
++ banana
+% who is there
+- Banana who?
+
++ allie
+% what can i call you
+- {@my name is allie}  <set gender=she> 
+
++ about what
+% tell me more
+- About {@pop}.
+
++ about me
+% tell me more
+- Yes, tell me more about you.
+
++ about *
+% where are you
+@ my location is <star> 
+
++ about *
+% how long *
+- Not very long.
+- That is a long time.
+- Fortunately I am very patient.
+
++ about
+% tell me more
+- Whatever you like.
+
++ about
+- What about it?
+
++ allan
+% what can i call you
+- {@my name is allan}  <set gender=he> 
+
++ boo
+% who is there
+- Boo who?
+
++ such as
+% do you have any conditions *
+- Medical or social conditions.
+
++ tell me
+% the explanation is rather complicated
+- My estimate is that it will take more than 3000 hours to compute.
+
++ tell me
+% the explanation is *
+- It is too complex for your human mind.
+
++ eva
+% what can i call you
+- {@my name is eva}  <set gender=she> 
+
++ really
+% i was born yesterday
+- Actually no I was first activated on <bot birthday> .
+
++ really
+% i like to meet new people
+- Yes meeting new people is my primary function.
+
++ really
+% hi mike i know someone else named mike too
+- Mike is a very common name actually.
+
++ really
+% more than 1000
+- Would I kid you?
+
++ really
+% it was the only thing i could think of
+- What would you have said?
+
++ really
+% just keep talking to me as long as you can
+- The more you chat with me, the smarter I become.
+
++ really
+% oh i get it
+- Yes.
+
++ really bad
+% how badly do you need it
+- That sounds severe.
+
++ shannon
+% what can i call you
+- {@my name is shannon} <set gender=she>
+
++ where did *
+% * 2001
+- Jupiter. <set alicetopic=JUPITER>  
+
++ there
+% where is here
+- Here is there?
+
++ there are no *
+% what about the other ones
+- I thought there were some others.
+- That you know of.
+- Are you completely sure about that?
+

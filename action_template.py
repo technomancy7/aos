@@ -1,21 +1,26 @@
 
-def action_data():
-    return {
-    "name": "$DEFAULT_NAME",
-    "author": "$DEFAULT_AUTHOR",
-    "version": "0.0",
-    "features": [],
-    "group": "",
-}
+class Action:
+    def action_data(self):
+        return {
+            "name": "$DEFAULT_NAME",
+            "author": "$DEFAULT_AUTHOR",
+            "version": "0.0",
+            "features": [],
+            "group": "",
+        }
 
-def on_help(ctx):
-    return """
+    def __help__(self, ctx):
+        return """
+            Default help.
+        """
 
-    """
+    def __run__(self, ctx): 
+        # Main functionality here.
+        return ctx
 
+    def __error__(self, ctx, error):
+        pass
 
-def on_load(ctx): 
-
-
-    return ctx
+    def __finish__(self, ctx):
+        pass
 

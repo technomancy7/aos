@@ -1,0 +1,30 @@
+
++ show config
+- Okay.<call>aos conf list</call>
+
++ set * to *
+- Set <0> to <1>.
+//@command conf set <0> <1>
+
++ set * in * to *
+- Set <star2>.<star> to <star3>.
+//@command conf set <1>.<0> <2>
+
++ run *
+- Running <star>.<call>aos appman run <star></call>
+
+
++ dear diary
+- <call>aos journal new</call>
+
++ write a note
+- <call>aos notes new -f</call>
+
++ scan here for *
+- <call>aos scan <star></call>
+
++ translate *
+- <call>aos tr <star> --to:en --from:auto</call>
+
++ <bot name>
+- Yes?

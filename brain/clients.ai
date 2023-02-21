@@ -1,0 +1,66 @@
+// Learn stuff about our users.
+
++ (what is my name|who am i|do you know my name|do you know who i am){weight=10}
+* <call>getname</call> == undefined => You never told me your name.
+- Your name is <call>getname</call>.
+- You told me your name is <call>getname</call>.
+- Aren't you <call>getname</call>?
+
++ my name is *
+- <call>setname <formal></call>Nice to meet you, <call>getname</call>.
+- <call>setname <formal></call><call>getname</call>, nice to meet you.
+
++ call me *
+- <call>setname <formal></call><call>getname</call>, I will call you that from now on.
+
++ i am # years old
+- <call>setuserproperty age <star></call>A lot of people are <get age>, you're not alone.
+- <call>setuserproperty age <star></call>Cool, I'm <bot age> myself.
+
++ i am a (@malenoun)
+- <call>setuserproperty sex male</call>Alright, you're a <star>.
+
++ i am a (@femalenoun)
+- <call>setuserproperty sex female</call>Alright, you're <star>.
+
++ i (am from|live in) *
+- <call>setuserproperty location <star2></call>I've spoken to people from <star2> before.
+- <call>setuserproperty location <star2></call><star2> sounds nice.
+
++ what do you know (about|of) me
+- I know enough.
+- I know things.
+- I'm always learning things.
+
++ what do you think (about|of) me
+* <get personality> == undefined => I am unsure.
+- I know you are <get personality>.
+
++ my favorite * is *
+- <set fav<star1>=<star2>>Why is it your favorite?
+
++ i am single
+- <set status=single><set spouse=nobody>I am too.
+
++ i have a girlfriend
+- <set status=girlfriend>What's her name?
+
++ i have a boyfriend
+- <set status=boyfriend>What's his name?
+
++ *
+% what is her name
+- <set spouse=<formal>>That's a pretty name.
+
++ *
+% what is his name
+- <set spouse=<formal>>That's a cool name.
+
++ my (girlfriend|boyfriend)* name is *
+- <set spouse=<formal>>That's a nice name.
+
++ what is my favorite *{weight=10}
+- Your favorite <star> is <get fav<star>>
+
++ who is my (boyfriend|girlfriend|spouse){weight=10}
+- <get spouse>

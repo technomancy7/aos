@@ -1,0 +1,63 @@
+> topic help
+	+ [*] (quit|cancel|nevermind|nvm|nothing|done) [*]
+	- Exited help mode. {topic=random}
+
+	+ you
+	- I am <bot name>. A conversational and general purpose AI created by Kaiser.
+	
+	+ [*] legacy [*]
+	- If you're interested in talking to the legacy AI (the old system before this one), ask me to `talk to legacy` now.{topic=random}
+	
+	+ [*] (sex|fuck|fucking|sex life|shagging|hump|humping|shag|masturbating|masturbation) [*]
+	- Only you can help yourself with that.{topic=random}<set personality=horny>
+	
+	+ [*] help [*]
+	- There is no helpception.
+	
+	+ [*] fix dxmp masterserver [*]
+	- To fix the masterserver in DXMP, either;\n
+	^ Visit <#396821109498183680> channel and download the auto-patcher;\n
+	^ Or, open DeusEx.ini in your Deus Ex/System, and replace all instances of `master0.gamespy.com` with `master.333networks.com`.{topic=random}
+	
+	+ [*] spoon
+	- There is no spoon.<set personality=a matrix fan>
+	
+	+ [*] (bork|borks|error|errors|problem|problems) [*]
+	- If you see any problems with my processing, or something has errored, be sure to report them to Kaiser!
+	
+	+ *
+	- I don't understand. Moving on then. {topic=random}
+< topic
+
+> topic asktimezone
+	+ (quit|cancel|nevermind|nvm|nothing)
+	- Okay, I won't update that. {topic=random}
+
+	+ *
+	- Okay, got it, your timezone is <star>. <set timezone=<star>> {topic=random}
+< topic
+
+> topic ignore
+
+  + i am sorry
+  - Okay.{topic=random}
+
+  + *
+  - ...
+  - Not talking.
+  - Not responding.
+  - <bot name> is not here right now, don't leave a message after the beep.
+  - Go away.
+  
+
+< topic
+
+> topic legacy
+
+  + quit
+  - Returning to normal.{topic=random}
+
+  + *
+  - <call>legacyai <star></call>
+
+< topic

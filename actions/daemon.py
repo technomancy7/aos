@@ -44,7 +44,35 @@ def on_load(ctx):
             if proc["name"].startswith("aos_"):
                 print(proc["name"][4:])
 
+    elif cmd == "send":
+        dname = ctx.get_string_ind(1)
+        line = ""
+        if len(ctx.get_string_list()) > 2:
+            line = " ".join(ctx.get_string_list()[2:])
+
+        for proc in list_screens():
+            if proc["name"].startswith("aos_"):
+                name = proc["name"]
+                if dname in name:
+                    print(f"Sending {line} to {name}")
+                    send_to_screen(name, line)
+
+    elif cmd == "connect" or cmd == "show":
+        to_run = " ".join(ctx.lines[1:])
+        for proc in list_screens():
+            if proc["name"].startswith("aos_"):
+                name = proc["name"]
+                if to_run in name:
+                    #
+                    attach_screen(name)
+
     elif cmd == "stop":
+        if ctx.get_string_ind(1) == "all":
+            for proc in list_screens():
+                if proc["name"].startswith("aos_"):
+                    print('Stopping '+proc["name"])
+                    close_screen(proc["name"])
+
         for proc in list_screens():
             if proc["name"].startswith("aos_") and ctx.get_string_ind(1) in proc["name"]:
                 print('Stopping '+proc["name"])

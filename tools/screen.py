@@ -23,6 +23,9 @@ def list_screens():
 def open_screen(name):
     os.system(f"screen -dmS {name}")
 
+def attach_screen(name):
+    os.system(f"screen -a -r {name}")
+    
 def send_to_screen(name, command):
     os.system(f"screen -S {name} -p 0 -X stuff '{command}\n'")
 

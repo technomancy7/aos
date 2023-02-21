@@ -1,0 +1,19 @@
+
+> object checkplayers python
+import requests
+args = ["unreal"]
+game = ''.join(args)
+s = f"http://333networks.com/json/{game}/all"
+data = requests.get(s).json()
+found = []
+for server in data[0]:
+    if server["numplayers"] > 0:
+        found.append(server)
+if len(found) > 0:
+    return f"Found players on {len(found)} servers."
+else:
+    return "I didn't find anybody."
+< object
+
++ are there any players on *
+- {checkplayers <star>}

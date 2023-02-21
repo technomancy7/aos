@@ -1,0 +1,143 @@
+! version = 2.0
+
+> object randomcat python
+	import requests
+	data = requests.get('http://aws.random.cat/meow').json()
+	return f"{data['file']}"
+< object
+
+> object randomdog python
+	import requests
+	data = requests.get('https://random.dog/woof.json').json()
+	return f"{data['url']}"
+< object
+
+> object exiteu python
+	v = ['a', 'e', 'i', 'o', 'u']
+	name = ' '.join(args)
+	name = name.lower()
+	start = []
+	for item in name:
+		start.append(item)
+		if item in v:
+			break
+	
+	return ''.join(start)+"xit"
+< object
+
+> object roll python
+	import random
+	lower = int(args[0])
+	upper = int(args[1])
+	
+	return random.randint(lower, upper)
+< object
+// @todo to reimplement
+> object dice python
+	rs.dispatch("dice", ''.join(args))
+< object
+
+> object asciitobinary python
+	from athena_common import BinaryCoder
+	try:
+		return BinaryCoder().encrypt(' '.join(args))
+	except Exception as e:
+		return e
+< object
+
+> object binarytoascii python
+	from athena_common import BinaryCoder
+	try:
+		return BinaryCoder().decrypt(' '.join(args))
+	except Exception as e:
+		return e
+< object
+
+> object asciitomorse python
+	from athena_common import MorseCoder
+	try:
+		return MorseCoder().encrypt(' '.join(args))
+	except Exception as e:
+		return e
+< object
+
+> object morsetoascii python
+	from athena_common import MorseCoder
+	print(args)
+	try:
+		return MorseCoder().decrypt(''.join(args))
+	except Exception as e:
+		return e
+< object
+
+> object converthextoascii python
+	import codecs
+	msg = ' '.join(args)
+	print(msg)
+	decode_hex = codecs.getdecoder("hex_codec")
+
+	arr = msg.split()
+	msg = ""
+	for item in arr:
+		msg += decode_hex(item)[0].decode('ascii')
+		
+	return msg
+< object
+
+> object increment python
+	return int(args[0]) + 1
+< object
+
+> object rand python
+	import random
+	print(args)
+	rs.dispatch('choice', choices=' '.join(args))
+< object
+
+> object choice python
+	import random, shlex, humanfriendly
+	choices = ' '.join(args)
+	if ", " in choices:
+		_choices = choices.split(", ")
+	elif " | " in choices:
+		_choices = choices.split(" | ")		
+	elif "," in choices:
+		_choices = choices.split(",")
+	elif "|" in choices:
+		_choices = choices.split("|")
+	else:
+		_choices = shlex.split(choices)
+	
+	_choices = rs._session.discord.get_cog('fun').filter_clist(_choices)
+	
+	if len(_choices) < 2:
+		return f"A choice between **{choices}** and **{choices}**? Oh let me see, I choose... you're an idiot."
+
+	bc = []
+	for item in _choices:
+		bc.append(f"**{item}**")
+	decision = random.choice(_choices)
+	return f"from {humanfriendly.text.concatenate(bc)}, I choose **{decision}**"
+
+< object
+
+> object aos python
+ctx = rs._session.aos
+ctx.quick_run(" ".join(args))
+< object
+
+> object setname python
+rs._session.aos.set_username(" ".join(args))
+< object
+
+> object getname python
+return rs._session.aos.username()
+< object
+
+> object setuserproperty python
+rs._session.aos.set_user_property(args[0], " ".join(args[1:]))
+< object
+
+> object getuserproperty python
+return rs._session.aos.get_user_property(" ".join(args))
+< object

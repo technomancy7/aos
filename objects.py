@@ -91,19 +91,40 @@ class Context:
         try:
             f = importlib.import_module("actions."+command)
             
-            if subctx.get_flag("help") or subctx.get_flag("h"):
-                if hasattr(f, "on_help") and type(f.on_help(subctx)) == str:
-                    return self.writeln(textwrap.dedent(f.on_help(subctx)))
-                return self.writeln(command+" has no help.")
-            try:
-                if hasattr(f, "on_load"):
-                    subctx = f.on_load(subctx) or subctx
-            except Exception as e:
-                print(traceback.format_exc())
-                #print(e)
-            finally:
-                if hasattr(f, "on_exit"):
-                    f.on_exit(subctx)
+            if hasattr(f, "Action"):
+                act = f.Action()
+                if subctx.get_flag("help") or subctx.get_flag("h"):
+                    if hasattr(act, "__help__") and type(act.__help__(subctx)) == str:
+                        return self.writeln(textwrap.dedent(act.__help__(subctx)))
+                    return self.writeln(command+" has no help.")
+                try:
+                    if hasattr(act, "__run__"):
+                        subctx = act.__run__(subctx) or subctx
+                except Exception as e:
+                    print(traceback.format_exc())
+                    if hasattr(act, "__error__"):
+                        act.__error__(ctx, e)
+                finally:
+                    if hasattr(act, "__finish__"):
+                        act.__finish__(subctx)
+
+            else:
+                if subctx.get_flag("help") or subctx.get_flag("h"):
+                    if hasattr(f, "on_help") and type(f.on_help(subctx)) == str:
+                        return self.writeln(textwrap.dedent(f.on_help(subctx)))
+                    return self.writeln(command+" has no help.")
+                try:
+                    if hasattr(f, "on_load"):
+                        subctx = f.on_load(subctx) or subctx
+                except Exception as e:
+                    print(traceback.format_exc())
+                    if hasattr(f, "on_error"):
+                        f.on_error(ctx, e)
+                finally:
+                    if hasattr(f, "on_exit"):
+                        f.on_exit(subctx)
+
+
         except Exception as e:
             print(traceback.format_exc())
         finally:
@@ -120,8 +141,29 @@ class Context:
         if codex.get("self") and codex["self"].get("name"): return codex["self"]["name"]
         return "User"
 
+    def get_user_property(self, propname):
+        codex = self.access_data("codex", "addrbook")
+
+        if codex.get("self") and codex["self"].get(propname): return codex["self"][propname]
+        return ""
+
     def name(self):
         return self.touch_config("system.name", "Bot")
+
+    def set_username(self, newname):
+        codex = self.access_data("codex", "addrbook")
+
+        codex["self"]['name'] = newname
+        self.export_data("codex", "addrbook", codex)
+
+    def set_user_property(self, propname, newname):
+        codex = self.access_data("codex", "addrbook")
+
+        codex["self"][propname] = newname
+        self.export_data("codex", "addrbook", codex)
+
+    def set_name(self, name):
+        self.set_config("system.name", name)
 
     def say(self, line):
         if line == "": return
@@ -282,6 +324,10 @@ class Context:
     def access_data(self, action, filename):
         with open(f"{self.aos_dir}data/{action}/{filename}.json", 'r') as fl:
             return json.load(fl)
+
+    def export_data(self, action, filename, data):
+        with open(f"{self.aos_dir}data/{action}/{filename}.json", 'w+') as fl:
+            json.dump(data, fl)
 
     def get_data_list(self, action = ""):
         out = []

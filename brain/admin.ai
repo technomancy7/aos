@@ -1,0 +1,14 @@
+// Administrative functions.
+
++ (reset|erase|format|delete) [*]
+- No.
+
+// to re-implement this
++ when i say * you say *
+- Okay, I'll remember that. <call>writenewline <star> : <star2></call>
+
++ say * when i say *
+- Okay, I'll remember that. <call>writenewline <star2> : <star></call>
+
++ forget line *
+- Okay, I'll forget that. <call>delline <star></call>
