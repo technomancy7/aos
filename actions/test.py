@@ -1,6 +1,8 @@
+import rich
 
 class Action:
-    def __action_data__(self):
+    @staticmethod
+    def __action__():
         return {
             "name": "test",
             "author": "Kaiser",
@@ -10,8 +12,14 @@ class Action:
         }
     
     def __run__(self, ctx):
-        print("Test action has run.")
-
+        cmd, ln = ctx.cmdsplit()
+        print(cmd)
+        print(ln)
+        #print(cmd, ",", line)
+        print(ctx.get_flag("test"))
+        #with rich.console.Console().pager():
+            #ctx.writeln("Hmm")
+            
     def __help__(self, ctx):
         print("Helpless.")
         

@@ -2,6 +2,39 @@
 + show config
 - Okay.<call>aos conf list</call>
 
++ (get|show|print|say|give) [me] a [random] entry from [the] * (dataset|set)
+@ get me 1 random entry from the <star2> set
+
++ (get|show|print|say|give) [me] # [random] (entry|entries) from [the] * (dataset|set)
+- Results: <call>sdrand <star4> <star2></call>.
+
++ (get|show|print|say|give) [me] # [random] (colors|colours)
+- Results: <call>sdrand colours <star2></call>.
+
++ (get|show|print|say|give) [me] # [random] adjectives
+- Results: <call>sdrand adjectives <star2></call>.
+
++ (get|show|print|say|give) [me] # [random] (building|buildings) [types]
+- Results: <call>sdrand building_types <star2></call>.
+
++ (get|show|print|say|give) [me] [a] [random] (color|colour)
+- Colour! <call>sdrand colours</call>.
+- Your colour is... <call>sdrand colours</call>.
+- How about <call>sdrand colours</call>?
+- Let's go with <call>sdrand colours</call>.
+
++ (get|show|print|say|give) [me] [a] [random] adjective
+- Adjective! <call>sdrand adjectives</call>.
+- Your adjective is... <call>sdrand adjectives</call>.
+- How about <call>sdrand adjectives</call>?
+- Let's go with <call>sdrand adjectives</call>.
+
++ (get|show|print|say|give) [me] [a] [random] building [type]
+- Building types?! <call>sdrand building_types</call>.
+- Your building type is... <call>sdrand building_types</call>.
+- How about <call>sdrand building_types</call>?
+- Let's go with <call>sdrand building_types</call>.
+
 + set * to *
 - Set <0> to <1>.
 //@command conf set <0> <1>
@@ -11,7 +44,7 @@
 //@command conf set <1>.<0> <2>
 
 + run *
-- Running <star>.<call>aos appman run <star></call>
+- <call>aos appman run <star></call>
 
 
 + dear diary

@@ -2,5 +2,5 @@ config.json
 self.log
 **data.json
 data/appman/**
-data/addrbook/**
+data/codex/**
 dsc/stories/**

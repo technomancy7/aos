@@ -45,10 +45,10 @@
 - <call>roll <star> <star2></call>
 
 + roll a [dice|die]
-- <call>dice 1d6</call>
+- <call>aos rng dice 1d6</call>
 
 + roll a * [dice|die]
-- <call>dice <star></call>
+- <call>aos rng dice <star></call>
 
 + (flip a coin|heads or tails)
 - You got Heads!
@@ -380,12 +380,6 @@
 - A millionty billion.
 - A chamillion.
 
-+ (choose|pick|decide) [between] *
-- <call>choice <star2></call>
-
-+ search [for] *
-- <call>search <star></call>
-
 + do * count as *
 - I'd say so, in some manner.
 - If you try very hard, sure.
@@ -465,7 +459,7 @@
 - Oh I <star1> <star2> too!
 
 + choose [between] *
-- <call>rand <star> </call>
+- <call>aos rng chose <star> </call>
 
 + do you (prefer|like) * or *
 - <star2>.
@@ -662,6 +656,9 @@
 + [*] thought you were a stealth knife
 - Slaughter. <set personality=a deus ex fan>
 
++ rate * out of #
+- I rate <star> <call>roll 0 <star2></call> out of <star2>.
+
 + (show|give|get) [me] a random cat [image|photo|img]
 - Here you go.\n
 ^ <call>randomcat</call><set personality=a cat person>
@@ -677,9 +674,6 @@
 ^ <call>randomdog</call><set personality=a dog person>
 - Good pupper.\n
 ^ <call>randomdog</call><set personality=a dog person>
-
-+ (show|give|get) [me a|me the|a|an|the|me an] *
-- <call>getrandomimg <star2></call>
 
 + dont call me *
 - Why? What's wrong with <star>?

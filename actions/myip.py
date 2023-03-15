@@ -17,6 +17,6 @@ def on_help(ctx):
 
 def on_load(ctx): 
     ip = get('https://api.ipify.org').text
-    ctx.writeln('Your IP address is: {}'.format(ip))
+    ctx.writeln(f'Your IP address is: {ip}')
     return ctx
 

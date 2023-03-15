@@ -136,7 +136,17 @@ def on_load(ctx):
                     
                 if os.path.isfile(f):
                     f = importlib.import_module("actions."+filename.split(".")[0])
-                    if hasattr(f, "action_data"):
+
+                    if hasattr(f, "Action"):
+                       #print(f)
+                        d = f.Action.__action__()
+                        d["filename"] = filename
+                        if output.get(d.get("group", "default")) == None:
+                            output[d.get("group", "default")] = []
+                        d["disabled"] = filename.split(".")[0] in disabled
+                        output[d.get("group", "default")].append(d)
+                    
+                    elif hasattr(f, "action_data"):
                         d = f.action_data()
                         d["filename"] = filename
                         if output.get(d.get("group", "default")) == None:

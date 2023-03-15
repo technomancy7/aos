@@ -1,0 +1,38 @@
+{
+    "tiers": [
+        {
+            "name": "S",
+            "entries": [
+                "Osvald"
+            ]
+        },
+        {
+            "name": "A",
+            "entries": []
+        },
+        {
+            "name": "B",
+            "entries": []
+        },
+        {
+            "name": "C",
+            "entries": []
+        },
+        {
+            "name": "D",
+            "entries": []
+        },
+        {
+            "name": "E",
+            "entries": []
+        },
+        {
+            "name": "F",
+            "entries": ["Partitio"]
+        }
+    ],
+	"unsorted": [],
+    "author": "",
+    "title": "Octopath Traveller 2 (How good is each character as a main protagonist)",
+    "order": "S|A|B|C|D|E|F"
+}

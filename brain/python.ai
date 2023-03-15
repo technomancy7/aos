@@ -32,13 +32,9 @@
 	
 	return random.randint(lower, upper)
 < object
-// @todo to reimplement
-> object dice python
-	rs.dispatch("dice", ''.join(args))
-< object
 
 > object asciitobinary python
-	from athena_common import BinaryCoder
+	from tools.converters import BinaryCoder
 	try:
 		return BinaryCoder().encrypt(' '.join(args))
 	except Exception as e:
@@ -46,7 +42,7 @@
 < object
 
 > object binarytoascii python
-	from athena_common import BinaryCoder
+	from tools.converters import BinaryCoder
 	try:
 		return BinaryCoder().decrypt(' '.join(args))
 	except Exception as e:
@@ -54,7 +50,7 @@
 < object
 
 > object asciitomorse python
-	from athena_common import MorseCoder
+	from tools.converters import MorseCoder
 	try:
 		return MorseCoder().encrypt(' '.join(args))
 	except Exception as e:
@@ -62,7 +58,7 @@
 < object
 
 > object morsetoascii python
-	from athena_common import MorseCoder
+	from tools.converters import MorseCoder
 	print(args)
 	try:
 		return MorseCoder().decrypt(''.join(args))
@@ -91,39 +87,23 @@
 > object rand python
 	import random
 	print(args)
-	rs.dispatch('choice', choices=' '.join(args))
-< object
-
-> object choice python
-	import random, shlex, humanfriendly
-	choices = ' '.join(args)
-	if ", " in choices:
-		_choices = choices.split(", ")
-	elif " | " in choices:
-		_choices = choices.split(" | ")		
-	elif "," in choices:
-		_choices = choices.split(",")
-	elif "|" in choices:
-		_choices = choices.split("|")
-	else:
-		_choices = shlex.split(choices)
-	
-	_choices = rs._session.discord.get_cog('fun').filter_clist(_choices)
-	
-	if len(_choices) < 2:
-		return f"A choice between **{choices}** and **{choices}**? Oh let me see, I choose... you're an idiot."
-
-	bc = []
-	for item in _choices:
-		bc.append(f"**{item}**")
-	decision = random.choice(_choices)
-	return f"from {humanfriendly.text.concatenate(bc)}, I choose **{decision}**"
-
+	#rs.dispatch('choice', choices=' '.join(args))
 < object
 
 > object aos python
-ctx = rs._session.aos
-ctx.quick_run(" ".join(args))
+	ctx = rs._session.aos
+	ctx.quick_run(" ".join(args))
+< object
+
+> object sdrand python
+	if len(args) == 1:
+		return rs._session.aos.sd_get_random(args[0])
+	else:
+		out = []
+		for i in range(0, int(args[1])):
+			out.append(rs._session.aos.sd_get_random(args[0]))
+		
+		return ", ".join(out)
 < object
 
 > object setname python

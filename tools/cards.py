@@ -1,94 +1,146 @@
-from enum import Enum
 from random import shuffle
+import json
 
-class Suits(Enum):
-    NULL = 0
-    HEARTS = 1
-    DIAMONDS = 2
-    CLUBS = 3
-    SPADES = 4
-
-    def as_string(self):
-        return [
-            "null",
-            "hearts",
-            "diamonds",
-            "clubs",
-            "spades"
-        ][self.value]
-
-class Hand:
+class CardManager:
     def __init__(self):
-        self.cards = []
+        self.defaults()
 
-    def draw_from(self, deck):
-        if issubclass(deck.__class__, Deck):
-            self.cards.append(deck.draw())
+    def defaults(self):
+        self.containers = {}
+        self.active = None
+        self.default_container = None
+
+    def import_state(self, path):
+        with open(path, "r") as f:
+            js = json.load(f)
+            self.containers = js['containers']
+            self.active = js['active']
+
+    def export_state(self, path):
+        with open(path, "w+") as f:
+            json.dump({
+                "containers": self.containers,
+                "active": self.active
+            }, f)
+
+    def discard_active(self):
+        if self.active != None:
+            self.containers["discard"].append(self.active)
+            self.active = None
+
+    def draw(self, target = None):
+        self.discard_active()
             
-    def append(self, card):
-        self.cards.append(card)  
+        if target == None and self.default_container != None:
+            target = self.default_container
 
-    @property
-    def length(self):
-        return len(self.cards)
+        self.active = self.containers[target].pop()
+        return self.active
+    def new_container(self, tag):
+        if not self.has_container(tag):
+            self.containers[tag] = []
 
-class PlayingCard:
-    def __init__(self, suit, value):
-        self.suit_id = suit
-        self.value = value
+    def delete_container(self, tag):
+        assert tag not in ["discard", "hand"], "Can't destroy discard or hand containers."
 
-    def to_hand(self, hand):
-        if issubclass(hand.__class__, Hand):
-            hand.cards.append(self)
+        if self.has_container(tag):
+            oldc = self.get(tag)
+            for card in oldc:
+                self.get("discard").append(card)
+            del self.containers[tag]
 
-    @property
-    def colour(self):
-        if self.suit == Suits.DIAMONDS or self.suit == Suits.HEARTS:
-            return "red"
-        else:
-            return "black"
+    def has_container(self, tag):
+        return tag in list(self.containers.keys())
 
-    @property
-    def value_name(self):
-        if self.value == 1:
-            return "ace"
-        elif self.value == 11:
-            return "jack"
-        elif self.value == 12:
-            return "queen"
-        elif self.value == 13:
-            return "king"
-        else:
-            return str(self.value)
+    def move(self, card_tag, container_from, container_to):#@todo move to/from active
+        f = None
+        if container_from != "active":
+            f = self.get(container_from)
 
-    @property
-    def suit(self):
-        return Suits(self.suit_id)
+        t = None
+        if container_to != "active": 
+            t = self.get(container_to)
 
-    @property
-    def suit_name(self):
-        return Suits(self.suit_id).as_string()
+        for card in f:
+            if card['name'] == card_tag: #@todo expand search
+                if container_from != "active":
+                    f.remove(card)
+                else:
+                    self.active = None
 
-    def __repr__(self):
-        return f"{self.value_name} of {self.suit_name}"
+                if container_to != "active":    
+                    t.append(card)
+                else:
+                    self.active = card
 
-class Deck:
-    def __init__(self):
-        self.cards = []
+                return
 
-        for value in range(1, 14):
-            for suit in range(1, 5):
-                self.cards.append(PlayingCard(suit, value))
+    def shuffle(self, container):
+        shuffle(self.get(container))
 
-    def append(self, card):
-        self.cards.append(card)  
+    def get(self, container):
+        return self.containers.get(container, [])
 
-    @property
-    def length(self):
-        return len(self.cards)
+    def new(self, *, jokers = 0, shuffle = False):
+        self.defaults()
 
-    def shuffle(self):
-        shuffle(self.cards)
+        self.new_container("basic")
+        self.new_container("tarot")
+        self.new_container("hand")
+        self.new_container("discard")
 
-    def draw(self):
-        return self.cards.pop()
+        for suit in range(0, 4):
+            suitname = [
+                "clubs",
+                "spades",
+                "hearts",
+                "diamonds"
+            ][suit]
+            suiticon = [
+                "♣️",
+                "♠️",
+                "♥️",
+                "♦️"
+            ][suit]
+
+            for value in range(1, 14):
+                name = str(value)
+                if value == 11: name = "jack"
+                if value == 12: name = "queen"
+                if value == 13: name = "king"
+                if value == 1: name = "ace"
+
+                nc = {
+                    "value": value,
+                    "name": f"{name} of {suitname}",
+                    "suit": suitname,
+                    "icon": suiticon
+                }
+                self.get("basic").append(nc)
+
+        for suit in range(0, 4):
+            suitname = [
+                "wands",
+                "swords",
+                "cups",
+                "pentacles"
+            ][suit]
+
+            for value in range(1, 15): #@todo higher arcanas
+                name = str(value)
+                if value == 11: name = "page"
+                if value == 12: name = "knight"
+                if value == 13: name = "queen"
+                if value == 14: name = "king"
+                if value == 1: name = "ace"
+
+                nc = {
+                    "value": value,
+                    "name":  f"{name} of {suitname}",
+                    "suit": suitname,
+                    "icon": None
+                }
+                self.get("tarot").append(nc)
+
+        self.shuffle("basic")
+

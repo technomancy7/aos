@@ -1,21 +1,38 @@
-import json, os, importlib, textwrap, readline, traceback
+import json, os, importlib, textwrap, readline, traceback, random
 from rich.console import Console
 from copy import deepcopy
 
 class Context:
     def __init__(self, *, line = "", command = "", lines = [], base_dir = ""):
-        self.aos_dir = base_dir#ATHENAOS_PATH
+        self.aos_dir = base_dir
         if line != "": self.update_from_line(line)
         else: self.update(command=command, lines=lines)
-        #print(lines)
         self.config = {}
         self._exit_code = -1
         self.console = Console(record=True)
-        #self.load_config()
         self.plaintext_output = False
         self.buffer = []
         self.time_format = 'HH:mm:ss DD-MM-YYYY'
         self.response = {}
+        self.hide_traceback = False
+
+    def sd_get_random(self, dsf):
+        pth = self.aos_dir+"static_data/"+str(dsf)+".txt"
+        #print(">", pth)
+        if os.path.exists(pth):
+            #print("Exists")
+            with open(pth, "r+") as f:
+                options = f.read().split("\n")
+                options = [opt.lower().strip() for opt in options]
+                #print(options)
+                return random.choice(options)
+
+    def cmdsplit(self):
+        cmd = self.get_string_ind(0).lower()
+        line = ""
+        if len(self.get_string_list()) > 1:
+            line = self.get_string()[len(cmd)+1:]
+        return cmd, line
 
     def coerce_bool(self, line):
         return str(line).lower() in ["1", "yes", "y", "true"]
@@ -62,6 +79,22 @@ class Context:
             if inv in disabled: disabled.remove(inv)
         return disabled
 
+    def cexec(self, action, method, *args, **kwargs):
+        if not os.path.exists(self.aos_dir+"actions/"+action+".py"):
+            return self.writeln(f"Action {action} not found")
+        try:
+            f = importlib.import_module("actions."+action)
+            
+            if hasattr(f, "Action"):
+                act = f.Action()
+                act.ctx = self
+                fn = getattr(act, method)
+                return fn(*args, **kwargs)
+            else:
+                print("Action not valid.")
+        except Exception as e:
+            print(traceback.format_exception(e))
+
     def quick_run(self, line):
         tmp = self.clone()
         tmp.update_from_line(line)
@@ -82,7 +115,7 @@ class Context:
 
         disabled = self.sanity_check_disabled(disabled)
 
-        if command in disabled:
+        if command in disabled: 
             return subctx.writeln(f"Action is disabled.")
 
         if not os.path.exists(self.aos_dir+"actions/"+command+".py"):
@@ -93,6 +126,8 @@ class Context:
             
             if hasattr(f, "Action"):
                 act = f.Action()
+                act.ctx = self
+
                 if subctx.get_flag("help") or subctx.get_flag("h"):
                     if hasattr(act, "__help__") and type(act.__help__(subctx)) == str:
                         return self.writeln(textwrap.dedent(act.__help__(subctx)))
@@ -101,9 +136,10 @@ class Context:
                     if hasattr(act, "__run__"):
                         subctx = act.__run__(subctx) or subctx
                 except Exception as e:
-                    print(traceback.format_exc())
+                    if not self.hide_traceback: print(traceback.format_exc())
                     if hasattr(act, "__error__"):
-                        act.__error__(ctx, e)
+                        act.__error__(self, e)
+
                 finally:
                     if hasattr(act, "__finish__"):
                         act.__finish__(subctx)
@@ -117,9 +153,10 @@ class Context:
                     if hasattr(f, "on_load"):
                         subctx = f.on_load(subctx) or subctx
                 except Exception as e:
-                    print(traceback.format_exc())
+                    if not self.hide_traceback: print(traceback.format_exc())
                     if hasattr(f, "on_error"):
-                        f.on_error(ctx, e)
+                        f.on_error(self, e)
+
                 finally:
                     if hasattr(f, "on_exit"):
                         f.on_exit(subctx)
@@ -203,7 +240,7 @@ class Context:
         inse = ""
         if prompt != "": prompt = f": ({prompt}) "
         if default != "": inse = f"[{default}]"
-        f = self.get_flag(value) or input(f"{value}{prompt}{inse} > ")
+        f = self.get_flag(value) or self.console.input(prompt=f"{value}{prompt}{inse} > ")
         if f == "": 
             f = default
         return f
@@ -248,13 +285,14 @@ class Context:
     
     def get_string_at(self, ind = 0): return self.get_string_ind(ind)
 
-    def get_string_ind(self, ind = 0):
+    def get_string_ind(self, ind = 0, d = ""):
         iters = 0
         for flag in self.lines:
             if not flag.startswith(f"-"):
                 if iters == ind:
                     return flag
                 iters += 1 
+        return d
 
     def exit_code(self, newCode = None):
         if newCode == None: return self._exit_code
@@ -358,7 +396,7 @@ class Context:
         with open(self.aos_dir+"config.json", 'w+') as f:
             f.write(json.dumps(self.config, indent=4))
 
-    def set_config(self, key, value):
+    def set_config(self, key, value, *, save = True):
         if "." in key:
             parent = key.split(".")[0]
             sub = key.split(".")[1]
@@ -373,7 +411,8 @@ class Context:
         else:
             self.config[key] = value
 
-        self.save_config()
+        if save: self.save_config()
+        return value
 
     def unset_config(self, key):
         if "." in key:

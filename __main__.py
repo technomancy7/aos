@@ -35,6 +35,7 @@ def editarg(x):
 
 def main(args):
     global context
+    print(args)
     if type(args) == str: args = shlex.split(args)
     if len(args) == 0: args = ['actions', "list"]
 
@@ -61,4 +62,4 @@ def run(args):
                     f.write(out)
 
 if __name__ == "__main__":
-    run(sys.argv[1:])
+    run(" ".join(sys.argv[1:]))

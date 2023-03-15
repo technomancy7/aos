@@ -1,0 +1,121 @@
+airport terminal
+amphitheatre
+apartment building
+aquarium
+arena
+art gallery
+assembly hall
+auditorium
+bank
+barn
+barracks
+basilica
+beaux-arts
+brewery
+bridge
+bungalow
+cabin
+casino
+castle
+cathedral
+cemetery
+church
+classroom
+clinic
+clubhouse
+college
+concert hall
+condominium
+convention center
+cottage
+courthouse
+dam
+department store
+depot
+detached house
+dormitory
+duplex
+embassy
+factory
+farmhouse
+fire station
+flat
+fortress
+funeral home
+gas station
+government building
+greenhouse
+gurdwara
+hangar
+hospital
+hotel
+house
+hut
+industrial building
+jail
+kindergarten
+lighthouse
+library
+manor house
+mansion
+manufacturing plant
+market hall
+mausoleum
+mill
+mosque
+motel
+museum
+music venue
+nursing home
+observatory
+office building
+opera house
+orangery
+palace
+parliament building
+pavilion
+penthouse
+pharmacy
+police station
+post office
+power station
+prision
+railway station
+ranch
+recreation center
+religious building
+research facility
+restaurant
+retirement home
+roller coaster
+row house
+school
+septic tank
+shed
+shelter
+shopping center
+shop
+skyscraper
+stadium
+stage
+station
+store
+supermarket
+synagogue
+temple
+tent
+terrace
+terraced house
+theater
+tower
+town hall
+townhouse
+university
+vineyard
+warehouse
+water tower
+water treatment plant
+winery
+workers' housing
+workshop
+yurt

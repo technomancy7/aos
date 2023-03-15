@@ -13,7 +13,7 @@ def on_help(ctx):
     return """
 
     """
-
+#@todo rewrite simpler
 
 def on_load(ctx): 
     cmd = ctx.get_string_ind(0) 

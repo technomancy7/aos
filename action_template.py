@@ -1,6 +1,7 @@
 
 class Action:
-    def action_data(self):
+    @staticmethod
+    def __action__():
         return {
             "name": "$DEFAULT_NAME",
             "author": "$DEFAULT_AUTHOR",

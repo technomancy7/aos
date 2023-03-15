@@ -1,6 +1,8 @@
 import os
 from rivescript import RiveScript
 import rivescript
+import rich
+
 def action_data():
     return {
     "name": "talk",
@@ -94,13 +96,32 @@ def on_load(ctx):
     line = ctx.get_string()
 
     def execute(ln):
-        print("INPUT", ln)
+        #ctx.writeln("INPUT", ln)
         firstpart = ln.split(" ")[0]
         rest = " ".join(ln.split(" ")[1:])
-
+        output = ""
         match firstpart:
-            case "/quit":
+            case "/quit" | "/q":
                 exit()
+            case "/aos":
+                ctx.quick_run(rest)
+            case "/console":
+                os.system(rest)
+            case "/cycle" | "/loop":
+                c = rest.split(" ")[0]
+                rest = " ".join(rest.split(" ")[1:])
+                if c.isdigit():
+                    reply = ""
+                    for i in range(0, int(c)+1):
+                        reply += rs.reply(username, rest)+" "
+                    return reply
+            case "/repeat" | "/redo" | "/again":
+                inx = 0
+                if rest.isdigit():
+                    inx = int(rest)
+                rln = ctx.touch_config(f"talk_sessions.{username}")["__history__"]["input"][0]
+                reply = rs.reply(username, rln)
+                return reply
             case "/remind":
                 rs._session.add_code(rest.replace("->", "\n"))
             case "/forget":
@@ -119,15 +140,28 @@ def on_load(ctx):
                 ctx.writeln(rs._session.get_all())
             case other:
                 reply = rs.reply(username, ln)
-                ctx.say(reply)
+                return reply
+        return output
 
     if line == "":
         while True:
             line = input(f"({username})> ")
-            execute(line)
-    else:
-        execute(line)
+            res = ""
+            if ", then " in line:
+                for subln in line.split(", then"):
+                    res += execute(subln)+" "
+            else:
+                res += execute(line)+" "
 
+            if res.strip(): ctx.say(res.strip())
+    else:
+        res = ""
+        if ", then " in line:
+            for subln in line.split(", then"):
+                res += execute(subln)+" "
+        else:
+            res += execute(line)+" "
+        if res.strip(): ctx.say(res.strip())
     return ctx
 
 def on_exit(ctx):

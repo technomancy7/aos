@@ -25,7 +25,7 @@ def on_load(ctx):
         with open(ctx.aos_dir+"self.log", "w+") as f:
             f.write("")
 
-    elif ctx.get_string_ind(0) == "actions":
+    """elif ctx.get_string_ind(0) == "actions":
         directory = ctx.aos_dir+"actions/"
         for filename in os.listdir(directory):
             f = os.path.join(directory, filename)
@@ -35,6 +35,6 @@ def on_load(ctx):
                     d = f.action_data()
                     ctx.writeln(f"[yellow]{d.get('name', filename)}[/yellow] (v {d.get('version', '0')}) by {d.get('author', '?')}")
                 else:
-                    ctx.writeln(f"{filename.split('.')[0]} has no action_data property.", style="dim")
+                    ctx.writeln(f"{filename.split('.')[0]} has no action_data property.", style="dim")"""
     return ctx
 

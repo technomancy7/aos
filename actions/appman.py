@@ -51,13 +51,12 @@ def on_load(ctx):
         case "run":
             def run_app(ctx, path, *args):
                 print(args)
-                cwd = os.getcwd()
+                
                 print("Run", path, "with", *args)
                 app = appinfo.get(path, {})
                 print(app)
-
+                cwd = app.get("cwd", None) or os.getcwd()
                 if path.endswith(".aos.py"):
-                    #cd = os.path.dirname(path)
                     with open(path) as f:
                         text = f.read()
                         to_compile = f'def func():\n{textwrap.indent(text, "  ")}'
@@ -67,30 +66,34 @@ def on_load(ctx):
                         env['func']()
 
                 elif app.get("launcher", "") != "": #@todo finish and test this
+                    return print("Not supported yet.")
                     cmd = app['launcher']
-                    p = subprocess.run([path, *args], cwd=cwd)
+                    p = subprocess.run([cmd, *args], cwd=cwd)
                 else:
-                    try:
-                        p = subprocess.run([path, *args], cwd=cwd)
-                    except PermissionError:
-                        ctx.writeln("Permissions error! Updating executable...")
-                        os.system(f"chmod u+x {path}")
-                        p = subprocess.run([path, *args], cwd=cwd)
+                    def runit():
+                        p = None
+                        try:
+                            p = subprocess.run([path, *args], cwd=cwd)
+                        except PermissionError:
+                            ctx.writeln("Permissions error! Updating executable...")
+                            os.system(f"chmod u+x {path}")
+                            runit()
+                        
+                        if ctx.touch_config("appman.show_result"): 
+                            ctx.writeln(f"Application exit: [blue]{p.args}[/blue] (Return code: "+str(p.returncode)+")")
+                    runit()
                     
-                    if ctx.touch_config("appman.show_result"): 
-                        ctx.writeln(f"Application exit: [blue]{p.args}[/blue] (Return code: "+str(p.returncode)+")")
-
             to_run = ctx.get_string_at(1)
             matches = []
             for d in appdirs:
                 for filename in os.listdir(d):
-                    m = fuzz.ratio(line, filename)
-                    if min_match < m or filename.startswith(to_run) or to_run in filename:
+                    m = fuzz.ratio(line.lower(), filename.lower())
+                    if min_match < m or filename.lower().startswith(to_run.lower()) or to_run.lower() in filename.lower():
                         matches.append(d+filename)
 
             for app in extraapps:
-                m = fuzz.ratio(line, app)
-                if min_match < m or app.startswith(to_run) or to_run in app:
+                m = fuzz.ratio(line.lower(), app.lower())
+                if min_match < m or app.lower().startswith(to_run.lower()) or to_run.lower() in app.lower():
                     matches.append(app)
 
             args = ctx.lines[2:]
