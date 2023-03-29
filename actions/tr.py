@@ -10,6 +10,30 @@ def action_data():
 
 #TODO
 # Take path/url to file and send it to a configurable command
+def open_gui(sender, app, data):
+    label = data['label']
+    context = data['context']
+    pos = context.touch_config(f"gui.{label}_pos", [0, 19])
+    height = context.touch_config(f"gui.{label}_height", 0)
+    width = context.touch_config(f"gui.{label}_width", 0)
+
+    if data["init"](label):
+
+        dpg = data['dpg']
+        print("Translator")
+        with dpg.window(label=label, tag=label, pos = pos, width = width, height = height, on_close = lambda: data["close"](label)):
+            def send_talk(**args):
+                pass#print(dpg.get_value("translator_input"))
+
+            #with dpg.group():
+            with dpg.group(horizontal=True, width=-1):
+                dpg.add_input_text(tag="trlangfrom", width=-1)
+                dpg.add_input_text(tag="trlangto", width=-1)
+            with dpg.group(horizontal=True):
+                dpg.add_input_text(tag="trtextfrom", width=-50, multiline=True)
+                dpg.add_input_text(tag="trtextto", width=-50, multiline=True)
+            dpg.add_button(callback=send_talk, label="Translate")
+
 def on_load(ctx): 
     ctx.load_config()
     mir:str = ctx.touch_config("translate.mirror", "https://libretranslate.de/translate")

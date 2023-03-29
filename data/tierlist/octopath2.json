@@ -8,19 +8,21 @@
         },
         {
             "name": "A",
-            "entries": []
+            "entries": ["Castti"]
         },
         {
             "name": "B",
-            "entries": []
+            "entries": ["Hikari", "Throne", "Temenos"]
         },
         {
             "name": "C",
-            "entries": []
+            "entries": [
+                "Partitio", "Ochette"
+            ]
         },
         {
             "name": "D",
-            "entries": []
+            "entries": ["Agnea"]
         },
         {
             "name": "E",
@@ -28,10 +30,10 @@
         },
         {
             "name": "F",
-            "entries": ["Partitio"]
+            "entries": []
         }
     ],
-	"unsorted": [],
+    "unsorted": [],
     "author": "",
     "title": "Octopath Traveller 2 (How good is each character as a main protagonist)",
     "order": "S|A|B|C|D|E|F"

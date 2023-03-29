@@ -1,4 +1,4 @@
-import rich
+from tools.converters import PhoneButtonConverter
 
 class Action:
     @staticmethod
@@ -12,11 +12,11 @@ class Action:
         }
     
     def __run__(self, ctx):
-        cmd, ln = ctx.cmdsplit()
-        print(cmd)
+        #cmd, ln = ctx.cmdsplit()
+        ln = ctx.get_string()
         print(ln)
         #print(cmd, ",", line)
-        print(ctx.get_flag("test"))
+        print(PhoneButtonConverter().convert(ln))
         #with rich.console.Console().pager():
             #ctx.writeln("Hmm")
             

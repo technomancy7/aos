@@ -35,7 +35,7 @@ def editarg(x):
 
 def main(args):
     global context
-    print(args)
+
     if type(args) == str: args = shlex.split(args)
     if len(args) == 0: args = ['actions', "list"]
 
@@ -52,14 +52,18 @@ def main(args):
     #print(context.response)
 
 def run(args):
-    try:
-        main(args)
-    finally:
-        if len(context.buffer) != 0:
-            with open(context.aos_dir+"self.log", "a+") as f:
-                f.write("\n--- NEW LOG START ---\n\n")
-                for out in context.buffer:
-                    f.write(out)
+    if args == "gui":
+        os.system("python3 "+ ATHENAOS_PATH+"gui.py")
+        return 
+    else:
+        try:
+            main(args)
+        finally:
+            if len(context.buffer) != 0:
+                with open(context.aos_dir+"self.log", "a+") as f:
+                    f.write("\n--- NEW LOG START ---\n\n")
+                    for out in context.buffer:
+                        f.write(out)
 
 if __name__ == "__main__":
     run(" ".join(sys.argv[1:]))

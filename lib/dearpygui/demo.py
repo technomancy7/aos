@@ -186,6 +186,7 @@ def _on_demo_close(sender, app_data, user_data):
     dpg.delete_item("__demo_stage1")
     dpg.delete_item("__demo_popup1")
     dpg.delete_item("__demo_popup2")
+    dpg.delete_item("__demo_popup3")
     dpg.delete_item("__demo_item_reg3")
     dpg.delete_item("__demo_item_reg6")
     dpg.delete_item("__demo_item_reg7")
@@ -273,7 +274,7 @@ def show_demo():
                 dpg.add_text(f'Dear PyGui says hello. ({dpg.get_dearpygui_version()})')
                 with dpg.group(horizontal=True):
                     dpg.add_text("The code for the most recent version of this demo can be found here:")
-                    _hyperlink("demo.py", "https://github.com/hoffstadt/DearPyGui/blob/master/DearPyGui/dearpygui/demo.py")
+                    _hyperlink("demo.py", "https://github.com/hoffstadt/DearPyGui/blob/master/dearpygui/demo.py")
 
         with dpg.collapsing_header(label="Window Options"):
 
@@ -962,7 +963,7 @@ def show_demo():
 
             with dpg.tree_node(label="Simple Layouts"):
                 dpg.add_text("Containers can be nested for advanced layout options")
-                with dpg.child_window(width=500, height=320):
+                with dpg.child_window(width=500, height=320, menubar=True):
                     with dpg.menu_bar():
                         dpg.add_menu(label="Menu Options")
                     with dpg.child_window(autosize_x=True, height=95):
@@ -1604,7 +1605,7 @@ def show_demo():
                             borders_innerH=True, borders_outerH=True, borders_innerV=True,
                             borders_outerV=True, context_menu_in_body=True, row_background=True,
                             policy=dpg.mvTable_SizingFixedFit, height=300,
-                            scrollY=True, clipper=True):
+                            scrollY=True, clipper=True) as table_id:
 
                     dpg.add_table_column(label="1")
                     dpg.add_table_column(label="2")
@@ -1652,7 +1653,7 @@ def show_demo():
                             borders_innerH=True, borders_outerH=True, borders_innerV=True,
                             borders_outerV=True, context_menu_in_body=True, row_background=True,
                             policy=dpg.mvTable_SizingFixedFit, height=300,
-                            scrollY=True, tag=_filter_table_id):
+                            scrollY=True, tag=_filter_table_id) as table_id:
 
                     dpg.add_table_column(label="1")
                     dpg.add_table_column(label="2")

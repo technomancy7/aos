@@ -83,11 +83,34 @@ class AOSSessionManager(rivescript.sessions.SessionManager):
                 data[k] = v
         self.aos.set_config(f"talk_sessions.{username}", data)
 
+def open_gui(sender, app, data):
+    label = data['label']
+    context = data['context']
+    pos = context.touch_config(f"gui.{label}_pos", [0, 19])
+    height = context.touch_config(f"gui.{label}_height", 0)
+    width = context.touch_config(f"gui.{label}_width", 0)
+
+    if data["init"](label):
+        dpg = data['dpg']
+        print("Talk")
+        with dpg.window(label=label, tag=label, pos = pos, width = width, height = height, on_close = lambda: data["close"](label)):
+            def send_talk(**args):
+                msg = dpg.get_value("talk_input")
+                dpg.set_value("talk_log", "> You: "+msg+"\n"+dpg.get_value("talk_log"))
+                dpg.set_value("talk_input", "")
+                dpg.focus_item("talk_input")
+
+            with dpg.group(horizontal=True):
+                dpg.add_input_text(tag="talk_input", width=-45, on_enter=True, callback=lambda: send_talk())
+                #dpg.add_key_press_handler(parent="talk_input", callback=lambda: print("done"))
+                dpg.add_button(callback=send_talk, label="Send")
+            dpg.add_input_text(tag="talk_log", width=-1, height=-1, multiline=True)
+
 def on_load(ctx): 
     ctx.set_config("talk.active", True)
     braindir = ctx.touch_config("talk.brain", ctx.aos_dir+"brain/")
     #print("Loading", braindir)
-    data = ctx.get_data()
+    #data = ctx.get_data()
     username = ctx.username()
     rs = RiveScript(session_manager=AOSSessionManager(ctx))
     rs._session.rs = rs

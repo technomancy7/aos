@@ -36,10 +36,25 @@ class Tierlist:
         self.data["order"] = "|".join(orders)
         return self
 
+    def remove_order(self, name, index = None):
+        orders = self.get_order()
+        if index == None: index = len(orders)
+        orders.remove(name)
+        self.data["order"] = "|".join(orders)
+        return self
+
     def add_tier(self, name, index = None):
         if index == None: index = len(self.data["tiers"])
         self.data["tiers"].insert(index, {"name": name, "entries": []})
         self.insert_order(name, index)
+        return self
+
+    def remove_tier(self, name):
+        for tier in self.data["tiers"]:
+            if tier['name'] == name:
+                self.data["tiers"].remove(tier)
+                self.remove_order(name)
+                break
         return self
 
     def get_tier(self, id_or_name):
@@ -54,17 +69,34 @@ class Tierlist:
                 
         return None
 
-    def add_to_tier(self, tier, entry):
+    def remove_from_tier(self, tier, entry):
         if type(tier) == int or (type(tier) == str and tier.isdigit()):
             tier_index = int(tier)
-            self.data["tiers"][tier_index]["entries"].append(entry)
+            if entry in self.data["tiers"][tier_index]["entries"]:
+                self.data["tiers"][tier_index]["entries"].remove(entry)
             return self
 
         tier = str(tier)
 
         for tierd in self.data["tiers"]:
-            if tierd["name"].lower() == tier.lower():        
-                tierd["entries"].append(entry)
+            if tierd["name"].lower() == tier.lower(): 
+                if entry in tierd['entries']:         
+                    tierd["entries"].remove(entry)
+        return self
+
+    def add_to_tier(self, tier, entry):
+        if type(tier) == int or (type(tier) == str and tier.isdigit()):
+            tier_index = int(tier)
+            if entry in self.data["tiers"][tier_index]["entries"]:
+                self.data["tiers"][tier_index]["entries"].append(entry)
+            return self
+
+        tier = str(tier)
+
+        for tierd in self.data["tiers"]:
+            if tierd["name"].lower() == tier.lower():   
+                if entry not in tierd['entries']:       
+                    tierd["entries"].append(entry)
         return self
 
 
