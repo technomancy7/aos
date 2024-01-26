@@ -1,1 +1,0 @@
-{"name": "kreboot", "group": "", "command": "{APPS}bin/kreboot.sh", "wd": "{APPS}kreboot/"}

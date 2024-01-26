@@ -1,1 +1,0 @@
-{"name": "osu", "group": "games", "command": "{APPS}bin/osu.AppImage", "wd": "{APPS}osu/"}

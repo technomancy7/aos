@@ -1,1 +1,0 @@
-{"name": "install_julia", "group": "", "command": "{APPS}bin/install_julia.sh", "wd": "{APPS}install_julia/"}

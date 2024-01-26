@@ -1,1 +1,0 @@
-{"name": "install_zig", "group": "", "command": "{APPS}bin/install_zig.rb", "wd": "{APPS}install_zig/"}
