@@ -4,3 +4,7 @@ self.log
 data/appman/**
 data/codex/**
 dsc/stories/**
+__pycache__/
+**__pycache__/
+**/__pycache__/
+**/lib/**
