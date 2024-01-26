@@ -9,6 +9,9 @@ def action_data():
     "group": "utility",
 }
 
+extensions = [
+    ["ActionsTest", lambda _, a, data: print(f"Luls {a} {data}")]
+]
 def on_help(ctx):
     return """ 
     Manages internal actions
@@ -34,6 +37,7 @@ def on_help(ctx):
 def printdata(ctx, d):
     comment = ""
     if d["disabled"]: comment = " [red](DISABLED)[/red]"
+    if d.get("description"): comment = f"{comment}\n - {d['description']}"
     ctx.writeln(f"[yellow]{d.get('name', 'Unknown')}[/yellow] (v {d.get('version', '0')}) by {d.get('author', '?')} in {d['filename']}{comment}")
 
 def on_load(ctx): 

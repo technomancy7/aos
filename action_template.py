@@ -8,6 +8,7 @@ class Action:
             "version": "0.0",
             "features": [],
             "group": "",
+            "description": "",
         }
 
     def __help__(self, ctx):
@@ -15,7 +16,7 @@ class Action:
             Default help.
         """
 
-    def __run__(self, ctx): 
+    def __run__(self, ctx):
         # Main functionality here.
         return ctx
 
@@ -24,4 +25,3 @@ class Action:
 
     def __finish__(self, ctx):
         pass
-

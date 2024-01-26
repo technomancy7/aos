@@ -1,168 +1,111 @@
 import os, json
 
-def action_data():
-    return {
-    "name": "addrbook",
-    "author": "Kaiser",
-    "version": "1.0b",
-    "features": [],
-    "group": "utility",
-}
+class Action:
+    @staticmethod
+    def __action__():
+        return {
+        "name": "codex",
+        "author": "Kaiser",
+        "version": "1.0b",
+        "features": [],
+        "group": "utility",
+    }
 
-def on_help(ctx):
-    return """
-    --db:<database>
-        Use a different database name, useful for grouping different entities together
+    def __help__(self, ctx):
+        return """
+        Flags:
+            --db:<database>
+                Use a different database name, useful for grouping different entities together
 
-    Commands: 
-        list | ls (default)
-        Shows all entries
+        Commands:
+            edit | write | e | w
+            Opens document for the database in code editor
 
-        db <<name>>
-        If no name given, lists all database names.
-        Else changes active database.
+            search | s <<key>> = <<value>>
+            Shows entries which contain a <<key>> and <<value>> match
 
-        update | u <entity>.<key> = <value>
-        Edits an entry quickly.
+            get <<name>>
+            Shows entry with matching <<name>>
 
-        add <name>
-        Use: Creates new entity in database.
-        Options:
-            --name:<new name>
+            list | ls (default)
+            Shows all entries
 
-        mod
-        Use: Modifies entity/entities in database.
-        Options:
-            --scope:all|<index_name>
-            --op:[edit,add,empty,del]
-            --field:<field>
-            --value:<new value> (Only used for op:edit)
-    """
+            db <<name>>
+            If no name given, lists all database names.
+            Else changes active database.
 
-def pretty_print_entity(ctx, name, entity):
-    ctx.writeln(f"[green bold]{name}[/green bold]")
-    for k, v in entity.items():
-        ctx.writeln(f" * [blue]{k}[/blue] = [yellow]{v}[/yellow]")
 
-def on_load(ctx): 
-    cmd = ctx.get_string_ind(0)
+        """
 
-    db = ctx.touch_config("codex.database", "addrbook")
-    if ctx.has_flag("db"): 
-        db = ctx.get_flag("db")
-        ctx.set_config("codex.database", db)
-        print("Updated default database record: "+db)
+    def get_display_name(self, ctx, name, db = "addrbook"):
+        doc = ctx.get_data_doc(db, override="codex") # override since this function may be called remotely
 
-    data = ctx.get_data(db)
+        for ent in doc.sections():
+            if name.lower() == ent.string_key().lower():
+                return ent.field("Display Name").optional_string_value() or "Default User"
 
-    #if data.get(db, None) == None: data[db] = {}
+    def __run__(self, ctx):
+        cmd = ctx.get_string_ind(0)
 
-    if cmd == "" or cmd == None: cmd = "list"
-    ctx.writeln(f" --- Currently in {db} ---")
-    match cmd:
-        case "add":
-            name = ctx.get_string()[len(cmd)+1:] or ctx.get_flag("name") or input("Name > ")
-            if name == "": return print("Name is required.")
+        db = ctx.touch_config("codex.database", "addrbook")
+        if ctx.has_flag("db"):
+            db = ctx.get_flag("db")
+            ctx.set_config("codex.database", db)
+            print("Updated default database record: "+db)
 
-            if data.get(name, None) == None:
-                data[name] = {}
+        data = ctx.get_data(db)
 
-                ctx.save_data(data, db)
-                print(f"{name} index created.")
-                return ctx.exit_code(1)
-            else: return print("Index already exists.")
-
-        case "db":
-            new = ctx.get_string()[len(cmd)+1:]
-            if new:
-                ctx.set_config("codex.database", new)
-                ctx.writeln("Updated default database record: "+new)
-            else:
-                ctx.writeln("Databases:")
-                for n in ctx.get_data_list():
-                    #self.parse_file(path+filename)
-                    ctx.writeln(f" [blue]{n}[/blue]")
-
-        case "delete" | "del" | "d":
-            name = ctx.get_string()[len(cmd)+1:] or ctx.get_flag("name") or input("Name > ")
-            if data.get(name, None) != None:
-                pretty_print_entity(ctx, name, data[name])
-                if ctx.get_flag("nw") or input("Confirm to delete (Input y to confirm) > ") == "y":
-                    del data[name]
-                    ctx.save_data(data, db)
-
-        case "list" | "ls":
-            for name, index in data.items():
-                pretty_print_entity(ctx, name, index)
-
-        case "update" | "u":
-            line = ctx.get_string()[len(cmd)+1:]
-
-            if line != "":
-                if "." in line and "=" in line:
-                    try:
-                        entity = line.split(".")[0]
-                        key = line.split(".")[1].split("=")[0].strip()
-                        value = line.split(".")[1].split("=")[1].strip()
-                    except:
-                        return ctx.writeln("Problem parsing line format...")
-                    if key != "" and entity != "" and value != "":
-                        #print(entity, key, value)
-                        if data.get(entity, None) == None:
-                            ctx.writeln("Entity not found.")
-                        else:
-                            data[entity][key] = value
-                            pretty_print_entity(ctx, entity, data[entity])
-                            ctx.save_data(data, db)
-
-                    else:
-                        ctx.writeln("Problem parsing line format...")
+        if cmd == "" or cmd == None: cmd = "list"
+        ctx.writeln(f" --- Currently active: [blue]{db}[/blue] ---")
+        ctx.writeln("")
+        match cmd:
+            case "db":
+                new = ctx.get_string()[len(cmd)+1:]
+                if new:
+                    ctx.set_config("codex.database", new)
+                    ctx.writeln("Updated default database record: "+new)
                 else:
-                    ctx.writeln("Problem parsing line format...")
-            else:
-                ctx.writeln("Invalid or no value given.")
-        case "mod":
-            scope = ctx.get_flag("scope") or input("Scope (Index to add field to) [all] > ")
-            field = ctx.get_flag("field") or input("New field > ")
-            operation = ctx.get_flag("op") or input("Operation [add, del, edit, empty]> ")
-            if operation not in ["add", "edit", "del", "empty"]: return print("Invalid operation.")
-            if not field: return print("Field is required.")
-            new_value = ""
-            if operation == "edit": new_value = ctx.get_string()[len(cmd)+1:]
-            #.get_flag("value") or input("New value > ")
+                    ctx.writeln("Databases:")
+                    for n in ctx.get_data_list():
+                        if not n.endswith(".eno"): continue
+                        ctx.writeln(f" [blue]{n.split('.')[0]}[/blue]")
 
-            if scope == "" or scope == "all":
-                if ctx.get_flag("nw") or input("Confirm to alter ALL index (Input y to confirm) > ") == "y":
-                    for name, index in data.items():
-                        #if index.get(field, None) == None:
-                        if operation == "empty":
-                            index[field] = ""
-                        if operation == "del" and index.get(field, None) != None:
-                            del index[field]
-                        if operation == "add" and index.get(field, None) == None:
-                            index[field] = ""
-                        if operation == "edit":
-                            index[field] = new_value
-                    ctx.save_data(data, db)
-                    return ctx.exit_code(1)
-                else:
-                    print("Cancelled.")
-                    return ctx.exit_code(0)
-            else:
-                index = data.get(scope, None)
-                if index != None:
-                    if operation == "empty":
-                        index[field] = ""
-                    if operation == "del" and index.get(field, None) != None:
-                        del index[field]
-                    if operation == "add" and index.get(field, None) == None:
-                        index[field] = ""
-                    if operation == "edit":
-                        index[field] = new_value
-                    ctx.save_data(data, db)
-                    return ctx.exit_code(1)
-                else:
-                    return print("Index does not exist.")
+            case "edit" | "write" | "e" | "w":
+                ctx.writeln("Opening "+ctx.data_path()+db+".eno")
+                ctx.edit_code(ctx.data_path()+db+".eno")
 
-    ctx.exit_code(0)
-    return ctx
+            case "search" | "s":
+                doc = ctx.get_data_doc(db)
+                searchstr = ctx.get_string()[len(cmd)+1:]
+                k = searchstr.split("=")[0].strip()
+                v = searchstr.split("=")[1].strip()
+
+                for ent in doc.sections():
+                    for elem in ent.elements():
+                        field = elem.to_field()
+                        if field.string_key().lower() == k.lower() and \
+                        field.optional_string_value().lower() == v.lower():
+                            self.pretty_print_entity(ctx, ent)
+
+            case "get" | "g":
+                doc = ctx.get_data_doc(db)
+                name = ctx.get_string()[len(cmd)+1:]
+                for ent in doc.sections():
+                    if name.lower() == ent.string_key().lower():
+                        self.pretty_print_entity(ctx, ent)
+
+            case "list" | "ls":
+                doc = ctx.get_data_doc(db)
+
+                for ent in doc.sections():
+                    self.pretty_print_entity(ctx, ent)
+
+        ctx.exit_code(0)
+        return ctx
+
+    def pretty_print_entity(self, ctx, ent):
+        ctx.writeln(f"# [blue]{ent.string_key()}[/blue]")
+        for elem in ent.elements():
+            k = elem.to_field()
+            ctx.writeln(f" - [blue]{k.string_key()}[/blue] = [blue]{k.optional_string_value()}[/blue]")
+        ctx.writeln("")

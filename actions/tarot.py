@@ -13,10 +13,24 @@ class Action:
             "group": "",
         }
 
+    def __extensions__(self):
+        return [
+            ["Tarot", None],
+            ["Reading", None]
+        ]
     def __help__(self, ctx):
         return """
+            r | reading
             s | show | i | info
             ls
+
+            Reading types (-r:<number>):
+                1. single (Draws one card, to answer a single question)
+                2. past, present, future (three cards, showing a moment of your past, how it effects you now, and how it will manifest in the future, or how you can overcome it)
+                3. situation, action, outcome (three cards, a situation, something you can do, and how it may turn out)
+                4. three options (think through a situation with 3 cards)
+
+                Add -s:<name> flag to save reading under defined name.
         """
 
     def tarot(self):
@@ -59,17 +73,12 @@ class Action:
             line = ctx.get_string()[len(cmd)+1:]
 
         line = line.lower()
-        print(cmd, "-", line)
+        #print(cmd, "-", line)
         self.data = self.tarot()
-        #print(d)
+        read_type = ctx.get_flag("t") or ctx.get_flag("r")
+        save_reading = ctx.get_flag("s")
         match cmd:
             case "reading" | "r":
-                ctx.writeln("Choose a reading type:")
-                ctx.writeln(" 1. single (Draws one card, to answer a single question)")
-                ctx.writeln(" 2. past, present, future (three cards, showing a moment of your past, how it effects you now, and how it will manifest in the future, or how you can overcome it)")
-                ctx.writeln(" 3. situation, action, outcome (three cards, a situation, something you can do, and how it may turn out)")
-                ctx.writeln(" 4. three options (think through a situation with 3 cards)")
-                read_type = ctx.console.input(prompt="> ")
                 cm = CardManager()
                 cm.new()
 
@@ -83,15 +92,17 @@ class Action:
                         if not rev: ctx.writeln(f"[blue]Meaning[/blue]: {info['meaning_up']}")
                         if rev: ctx.writeln(f"[blue]Reversed[/blue]: {info['meaning_rev']}")
                         ctx.writeln(f"[blue]Description[/blue]: {info['desc']}")
-                        ctx.writeln("Press Enter to exit, or type a name/label/description to save this reading.")
-                        n = input("")
-                        if n:
+                        if save_reading:
                             saved = {
                                 "card": card,
                                 "reversed": rev,
                                 "meaning": info,
-                                "label": n
+                                "label": save_reading
                             }
+                            ctx.writeln(f"Will save {saved}")
+                    case default:
+                        ctx.writeln(f"Unknown reading type {read_type}")
+
             case "s" | "show" | "i" | "info":
                 card = self.get_card_info(line)
                 ctx.say(f"Here is information on {card['name']}.")

@@ -1,6 +1,9 @@
 import json, os, importlib, textwrap, readline, traceback, random
 from rich.console import Console
 from copy import deepcopy
+import enolib
+from enotype import boolean, integer
+enolib.register(boolean, integer)
 
 class Context:
     def __init__(self, *, line = "", command = "", lines = [], base_dir = ""):
@@ -15,6 +18,8 @@ class Context:
         self.time_format = 'HH:mm:ss DD-MM-YYYY'
         self.response = {}
         self.hide_traceback = False
+
+        self.saved_username = ""
 
     def sd_get_random(self, dsf):
         pth = self.aos_dir+"static_data/"+str(dsf)+".txt"
@@ -36,7 +41,7 @@ class Context:
 
     def coerce_bool(self, line):
         return str(line).lower() in ["1", "yes", "y", "true"]
-            
+
     def update_from_line(self, line):
         line = line.split(" ")
         self.command = line[0]
@@ -79,12 +84,27 @@ class Context:
             if inv in disabled: disabled.remove(inv)
         return disabled
 
+    def get_action_object(self, action):
+        if not os.path.exists(self.aos_dir+"actions/"+action+".py"):
+            return self.writeln(f"Action {action} not found")
+        try:
+            f = importlib.import_module("actions."+action)
+
+            if hasattr(f, "Action"):
+                act = f.Action()
+                act.ctx = self
+                return act
+            else:
+                print("Action not valid.")
+        except Exception as e:
+            print(traceback.format_exception(e))
+
     def cexec(self, action, method, *args, **kwargs):
         if not os.path.exists(self.aos_dir+"actions/"+action+".py"):
             return self.writeln(f"Action {action} not found")
         try:
             f = importlib.import_module("actions."+action)
-            
+
             if hasattr(f, "Action"):
                 act = f.Action()
                 act.ctx = self
@@ -105,17 +125,17 @@ class Context:
         self.start_response()
         subctx = None
         if context == None:
-            subctx = self 
+            subctx = self
         else:
             subctx = context
-        
+
         command = subctx.resolve_alias().lower()
 
         disabled = subctx.touch_config("system.disabled", [])
 
         disabled = self.sanity_check_disabled(disabled)
 
-        if command in disabled: 
+        if command in disabled:
             return subctx.writeln(f"Action is disabled.")
 
         if not os.path.exists(self.aos_dir+"actions/"+command+".py"):
@@ -123,7 +143,7 @@ class Context:
 
         try:
             f = importlib.import_module("actions."+command)
-            
+
             if hasattr(f, "Action"):
                 act = f.Action()
                 act.ctx = self
@@ -173,12 +193,13 @@ class Context:
             return subctx
 
     def username(self):
-        codex = self.access_data("codex", "addrbook")
-
-        if codex.get("self") and codex["self"].get("name"): return codex["self"]["name"]
-        return "User"
+        if self.saved_username != "": return self.saved_username
+        newusr = self.get_action_object("codex").get_display_name(self, "self")
+        self.saved_username = newusr
+        return newusr
 
     def get_user_property(self, propname):
+        return "Undefined (TODO REWRITE)"
         codex = self.access_data("codex", "addrbook")
 
         if codex.get("self") and codex["self"].get(propname): return codex["self"][propname]
@@ -208,7 +229,7 @@ class Context:
             tts_cmd = self.touch_config("system.tts")
             if tts_cmd != None:
                 os.system(tts_cmd.replace("$P", line.replace("'", ""))+"&")
-        
+
         if self.touch_config("system.tts_output", True):
             self.writeln(f"[red]\[{self.name()}][/red] {line}")
 
@@ -241,7 +262,7 @@ class Context:
         if prompt != "": prompt = f": ({prompt}) "
         if default != "": inse = f"[{default}]"
         f = self.get_flag(value) or self.console.input(prompt=f"{value}{prompt}{inse} > ")
-        if f == "": 
+        if f == "":
             f = default
         return f
 
@@ -256,10 +277,10 @@ class Context:
     def get_flag(self, name, default = ""):
         for flag in self.lines:
             if flag.startswith(f"-{name}:") or flag.startswith(f"--{name}:") and (":" in flag or "=" in flag):
-                if ":" in flag:
-                    return flag.split(":")[1]
-                elif "=" in flag:
-                    return flag.split("=")[1]    
+                if "=" in flag:
+                    return flag.split("=")[1]
+                elif ":" in flag:
+                    return ":".join(flag.split(":")[1:])
                 else:
                     return "true"
             if flag == f"-{name}" or flag == f"--{name}" and (":" not in flag and "=" not in flag):
@@ -267,14 +288,14 @@ class Context:
         return default
 
     def get_string(self, start_at = None, *, default = ""):
-        if start_at != None: 
+        if start_at != None:
             return " ".join(self.get_string_list()[int(start_at):]) or default
 
         out = []
         for flag in self.lines:
             if not flag.startswith(f"-"):
                 out.append(flag)
-        return " ".join(out)  
+        return " ".join(out)
 
     def get_string_list(self):
         out = []
@@ -282,7 +303,7 @@ class Context:
             if not flag.startswith(f"-"):
                 out.append(flag)
         return out
-    
+
     def get_string_at(self, ind = 0): return self.get_string_ind(ind)
 
     def get_string_ind(self, ind = 0, d = ""):
@@ -291,24 +312,16 @@ class Context:
             if not flag.startswith(f"-"):
                 if iters == ind:
                     return flag
-                iters += 1 
+                iters += 1
         return d
 
     def exit_code(self, newCode = None):
         if newCode == None: return self._exit_code
         self._exit_code = newCode
 
-    def data_path(self, override = ""):
-        name = self.command
-        if override != "": name = override
-        path = self.aos_dir+"data/"+name+"/"
-        if not os.path.exists(path):
-            os.makedirs(path)
-        return path
-
     def view_image(self, path):
         app = self.touch_config("system.imageviewer", "eog")
-        
+
         if "$T" in app:
             os.system(app.replace("$T", path))
         else:
@@ -348,6 +361,20 @@ class Context:
         else:
             return ""
 
+    def edit_code(self, txtfile):
+        txtedit = self.touch_config("system.codeeditor", "pulsar")
+
+        if "$T" in txtedit:
+            os.system(txtedit.replace("$T", txtfile))
+        else:
+            os.system(txtedit+" "+txtfile)
+
+        if os.path.exists(txtfile):
+            with open(txtfile, "r") as f:
+                return f.read().strip()
+        else:
+            return ""
+
     def delete_text_file(self):
         txtfile = self.aos_dir+"editing.txt"
         if os.path.exists(txtfile):
@@ -358,6 +385,12 @@ class Context:
         if not os.path.exists(f+filename+".json"):
             with open(f+filename+".json", 'w+') as f:
                 f.write("{}")
+
+    def validate_generic_data_file(self, filename = "data"):
+        f = self.data_path()
+        if not os.path.exists(f+filename):
+            with open(f+filename, 'w+') as f:
+                f.write("")
 
     def access_data(self, action, filename):
         with open(f"{self.aos_dir}data/{action}/{filename}.json", 'r') as fl:
@@ -374,18 +407,38 @@ class Context:
             out.append(filename)
         return out
 
-    def get_data(self, filename = "data"):
-        f = self.data_path()
+    def get_data_raw(self, filename = "data", *, override = ""):
+        f = self.data_path(override)
+        self.validate_generic_data_file(filename)
+        with open(f+filename, 'r') as fl:
+            return fl.read()
+
+    def get_data_doc(self, filename = "data", *, override = ""):
+        f = self.data_path(override)
+        self.validate_generic_data_file(filename+".eno")
+        with open(f+filename+".eno", 'r') as fl:
+            return enolib.parse(fl.read())
+
+    def get_data(self, filename = "data", *, override = ""):
+        f = self.data_path(override)
         self.validate_data_file(filename)
         with open(f+filename+".json", 'r') as fl:
             return json.load(fl)
+
+    def data_path(self, override = ""):
+        name = self.command
+        if override != "": name = override
+        path = self.aos_dir+"data/"+name+"/"
+        if not os.path.exists(path):
+            os.makedirs(path)
+        return path
 
     def save_data(self, js, filename = "data"):
         f = self.data_path()
         self.validate_data_file(filename)
         with open(f+filename+".json", 'w+') as fl:
             fl.write(json.dumps(js, indent=4))
-        
+
     def load_config(self):
         if os.path.exists(self.aos_dir+"config.json"):
             with open(self.aos_dir+"config.json", 'r') as f:
@@ -402,11 +455,11 @@ class Context:
             sub = key.split(".")[1]
             if self.config.get(parent, None) == None:
                 self.config[parent] = {}
-            
+
             if type(self.config[parent]) == dict:
                 self.config[parent][sub] = value
             else:
-                return 
+                return
 
         else:
             self.config[key] = value
@@ -420,11 +473,11 @@ class Context:
             sub = key.split(".")[1]
             if self.config.get(parent, None) == None:
                 return
-            
+
             if type(self.config[parent]) == dict:
                 del self.config[parent][sub]
             else:
-                return 
+                return
 
         else:
             del self.config[key]
@@ -438,7 +491,7 @@ class Context:
             sub = key.split(".")[1]
             if self.config.get(parent, None) == None:
                 self.config[parent] = {}
-            
+
             if type(self.config[parent]) == dict:
                 if self.config[parent].get(sub, None) == None:
                     if not ignore: self.set_config(key, default)

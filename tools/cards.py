@@ -141,6 +141,42 @@ class CardManager:
                     "icon": None
                 }
                 self.get("tarot").append(nc)
+        
+        tarot_higher_arcana = [
+            "The Fool",
+            "The Magician",
+            "The High Priestess",
+            "The Empress",
+            "The Emperor",
+            "The Hierophant",
+            "The Lovers",
+            "The Chariot",
+            "Strength",
+            "The Hermit",
+            "Wheel of Fortune",
+            "Justice",
+            "The Hanged Man",
+            "Death",
+            "Temperance",
+            "The Devil",
+            "The Tower",
+            "The Star",
+            "The Moon",
+            "The Sun",
+            "Judgment",
+            "The World"
+        ]
+        
+        for i, ac in enumerate(tarot_higher_arcana):
+            nc = {
+                "value": i,
+                "name":  f"{i} {ac}",
+                "suit": None,
+                "icon": None
+            }
+            self.get("tarot").append(nc)
+    
 
         self.shuffle("basic")
+        self.shuffle("tarot")
 

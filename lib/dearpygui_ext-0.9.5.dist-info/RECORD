@@ -1,0 +1,15 @@
+dearpygui_ext-0.9.5.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+dearpygui_ext-0.9.5.dist-info/LICENSE,sha256=LosyXxiwamdJ4aHLKuNBws20EFKxINoDVTN3fBd2BA8,1090
+dearpygui_ext-0.9.5.dist-info/METADATA,sha256=A6MdBdZO6sHGMYm6rmC1WePjIQlVDTcKCdJWVe5rQYs,5725
+dearpygui_ext-0.9.5.dist-info/RECORD,,
+dearpygui_ext-0.9.5.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+dearpygui_ext-0.9.5.dist-info/WHEEL,sha256=G16H4A3IeoQmnOrYV4ueZGKSjhipXx8zc8nu9FGlvMA,92
+dearpygui_ext-0.9.5.dist-info/top_level.txt,sha256=QvEk-Z8slLfT_X6pmdHHS-wTbNcOU6YVxLWtdwGfEJo,14
+dearpygui_ext/__init__.py,sha256=4LqLcvNhtvT3HceKC3pXBHW91E4XbKrWBLoTQghHVAM,6
+dearpygui_ext/__pycache__/__init__.cpython-311.pyc,,
+dearpygui_ext/__pycache__/logger.cpython-311.pyc,,
+dearpygui_ext/__pycache__/themes.cpython-311.pyc,,
+dearpygui_ext/__pycache__/utilities.cpython-311.pyc,,
+dearpygui_ext/logger.py,sha256=RXjh3MSS4sCCDA4qQGLGEIKicvyTdQaOqP4R-pBgrIg,3832
+dearpygui_ext/themes.py,sha256=KdNbFqlcV52kDnHNhUq4NczHlrQgX1DlvwzLMFGYhzc,23213
+dearpygui_ext/utilities.py,sha256=Q--VUL1WrhHGfa9kXUTfICTBZZkZyEIbtv9QNQbyMcw,6707

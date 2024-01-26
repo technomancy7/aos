@@ -3,6 +3,7 @@
         "name": "Kai",
         "age": "30",
         "location": "england",
-        "phone": "07497485628"
+        "phone": "07497485628",
+        "test": "failed"
     }
 }

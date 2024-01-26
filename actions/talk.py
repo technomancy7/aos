@@ -3,18 +3,6 @@ from rivescript import RiveScript
 import rivescript
 import rich
 
-def action_data():
-    return {
-    "name": "talk",
-    "author": "Kaiser",
-    "version": "0.4",
-    "features": [],
-    "group": "system",
-}
-
-def on_help(ctx):
-    pass
-
 class AOSSessionManager(rivescript.sessions.SessionManager):
     def __init__(self, aos_ctx):
         self.aos = aos_ctx
@@ -40,7 +28,7 @@ class AOSSessionManager(rivescript.sessions.SessionManager):
         text = ""
         with open(self.local_file, "r") as f:
             text = f.read()
-        
+
         while "\n\n" in text: text = text.replace("\n\n", "\n")
         text = text.strip()
         with open(self.local_file, "w") as f:
@@ -83,109 +71,107 @@ class AOSSessionManager(rivescript.sessions.SessionManager):
                 data[k] = v
         self.aos.set_config(f"talk_sessions.{username}", data)
 
-def open_gui(sender, app, data):
-    label = data['label']
-    context = data['context']
-    pos = context.touch_config(f"gui.{label}_pos", [0, 19])
-    height = context.touch_config(f"gui.{label}_height", 0)
-    width = context.touch_config(f"gui.{label}_width", 0)
+class Action:
+    @staticmethod
+    def __action__():
+        return {
+        "name": "talk",
+        "author": "Kaiser",
+        "version": "0.4",
+        "features": [],
+        "group": "system",
+    }
 
-    if data["init"](label):
-        dpg = data['dpg']
-        print("Talk")
-        with dpg.window(label=label, tag=label, pos = pos, width = width, height = height, on_close = lambda: data["close"](label)):
-            def send_talk(**args):
-                msg = dpg.get_value("talk_input")
-                dpg.set_value("talk_log", "> You: "+msg+"\n"+dpg.get_value("talk_log"))
-                dpg.set_value("talk_input", "")
-                dpg.focus_item("talk_input")
+    def __help__(self, ctx):
+        pass
 
-            with dpg.group(horizontal=True):
-                dpg.add_input_text(tag="talk_input", width=-45, on_enter=True, callback=lambda: send_talk())
-                #dpg.add_key_press_handler(parent="talk_input", callback=lambda: print("done"))
-                dpg.add_button(callback=send_talk, label="Send")
-            dpg.add_input_text(tag="talk_log", width=-1, height=-1, multiline=True)
+    def __run__(self, ctx):
+        ctx.set_config("talk.active", True)
+        braindir = ctx.touch_config("talk.brain", ctx.aos_dir+"brain/")
 
-def on_load(ctx): 
-    ctx.set_config("talk.active", True)
-    braindir = ctx.touch_config("talk.brain", ctx.aos_dir+"brain/")
-    #print("Loading", braindir)
-    #data = ctx.get_data()
-    username = ctx.username()
-    rs = RiveScript(session_manager=AOSSessionManager(ctx))
-    rs._session.rs = rs
-    rs.load_directory(braindir, ext=['ai'])
-    rs.sort_replies()
-    line = ctx.get_string()
+        username = ctx.username()
+        rs = RiveScript(session_manager=AOSSessionManager(ctx))
+        rs._session.rs = rs
+        rs.load_directory(braindir, ext=['ai', 'rive'])
+        rs.sort_replies()
+        line = ctx.get_string()
 
-    def execute(ln):
-        #ctx.writeln("INPUT", ln)
-        firstpart = ln.split(" ")[0]
-        rest = " ".join(ln.split(" ")[1:])
-        output = ""
-        match firstpart:
-            case "/quit" | "/q":
-                exit()
-            case "/aos":
-                ctx.quick_run(rest)
-            case "/console":
-                os.system(rest)
-            case "/cycle" | "/loop":
-                c = rest.split(" ")[0]
-                rest = " ".join(rest.split(" ")[1:])
-                if c.isdigit():
-                    reply = ""
-                    for i in range(0, int(c)+1):
-                        reply += rs.reply(username, rest)+" "
+        def execute(ln):
+            firstpart = ln.split(" ")[0]
+            rest = " ".join(ln.split(" ")[1:])
+            output = ""
+            match firstpart:
+                case "/" | "/h" | "/help" | "/cmd":
+                    ctx.writeln(f"AI PARSER HELP")
+                    ctx.writeln("/quit, /edit <rs file name>, /aos <aos command>, /console <terminal command>")
+                    ctx.writeln("/loop <counter> <text>, /repeat <history index>, /remind <code>, /forget <code>")
+                    ctx.writeln("/thaw, /freeze, /set, /get /showall")
+                case "/quit" | "/q":
+                    exit()
+                case "/edit":
+                    ctx.edit_code(ctx.aos_dir+"/brain/"+rest)
+                case "/aos":
+                    ctx.quick_run(rest)
+                case "/console":
+                    os.system(rest)
+                case "/cycle" | "/loop":
+                    c = rest.split(" ")[0]
+                    rest = " ".join(rest.split(" ")[1:])
+                    if c.isdigit():
+                        reply = ""
+                        for i in range(0, int(c)):
+                            reply += rs.reply(username, rest)+" "
+                        return reply
+                case "/repeat" | "/redo" | "/again":
+                    inx = 0
+                    if rest.isdigit():
+                        inx = int(rest)
+                    rln = ctx.touch_config(f"talk_sessions.{username}")["__history__"]["input"][0]
+                    reply = rs.reply(username, rln)
                     return reply
-            case "/repeat" | "/redo" | "/again":
-                inx = 0
-                if rest.isdigit():
-                    inx = int(rest)
-                rln = ctx.touch_config(f"talk_sessions.{username}")["__history__"]["input"][0]
-                reply = rs.reply(username, rln)
-                return reply
-            case "/remind":
-                rs._session.add_code(rest.replace("->", "\n"))
-            case "/forget":
-                rs._session.remove_code(rest.replace("->", "\n"))
-            case "/freeze":
-                rs._session.freeze(username)
-            case "/thaw":
-                rs._session.thaw(username)    
-            case "/set":
-                key = rest.split(":")[0]
-                val = ":".join(rest.split(":")[1:]).strip()
-                rs._session.set(username, {key: val})
-            case "/get":
-                ctx.writeln(rs._session.get(username, rest))
-            case "/showall":
-                ctx.writeln(rs._session.get_all())
-            case other:
-                reply = rs.reply(username, ln)
-                return reply
-        return output
+                case "/remind":
+                    rs._session.add_code(rest.replace("->", "\n"))
+                case "/forget":
+                    rs._session.remove_code(rest.replace("->", "\n"))
+                case "/freeze":
+                    rs._session.freeze(username)
+                case "/thaw":
+                    rs._session.thaw(username)
+                case "/set":
+                    key = rest.split(":")[0]
+                    val = ":".join(rest.split(":")[1:]).strip()
+                    rs._session.set(username, {key: val})
+                case "/get":
+                    ctx.writeln(rs._session.get(username, rest))
+                case "/showall":
+                    ctx.writeln(rs._session.get_all())
+                case other:
+                    reply = rs.reply(username, ln)
+                    return reply
+            return output
 
-    if line == "":
-        while True:
-            line = input(f"({username})> ")
+        if line == "":
+            while True:
+                line = input(f"[blue]({username})[/blue]> ")
+                res = ""
+                if ", then " in line:
+                    for subln in line.split(", then"):
+                        res += execute(subln)+" "
+                else:
+                    res += execute(line)+" "
+
+                if res.strip(): ctx.say(res.strip())
+        else:
             res = ""
             if ", then " in line:
                 for subln in line.split(", then"):
+                    ctx.writeln(f"[blue]({username})[/blue]> {subln}")
                     res += execute(subln)+" "
             else:
+                ctx.writeln(f"[blue]({username})[/blue]> {line}")
                 res += execute(line)+" "
-
             if res.strip(): ctx.say(res.strip())
-    else:
-        res = ""
-        if ", then " in line:
-            for subln in line.split(", then"):
-                res += execute(subln)+" "
-        else:
-            res += execute(line)+" "
-        if res.strip(): ctx.say(res.strip())
-    return ctx
+        return ctx
 
-def on_exit(ctx):
-    ctx.set_config("talk.active", False)
+    def __finish__(self, ctx):
+        ctx.set_config("talk.active", False)

@@ -1,3 +1,0 @@
-Rolling 2d7 (+0)
-Total: 12
-Rolls: [7, 5]

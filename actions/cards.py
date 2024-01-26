@@ -59,8 +59,8 @@ class Action:
         """
 
     def draw_random(self, deck = "basic"):
-        self.cm = CardManager()
-        self.cm.new()
+        #self.cm = CardManager()
+        #self.cm.new()
         return self.cm.draw(deck)
         
     def __run__(self, ctx): 

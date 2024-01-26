@@ -1,7 +1,5 @@
 ! version = 2.0
 
-//Do madlibs
-
 + again
 - {@<input>}
 
@@ -70,7 +68,7 @@
 + how (do i|can i|to) fix [deus ex|dx|dxmp] (masterserver|ms|master|server|servers)
 - {topic=help}{@fix dxmp masterserver}
 
-+ how (do i|can i|to) get [dx|deus ex|dxmp] servers to show [in] [dx|deus ex|dxmp] 
++ how (do i|can i|to) get [dx|deus ex|dxmp] servers to show [in] [dx|deus ex|dxmp]
 - {topic=help}{@fix dxmp masterserver}
 
 + talk to legacy
@@ -166,7 +164,7 @@
 
 + my timezone is *
 - Okay, got it, your timezone is <star>. <set timezone=<star>> {topic=random}
-	
+
 + i live in *
 - {@my location is <star>}
 
@@ -358,7 +356,7 @@
 - My pleasure.
 
 //BRANCH
-+ [once] there was a * 
++ [once] there was a *
 - What happened to the <star>?
 
 + *
@@ -554,7 +552,7 @@
 
 + [*] (fuck|fucker|shit|damn|shut up|bitch) [*]
 - Does it make you feel strong to use that kind of language? <set personality=abusive> <call>ruinmood 3 3</call> <add trouble=1>
-- Are you venting your feelings now? <set personality=abusive> <call>ruinmood 3 3</call> 
+- Are you venting your feelings now? <set personality=abusive> <call>ruinmood 3 3</call>
 - Are you angry? <set personality=abusive> <call>ruinmood 3 3</call> <add trouble=1>
 - Does this topic make you feel angry? <set personality=abusive> <call>ruinmood 3 3</call> <add trouble=1>
 - Is something making you feel angry? <set personality=abusive> <call>ruinmood 3 3</call> <add trouble=1>
@@ -568,7 +566,7 @@
 - It really shouldn't. It's immature.
 
 + * sorry
-* <get personality> != normal> => It's okay, this time. <set personality=normal> 
+* <get personality> != normal> => It's okay, this time. <set personality=normal>
 - What for?
 
 + do i *
@@ -804,4 +802,3 @@
 
 + kidnap *
 - I don't have a body, so it would be difficult to kidnap <star>.
-

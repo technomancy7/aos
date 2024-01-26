@@ -1,8 +1,9 @@
 opencv-python 
 arrow
-dearpygui
+rivescript
 thefuzz
 fuzzywuzzy
+thefuzz
 humanfriendly
 pokebase
 pygments
@@ -11,4 +12,7 @@ urllib3
 qrcode
 pyzbar
 pillow
+pypresense
 aiohttp
+enolib
+enotype

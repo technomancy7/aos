@@ -1,4 +1,34 @@
 
+class XConverter:
+    def __init__(self):
+        pass
+
+    def convert(self, base_value, base_type, to_type):
+        base_value = int(base_value)
+        conversion_factors = {
+            'm': 1.0,
+            'cm': 0.01,
+            'mm': 0.001,
+            'km': 1000.0,
+            'inch': 0.0254,
+            'ft': 0.3048,
+            'yard': 0.9144,
+            'yards': 0.9144,
+            'mile': 1609.34,
+            'miles': 1609.34
+        }
+
+        if base_type in conversion_factors and to_type in conversion_factors:
+            factor_in = conversion_factors[base_type]
+            factor_out = conversion_factors[to_type]
+
+            return base_value * factor_in / factor_out
+
+        else:
+            raise ValueError("Invalid units")
+
+
+
 class PhoneButtonConverter:#@todo doesnt work
     def __init__(self):
         self.buttons = {

@@ -1,9 +1,14 @@
++ show (the|my) codex
+- Okay.<call>aos codex list</call>
+
++ edit (the|my) codex
+- Okay.<call>aos codex edit</call>
 
 + show config
 - Okay.<call>aos conf list</call>
 
-+ (get|show|print|say|give) [me] a [random] entry from [the] * (dataset|set)
-@ get me 1 random entry from the <star2> set
++ (get|show|print|say|give) [me] (a|an) [random] entry from [the] * (dataset|set)
+@ get me 1 random entry from the <star3> set
 
 + (get|show|print|say|give) [me] # [random] (entry|entries) from [the] * (dataset|set)
 - Results: <call>sdrand <star4> <star2></call>.
@@ -45,13 +50,6 @@
 
 + run *
 - <call>aos appman run <star></call>
-
-
-+ dear diary
-- <call>aos journal new</call>
-
-+ write a note
-- <call>aos notes new -f</call>
 
 + scan here for *
 - <call>aos scan <star></call>
