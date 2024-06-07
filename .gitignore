@@ -1,8 +1,10 @@
 config.json
 self.log
 **data.json
+**data.eno
 data/appman/**
 data/codex/**
+data/notes/**
 dsc/stories/**
 __pycache__/
 **__pycache__/

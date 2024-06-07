@@ -1,18 +1,46 @@
-import json, os, importlib, textwrap, readline, traceback, random
+import json, os, importlib, textwrap, readline, traceback, random, subprocess, shlex
 from rich.console import Console
+from rich.panel import Panel
+from rich.markup import escape
 from copy import deepcopy
 import enolib
-from enotype import boolean, integer
-enolib.register(boolean, integer)
+from enotype import boolean, integer, float, color, date, datetime, email, url, comma_separated
+enolib.register(boolean, integer, float, color, date, datetime, email, url, comma_separated)
+
+class Gum:
+    def choose(self, prompt, *options):
+        if len(options) == 1:
+            return options[0]
+
+        opts = [f"\"{o}\"" for o in options]
+        base_cmd = f"gum choose --header=\"{prompt}\" {' '.join(opts)}"
+        result = subprocess.check_output(shlex.split(base_cmd), universal_newlines=True).strip()
+        return result
+
+    def get_input(self, prompt = "Input response:"):
+        base_cmd = f"gum input --header='{prompt}'"
+        result = subprocess.check_output(shlex.split(base_cmd), universal_newlines=True).strip()
+        return result
+
+    def confirm(self, prompt = "Input response:"):
+        base_cmd = f"gum confirm \"{prompt}\""
+        try:
+            result = subprocess.run(shlex.split(base_cmd), check=True)
+            return True
+        except:
+            return False
 
 class Context:
     def __init__(self, *, line = "", command = "", lines = [], base_dir = ""):
         self.aos_dir = base_dir
+        self.g = Gum()
         if line != "": self.update_from_line(line)
         else: self.update(command=command, lines=lines)
         self.config = {}
         self._exit_code = -1
         self.console = Console(record=True)
+        self.panel = Panel
+        self.esc = escape
         self.plaintext_output = False
         self.buffer = []
         self.time_format = 'HH:mm:ss DD-MM-YYYY'
@@ -20,6 +48,22 @@ class Context:
         self.hide_traceback = False
 
         self.saved_username = ""
+
+    def notify(self, title, text):
+        cmd = f'notify-send --app-name=Athena "{title}" "{text}"'
+        os.system(cmd)
+
+    def sd_get_doc(self, dsf):
+        pth = self.aos_dir+"static_data/"+str(dsf)+".eno"
+        if os.path.exists(pth):
+            with open(pth, "r+") as f:
+                return enolib.parse(f.read())
+
+    def sd_get_json(self, dsf):
+        pth = self.aos_dir+"static_data/"+str(dsf)+".json"
+        if os.path.exists(pth):
+            with open(pth, "r+") as f:
+                return json.load(f)
 
     def sd_get_random(self, dsf):
         pth = self.aos_dir+"static_data/"+str(dsf)+".txt"
@@ -150,7 +194,7 @@ class Context:
 
                 if subctx.get_flag("help") or subctx.get_flag("h"):
                     if hasattr(act, "__help__") and type(act.__help__(subctx)) == str:
-                        return self.writeln(textwrap.dedent(act.__help__(subctx)))
+                        return self.write_panel(textwrap.dedent(act.__help__(subctx)))
                     return self.writeln(command+" has no help.")
                 try:
                     if hasattr(act, "__run__"):
@@ -167,7 +211,7 @@ class Context:
             else:
                 if subctx.get_flag("help") or subctx.get_flag("h"):
                     if hasattr(f, "on_help") and type(f.on_help(subctx)) == str:
-                        return self.writeln(textwrap.dedent(f.on_help(subctx)))
+                        return self.write_panel(textwrap.dedent(f.on_help(subctx)))
                     return self.writeln(command+" has no help.")
                 try:
                     if hasattr(f, "on_load"):
@@ -251,11 +295,21 @@ class Context:
                 return realname
         return self.command
 
+    def getln(self, prompt):
+        self.console.no_color = self.plaintext_output
+        return self.console.input(prompt)
+
     def writeln(self, *line, **args):
         self.console.no_color = self.plaintext_output
         self.console.print(*line, **args)
         out = self.console.export_text()
         self.buffer.append(out)
+
+    def write_panel(self, text):
+        if self.plaintext_output:
+            return self.writeln(text)
+
+        self.console.print(self.panel(text))
 
     def ask(self, value, *, prompt = "", default = ""):
         inse = ""
@@ -326,6 +380,14 @@ class Context:
             os.system(app.replace("$T", path))
         else:
             os.system(app+" "+path)
+
+    def play_audio_path(self, p):
+        app = self.touch_config("apps.audio", "vlc")
+
+        if "$P" in app:
+            os.system(app.replace("$P", p))
+        else:
+            os.system(app+" "+p)
 
     def open_text_editor(self, default_text = None, *, filetype = "txt"):
         txtedit = self.touch_config("system.texteditor", "nano")
@@ -416,6 +478,11 @@ class Context:
     def get_data_doc(self, filename = "data", *, override = ""):
         f = self.data_path(override)
         self.validate_generic_data_file(filename+".eno")
+        with open(f+filename+".eno", 'r') as fl:
+            return enolib.parse(fl.read())
+
+    def get_doc(self, filename = "data"):
+        f = self.aos_dir+"docs/"
         with open(f+filename+".eno", 'r') as fl:
             return enolib.parse(fl.read())
 

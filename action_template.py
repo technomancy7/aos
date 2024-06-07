@@ -17,6 +17,7 @@ class Action:
         """
 
     def __run__(self, ctx):
+        cmd, ln = ctx.cmdsplit()
         # Main functionality here.
         return ctx
 

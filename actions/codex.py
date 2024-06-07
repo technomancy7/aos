@@ -1,4 +1,6 @@
 import os, json
+import webbrowser
+import random
 
 class Action:
     @staticmethod
@@ -24,8 +26,10 @@ class Action:
             search | s <<key>> = <<value>>
             Shows entries which contain a <<key>> and <<value>> match
 
-            get <<name>>
+            get [<<db>>].<<name>>
             Shows entry with matching <<name>>
+                --open:<<field>> - Opens field in browser if it is a valid URL
+                --rand:<<field>> - Choses random element from a comma-separated line
 
             list | ls (default)
             Shows all entries
@@ -51,13 +55,10 @@ class Action:
         if ctx.has_flag("db"):
             db = ctx.get_flag("db")
             ctx.set_config("codex.database", db)
-            print("Updated default database record: "+db)
-
-        data = ctx.get_data(db)
+            ctx.writeln("Updated default database record: "+db)
 
         if cmd == "" or cmd == None: cmd = "list"
-        ctx.writeln(f" --- Currently active: [blue]{db}[/blue] ---")
-        ctx.writeln("")
+
         match cmd:
             case "db":
                 new = ctx.get_string()[len(cmd)+1:]
@@ -71,6 +72,9 @@ class Action:
                         ctx.writeln(f" [blue]{n.split('.')[0]}[/blue]")
 
             case "edit" | "write" | "e" | "w":
+                new = ctx.get_string()[len(cmd)+1:]
+                if new:
+                    db = new
                 ctx.writeln("Opening "+ctx.data_path()+db+".eno")
                 ctx.edit_code(ctx.data_path()+db+".eno")
 
@@ -88,13 +92,38 @@ class Action:
                             self.pretty_print_entity(ctx, ent)
 
             case "get" | "g":
-                doc = ctx.get_data_doc(db)
                 name = ctx.get_string()[len(cmd)+1:]
+                if "." in name:
+                    db = name.split(".")[0]
+                    name = name.split(".")[1]
+
+                doc = ctx.get_data_doc(db)
                 for ent in doc.sections():
                     if name.lower() == ent.string_key().lower():
-                        self.pretty_print_entity(ctx, ent)
+                        if ctx.has_flag("open"):
+                            field = ctx.get_flag("open")
+                            try:
+                                url = ent.field(field).required_url_value()
+                                webbrowser.open(url)
+                            except:
+                                ctx.writeln("Field is not valid.")
+                        elif ctx.has_flag("rand"):
+                            field = ctx.get_flag("rand")
+                            try:
+                                v = ent.field(field).required_comma_separated_value()
+                                ctx.writeln(random.choice(v))
+                            except:
+                                ctx.writeln("Field is not valid.")
+                        else:
+                            self.pretty_print_entity(ctx, ent)
+                        return
+
+                ctx.writeln("Could not find entry.")
 
             case "list" | "ls":
+                new = ctx.get_string()[len(cmd)+1:]
+                if new:
+                    db = new
                 doc = ctx.get_data_doc(db)
 
                 for ent in doc.sections():
@@ -104,8 +133,40 @@ class Action:
         return ctx
 
     def pretty_print_entity(self, ctx, ent):
-        ctx.writeln(f"# [blue]{ent.string_key()}[/blue]")
+        text = f"[red]{ent.string_key()}[/red]"
+
         for elem in ent.elements():
-            k = elem.to_field()
-            ctx.writeln(f" - [blue]{k.string_key()}[/blue] = [blue]{k.optional_string_value()}[/blue]")
-        ctx.writeln("")
+            if elem.yields_field():
+                k = elem.to_field()
+                if "\n" in k.optional_string_value():
+                    text += f"\n - [blue]{k.string_key()}[/blue]:"
+                    for ln in k.optional_string_value().split("\n"):
+                         text += f"\n  | [blue]{ln}[/blue]"
+                else:
+                    text += f"\n - [blue]{k.string_key()}[/blue] = [blue]{k.optional_string_value()}[/blue]"
+
+            elif elem.yields_list():
+                k = elem.to_list()
+                entries = "\n".join([f"   + [yellow]{entry}[/yellow]" for entry in k.required_string_values()])
+                text += f"\n -- [blue]{k.string_key()}[/blue]\n{entries}"
+
+            elif elem.yields_section():
+                k = elem.to_section()
+
+                text += f"\n\n [green]{k.string_key()}[/green]"
+                for f in k.elements():
+                    if f.yields_field():
+                        k2 = f.to_field()
+                        if "\n" in k2.optional_string_value():
+                            text += f"\n - [blue]{k2.string_key()}[/blue]:"
+                            for ln in k2.optional_string_value().split("\n"):
+                                 text += f"\n  | [blue]{ln}[/blue]"
+                        else:
+                            text += f"\n - [blue]{k2.string_key()}[/blue] = [blue]{k2.optional_string_value()}[/blue]"
+
+                    elif f.yields_list():
+                        k2 = f.to_list()
+                        entries = "\n".join([f"   + [yellow]{entry}[/yellow]" for entry in k2.required_string_values()])
+                        text += f"\n - [blue]{k2.string_key()}[/blue]\n{entries}"
+
+        ctx.write_panel(text)

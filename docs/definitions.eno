@@ -1,0 +1,18 @@
+system.texteditor: The text editor application used whenever the internet edit function is called.
+root.plaintext: Are log messages in plaintext?
+core.name: The internal name of the AI.
+root.aliases: Used for creating custom commands that are shortcuts for other commands.
+root.apps: Commands for applications used by the system. `$P` refers to the path of the file used.
+codex.database: Database name used by the codex system.
+define.minmatch: Minimum percentage match required to be considered for the result.
+shell.active: INTERNAL, DO NOT EDIT
+root.cwd: INTERNAL, DO NOT EDIT
+scan.ext: List of filetypes that scan will attempt to read.
+appman.dir: Directory that applications are stored in by default.
+appman.select_first: If True, when there are multiple possible applications to launch, default to the first one found.
+actions.list_disabled: Do we show disabled actions in the action list?
+nowplaying.icon: Icon for the embed
+testvar: Just for testing.
+nowplaying: MPRIS to Discord RPC bridge
+compact:
+- talk_sessions

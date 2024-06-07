@@ -16,20 +16,19 @@ def on_help(ctx):
     Takes one parameter: path to file
     """
 
-def on_load(ctx): 
+def on_load(ctx):
     path = ctx.get_string()
     from rich.syntax import Syntax
     from rich.markdown import Markdown
 
-    
+
 
     if path.endswith("md") or ctx.has_flag("md"):
         with open(path) as f:
             md = Markdown(f.read())
-            ctx.writeln(md)
+            ctx.write_panel(md)
     else:
-        syntax = Syntax.from_path(path)
-        ctx.writeln(syntax)
+        syntax = Syntax.from_path(path, line_numbers=True)
+        ctx.write_panel(syntax)
 
     return ctx
-

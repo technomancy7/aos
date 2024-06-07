@@ -1,14 +1,14 @@
-import os
 
 class Action:
     @staticmethod
     def __action__():
         return {
-            "name": "search",
+            "name": "memo",
             "author": "Kai",
             "version": "0.0",
             "features": [],
             "group": "",
+            "description": "",
         }
 
     def __help__(self, ctx):
@@ -16,12 +16,9 @@ class Action:
             Default help.
         """
 
-    def __run__(self, ctx): 
-        ln = ctx.get_string()
-        search_directories = [
-            os.path.expanduser("~/")
-        ]
-
+    def __run__(self, ctx):
+        cmd, ln = ctx.cmdsplit()
+        # Main functionality here.
         return ctx
 
     def __error__(self, ctx, error):
@@ -29,4 +26,3 @@ class Action:
 
     def __finish__(self, ctx):
         pass
-

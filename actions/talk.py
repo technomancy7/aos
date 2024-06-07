@@ -152,7 +152,7 @@ class Action:
 
         if line == "":
             while True:
-                line = input(f"[blue]({username})[/blue]> ")
+                line = ctx.getln(f"[blue]({username})[/blue]> ")
                 res = ""
                 if ", then " in line:
                     for subln in line.split(", then"):

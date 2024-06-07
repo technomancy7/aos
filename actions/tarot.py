@@ -13,11 +13,6 @@ class Action:
             "group": "",
         }
 
-    def __extensions__(self):
-        return [
-            ["Tarot", None],
-            ["Reading", None]
-        ]
     def __help__(self, ctx):
         return """
             r | reading
@@ -62,11 +57,11 @@ class Action:
                 highest_match_n = 100
 
             #if (len(line)> 4 and line in card['name'].lower()):
-        return highest_match    
+        return highest_match
         #if highest_match != None:
-            #card = highest_match   
+            #card = highest_match
 
-    def __run__(self, ctx): 
+    def __run__(self, ctx):
         cmd = ctx.get_string_ind(0).lower()
         line = ""
         if len(ctx.get_string_list()) > 1:
@@ -75,7 +70,7 @@ class Action:
         line = line.lower()
         #print(cmd, "-", line)
         self.data = self.tarot()
-        read_type = ctx.get_flag("t") or ctx.get_flag("r")
+        read_type = line#ctx.get_flag("t") or ctx.get_flag("r")
         save_reading = ctx.get_flag("s")
         match cmd:
             case "reading" | "r":
@@ -87,11 +82,18 @@ class Action:
                     case "single" | "1":
                         card = cm.draw("tarot")
                         rev = random.choice([True, False])
+
                         info = self.get_card_info(card['name'])
-                        ctx.writeln(f"{info['value']} - [red]{info['name']}[/red] ({info['name_short']})")
-                        if not rev: ctx.writeln(f"[blue]Meaning[/blue]: {info['meaning_up']}")
-                        if rev: ctx.writeln(f"[blue]Reversed[/blue]: {info['meaning_rev']}")
-                        ctx.writeln(f"[blue]Description[/blue]: {info['desc']}")
+
+                        text = f"{info['value']} - [red]{info['name']}[/red] ({info['name_short']})"
+                        text = text + f"\n[blue]Meaning[/blue]: {info['meaning_up']}"
+                        text = text + f"\n[blue]Reversed[/blue]: {info['meaning_rev']}"
+                        text = text + f"\n[blue]Description[/blue]: {info['desc']}"
+
+                        if rev: text = text.replace("[blue]Reversed[/blue]", "[red]>[/red] [blue]Reversed[/blue]")
+                        else: text = text.replace("[blue]Meaning[/blue]", "[red]>[/red] [blue]Meaning[/blue]")
+                        ctx.write_panel(text)
+
                         if save_reading:
                             saved = {
                                 "card": card,
@@ -99,7 +101,8 @@ class Action:
                                 "meaning": info,
                                 "label": save_reading
                             }
-                            ctx.writeln(f"Will save {saved}")
+                            ctx.writeln(f"Will save {saved} (not yet implemented)")
+
                     case default:
                         ctx.writeln(f"Unknown reading type {read_type}")
 
@@ -121,4 +124,3 @@ class Action:
 
     def __finish__(self, ctx):
         pass
-
