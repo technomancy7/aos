@@ -1,9 +1,93 @@
 
 class XConverter:
     def __init__(self):
-        pass
+        self.temps = ["k", "f", "c"]
+        self.weights = ["mg", "g", "kg", "oz", "lb"]
+        self.distances = ["m", "cm", "mm", "km", "inch", "ft", "yd", "mile"]
+        self.translation_table = {
+            "m": "meters",
+            "cm": "centimeters",
+            "mm": "milimeters",
+            "km": "kilometers",
+            "inch": "inches",
+            "ft": "feet",
+            "yd": "yards",
+            "mile": "miles",
+
+            "mg": "milligrams",
+            "g": "grams",
+            "kg": "kilograms",
+            "oz": "ounces",
+            "lb": "pounds",
+
+            "k": "kelvin",
+            "f": "fahrenheit",
+            "c": "celcius",
+        }
+        
+    def pretty_convert(self, base_value, base_type, to_type):
+        value = self.convert(base_value, base_type, to_type)
+        str_base_type = self.translation_table.get(base_type, base_type)
+        str_to_type = self.translation_table.get(to_type, to_type)
+        return f"{base_value} {str_base_type} is {value} {str_to_type}"
 
     def convert(self, base_value, base_type, to_type):
+        base_value = int(base_value)
+
+        if base_type in self.temps and base_type in self.temps:
+            return self.convert_temp(base_value, base_type, to_type)
+
+        if base_type in self.weights and base_type in self.weights:
+            return self.convert_weight(base_value, base_type, to_type)
+
+        if base_type in self.distances and base_type in self.distances:
+            return self.convert_dist(base_value, base_type, to_type)
+
+    def convert_temp(self, base_value, base_type, to_type):
+          if base_type == "c" and to_type == "f":
+              result = (base_value * 9/5) + 32
+              return result
+
+          elif base_type == "f" and to_type == "c":
+              result = (base_value - 32) * 5/9
+              return result
+
+          elif base_type == "c" and to_type == "k":
+              result = base_value + 273.15
+              return result
+
+          elif base_type == "k" and to_type == "c":
+              result = base_value - 273.15
+              return result
+
+          elif base_type == "f" and to_type == "k":
+              result = (base_value - 32) * 5/9 + 273.15
+              return result
+
+          elif base_type == "k" and to_type == "f":
+              result = (base_value - 273.15) * 9/5 + 32
+              return result
+
+    def convert_weight(self, base_value, base_type, to_type):
+        base_value = int(base_value)
+        conversion_factors = {
+            "mg": 0.001,
+            "g": 1,
+            "kg": 1000,
+            "oz": 28.3495,
+            "lb": 453.592
+        }
+
+        if base_type in conversion_factors and to_type in conversion_factors:
+            factor_in = conversion_factors[base_type]
+            factor_out = conversion_factors[to_type]
+
+            return base_value * factor_in / factor_out
+
+        else:
+            raise ValueError("Invalid units")
+
+    def convert_dist(self, base_value, base_type, to_type):
         base_value = int(base_value)
         conversion_factors = {
             'm': 1.0,
@@ -12,10 +96,8 @@ class XConverter:
             'km': 1000.0,
             'inch': 0.0254,
             'ft': 0.3048,
-            'yard': 0.9144,
-            'yards': 0.9144,
-            'mile': 1609.34,
-            'miles': 1609.34
+            'yd': 0.9144,
+            'mile': 1609.34
         }
 
         if base_type in conversion_factors and to_type in conversion_factors:
@@ -42,7 +124,7 @@ class PhoneButtonConverter:#@todo doesnt work
             '9': 'WXYZ',
             '0': ' ',
         }
-        
+
     def convert(self, numbers):
         result = ''
         for num in numbers:

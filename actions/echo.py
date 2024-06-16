@@ -1,10 +1,9 @@
-from tools.converters import XConverter
 
 class Action:
     @staticmethod
     def __action__():
         return {
-            "name": "convert",
+            "name": "echo",
             "author": "Kai",
             "version": "0.0",
             "features": [],
@@ -18,14 +17,7 @@ class Action:
         """
 
     def __run__(self, ctx):
-        line = ctx.get_string().split(" ")
-        print(line)
-
-        c = XConverter()
-
-        r = c.pretty_convert(line[0], line[1], line[2])
-        ctx.say(r)
-
+        ctx.say(ctx.get_string())
         return ctx
 
     def __error__(self, ctx, error):

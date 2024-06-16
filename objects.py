@@ -22,6 +22,9 @@ class Gum:
         result = subprocess.check_output(shlex.split(base_cmd), universal_newlines=True).strip()
         return result
 
+    def ask(self, prompt = "Input response:"):
+        return self.get_input(prompt=prompt)
+
     def confirm(self, prompt = "Input response:"):
         base_cmd = f"gum confirm \"{prompt}\""
         try:
@@ -275,7 +278,7 @@ class Context:
                 os.system(tts_cmd.replace("$P", line.replace("'", ""))+"&")
 
         if self.touch_config("system.tts_output", True):
-            self.writeln(f"[red]\[{self.name()}][/red] {line}")
+            self.writeln(f"[red][{self.name()}][/red] {line}")
 
     def send_to_sayfile(self, text):
         with open(self.aos_dir+"text.txt", "w+") as f:

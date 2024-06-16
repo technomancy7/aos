@@ -15,8 +15,8 @@ class Action:
         return """
             set <key> <value>
             get <key>
-            rm <key>
-            ls
+            rm | remove | rem | delete | del <key>
+            ls | list
         """
 
     def __run__(self, ctx):
@@ -24,8 +24,13 @@ class Action:
 
         match cmd:
             case "set":
-                k = ln.split()[0]
-                v = ' '.join(ln.split()[1:])
+                if ln == "":
+                    k = ctx.g.ask("Key: ")
+                    v = ctx.g.ask("Value:")
+                else:
+                    k = ln.split()[0]
+                    v = ' '.join(ln.split()[1:])
+
                 g = ""
                 if "." in k:
                     g = k.split(".")[0]
@@ -35,20 +40,20 @@ class Action:
                     data = ctx.get_data()
 
                     if data.get(g, None) == None and type(data.get(g)) != dict:
-                        ctx.writeln(f"Created key group: {g}")
+                        ctx.writeln(f"Created key group: [blue]{g}[/blue]")
                         data[g] = {}
 
                     if type(data.get(g)) != dict:
-                        return ctx.writeln("Key is already taken.")
+                        return ctx.writeln(f"Key [blue]{g}[/blue] is already taken.")
 
                     data[g][k] = v
                     ctx.save_data(data)
-                    ctx.writeln(f"{g}.{k} = {v}")
+                    ctx.writeln(f"[blue]{g}[/blue].[blue]{k}[/blue] = [yellow]{v}[/yellow]")
                 else:
                     data = ctx.get_data()
                     data[k] = v
                     ctx.save_data(data)
-                    ctx.writeln(f"{k} = {v}")
+                    ctx.writeln(f"[blue]{k}[/blue] = [yellow]{v}[/yellow]")
 
             case "get":
                 data = ctx.get_data()
@@ -58,23 +63,23 @@ class Action:
                     k = ln.split(".")[1]
                     group = data.get(g)
                     if type(group) != dict:
-                        return ctx.writeln(f"{g} not a valid group.")
+                        return ctx.writeln(f"[blue]{g}[/blue] not a valid group.")
                     if group != None:
                         v = group.get(k)
                         if v != None:
-                            ctx.writeln(f"{g}.{k} = {v}")
+                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k} = [green]{v}[/green]")
                         else:
-                            ctx.writeln(f"{g}.{k} (Undefined)")
+                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k} ([yellow]Undefined[/yellow])")
                     else:
-                        ctx.writeln(f"{g} (Undefined)")
+                        ctx.writeln(f"[blue]{g}[/blue] ([yellow]Undefined[/yellow])")
                 else:
                     v = data.get(ln)
                     if v != None:
-                        ctx.writeln(f"{ln} = {v}")
+                        ctx.writeln(f"[blue]{ln}[/blue] = [green]{v}[/green]")
                     else:
-                        ctx.writeln(f"{ln} (Undefined)")
+                        ctx.writeln(f"[blue]{ln}[/blue] ([yellow]Undefined[/yellow])")
 
-            case "rm":
+            case "rm" | "rem" | "remove" | "del" | "delete":
                 data = ctx.get_data()
 
                 if "." in ln:
@@ -82,35 +87,35 @@ class Action:
                     k = ln.split(".")[1]
                     group = data.get(g)
                     if type(group) != dict:
-                        return ctx.writeln(f"{g} not a valid group.")
+                        return ctx.writeln(f"[blue]{g}[/blue] not a valid group.")
                     if group != None:
                         v = group.get(k)
                         if v != None:
                             del data[g][k]
-                            ctx.writeln(f"{g}.{k} (Deleted) {v}")
+                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k}[/blue] ([red]Deleted[/red]) {v}")
                             ctx.save_data(data)
                         else:
-                            ctx.writeln(f"{g}.{k} (Undefined)")
+                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k}[/blue] ([yellow]Undefined[/yellow])")
                     else:
-                        ctx.writeln(f"{g} (Undefined)")
+                        ctx.writeln(f"[blue]{g}[/blue] ([yellow]Undefined[/yellow])")
                 else:
                     v = data.get(ln)
                     if v != None:
                         del data[ln]
-                        ctx.writeln(f"{ln} (Deleted) {v}")
+                        ctx.writeln(f"[blue]{ln}[/blue] ([red]Deleted[/red]) {v}")
                         ctx.save_data(data)
                     else:
-                        ctx.writeln(f"{ln} (Undefined)")
+                        ctx.writeln(f"[blue]{ln}[/blue] ([yellow]Undefined[/yellow])")
 
-            case "ls":
+            case "ls" | "list":
                 data = ctx.get_data()
                 for k, v in data.items():
                     if type(v) == dict:
-                        ctx.writeln(f" [ {k} ]")
+                        ctx.writeln(f" [ [blue]{k}[/blue] ]")
                         for sk, sv in v.items():
-                            ctx.writeln(f" | {sk} = {sv}")
+                            ctx.writeln(f" | [blue]{sk}[/blue] = {sv}")
                     else:
-                        ctx.writeln(f"{k} = {v}")
+                        ctx.writeln(f"[blue]{k}[/blue] = {v}")
 
         return ctx
 
