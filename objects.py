@@ -147,6 +147,8 @@ class Context:
             print(traceback.format_exception(e))
 
     def cexec(self, action, method, *args, **kwargs):
+        print("cexec", action, method, args, kwargs)
+
         if not os.path.exists(self.aos_dir+"actions/"+action+".py"):
             return self.writeln(f"Action {action} not found")
         try:

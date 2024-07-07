@@ -13,9 +13,9 @@ class Action:
 
     def __help__(self, ctx):
         return """
-            add
-            ls
-            complete
+            add - Guided creation of a new quest
+            ls - Shows current quests. Add -s to show completed.
+            complete <quest_id> - Completes a quest
         """
 
     def new_quest(self, **data):
@@ -41,8 +41,8 @@ class Action:
                     if d.get(questkey) and d[questkey]["objectives"].get(obj):
                         if d[questkey]["objectives"][obj]["state"] != "completed":
                             d[questkey]["objectives"][obj]["state"] = "completed"
-                            #TODO exp rewards here
-                            ctx.writeln(f"QUEST COMPLETED: {d[questkey]['text']}->{d[questkey]['objectives'][obj]['text']}")
+                            ctx.cexec("irlrpg", "give_exp", exp = d[questkey]["objectives"][obj]['exp'])
+                            ctx.writeln(f"[green]QUEST COMPLETED[/green]: {d[questkey]['text']} -> {d[questkey]['objectives'][obj]['text']}")
                             ctx.save_data(d)
                         else:
                             ctx.writeln("Quest already completed.")
@@ -52,31 +52,53 @@ class Action:
                     if d.get(ln):
                         if d[ln]['state'] != "completed":
                             d[ln]['state'] = "completed"
-                            ctx.writeln(f"QUEST COMPLETED: {d[ln]['text']}")
+                            ctx.cexec("irlrpg", "give_exp", exp = d[ln]['exp'])
+                            ctx.writeln(f"[green]QUEST COMPLETED[/green]: {d[ln]['text']}")
+                        else:
+                            return ctx.writeln("Quest already completed.")
 
                         if len(d[ln]["objectives"]) > 0:
                             for obj, _ in d[ln]["objectives"].items():
                                 if d[ln]["objectives"][obj]["state"] != "completed":
                                     d[ln]["objectives"][obj]["state"] = "completed"
-                                    #TODO exp rewards here
-                                    ctx.writeln(f"QUEST COMPLETED: {d[ln]['text']}->{d[ln]['objectives'][obj]['text']}")
-                        #ctx.writeln(d[ln])
+                                    ctx.cexec("irlrpg", "give_exp", exp = d[ln]["objectives"][obj]['exp'])
+                                    ctx.writeln(f"[green]QUEST COMPLETED[/green]: {d[ln]['text']} -> {d[ln]['objectives'][obj]['text']}")
+
                         ctx.save_data(d)
                     else:
                         ctx.writeln("Quest not found.")
 
             case "ls":
                 d = ctx.get_data()
+                show_completed = ctx.has_flag("s")
+                q = 0
                 for _, quest in d.items():
-                    if quest["state"] == "completed":
+                    if quest["state"] == "completed" and not show_completed:
                         continue
-                    text = f" # {quest['text']} ({quest['id']})"
+
+                    q += 1
+                    pre = "[blue]" if quest['state'] != "completed" else "[s]"
+                    suf = "[/blue]" if quest['state'] != "completed" else "[/s]"
+                    exp = ""
+                    if ctx.touch_config("quests.use_exp", False) and quest['exp'] > 0:
+                        exp = f" EXP: {quest['exp']} "
+
+                    text = f" # {pre}{quest['text']}{suf} {exp}({quest['id']}) {quest['state']}"
+
                     if len(quest['objectives']) > 0:
-                        text += "\n - Objectives: "
+                        text += "\n  - [green]Objectives[/green]: "
                         for _, item in quest['objectives'].items():
-                            text += f"\n   * {item['text']} ({quest['id']}.{item['id']})"
+                            ipre = "[blue]" if item['state'] != "completed" else "[s]"
+                            isuf = "[/blue]" if item['state'] != "completed" else "[/s]"
+                            exp = ""
+                            if ctx.touch_config("quests.use_exp", False) and item['exp'] > 0:
+                                exp = f" EXP: {item['exp']} "
+                            text += f"\n    * {ipre}{item['text']}{isuf} {exp}({quest['id']}.{item['id']}) {item['state']}"
 
                     ctx.write_panel(text)
+
+                if q == 0:
+                    ctx.writeln("No quests available.")
 
             case "add":
                 d = ctx.get_data()
@@ -89,16 +111,20 @@ class Action:
 
                     ctx.writeln("If this is an objective under another quest, write its ID here.")
                     quest_parent = self.ctx.g.get_input("Quest parent ID:")
-                    if quest_parent and not d.get(quest_parent):
-                        return ctx.writeln("Parent not found.")
+                    if quest_parent != "":
+                        if not d.get(quest_parent):
+                            return ctx.writeln("Parent not found.")
 
-                    else:
-                        if d[quest_parent]["objectives"].get(quest_id):
-                            return ctx.writeln("Quest ID already taken.")
+                        else:
+                            if d[quest_parent]["objectives"].get(quest_id):
+                                return ctx.writeln("Quest ID already taken.")
 
                     quest_exp = 0
                     if ctx.touch_config("quests.use_exp", False):
-                        quest_exp = int(self.ctx.g.get_input("Quest reward EXP:")) or 0
+                        e_gain = self.ctx.g.get_input("Quest reward EXP:")
+                        if e_gain != "":
+                            quest_exp = int(e_gain)
+                            if quest_exp < 0: quest_exp = 0
 
                     q = self.new_quest(text=quest_text, id=quest_id, exp=quest_exp)
 
