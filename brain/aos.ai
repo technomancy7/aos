@@ -2,7 +2,13 @@
 - Okay.<call>aos codex list</call>
 
 + edit (the|my) codex
-- Okay.<call>aos codex edit</call>
+- <call>aos codex edit</call>
+
++ edit (the|my) * codex
+- <call>aos codex edit --db:<star2></call>
+
++ summarize *
+- <call>aos wiki <star></call>
 
 + show config
 - Okay.<call>aos conf list</call>

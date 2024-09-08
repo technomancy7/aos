@@ -55,41 +55,37 @@ class Action:
         if ctx.has_flag("db"):
             db = ctx.get_flag("db")
             ctx.set_config("codex.database", db)
-            ctx.writeln("Updated default database record: "+db)
+            #ctx.writeln("Updated default database record: "+db)
 
         if cmd == "" or cmd == None: cmd = "list"
 
         match cmd:
-            case "db":
-                new = ctx.get_string()[len(cmd)+1:]
-                if new:
-                    ctx.set_config("codex.database", new)
-                    ctx.writeln("Updated default database record: "+new)
-                else:
-                    ctx.writeln("Databases:")
-                    for n in ctx.get_data_list():
-                        if not n.endswith(".eno"): continue
-                        ctx.writeln(f" [blue]{n.split('.')[0]}[/blue]")
-
             case "edit" | "write" | "e" | "w":
-                new = ctx.get_string()[len(cmd)+1:]
-                if new:
-                    db = new
                 ctx.writeln("Opening "+ctx.data_path()+db+".eno")
                 ctx.edit_code(ctx.data_path()+db+".eno")
 
             case "search" | "s":
-                doc = ctx.get_data_doc(db)
-                searchstr = ctx.get_string()[len(cmd)+1:]
-                k = searchstr.split("=")[0].strip()
-                v = searchstr.split("=")[1].strip()
+                for filename in os.listdir(ctx.data_path()):
+                    dbname = filename.split(".")[0]
+                    doc = ctx.get_data_doc(dbname)
+                    searchstr = ctx.get_string()[len(cmd)+1:]
+                    k = searchstr.split("=")[0].strip()
+                    v = searchstr.split("=")[1].strip()
 
-                for ent in doc.sections():
-                    for elem in ent.elements():
-                        field = elem.to_field()
-                        if field.string_key().lower() == k.lower() and \
-                        field.optional_string_value().lower() == v.lower():
-                            self.pretty_print_entity(ctx, ent)
+                    for ent in doc.sections():
+                        for elem in ent.elements():
+                            if elem.yields_field():
+                                field = elem.to_field()
+                                if field.string_key().lower() == k.lower() and \
+                                field.optional_string_value().lower() == v.lower():
+                                    self.pretty_print_entity(ctx, ent, dbname)
+                            elif elem.yields_section():
+                                for field in elem.to_section().elements():
+                                    if field.yields_field():
+                                        field = field.to_field()
+                                        if field.string_key().lower() == k.lower() and \
+                                        field.optional_string_value().lower() == v.lower():
+                                            self.pretty_print_entity(ctx, elem.to_section(), dbname+"."+ent.string_key())
 
             case "get" | "g":
                 name = ctx.get_string()[len(cmd)+1:]
@@ -115,25 +111,33 @@ class Action:
                             except:
                                 ctx.writeln("Field is not valid.")
                         else:
-                            self.pretty_print_entity(ctx, ent)
+                            self.pretty_print_entity(ctx, ent, db)
                         return
 
                 ctx.writeln("Could not find entry.")
 
             case "list" | "ls":
-                new = ctx.get_string()[len(cmd)+1:]
-                if new:
-                    db = new
-                doc = ctx.get_data_doc(db)
+                if ctx.has_flag("db"):
+                    db = ctx.get_flag("db")
+                    doc = ctx.get_data_doc(db)
 
-                for ent in doc.sections():
-                    self.pretty_print_entity(ctx, ent)
+                    for ent in doc.sections():
+                        self.pretty_print_entity(ctx, ent, db)
+                else:
+                    for filename in os.listdir(ctx.data_path()):
+                        dbname = filename.split(".")[0]
+                        if dbname not in ctx.touch_config("codex.ignores", []):
+                            #ctx.writeln(f"[red bold]{dbname}[/red bold]")
+                            doc = ctx.get_data_doc(dbname)
+                            for ent in doc.sections():
+                                self.pretty_print_entity(ctx, ent, dbname)
+
 
         ctx.exit_code(0)
         return ctx
 
-    def pretty_print_entity(self, ctx, ent):
-        text = f"[red]{ent.string_key()}[/red]"
+    def pretty_print_entity(self, ctx, ent, db):
+        text = f"[red]{ent.string_key()}[/red] in [red]{db}[/red]"
 
         for elem in ent.elements():
             if elem.yields_field():

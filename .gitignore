@@ -2,6 +2,7 @@ config.json
 self.log
 **data.json
 **data.eno
+data/**
 data/appman/**
 data/codex/**
 data/notes/**

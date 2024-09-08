@@ -99,10 +99,11 @@ class Action:
             ctx.update_response(operator = "get", key = key, value = val)
             ctx.writeln(f"[yellow]{key}[/yellow] = [green]{val}[/green] ({type(val)})")
 
+        elif cmd == "edit":
+            ctx.edit_file(ctx.aos_dir+"config.json")
+
         elif cmd == "list":
-            #dc = Datascript().parse_file(ctx.aos_dir+"definitions.dcs")["variables"]
             dc = ctx.get_doc("definitions")
-            #return print(dc.field("core.nae").optional_string_value())
             compacts = dc.list('compact').required_string_values()
 
             ind = False

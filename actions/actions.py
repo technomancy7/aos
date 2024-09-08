@@ -138,28 +138,30 @@ class Action:
                         output[d.get("group", "default")].append(d)
 
                     if os.path.isfile(f):
-                        f = importlib.import_module("actions."+filename.split(".")[0])
+                        try:
+                            f = importlib.import_module("actions."+filename.split(".")[0])
 
-                        if hasattr(f, "Action"):
-                           #print(f)
-                            d = f.Action.__action__()
-                            d["filename"] = filename
-                            if output.get(d.get("group", "default")) == None:
-                                output[d.get("group", "default")] = []
-                            d["disabled"] = filename.split(".")[0] in disabled
-                            output[d.get("group", "default")].append(d)
+                            if hasattr(f, "Action"):
+                               #print(f)
+                                d = f.Action.__action__()
+                                d["filename"] = filename
+                                if output.get(d.get("group", "default")) == None:
+                                    output[d.get("group", "default")] = []
+                                d["disabled"] = filename.split(".")[0] in disabled
+                                output[d.get("group", "default")].append(d)
 
-                        elif hasattr(f, "action_data"):
-                            d = f.action_data()
-                            d["filename"] = filename
-                            if output.get(d.get("group", "default")) == None:
-                                output[d.get("group", "default")] = []
-                            d["disabled"] = filename.split(".")[0] in disabled
-                            output[d.get("group", "default")].append(d)
-                            #printdata(ctx, filename, d)
-                        else:
-                            errors.append(filename.split(".")[0])
-                            #ctx.writeln(f"{filename.split('.')[0]} has no action_data property.", style="dim")
+                            elif hasattr(f, "action_data"):
+                                d = f.action_data()
+                                d["filename"] = filename
+                                if output.get(d.get("group", "default")) == None:
+                                    output[d.get("group", "default")] = []
+                                d["disabled"] = filename.split(".")[0] in disabled
+                                output[d.get("group", "default")].append(d)
+                                #printdata(ctx, filename, d)
+                            else:
+                                errors.append(filename.split(".")[0])
+                        except Exception as e:
+                            errors.append(f"{filename} -> {str(e)}")
 
             for key in output.keys():
                 ctx.writeln(" = "+key+" =")

@@ -9,12 +9,12 @@ context = None
 # TODO
 """
 Talk mode action using basic regex natural language to pass to commands
-Have aliases for common patterns 
-So instead of 
-Roll a (full dice notation syntax detection) 
-Roll a (:dice_notation:) 
+Have aliases for common patterns
+So instead of
+Roll a (full dice notation syntax detection)
+Roll a (:dice_notation:)
 
-Class with dot Learn() 
+Class with dot Learn()
 Detect if passed arg is a dir or file
 
 Tamagotchi style pet
@@ -30,7 +30,7 @@ def editarg(x):
     out = x.replace("-", " ")
     out = out[prefix:]
     if prefix > 0: out = "-"*prefix+out
-    return out 
+    return out
 
 
 def main(args):
@@ -54,7 +54,7 @@ def main(args):
 def run(args):
     if args == "gui":
         os.system("python3 "+ ATHENAOS_PATH+"gui.py")
-        return 
+        return
     else:
         try:
             main(args)

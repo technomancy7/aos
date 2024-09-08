@@ -1,4 +1,4 @@
-import json, os, importlib, textwrap, readline, traceback, random, subprocess, shlex
+import json, os, importlib, textwrap, readline, traceback, random, subprocess, shlex, threading, time
 from rich.console import Console
 from rich.panel import Panel
 from rich.markup import escape
@@ -55,6 +55,73 @@ class Context:
     def notify(self, title, text):
         cmd = f'notify-send --app-name=Athena "{title}" "{text}"'
         os.system(cmd)
+
+    def run_daemon(self, daemon_name):
+        if os.path.exists(f"{self.aos_dir}daemons/{daemon_name}.py"):
+            base_cmd = f"python3 {self.aos_dir}daemons/{daemon_name}.py"
+            process = subprocess.Popen(shlex.split(base_cmd))
+            if process.poll() is None:
+                self.writeln(f"Daemon {daemon_name} started.")
+                p = self.touch_config("daemon.names", [])
+                if daemon_name not in p:
+                    p.append(daemon_name)
+                    self.set_config("daemon.names", p)
+            else:
+                self.writeln("Subprocess has failed.")
+
+    def end_pipe_listen(self):
+        self.waiting_for_daemon = False
+
+    def get_pipe_reply(self, pipename, text, callback):
+        self.waiting_for_daemon = True
+
+        listener = threading.Thread(target=self.listen_for_pipe, args = ("aos_reply", callback, 1))
+        listener.daemon = True
+        listener.start()
+
+        speaker = threading.Thread(target=self.send_message_to_pipe, args = (pipename, text))
+        speaker.daemon = True
+        speaker.start()
+
+        c = 0
+        while self.waiting_for_daemon:
+            time.sleep(1)
+            c += 1
+            if not self.waiting_for_daemon:
+                break
+
+            if c >= 2:
+                break
+
+    def listen_for_pipe(self, pipe_name, callback = None, limit = 1, cleanup = False):
+        pipe_path = f'/tmp/{pipe_name}'
+        if not os.path.exists(pipe_path):
+            os.mkfifo(pipe_path)
+
+        # Open the pipe for reading
+        c = 0
+        with open(pipe_path, 'r') as pipe:
+            while True:
+                message = pipe.read().strip()
+                if message and callback and callable(callback):
+                    callback(message)
+
+                    c += 1
+                    if c >= limit:
+                        break
+                else:
+                    if message: return message
+
+        # Clean up
+        if cleanup: os.remove(pipe_path)
+
+    def send_message_to_pipe(self, pipe_name, message):
+        pipe_path = f'/tmp/{pipe_name}'
+
+        # Open the pipe for writing
+        with open(pipe_path, 'w') as pipe:
+            pipe.write(message + '\n')
+            pipe.flush()
 
     def sd_get_doc(self, dsf):
         pth = self.aos_dir+"static_data/"+str(dsf)+".eno"
@@ -310,11 +377,12 @@ class Context:
         out = self.console.export_text()
         self.buffer.append(out)
 
-    def write_panel(self, text):
+    def write_panel(self, text, title = None):
         if self.plaintext_output:
             return self.writeln(text)
 
-        self.console.print(self.panel(text))
+
+        self.console.print(self.panel(text, title = title))
 
     def ask(self, value, *, prompt = "", default = ""):
         inse = ""
@@ -327,7 +395,11 @@ class Context:
 
     def has_flag(self, name):
         for flag in self.lines:
+            #print(flag.startswith(f"-{name}="))
+            #print(flag.startswith(f"--{name}="))
             if flag.startswith(f"-{name}:") or flag.startswith(f"--{name}:") and (":" in flag or "=" in flag):
+                return True
+            if flag.startswith(f"-{name}=") or flag.startswith(f"--{name}=") and (":" in flag or "=" in flag):
                 return True
             if flag == f"-{name}" or flag == f"--{name}" and (":" not in flag and "=" not in flag):
                 return True
@@ -335,7 +407,7 @@ class Context:
 
     def get_flag(self, name, default = ""):
         for flag in self.lines:
-            if flag.startswith(f"-{name}:") or flag.startswith(f"--{name}:") and (":" in flag or "=" in flag):
+            if flag.startswith(f"-{name}:") or flag.startswith(f"--{name}:") or flag.startswith(f"-{name}=") or flag.startswith(f"--{name}=") and (":" in flag or "=" in flag):
                 if "=" in flag:
                     return flag.split("=")[1]
                 elif ":" in flag:
@@ -504,6 +576,12 @@ class Context:
         if not os.path.exists(path):
             os.makedirs(path)
         return path
+
+    def save_data_file(self, text, filename = "data.txt"):
+        f = self.data_path()
+        self.validate_generic_data_file(filename)
+        with open(f+filename, 'w+') as fl:
+            fl.write(text)
 
     def save_data(self, js, filename = "data"):
         f = self.data_path()

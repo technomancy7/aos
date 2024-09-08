@@ -5,7 +5,6 @@
 + *
 - What are you doing?
 - Tell me one of your favorite possessions.
-- What is your current status?
 - I'm not sure I understand you fully.
 - Please go on.
 - That is interesting. Please continue.
@@ -67,6 +66,5 @@
 % tell me one of your favorite possessions
 - You must be very fond of it. <set has=<person>>
 
-+ *
-% what is your current status
++ my status is *
 - Updating your status to "<set status=<star>><get status>".
