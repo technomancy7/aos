@@ -1,4 +1,5 @@
 config.json
+config.toml
 self.log
 **data.json
 **data.eno
