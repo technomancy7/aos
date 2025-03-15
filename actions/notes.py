@@ -41,6 +41,7 @@ class Action:
         """)
 
     def __run__(self, ctx):
+        print("DEPRECATION: Functionality merged to Codex")
         cmd, ln = ctx.cmdsplit()
         hd = ctx.has_flag("d")
         tags = ctx.get_flag("ts").split(",") or []

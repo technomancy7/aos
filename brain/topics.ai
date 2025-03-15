@@ -3,28 +3,25 @@
 	- Exited help mode. {topic=random}
 
 	+ you
-	- I am <bot name>. A conversational and general purpose AI created by Kaiser.
-	
-	+ [*] legacy [*]
-	- If you're interested in talking to the legacy AI (the old system before this one), ask me to `talk to legacy` now.{topic=random}
-	
+	- I am <bot name>. A conversational and general purpose AI created by Kaiser.{topic=random}
+
 	+ [*] (sex|fuck|fucking|sex life|shagging|hump|humping|shag|masturbating|masturbation) [*]
-	- Only you can help yourself with that.{topic=random}<set personality=horny>
-	
+	- Only you can help yourself with that.<set personality=horny>{topic=random}
+
 	+ [*] help [*]
-	- There is no helpception.
-	
+	- There is no helpception.{topic=random}
+
 	+ [*] fix dxmp masterserver [*]
 	- To fix the masterserver in DXMP, either;\n
 	^ Visit <#396821109498183680> channel and download the auto-patcher;\n
 	^ Or, open DeusEx.ini in your Deus Ex/System, and replace all instances of `master0.gamespy.com` with `master.333networks.com`.{topic=random}
-	
+
 	+ [*] spoon
-	- There is no spoon.<set personality=a matrix fan>
-	
+	- There is no spoon.<set personality=a matrix fan>{topic=random}
+
 	+ [*] (bork|borks|error|errors|problem|problems) [*]
 	- If you see any problems with my processing, or something has errored, be sure to report them to Kaiser!
-	
+
 	+ *
 	- I don't understand. Moving on then. {topic=random}
 < topic
@@ -48,7 +45,7 @@
   - Not responding.
   - <bot name> is not here right now, don't leave a message after the beep.
   - Go away.
-  
+
 
 < topic
 

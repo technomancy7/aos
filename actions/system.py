@@ -28,6 +28,22 @@ class Action:
         cmd, ln = ctx.cmdsplit()
 
         match cmd:
+            case "list.get":
+                print(ctx.get_textlist(ln))
+
+            case "list.delete":
+                print(ctx.delete_textlist(ln))
+                
+            case "list.remove":
+                name = ln.split(" ")[0]
+                v = " ".join(ln.split(" ")[1:])
+                print(ctx.remove_textlist(name, v))
+
+            case "list.append":
+                name = ln.split(" ")[0]
+                v = " ".join(ln.split(" ")[1:])
+                print(ctx.append_textlist(name, v))
+
             case "log.purge":
                 with open(ctx.aos_dir+"self.log", "w+") as f:
                     f.write("")

@@ -6,6 +6,11 @@ from copy import deepcopy
 import enolib
 from enotype import boolean, integer, float, color, date, datetime, email, url, comma_separated
 enolib.register(boolean, integer, float, color, date, datetime, email, url, comma_separated)
+from datetime import datetime, date
+from dateutil import parser
+import arrow#, pytz
+import tomlkit
+import tomlkit.items
 
 class Gum:
     def choose(self, prompt, *options):
@@ -33,6 +38,27 @@ class Gum:
         except:
             return False
 
+class Utils:
+    @staticmethod
+    def human_friendly_date(input_date):
+        # Try to parse the input date
+        ##try:
+        if isinstance(input_date, str):
+            parsed_date = parser.parse(input_date)
+        elif isinstance(input_date, (datetime, date)):
+            parsed_date = input_date
+        else:
+            raise ValueError("Unsupported date format")
+
+        # Ensure the parsed date is timezone-aware
+        #if parsed_date.tzinfo is None:
+            #parsed_date = pytz.utc.localize(parsed_date)
+
+
+        #print(parsed_date, type(parsed_date))
+        a = arrow.Arrow.fromdatetime(parsed_date)
+        return a.humanize(granularity=['year', 'month'])
+
 class Context:
     def __init__(self, *, line = "", command = "", lines = [], base_dir = ""):
         self.aos_dir = base_dir
@@ -49,8 +75,38 @@ class Context:
         self.time_format = 'HH:mm:ss DD-MM-YYYY'
         self.response = {}
         self.hide_traceback = False
+        self.stdinrd = ""
 
         self.saved_username = ""
+
+        self.utils = Utils
+
+    def _safe_eval(self, code, **opts):
+        env = {
+            "ctx": self,
+            "eval": None,
+            "exec": None,
+            "builtins": None,
+            "print": self.writeln,
+            "v": self.touch_config,
+            "var": self.touch_config,
+            "touch": self.touch_config,
+            "data": self.get_data
+        }
+
+        env.update(**opts)
+        return eval(code, env)
+
+    def subproc(self, cmd):
+        result = subprocess.run(shlex.split(cmd))
+        exit_code = result.returncode
+        return exit_code
+
+    def download_file(self, url, out_path):
+        cmd = f'curl --output {out_path} "{url}"'
+        result = subprocess.run(shlex.split(cmd))
+        exit_code = result.returncode
+        return exit_code
 
     def notify(self, title, text):
         cmd = f'notify-send --app-name=Athena "{title}" "{text}"'
@@ -63,7 +119,7 @@ class Context:
             if process.poll() is None:
                 self.writeln(f"Daemon {daemon_name} started.")
                 p = self.touch_config("daemon.names", [])
-                if daemon_name not in p:
+                if p != None and daemon_name not in p:
                     p.append(daemon_name)
                     self.set_config("daemon.names", p)
             else:
@@ -157,7 +213,7 @@ class Context:
         return str(line).lower() in ["1", "yes", "y", "true"]
 
     def update_from_line(self, line):
-        line = line.split(" ")
+        line = shlex.split(line)
         self.command = line[0]
         self.line = " ".join(line[1:])
         self.lines = line[1:]
@@ -325,12 +381,14 @@ class Context:
         return self.touch_config("system.name", "Bot")
 
     def set_username(self, newname):
+        return print("NOT IMPLEMENTED")
         codex = self.access_data("codex", "addrbook")
 
         codex["self"]['name'] = newname
         self.export_data("codex", "addrbook", codex)
 
     def set_user_property(self, propname, newname):
+        return print("NOT IMPLEMENTED")
         codex = self.access_data("codex", "addrbook")
 
         codex["self"][propname] = newname
@@ -501,7 +559,7 @@ class Context:
             return ""
 
     def edit_code(self, txtfile):
-        txtedit = self.touch_config("system.codeeditor", "pulsar")
+        txtedit:str = self.touch_config("system.codeeditor", "pulsar")
 
         if "$T" in txtedit:
             os.system(txtedit.replace("$T", txtfile))
@@ -514,30 +572,93 @@ class Context:
         else:
             return ""
 
+    def delete_textlist(self, name):
+        if os.path.exists(self.aos_dir+"textlists/"+name+".txt"):
+            os.remove(self.aos_dir+"textlists/"+name+".txt")
+            return True
+        return False
+
+    def remove_textlist(self, name, value):
+        arr = self.get_textlist(name)
+        if value in arr:
+            arr.remove(value)
+            self.save_textlist(name, arr)
+            return True
+        return False
+
+    def append_textlist(self, name, value):
+        arr = self.get_textlist(name)
+        if value not in arr:
+            arr.append(value)
+            self.save_textlist(name, arr)
+            return True
+
+        return False
+
+    def save_textlist(self, name, arr):
+        if not os.path.exists(self.aos_dir+"textlists/"):
+            os.makedirs(self.aos_dir+"textlists/")
+
+        with open(self.aos_dir+"textlists/"+name+".txt", "w+") as f:
+            f.write("\n".join(arr))
+
+    def get_textlist(self, name):
+        if not os.path.exists(self.aos_dir+"textlists/"):
+            os.makedirs(self.aos_dir+"textlists/")
+
+        if not os.path.exists(self.aos_dir+"textlists/"+name+".txt"):
+            return []
+
+        with open(self.aos_dir+"textlists/"+name+".txt", "r") as f:
+            return f.read().split("\n")
+
     def delete_text_file(self):
         txtfile = self.aos_dir+"editing.txt"
         if os.path.exists(txtfile):
             os.remove(txtfile)
 
-    def validate_data_file(self, filename = "data"):
-        f = self.data_path()
-        if not os.path.exists(f+filename+".json"):
-            with open(f+filename+".json", 'w+') as f:
-                f.write("{}")
-
-    def validate_generic_data_file(self, filename = "data"):
-        f = self.data_path()
+    def validate_data_file(self, filename = "data", *, override = "", fmt = "json"):
+        f = self.data_path(override)
+        if fmt: filename = f"{filename}.{fmt}"
         if not os.path.exists(f+filename):
             with open(f+filename, 'w+') as f:
-                f.write("")
+                if fmt == "json":
+                    f.write("{}")
+                else:
+                    f.write("")
 
-    def access_data(self, action, filename):
-        with open(f"{self.aos_dir}data/{action}/{filename}.json", 'r') as fl:
-            return json.load(fl)
+    def validate_generic_data_file(self, filename = "data", *, override = ""):
+        print("validate_generic_data_file should be replaced with validate_data_file(fmt = None)")
+        self.validate_data_file(filename, override = override, fmt = "")
 
-    def export_data(self, action, filename, data):
-        with open(f"{self.aos_dir}data/{action}/{filename}.json", 'w+') as fl:
-            json.dump(data, fl)
+    def access_data(self, action, filename, fmt = "json"):
+        with open(f"{self.aos_dir}data/{action}/{filename}.{fmt}", 'r') as fl:
+            if fmt == "json":
+                return json.load(fl)
+
+            elif fmt == "toml":
+                return tomlkit.parse(fl.read())
+
+            elif fmt == "eno":
+                return enolib.parse(fl.read())
+
+            else:
+                return fl.read()
+
+    def export_data(self, action, filename, data, fmt = "json"):
+        if fmt: filename = f"{filename}.{fmt}"
+        with open(f"{self.aos_dir}data/{action}/{filename}", 'w+') as fl:
+            if fmt == "json":
+                json.dump(data, fl)
+
+            elif fmt == "toml":
+                fl.write(tomlkit.dumps(data))
+
+            elif fmt == "eno":
+                print("ERROR: format eno does not support writing")
+
+            else:
+                fl.write(str(data))
 
     def get_data_list(self, action = ""):
         out = []
@@ -547,27 +668,45 @@ class Context:
         return out
 
     def get_data_raw(self, filename = "data", *, override = ""):
-        f = self.data_path(override)
-        self.validate_generic_data_file(filename)
-        with open(f+filename, 'r') as fl:
-            return fl.read()
+        print("DEPRECATION: get_data_raw should be replaced with get_data(**, fmt='')")
+        return self.get_data(filename, override = override, fmt = "")
 
     def get_data_doc(self, filename = "data", *, override = ""):
-        f = self.data_path(override)
-        self.validate_generic_data_file(filename+".eno")
-        with open(f+filename+".eno", 'r') as fl:
-            return enolib.parse(fl.read())
+        print("DEPRECATION: get_data_doc should be replaced with get_data(**, fmt='eno')")
+        return self.get_data(filename, override = override, fmt = "eno")
 
-    def get_doc(self, filename = "data"):
+    def get_doc(self, filename = "data", fmt = "json"):
         f = self.aos_dir+"docs/"
-        with open(f+filename+".eno", 'r') as fl:
-            return enolib.parse(fl.read())
+        with open(f+filename+"."+fmt, 'r') as fl:
+            if fmt == "json":
+                return json.load(fl)
 
-    def get_data(self, filename = "data", *, override = ""):
+            elif fmt == "toml":
+                return tomlkit.parse(fl.read())
+
+            elif fmt == "eno":
+                return enolib.parse(fl.read())
+            else:
+                return fl.read()
+
+    def get_data(self, filename = "data", *, override = "", fmt = "json", skip_validate = True):
         f = self.data_path(override)
-        self.validate_data_file(filename)
-        with open(f+filename+".json", 'r') as fl:
-            return json.load(fl)
+        if not skip_validate: self.validate_data_file(filename, override = override, fmt = fmt)
+        if skip_validate:
+            if not os.path.exists(f+filename+"."+fmt):
+                return None
+
+        with open(f+filename+"."+fmt, 'r') as fl:
+            if fmt == "json":
+                return json.load(fl)
+
+            elif fmt == "toml":
+                return tomlkit.parse(fl.read())
+
+            elif fmt == "eno":
+                return enolib.parse(fl.read())
+            else:
+                return fl.read()
 
     def data_path(self, override = ""):
         name = self.command
@@ -577,27 +716,34 @@ class Context:
             os.makedirs(path)
         return path
 
-    def save_data_file(self, text, filename = "data.txt"):
-        f = self.data_path()
-        self.validate_generic_data_file(filename)
-        with open(f+filename, 'w+') as fl:
-            fl.write(text)
+    def save_data_file(self, text, filename = "data", override = ""):
+        self.save_data(text, filename, override = override, fmt = "txt")
 
-    def save_data(self, js, filename = "data"):
-        f = self.data_path()
-        self.validate_data_file(filename)
-        with open(f+filename+".json", 'w+') as fl:
-            fl.write(json.dumps(js, indent=4))
+    def save_data(self, data, filename = "data", *, override = "", fmt = "json"):
+        f = self.data_path(override)
+        self.validate_data_file(filename, override = override, fmt = fmt)
+        with open(f+filename+"."+fmt, 'w+') as fl:
+            if fmt == "json":
+                json.dump(data, fl)
+
+            elif fmt == "toml":
+                fl.write(tomlkit.dumps(data))
+
+            elif fmt == "eno":
+                print("ERROR: format eno does not support writing")
+
+            else:
+                fl.write(str(data))
 
     def load_config(self):
-        if os.path.exists(self.aos_dir+"config.json"):
-            with open(self.aos_dir+"config.json", 'r') as f:
-                self.config = json.load(f)
+        if os.path.exists(self.aos_dir+"config.toml"):
+            with open(self.aos_dir+"config.toml", 'r') as f:
+                self.config = tomlkit.parse(f.read())
                 return self.config
 
     def save_config(self):
-        with open(self.aos_dir+"config.json", 'w+') as f:
-            f.write(json.dumps(self.config, indent=4))
+        with open(self.aos_dir+"config.toml", 'w+') as f:
+            f.write(tomlkit.dumps(self.config))
 
     def set_config(self, key, value, *, save = True):
         if "." in key:
@@ -606,7 +752,7 @@ class Context:
             if self.config.get(parent, None) == None:
                 self.config[parent] = {}
 
-            if type(self.config[parent]) == dict:
+            if type(self.config[parent]) == tomlkit.items.Table:
                 self.config[parent][sub] = value
             else:
                 return
@@ -624,7 +770,7 @@ class Context:
             if self.config.get(parent, None) == None:
                 return
 
-            if type(self.config[parent]) == dict:
+            if type(self.config[parent]) == tomlkit.items.Table:
                 del self.config[parent][sub]
             else:
                 return
@@ -642,7 +788,7 @@ class Context:
             if self.config.get(parent, None) == None:
                 self.config[parent] = {}
 
-            if type(self.config[parent]) == dict:
+            if type(self.config[parent]) == tomlkit.items.Table:
                 if self.config[parent].get(sub, None) == None:
                     if not ignore: self.set_config(key, default)
                     return default

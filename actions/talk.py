@@ -60,7 +60,7 @@ class AOSSessionManager(rivescript.sessions.SessionManager):
 
     def get(self, username, var, default = "undefined"):
         data = self.aos.touch_config(f"talk_sessions.{username}", {})
-        return data.get(var, None)
+        return data.get(var, default)
 
     def set(self, username, dic):
         data = self.aos.touch_config(f"talk_sessions.{username}", {})

@@ -40,7 +40,7 @@ class Action:
 
         match cmd:
             case "store":
-                d = ctx.get_data()
+                d = ctx.get_data(fmt="toml")
                 if not ln:
                     for k, v in d.items():
                         ctx.write_panel(f"{v}", title = k)
@@ -49,13 +49,13 @@ class Action:
                 txt = ctx.touch_config("memo.text", "")
 
                 d[ln] = txt
-                ctx.save_data(d)
+                ctx.save_data(d, fmt="toml")
 
             case "recall":
                 if not ln:
                     return self.writeln("A name is needed.")
 
-                d = ctx.get_data()
+                d = ctx.get_data(fmt="toml")
                 if d.get(ln):
                     ctx.set_config("memo.text", d[ln])
 

@@ -44,7 +44,7 @@ def parse_qr(ctx, source):
     return out
 
 def create_qr(ctx, text):
-    fill_colour = ctx.touch_config("qr.fill_colour", "blue")
+    fill_colour = ctx.touch_config("qr.fill_colour", "white")
     back_colour = ctx.touch_config("qr.back_colour", "black")
     outpath = f"{ctx.data_path()}qrcode.png"
     img = qrcode.QRCode(border=0, error_correction=qrcode.constants.ERROR_CORRECT_L)

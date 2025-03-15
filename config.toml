@@ -1,0 +1,187 @@
+cwd = '/home/kaiz0r' # DO NOT EDIT
+daemon_delay = 5
+plaintext = false
+compact = ["talk_sessions"]
+
+[actions]
+list_disabled = true
+
+[ai]
+#key for the google AI client
+key = 'AIzaSyDgGC6U2UA-zsMr4LlmAkx1Ger2Hyh3yqE'
+
+[aliases]
+act = 'actions'
+app = 'appman'
+dex = 'pokedex'
+p = 'pokedex'
+print = 'syntax'
+sys = 'system'
+w = 'weather'
+
+[appman]
+dir = '~/.aos_applications/'
+min_match = 90
+select_first = false
+show_result = true
+
+[apps]
+audio = "vlc '$P'"
+image = "okular '$P'"
+
+[bsky]
+host = 'https://bsky.social'
+pwd = 'angelus1'
+user = 'technomancer32.bsky.social'
+
+[codex]
+database = 'cs'
+ignores = ['yt', 'lang']
+
+[daemon]
+names = []
+
+[define]
+minmatch = 80
+
+[discord]
+client_id = 1142046335017685072
+delay = 5
+displayplayer = 'YouTube Music'
+fmt = '{{artist}} - {{title}}'
+icon = 'youtube'
+player = 'plasma-browser-integration'
+
+[irlrpg]
+current_exp = 100
+level = 6
+
+[keybinds]
+input = 'F2'
+open_eval = 'F5'
+open_log = 'F6'
+
+[keycli]
+db = 'Passwords.kdbx'
+
+[keyli]
+db = '/home/kaiz0r/Passwords.kdbx'
+pwd = 'angelus'
+
+[keys]
+virustotal = 'afe6e8a48730e79c71f009885f6075f00989b672a4dad853fd518c53fe32d6d5'
+weather = 'e2114f04eab34041b34121223200804'
+youdotcom = 'K2Q4VKHR7Y41YZS6MTUD8ZTQSFTB2D896KS'
+
+[memo]
+text = "jacket, joggers, slimfast, potnoodles"
+
+[pokedex]
+evolution = true
+types = true
+
+[pwd]
+db = '/home/kaiz0r/Passwords.kdbx'
+password = 'angelus'
+
+[qr]
+back_colour = 'black'
+fill_colour = 'white'
+
+[quests]
+use_exp = true
+
+[scan]
+ext = [
+    '.txt',
+    '.js',
+    '.uc',
+    '.c',
+    '.cpp',
+    '.h',
+    '.lua',
+    '.rb',
+    '.jl',
+    '.py',
+    '.acf',
+    '.html',
+    '.htm',
+    '.log',
+]
+
+[search]
+engine = 'brave'
+
+[shell]
+above_prompt = ' [ $cwd ] '
+active = false
+prompt = '\[$cwd] $ '
+
+[system]
+codeeditor = 'micro $T'
+disabled = ['dataset', 'cb', 'keva']
+imageviewer = 'eog $T'
+name = 'Athena'
+runner = 'python3'
+texteditor = 'micro $T'
+tts = "/home/kaiz0r/flite-2.2/bin/flite -voice slt -t '$P'"
+tts_output = true
+vocal = true
+
+[talk]
+active = true
+brain = '/home/kaiz0r/.aos/brain/'
+
+[talk_sessions]
+[talk_sessions.Techno]
+__lastmatch__ = 'show sty'
+bork = 'infinite'
+it = 'hellp'
+memo = 'borkies'
+personality = 'abusive'
+status = 'edit the lang codex'
+topic = 'random'
+trouble = 1
+
+[talk_sessions.Techno.__history__]
+input = [
+    'show sty',
+    'show memo',
+    'set memo wins',
+    'show memo',
+    'show sty',
+    'what is my bork',
+    'what is my bork',
+    'my bork is infinite',
+    'my borks are infinite',
+]
+reply = [
+    'borkies',
+    'wins',
+    'Got it. ',
+    'undefined',
+    'borkies',
+    'Your bork is infinite.',
+    'Your bork is infinite.',
+    'Okay, your bork is infinite. ',
+    'How many roads does a man need to travel down before he admits he is lost?',
+]
+
+[test] # testing key for things
+me = "yes"
+a = ["one", "two"]
+
+[translate]
+mirror = 'https://translate.terraprint.co/translate'
+short_response = false
+
+[user]
+name = 'Kai'
+post_code = 'LS12'
+
+[vocal]
+system = true # will the bot talk
+
+[aiman]
+appimages = "/home/kaiz0r/.appimages/"
+min_match = 90

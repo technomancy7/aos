@@ -1,4 +1,4 @@
-import os, sys, shlex, json, textwrap
+import os, sys, shlex, json, textwrap, select
 import importlib
 
 HOME = os.path.expanduser("~")+"/"
@@ -35,7 +35,9 @@ def editarg(x):
 
 def main(args):
     global context
-
+    pipe_text = ""
+    if select.select([sys.stdin,],[],[],0.0)[0]:
+        pipe_text = sys.stdin.read()
     if type(args) == str: args = shlex.split(args)
     if len(args) == 0: args = ['actions', "list"]
 
@@ -43,6 +45,7 @@ def main(args):
     lines = args[1:]
 
     context = Context(command=cmd, lines=lines, base_dir = ATHENAOS_PATH)
+    context.stdinrd = pipe_text
     context.load_config()
     context.plaintext_output = context.touch_config("plaintext", False)
     context.execute()

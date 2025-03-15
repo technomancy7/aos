@@ -1,10 +1,9 @@
-from tools.converters import XConverter
 
 class Action:
     @staticmethod
     def __action__():
         return {
-            "name": "convert",
+            "name": "actstore",
             "author": "Kai",
             "version": "0.0",
             "features": [],
@@ -18,13 +17,15 @@ class Action:
         """
 
     def __run__(self, ctx):
-        line = ctx.get_string().split(" ")
-        c = XConverter()
-        if line[2] == "miles":
-            line[2] = "mile"
-        r = c.pretty_convert(line[0], line[1], line[2])
-        ctx.say(r)
-
+        cmd, ln = ctx.cmdsplit()
+        # Main functionality here.
+        match cmd:
+            case "set" | "s":
+                d = ctx.get_data()
+                db = ctx.get_flag("n", "default")
+                d[db] = ln
+                ctx.save_data(d)
+                ctx.writeln(f"Saved {ln} -> {db}")
         return ctx
 
     def __error__(self, ctx, error):

@@ -1,6 +1,8 @@
 from ast import parse
 import os
 from tools.datascript import *
+import tomlkit
+import tomlkit.items
 
 class Action:
     @staticmethod
@@ -68,7 +70,7 @@ class Action:
             key = line[0]
             line = self.parse_val(" ".join(line[1:]))
             ls = ctx.touch_config(key, None)
-            if type(ls) == list:
+            if type(ls) == tomlkit.items.Array:
                 ls.remove(line)
                 ctx.set_config(key, ls)
                 ctx.writeln(f"[yellow]{key}[/yellow] = [green]{ls}[/green] ({type(ls)})")
@@ -80,12 +82,13 @@ class Action:
             key = line[0]
             line = self.parse_val(" ".join(line[1:]))
             ls = ctx.touch_config(key, None)
-            if type(ls) == list:
+            #print(key, ls)
+            if type(ls) == tomlkit.items.Array:
                 ls.append(line)
                 ctx.set_config(key, ls)
                 ctx.writeln(f"[yellow]{key}[/yellow] = [green]{ls}[/green] ({type(ls)})")
                 ctx.update_response(operator = "append", key = key, value = ls)
-            elif type(ls) == str:
+            elif type(ls) == tomlkit.items.String:
                 ls += line
                 ctx.set_config(key, ls)
                 ctx.writeln(f"[yellow]{key}[/yellow] = [green]{ls}[/green] ({type(ls)})")
@@ -97,54 +100,46 @@ class Action:
             key = " ".join(line)
             val = ctx.touch_config(key, "", ignore = True)
             ctx.update_response(operator = "get", key = key, value = val)
-            ctx.writeln(f"[yellow]{key}[/yellow] = [green]{val}[/green] ({type(val)})")
+            t = type(val)
+            #print(t)
+            if t != bool and t != tomlkit.items.Table: t = type(t.unwrap(t))
+            ctx.writeln(f"[yellow]{key}[/yellow] = [green]{val}[/green] ({t.__name__})")
 
         elif cmd == "edit":
             ctx.edit_file(ctx.aos_dir+"config.json")
 
         elif cmd == "list":
-            dc = ctx.get_doc("definitions")
-            compacts = dc.list('compact').required_string_values()
-
+            compacts = conf.get('compact', [])
             ind = False
+
             for k, v in conf.items():
-                desc = ""
-                if dc.field("root").optional_string_value():
-                    desc = f" // {dc.field('root').optional_string_value()}"
-
-                if type(v) == dict:
+                if type(v) == tomlkit.items.Table:
                     ind = True
-
                     ctx.writeln()
-                    descmain = ""
-                    if dc.field(k).optional_string_value():
-                        descmain = f" // {dc.field(k).optional_string_value()}"
-                    ctx.writeln(f"[blue]{k}[/blue]:{descmain}")
+
+                    ctx.writeln(f"[blue]{k}[/blue]: {v.trivia.comment}")
 
                     if k not in compacts:
                         for sk, sv in v.items():
-                            desc2 = ""
-                            if dc.field(k+"."+sk).optional_string_value():
-                                desc2 = f" // {dc.field(k+'.'+sk).optional_string_value()}"
-                            ctx.writeln(f"- [yellow]{sk}[/yellow] = [green]{sv}[/green] ({type(sv)}){desc2}")
+                            if type(sv) == bool:
+                                b = v.value.item(sk)
+                                ctx.writeln(f"- [yellow]{sk}[/yellow] = [green]{sv}[/green] ({type(sv).__name__}) {b.trivia.comment}")
+                            else:
+                                ctx.writeln(f"- [yellow]{sk}[/yellow] = [green]{sv}[/green] ({type(sv.unwrap()).__name__}) {sv.trivia.comment}")
                     else:
                         ctx.writeln(f"{len(list(v.items()))} items")
-
-                elif type(v) == list:
-                    ind = True
-                    ctx.writeln()
-                    ctx.writeln(f"[blue]{k}[/blue]:{desc}")
-                    for item in v:
-                        ctx.writeln(f"* [yellow]{item}[/yellow] ({type(item)})")
 
                 else:
                     if ind:
                         ctx.writeln()
                         ind = False
-                    desc2 = ""
-                    if dc.field(k).optional_string_value():
-                        desc2 = f" // {dc.field(k).optional_string_value()}"
-                    ctx.writeln(f"[yellow]{k}[/yellow] = {v} ({type(v)}){desc2}")
+
+                    if type(v) == bool:
+                        ctx.writeln(f"[yellow]{k}[/yellow] = {v} ({type(v).__name__}) {conf.item(k).trivia.comment}")
+                    else:
+                        ctx.writeln(f"[yellow]{k}[/yellow] = {v} ({type(v.unwrap()).__name__}) {v.trivia.comment}")
+
+            ctx.writeln()
         else:
             return ctx.writeln("What?")
         return ctx

@@ -24,12 +24,12 @@ class XConverter:
             "f": "fahrenheit",
             "c": "celcius",
         }
-        
+
     def pretty_convert(self, base_value, base_type, to_type):
         value = self.convert(base_value, base_type, to_type)
         str_base_type = self.translation_table.get(base_type, base_type)
         str_to_type = self.translation_table.get(to_type, to_type)
-        return f"{base_value} {str_base_type} is {value} {str_to_type}"
+        return f"{base_value} {str_base_type} is {value:.2f} {str_to_type}"
 
     def convert(self, base_value, base_type, to_type):
         base_value = int(base_value)

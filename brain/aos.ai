@@ -7,6 +7,15 @@
 + edit (the|my) * codex
 - <call>aos codex edit --db:<star2></call>
 
++ convert # * to *
+- <call>aos convert <star1> <star2> <star3></call>
+
++ search for *
+- <call>aos search <star></call>
+
++ search for * (with|on) *
+- <call>aos search <star> --e:<star3></call>
+
 + summarize *
 - <call>aos wiki <star></call>
 

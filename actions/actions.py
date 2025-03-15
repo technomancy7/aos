@@ -35,9 +35,12 @@ class Action:
 
     def printdata(self, ctx, d):
         comment = ""
-        if d["disabled"]: comment = " [red](DISABLED)[/red]"
-        if d.get("description"): comment = f"{comment}\n - {d['description']}"
-        ctx.writeln(f"[yellow]{d.get('name', 'Unknown')}[/yellow] (v {d.get('version', '0')}) by {d.get('author', '?')} in {d['filename']}{comment}")
+        if d["disabled"]:
+            comment = " [red](DISABLED)[/red]"
+            ctx.writeln(f"[yellow]{d.get('name', 'Unknown')}[/yellow] in {d['filename']}{comment}")
+        else:
+            if d.get("description"): comment = f"{comment}\n - {d['description']}"
+            ctx.writeln(f"[yellow]{d.get('name', 'Unknown')}[/yellow] (v {d.get('version', '0')}) by {d.get('author', '?')} in {d['filename']}{comment}")
 
     def __run__(self, ctx):
         output = {}
@@ -138,6 +141,15 @@ class Action:
                         output[d.get("group", "default")].append(d)
 
                     if os.path.isfile(f):
+                        if filename.split(".")[0] in disabled:
+                            if output.get("disabled") == None:
+                                output["disabled"] = []
+                            output["disabled"].append({
+                                "name": filename.split(".")[0],
+                                "disabled": True,
+                                "filename": filename
+                            })
+                            continue
                         try:
                             f = importlib.import_module("actions."+filename.split(".")[0])
 
@@ -147,7 +159,7 @@ class Action:
                                 d["filename"] = filename
                                 if output.get(d.get("group", "default")) == None:
                                     output[d.get("group", "default")] = []
-                                d["disabled"] = filename.split(".")[0] in disabled
+                                d["disabled"] = False
                                 output[d.get("group", "default")].append(d)
 
                             elif hasattr(f, "action_data"):
@@ -155,7 +167,7 @@ class Action:
                                 d["filename"] = filename
                                 if output.get(d.get("group", "default")) == None:
                                     output[d.get("group", "default")] = []
-                                d["disabled"] = filename.split(".")[0] in disabled
+                                d["disabled"] = False
                                 output[d.get("group", "default")].append(d)
                                 #printdata(ctx, filename, d)
                             else:

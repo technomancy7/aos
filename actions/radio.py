@@ -21,45 +21,35 @@ class Action:
         if cmd == "": return ctx.writeln("Missing values.")
         match cmd:
             case "ls" | "list" | "lists":
-                data = ctx.get_data_doc("radio")
-                for cat in data.sections():
-                    ctx.writeln(f" < {cat.string_key()} >")
-                    for station in cat.sections():
-                        d = station.field('description').optional_string_value() or ""
-                        if d != "": d = d+"\n"
-                        ctx.write_panel(f" < {station.string_key()} > \n{d}{station.field('url').optional_string_value()}\n{station.list('names').optional_string_values()}")
-
-            case "show" | "get":
-                pass
+                data = ctx.get_data("radio", fmt="toml")
+                for radio_key, station in data.items():
+                    text = f" < [blue]{station.get('title') or radio_key}[/blue] >"
+                    text += f"\n[red]Stream[/red]: {station.get('url', '')}"
+                    text += f"\n[red]Web[/red]: {station.get('website', '')}"
+                    text += f"\n[red]Names[/red]: {station.get('names', [])}"
+                    ctx.write_panel(text)
 
             case "open" | "web":
-                data = ctx.get_data_doc("radio")
-                for cat in data.sections():
-                    for station in cat.sections():
-                        n = station.string_key()
-                        if ln.lower() == n.lower() or ln.lower() in station.list("names").optional_string_values():
-                            if station.field('website').optional_string_value():
-                                url = station.field('website').required_url_value()
-                                webbrowser.open(url)
-                            else:
-                                ctx.writeln("Stream has no valid url.")
+                data = ctx.get_data("radio", fmt="toml")
+                for radio_key, station in data.items():
+                    if radio_key == ln or ln in station.get("names", []):
+                        ctx.writeln(f"Opening {station['website']}")
+                        webbrowser.open(station['website'])
 
             case "play" | "p":
-                data = ctx.get_data_doc("radio")
-
-                for cat in data.sections():
-                    for station in cat.sections():
-                        n = station.string_key()
-                        if ln.lower() == n.lower() or ln.lower() in station.list("names").optional_string_values():
-                            if station.field('url').optional_string_value():
-                                ctx.write_panel(f"Playing {station.field('url').optional_string_value()}")
-                                ctx.play_audio_path(station.field('url').optional_string_value())
-                                return
-                            else:
-                                ctx.writeln("Stream has no valid url.")
+                data = ctx.get_data("radio", fmt="toml")
+                for radio_key, station in data.items():
+                    if radio_key == ln or ln in station.get("names", []):
+                        if station.get("url"):
+                            ctx.write_panel(f"Playing {station['url']}")
+                            ctx.play_audio_path(station['url'])
+                            return
+                        else:
+                            ctx.writeln("Stream has no valid url.")
                 ctx.writeln(f"Could not find station: {ln}")
+
             case "edit" | "e":
-                ctx.edit_code("radio.eno")
+                ctx.edit_code("radio.toml")
 
         return ctx
 

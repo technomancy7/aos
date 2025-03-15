@@ -36,6 +36,12 @@ class Action:
                     g = k.split(".")[0]
                     k = k.split(".")[1]
 
+                try:
+                    v = eval(v)
+                except Exception as e:
+                    print(f"Interpreting as str: {e}") 
+
+                t = type(v).__name__
                 if g:
                     data = ctx.get_data()
 
@@ -48,12 +54,12 @@ class Action:
 
                     data[g][k] = v
                     ctx.save_data(data)
-                    ctx.writeln(f"[blue]{g}[/blue].[blue]{k}[/blue] = [yellow]{v}[/yellow]")
+                    ctx.writeln(f"[blue]{g}[/blue].[blue]{k}[/blue] = [yellow]{v}[/yellow] ({t})")
                 else:
                     data = ctx.get_data()
                     data[k] = v
                     ctx.save_data(data)
-                    ctx.writeln(f"[blue]{k}[/blue] = [yellow]{v}[/yellow]")
+                    ctx.writeln(f"[blue]{k}[/blue] = [yellow]{v}[/yellow] ({t})")
 
             case "get":
                 data = ctx.get_data()
@@ -66,18 +72,20 @@ class Action:
                         return ctx.writeln(f"[blue]{g}[/blue] not a valid group.")
                     if group != None:
                         v = group.get(k)
+                        t = type(v).__name__
                         if v != None:
-                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k} = [green]{v}[/green]")
+                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k} = [green]{v}[/green] ({t})")
                         else:
-                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k} ([yellow]Undefined[/yellow])")
+                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k} ([yellow]Undefined[/yellow]) ({t})")
                     else:
-                        ctx.writeln(f"[blue]{g}[/blue] ([yellow]Undefined[/yellow])")
+                        ctx.writeln(f"[blue]{g}[/blue] ([yellow]Undefined[/yellow]) ({t})")
                 else:
                     v = data.get(ln)
+                    t = type(v).__name__
                     if v != None:
-                        ctx.writeln(f"[blue]{ln}[/blue] = [green]{v}[/green]")
+                        ctx.writeln(f"[blue]{ln}[/blue] = [green]{v}[/green] ({t})")
                     else:
-                        ctx.writeln(f"[blue]{ln}[/blue] ([yellow]Undefined[/yellow])")
+                        ctx.writeln(f"[blue]{ln}[/blue] ([yellow]Undefined[/yellow]) ({t})")
 
             case "rm" | "rem" | "remove" | "del" | "delete":
                 data = ctx.get_data()
@@ -90,9 +98,11 @@ class Action:
                         return ctx.writeln(f"[blue]{g}[/blue] not a valid group.")
                     if group != None:
                         v = group.get(k)
+
                         if v != None:
+                            t = type(v).__name__
                             del data[g][k]
-                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k}[/blue] ([red]Deleted[/red]) {v}")
+                            ctx.writeln(f"[blue]{g}[/blue].[blue]{k}[/blue] ([red]Deleted[/red]) {v} ({t})")
                             ctx.save_data(data)
                         else:
                             ctx.writeln(f"[blue]{g}[/blue].[blue]{k}[/blue] ([yellow]Undefined[/yellow])")
@@ -100,7 +110,9 @@ class Action:
                         ctx.writeln(f"[blue]{g}[/blue] ([yellow]Undefined[/yellow])")
                 else:
                     v = data.get(ln)
+
                     if v != None:
+                        t = type(v).__name__
                         del data[ln]
                         ctx.writeln(f"[blue]{ln}[/blue] ([red]Deleted[/red]) {v}")
                         ctx.save_data(data)
@@ -113,8 +125,10 @@ class Action:
                     if type(v) == dict:
                         ctx.writeln(f" [ [blue]{k}[/blue] ]")
                         for sk, sv in v.items():
+                            t = type(sv).__name__
                             ctx.writeln(f" | [blue]{sk}[/blue] = {sv}")
                     else:
+                        t = type(v).__name__
                         ctx.writeln(f"[blue]{k}[/blue] = {v}")
 
         return ctx

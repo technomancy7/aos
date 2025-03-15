@@ -3,12 +3,8 @@
 + (reset|erase|format|delete) [*]
 - No.
 
-// to re-implement this
-+ when i say * you say *
-- Okay, I'll remember that. <call>writenewline <star> : <star2></call>
++ set memo *
+- Got it. <set memo=<star>>
 
-+ say * when i say *
-- Okay, I'll remember that. <call>writenewline <star2> : <star></call>
-
-+ forget line *
-- Okay, I'll forget that. <call>delline <star></call>
++ show memo
+- <get memo>
